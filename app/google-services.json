@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "492960336873",
+    "project_id": "u-farm-27bab",
+    "storage_bucket": "u-farm-27bab.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:492960336873:android:856753d3ebe03a1d7cd978",
+        "android_client_info": {
+          "package_name": "com.example.u_farm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "492960336873-kpmq8gmn37riibaoasms8h9ld5s8r6qo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.u_farm",
+            "certificate_hash": "dd4104b3f3aa94391e0a2d96d960905a463fcb4f"
+          }
+        },
+        {
+          "client_id": "492960336873-n43hme2dfhsrml7ofcp0fc51ljinp944.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVhZanLLxiVUQI9py0rk_YtSdZOmI3TpA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "492960336873-n43hme2dfhsrml7ofcp0fc51ljinp944.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
