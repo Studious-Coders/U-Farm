@@ -12,4 +12,7 @@
     <string name="or">or</string>
     <string name="home">Home</string>
     <string name="news">News</string>
+    <string name="share">Share</string>
+    <string name="copylink">Copylink</string>
+    <string name="save">Save</string>
 </resources>
