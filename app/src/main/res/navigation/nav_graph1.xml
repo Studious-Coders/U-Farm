@@ -21,4 +21,19 @@
         android:name="com.example.u_farm.news.NewsFragment"
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" />
+    <activity
+        android:id="@+id/addProblemsActivity"
+        android:name="com.example.u_farm.home.addproblems.AddProblemsActivity"
+        android:label="AddProblemsActivity"
+        tools:layout="@layout/activity_add_problems"/>
+    <activity
+        android:id="@+id/addSolutionsActivity"
+        android:name="com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity"
+        android:label="AddSolutionsActivity"
+        tools:layout="@layout/activity_solutions"/>
+    <activity
+        android:id="@+id/solutionsActivity"
+        android:name="com.example.u_farm.home.solutions.SolutionsActivity"
+        android:label="SolutionsActivity"
+        tools:layout="@layout/activity_add_solutions"/>
 </navigation>

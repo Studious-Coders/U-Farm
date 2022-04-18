@@ -5,7 +5,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import com.example.u_farm.R
+import com.example.u_farm.databinding.FragmentHomeBinding
+import com.example.u_farm.databinding.FragmentNewsBinding
+import kotlinx.android.synthetic.main.activity_home.*
 
 class NewsFragment : Fragment() {
 
@@ -14,6 +18,9 @@ class NewsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news, container, false)
+        val binding: FragmentNewsBinding =
+            DataBindingUtil.inflate(inflater,R.layout.fragment_news,container,false)
+
+        return binding.root
     }
 }

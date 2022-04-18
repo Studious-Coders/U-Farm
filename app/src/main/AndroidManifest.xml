@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UFarm">
         <activity
+            android:name=".home.solutions.addsolutions.AddSolutionsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".home.addproblems.AddProblemsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".home.solutions.SolutionsActivity"
+            android:exported="true" />
+        <activity
             android:name=".HomeActivity"
             android:exported="true" />
         <activity
@@ -21,7 +30,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
