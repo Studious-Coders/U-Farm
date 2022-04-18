@@ -27,10 +27,12 @@ class HomeFragment : Fragment() {
         val binding:FragmentHomeBinding=DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
 
 
-        (activity as AppCompatActivity).supportActionBar?.hide()
+        (activity as AppCompatActivity).supportActionBar?.title="Problems"
         val application= requireNotNull(this.activity).application
         val viewModelFactory=HomeViewModelFactory(application)
         val homeViewModel= ViewModelProvider(this,viewModelFactory).get(HomeViewModel::class.java)
+
+
         binding.homeViewModel=homeViewModel
 
         binding.lifecycleOwner=this

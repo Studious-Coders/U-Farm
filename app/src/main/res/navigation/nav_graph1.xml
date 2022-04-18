@@ -9,7 +9,7 @@
     <fragment
         android:id="@+id/home"
         android:name="com.example.u_farm.home.HomeFragment"
-        android:label="fragment_home"
+        android:label="Home"
         tools:layout="@layout/fragment_home" >
         <action
             android:id="@+id/action_home_to_news"
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/news"
         android:name="com.example.u_farm.news.NewsFragment"
-        android:label="fragment_news"
+        android:label="News"
         tools:layout="@layout/fragment_news" />
     <activity
         android:id="@+id/addProblemsActivity"
