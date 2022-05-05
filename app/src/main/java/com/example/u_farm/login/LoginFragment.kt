@@ -34,11 +34,21 @@ class LoginFragment : Fragment() {
         loginViewModel.firebaseUser.observe(viewLifecycleOwner, Observer{
             if(it!=null){
                 Toast.makeText(application,"Welcome back!", Toast.LENGTH_LONG).show()
-                val intent= Intent(application, HomeActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(intent)
-            }
+            val intent= Intent(application, HomeActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+            startActivity(intent)
+        }
         })
+
+//        loginViewModel.skip.observe(viewLifecycleOwner, Observer{
+//            if(it == true){
+//                Toast.makeText(application,"Welcome to U-Farm App", Toast.LENGTH_LONG).show()
+//                val intent= Intent(application, HomeActivity::class.java)
+//                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+//                startActivity(intent)
+//
+//            }
+//        })
         loginViewModel.navigateToRegister.observe(viewLifecycleOwner, Observer {
             if(it) {
                 this.findNavController().navigate(LoginFragmentDirections.actionLoginFragmentToRegisterFragment())

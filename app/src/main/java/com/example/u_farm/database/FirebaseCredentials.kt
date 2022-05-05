@@ -26,6 +26,8 @@ class AuthRepository(application: Application){
     private var setUserDataRepository=MutableLiveData<Boolean?>()
     private var getUserDataRepository=MutableLiveData<U_Farm?>()
     private var singleRecordDataRepository=MutableLiveData<Boolean?>()
+  //  private var userIsNotAuthenticated=MutableLiveData<Boolean?>()
+
     private var uploadedDataRepository=MutableLiveData<String?>()
     private var storage:FirebaseStorage
 
@@ -33,7 +35,7 @@ class AuthRepository(application: Application){
     init{
         this.application=application
         firebaseDatabase= FirebaseDatabase.getInstance()
-        reference=firebaseDatabase.getReference("ticketBookingAppDB")
+        reference=firebaseDatabase.getReference("UFARMDB")
         storage=FirebaseStorage.getInstance()
         auth= FirebaseAuth.getInstance()
         if(auth.currentUser!=null){
@@ -66,6 +68,17 @@ class AuthRepository(application: Application){
     fun uploadedDataMutuableLiveData(): MutableLiveData<String?>{
         return uploadedDataRepository
     }
+
+
+//    fun userIsNotAuthenticatedMutuableLiveData(): MutableLiveData<Boolean?>{
+//        return userIsNotAuthenticated
+//    }
+
+//    fun skip(flag:Boolean){
+//        val ufarm=U_Farm(flag,"","","")
+//        setUserData(ufarm)
+////        singleRecord(flag,"skip")
+
 
     fun register(username:String,email:String,password:String){
         if(email.isEmpty()||password.isEmpty()){
@@ -112,11 +125,11 @@ class AuthRepository(application: Application){
     }
 
     //UserModel
-    fun setUserData(ufarm: U_Farm){
+    fun setUserData(ticketBookingApp: U_Farm){
         reference.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (auth.currentUser?.uid != null) {
-                    reference.child(auth.currentUser!!.uid).setValue(ufarm)
+                    reference.child(auth.currentUser!!.uid).setValue(ticketBookingApp)
                 }
 
                 setUserDataRepository.postValue(true)
@@ -136,6 +149,7 @@ class AuthRepository(application: Application){
                 if (auth.currentUser?.uid != null) {
                     reference.child("${auth.currentUser?.uid}/$parameter").setValue(data)
                 }
+
                 singleRecordDataRepository.postValue(true)
             }
 

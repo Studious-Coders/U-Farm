@@ -45,6 +45,9 @@ class RegisterFragment : Fragment() {
             }
         })
 
+
+
+
         registerViewModel.navigateToLogin.observe(viewLifecycleOwner, Observer {
             if(it){
                 this.findNavController().navigate(RegisterFragmentDirections.actionRegisterFragmentToLoginFragment())
