@@ -26,8 +26,6 @@ class AuthRepository(application: Application){
     private var setUserDataRepository=MutableLiveData<Boolean?>()
     private var getUserDataRepository=MutableLiveData<U_Farm?>()
     private var singleRecordDataRepository=MutableLiveData<Boolean?>()
-  //  private var userIsNotAuthenticated=MutableLiveData<Boolean?>()
-
     private var uploadedDataRepository=MutableLiveData<String?>()
     private var storage:FirebaseStorage
 
@@ -68,17 +66,6 @@ class AuthRepository(application: Application){
     fun uploadedDataMutuableLiveData(): MutableLiveData<String?>{
         return uploadedDataRepository
     }
-
-
-//    fun userIsNotAuthenticatedMutuableLiveData(): MutableLiveData<Boolean?>{
-//        return userIsNotAuthenticated
-//    }
-
-//    fun skip(flag:Boolean){
-//        val ufarm=U_Farm(flag,"","","")
-//        setUserData(ufarm)
-////        singleRecord(flag,"skip")
-
 
     fun register(username:String,email:String,password:String){
         if(email.isEmpty()||password.isEmpty()){

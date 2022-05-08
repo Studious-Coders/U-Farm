@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_baseline_search_24"
+        android:title="@string/search"
+        android:contentDescription="@string/to_search_using_images"
+        app:showAsAction="ifRoom|collapseActionView"
+        app:actionViewClass="android.widget.SearchView" />
+    <item
+        android:id="@+id/image"
+        android:title="ImageSearch"
+        android:icon="@drawable/ic_baseline_photo_camera_24"
+        android:contentDescription=""
+        app:showAsAction="ifRoom|collapseActionView" />
+
+    <item
+        android:id="@+id/more"
+        android:title="@string/userprofile"
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:contentDescription="UserProfileImage"
+        app:showAsAction="ifRoom" />
+
+</menu>

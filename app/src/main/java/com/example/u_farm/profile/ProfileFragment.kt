@@ -1,4 +1,4 @@
-package com.example.u_farm.news
+package com.example.u_farm.profile
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -8,21 +8,24 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.u_farm.R
-import com.example.u_farm.databinding.FragmentHomeBinding
 import com.example.u_farm.databinding.FragmentNewsBinding
-import kotlinx.android.synthetic.main.activity_home.*
+import com.example.u_farm.databinding.FragmentProfileBinding
 
-class NewsFragment : Fragment() {
+class ProfileFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding: FragmentNewsBinding =
-            DataBindingUtil.inflate(inflater,R.layout.fragment_news,container,false)
-        (activity as AppCompatActivity).supportActionBar?.title="News"
+        val binding: FragmentProfileBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_profile,container,false)
+        (activity as AppCompatActivity).supportActionBar?.title="Profile"
 
         return binding.root
     }
 }
+
+
+
+

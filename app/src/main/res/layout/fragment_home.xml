@@ -1,111 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:android="http://schemas.android.com/apk/res/android">
-<data>
-    <variable
-        name="homeViewModel"
-        type="com.example.u_farm.home.HomeViewModel" />
-</data>
-
-<com.google.android.material.card.MaterialCardView
-    android:id="@+id/card1"
-    app:cardElevation="25dp"
-    android:background="?attr/colorAccent"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="8dp">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="home"
+            type="com.example.u_farm.home.U_FarmAdapter" />
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-        <RelativeLayout
-            android:id="@+id/relativelayout1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_margin="8dp">
+    </data>
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/selectphoto1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_alignParentStart="true"
-                android:layout_alignParentTop="true"
-                android:background="@drawable/ic_baseline_account_circle_24"
-                android:src="@mipmap/ic_launcher"
-                app:civ_border_color="#000000"
-                app:civ_border_width="1dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card1"
+                app:cardElevation="25dp"
+                android:background="?attr/colorAccent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="12dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="12dp"
-                android:layout_toEndOf="@id/selectphoto1"
-                android:gravity="center"
-                android:text="Siva"
-                android:textColor="?attr/colorPrimary"
-                android:textSize="20sp"
-                android:textStyle="bold" />
+                android:layout_margin="8dp">
 
-            <ImageButton
-                android:id="@+id/postmenus1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_alignParentTop="true"
-                android:layout_alignParentEnd="true"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="12dp"
-                android:layout_marginBottom="12dp"
-                android:background="@drawable/ic_baseline_more_horiz_24" />
 
-        </RelativeLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <RelativeLayout
+                        android:id="@+id/relativelayout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_margin="8dp">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="8dp">
-            <!-- Media -->
-            <ImageView
-                android:layout_width="380dp"
-                android:layout_height="380dp"
-                android:contentDescription="diseases affected plants image"
-                android:scaleType="centerCrop"
-                app:srcCompat="@drawable/plantdiseases" />
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/selectphoto1"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:src="@mipmap/ic_launcher"
+                            app:civ_border_color="#000000"
+                            app:civ_border_width="1dp"
+                            tools:src="@drawable/plantdiseases" />
 
-            <!-- Title, secondary and supporting text -->
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/problem1"
-                android:textSize="18sp"
-                android:textColor="?attr/colorPrimary"
-                />
-        </LinearLayout>
+                        <TextView
+                            android:id="@+id/username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_toEndOf="@id/selectphoto1"
+                            android:gravity="center"
+                            android:textColor="?attr/colorPrimary"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            tools:text="Farmer" />
 
-        <!-- Buttons -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_gravity="end"
-            android:orientation="horizontal">
+                        <ImageButton
+                            android:id="@+id/postmenus1"
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:background="@drawable/ic_baseline_more_horiz_24" />
 
-            <com.google.android.material.button.MaterialButton
-                style="?attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/solutions"
-                android:onClick="@{()->homeViewModel.navigateToSolutionPage()}"
-                android:textColor="#858585"/>
+                    </RelativeLayout>
 
-        </LinearLayout>
-    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp">
+                        <!-- Media -->
+                        <ImageView
+                            android:id="@+id/photo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="224dp"
+                            android:contentDescription="diseases affected plants image"
+                            android:scaleType="centerCrop"
+                            tools:srcCompat="@drawable/plantdiseases" />
 
-</com.google.android.material.card.MaterialCardView>
+                        <!-- Title, secondary and supporting text -->
+                        <TextView
+                            android:id="@+id/description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            tools:text="@string/problem1"
+                            android:textSize="18sp"
+                            android:textColor="?attr/colorPrimary"
+                            />
+                    </LinearLayout>
+
+                    <!-- Buttons -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:layout_gravity="end"
+                        android:orientation="horizontal">
+
+                        <com.google.android.material.button.MaterialButton
+                            style="?attr/borderlessButtonStyle"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/solutions"
+                            android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24"
+                            android:textColor="#858585"/>
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
 </layout>

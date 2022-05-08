@@ -21,6 +21,11 @@
         android:name="com.example.u_farm.news.NewsFragment"
         android:label="News"
         tools:layout="@layout/fragment_news" />
+    <fragment
+        android:id="@+id/profile"
+        android:name="com.example.u_farm.profile.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_profile" />
     <activity
         android:id="@+id/addProblemsActivity"
         android:name="com.example.u_farm.home.addproblems.AddProblemsActivity"

@@ -16,12 +16,7 @@ class LoginViewModel(application: Application): ViewModel() {
     val navigateToRegister: LiveData<Boolean>
         get() = _navigateToRegister
 
-
-
-
-
       fun skipAuthentication(){
-//         authRepository.skip(true)
           _skip.value=true
       }
 
@@ -37,25 +32,12 @@ class LoginViewModel(application: Application): ViewModel() {
     val firebaseUser:LiveData<FirebaseUser?>
         get()=authRepository.getFirebaseUserMutableLiveData()
 
-    val data:LiveData<U_Farm?>
-        get() =authRepository.getUserDataMutableLiveData()
-
-
-//    val isSkipOrNot:LiveData<Boolean?>
-//        get()=authRepository.userIsNotAuthenticatedMutuableLiveData()
     private val _skip = MutableLiveData<Boolean>()
     val skip: LiveData<Boolean>
         get() = _skip
 
-
-//    fun finalCode(){
-//      _skip.value=data.value?.skip
-//  }
-
-
     init{
         authRepository= AuthRepository(application)
-        authRepository.getUserData()
     }
 
     fun login(email:String,password:String){

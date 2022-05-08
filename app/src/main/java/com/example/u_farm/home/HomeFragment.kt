@@ -11,8 +11,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentHomeBinding
+import com.example.u_farm.databinding.RecyclerviewBinding
 import com.example.u_farm.home.solutions.SolutionsActivity
 import com.example.u_farm.register.RegisterFragmentDirections
 import kotlinx.android.synthetic.main.activity_home.*
@@ -24,20 +26,20 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        val binding:FragmentHomeBinding=DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
+        val binding:RecyclerviewBinding=DataBindingUtil.inflate(inflater,R.layout.recyclerview,container,false)
 
 
-        (activity as AppCompatActivity).supportActionBar?.title="Problems"
+        (activity as AppCompatActivity).supportActionBar?.hide()
         val application= requireNotNull(this.activity).application
         val viewModelFactory=HomeViewModelFactory(application)
         val homeViewModel= ViewModelProvider(this,viewModelFactory).get(HomeViewModel::class.java)
 
-
-        binding.homeViewModel=homeViewModel
+        binding.recyclerViewModel=homeViewModel
 
         binding.lifecycleOwner=this
 
-
+           val adapter=U_FarmAdapter()
+               binding.recyclerView.adapter=adapter
 
         homeViewModel.navigateToSolutionsPage.observe(viewLifecycleOwner, Observer {
             if(it){
