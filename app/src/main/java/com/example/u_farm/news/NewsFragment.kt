@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.u_farm.R
-import com.example.u_farm.databinding.FragmentHomeBinding
+
 import com.example.u_farm.databinding.FragmentNewsBinding
 import kotlinx.android.synthetic.main.activity_home.*
 

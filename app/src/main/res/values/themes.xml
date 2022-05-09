@@ -2,9 +2,10 @@
     <!-- Base application theme. -->
     <style name="Theme.UFarm" parent="Theme.MaterialComponents.DayNight">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/black</item>
-        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorPrimary">#C4C4C4</item>
+        <item name="colorPrimaryDark">#C4C4C4</item>
         <item name="colorAccent">@color/white</item>
-        <!-- Customize your theme here. -->
+        <item name="android:textColor">@color/black</item>
+          <!-- Customize your theme here. -->
     </style>
 </resources>

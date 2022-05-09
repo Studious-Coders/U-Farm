@@ -4,6 +4,7 @@ import android.app.Application
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.u_farm.model.U_Farm
 import com.google.android.gms.tasks.Continuation
@@ -13,6 +14,7 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
+import kotlinx.coroutines.NonCancellable.children
 import java.util.*
 
 
@@ -28,7 +30,8 @@ class AuthRepository(application: Application){
     private var singleRecordDataRepository=MutableLiveData<Boolean?>()
     private var uploadedDataRepository=MutableLiveData<String?>()
     private var storage:FirebaseStorage
-
+    private var userDataMutableLiveDataList=MutableLiveData<MutableList<U_Farm?>>()
+     var userData1=mutableListOf<U_Farm?>()
 
     init{
         this.application=application
@@ -58,6 +61,12 @@ class AuthRepository(application: Application){
         return getUserDataRepository
     }
 
+
+    fun userDataMutableLiveDataList(): MutableLiveData<MutableList<U_Farm?>> {
+        return userDataMutableLiveDataList
+    }
+
+
     fun singleRecordDataMutuableLiveData(): MutableLiveData<Boolean?>{
         return singleRecordDataRepository
     }
@@ -66,6 +75,8 @@ class AuthRepository(application: Application){
     fun uploadedDataMutuableLiveData(): MutableLiveData<String?>{
         return uploadedDataRepository
     }
+
+
 
     fun register(username:String,email:String,password:String){
         if(email.isEmpty()||password.isEmpty()){
@@ -147,12 +158,12 @@ class AuthRepository(application: Application){
     }
 
     fun getUserData(){
-        val userData:Query=firebaseDatabase.getReference("/ticketBookingAppDB/${auth.currentUser?.uid}")
-        userData.addValueEventListener(object :ValueEventListener{
+        val userData:Query=firebaseDatabase.getReference("/UFARMDB/${auth.currentUser?.uid}")
+        userData.addValueEventListener(object :ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                val ticketBookingApp = snapshot.getValue(U_Farm::class.java)
-                if (ticketBookingApp != null) {
-                    getUserDataRepository.postValue(ticketBookingApp)
+                val uFarm = snapshot.getValue(U_Farm::class.java)
+                if (uFarm != null) {
+                    getUserDataRepository.postValue(uFarm)
                 }
             }
             override fun onCancelled(error: DatabaseError) {
@@ -161,8 +172,29 @@ class AuthRepository(application: Application){
 
         })
 
-
     }
+
+fun getUserDataList(){
+    val userData:Query=firebaseDatabase.getReference("/UFARMDB")
+    userData.addValueEventListener(object :ValueEventListener {
+        override fun onDataChange(snapshot: DataSnapshot) {
+                        for (postSnapshot in snapshot.children) {
+                            val uFarm = postSnapshot.getValue(U_Farm::class.java)
+                            if (uFarm != null) {
+                                userData1.add(uFarm)
+                            }
+                        }
+                        userDataMutableLiveDataList.postValue(userData1)
+                    }
+
+                        override fun onCancelled(error: DatabaseError) {
+
+                }
+
+            })
+
+        }
+
 
     fun uploadImageToFirebaseStorage(image: Uri) {
         val ref = FirebaseStorage.getInstance()

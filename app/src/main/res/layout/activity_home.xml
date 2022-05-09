@@ -32,6 +32,7 @@
             android:background="?attr/colorPrimary"
             app:itemIconTint="?attr/colorAccent"
             app:itemTextColor="?attr/colorAccent"
+            app:itemRippleColor="?attr/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
