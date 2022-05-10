@@ -1,10 +1,12 @@
 package com.example.u_farm.profile
 
+import android.content.DialogInterface
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.u_farm.R
@@ -23,6 +25,18 @@ class ProfileFragment : Fragment() {
         (activity as AppCompatActivity).supportActionBar?.title="Profile"
 
         return binding.root
+    }
+
+    fun onpreferredlang()
+    {
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Languages")
+            .setItems(R.array.languageslist,
+                DialogInterface.OnClickListener { dialog, which ->
+                    // The 'which' argument contains the index position
+                    // of the selected item
+                })
+        builder.create()
     }
 }
 
