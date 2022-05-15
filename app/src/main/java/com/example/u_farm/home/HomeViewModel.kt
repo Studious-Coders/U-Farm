@@ -11,18 +11,32 @@ import com.google.firebase.auth.FirebaseUser
 class HomeViewModel(application: Application): ViewModel() {
 
     private var authRepository: AuthRepository
-    private val _navigateToSolutionsPage= MutableLiveData<Boolean>()
-    val navigateToSolutionsPage: LiveData<Boolean>
+    private val _navigateToSolutionsPage= MutableLiveData<String>()
+    val navigateToSolutionsPage: LiveData<String>
         get()=_navigateToSolutionsPage
 
-    fun navigateToSolutionPage(){
-        _navigateToSolutionsPage.value=true
+    private val _navigateToAddProblemsPage= MutableLiveData<Boolean>()
+    val navigateToAddProblemsPage: LiveData<Boolean>
+        get()=_navigateToAddProblemsPage
+
+
+    fun navigateToSolutionsPageDone() {
+        _navigateToSolutionsPage.value=""
+
     }
 
-    fun navigateToSolutionsPageDone(){
-        _navigateToSolutionsPage.value=false
+    fun navigateToAddProblemsPage(){
+        _navigateToAddProblemsPage.value=true
     }
 
+    fun navigateToAddProblemsPageDone(){
+        _navigateToAddProblemsPage.value=false
+    }
+
+    fun navigateToSolutionsPage(username: String) {
+        _navigateToSolutionsPage.value=username
+
+    }
 
 
     init{

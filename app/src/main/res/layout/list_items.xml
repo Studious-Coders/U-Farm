@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <variable
             name="data"
             type="com.example.u_farm.model.U_Farm" />
+        <variable
+            name="clicklistener"
+            type="com.example.u_farm.home.SolutionListener" />
     </data>
 
 <com.google.android.material.card.MaterialCardView
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/card1"
     app:cardElevation="25dp"
-    app:cardPreventCornerOverlap="false"
-    app:cardBackgroundColor="?attr/colorAccent"
-    android:shadowColor="@color/white"
+    app:cardBackgroundColor="?attr/colorSecondary"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="8dp">
@@ -39,7 +39,7 @@
                 android:layout_alignParentTop="true"
                 android:src="@mipmap/ic_launcher"
                 app:civ_border_color="#000000"
-                app:civ_border_width="1dp"
+                app:civ_border_width="0.5dp"
                 tools:src="@drawable/plantdiseases" />
 
             <TextView
@@ -58,15 +58,16 @@
 
             <ImageButton
                 android:id="@+id/postmenus1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="12dp"
                 android:layout_marginBottom="12dp"
                 android:background="@drawable/ic_baseline_more_horiz_24"
-                android:backgroundTint="?attr/colorAccent" />
+                android:backgroundTint="?attr/colorAccent"
+                android:contentDescription="@string/already_have_a_account" />
 
         </RelativeLayout>
 
@@ -74,7 +75,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:padding="8dp">
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp">
             <!-- Media -->
             <ImageView
                 android:id="@+id/photo"
@@ -90,7 +92,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 tools:text="@string/problem1"
-                android:textSize="18sp"
+                android:textSize="16sp"
                 />
         </LinearLayout>
 
@@ -98,17 +100,19 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
             android:layout_gravity="end"
+            android:layout_margin="8dp"
             android:orientation="horizontal">
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/solution"
                 style="?attr/borderlessButtonStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/solutions"
-                android:textColor="?attr/colorPrimary"
-                android:drawableTint="?attr/colorPrimary"
+                android:onClick="@{()->clicklistener.onClick(data)}"
+                android:textColor="?attr/colorAccent"
+                android:drawableTint="?attr/colorAccent"
                 android:drawableRight="@drawable/ic_baseline_keyboard_arrow_right_24" />
 
         </LinearLayout>

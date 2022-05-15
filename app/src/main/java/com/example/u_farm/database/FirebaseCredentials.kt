@@ -123,17 +123,14 @@ class AuthRepository(application: Application){
     }
 
     //UserModel
-    fun setUserData(ticketBookingApp: U_Farm){
+    fun setUserData(ufarm: U_Farm){
         reference.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (auth.currentUser?.uid != null) {
-                    reference.child(auth.currentUser!!.uid).setValue(ticketBookingApp)
+                    reference.child(auth.currentUser!!.uid).setValue(ufarm)
                 }
-
                 setUserDataRepository.postValue(true)
             }
-
-
             override fun onCancelled(error: DatabaseError) {
                 setUserDataRepository.postValue(false)
             }
@@ -147,10 +144,8 @@ class AuthRepository(application: Application){
                 if (auth.currentUser?.uid != null) {
                     reference.child("${auth.currentUser?.uid}/$parameter").setValue(data)
                 }
-
                 singleRecordDataRepository.postValue(true)
             }
-
             override fun onCancelled(error: DatabaseError) {
                 singleRecordDataRepository.postValue(false)
             }
@@ -169,12 +164,10 @@ class AuthRepository(application: Application){
             override fun onCancelled(error: DatabaseError) {
 
             }
-
         })
-
     }
 
-fun getUserDataList(){
+    fun getUserDataList(){
     val userData:Query=firebaseDatabase.getReference("/UFARMDB")
     userData.addValueEventListener(object :ValueEventListener {
         override fun onDataChange(snapshot: DataSnapshot) {
@@ -186,7 +179,6 @@ fun getUserDataList(){
                         }
                         userDataMutableLiveDataList.postValue(userData1)
                     }
-
                         override fun onCancelled(error: DatabaseError) {
 
                 }
@@ -194,7 +186,6 @@ fun getUserDataList(){
             })
 
         }
-
 
     fun uploadImageToFirebaseStorage(image: Uri) {
         val ref = FirebaseStorage.getInstance()

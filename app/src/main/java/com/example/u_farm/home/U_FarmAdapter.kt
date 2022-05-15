@@ -9,11 +9,10 @@ import com.example.u_farm.R
 import com.example.u_farm.databinding.ListItemsBinding
 import com.example.u_farm.model.U_Farm
 
-class U_FarmAdapter : ListAdapter<U_Farm,U_FarmAdapter.ViewHolder>(U_FarmDiffCallback()) {
-
+class U_FarmAdapter(val clickListener:SolutionListener) : ListAdapter<U_Farm,U_FarmAdapter.ViewHolder>(U_FarmDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item,clickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -23,12 +22,14 @@ class U_FarmAdapter : ListAdapter<U_Farm,U_FarmAdapter.ViewHolder>(U_FarmDiffCal
     class ViewHolder private constructor(val binding: ListItemsBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: U_Farm) {
-           binding.data=item
+        fun bind(item: U_Farm,clickListener: SolutionListener) {
+       binding.data=item
+            binding.clicklistener=clickListener
             binding.username.text=item.username
             binding.photo.setImageResource(R.drawable.plantdiseases)
             binding.selectphoto1.setImageResource(R.drawable.plantdiseases)
             binding.description.setText(R.string.problem1)
+
            binding.executePendingBindings()
         }
 
@@ -40,6 +41,13 @@ class U_FarmAdapter : ListAdapter<U_Farm,U_FarmAdapter.ViewHolder>(U_FarmDiffCal
             }
         }
     }
+}
+
+class SolutionListener(val clickListener: (sleepId:String) -> Unit){
+    fun onClick(model:U_Farm)=clickListener(model.username)
+
+
+
 }
 class U_FarmDiffCallback : DiffUtil.ItemCallback<U_Farm>() {
             override fun areItemsTheSame(oldItem: U_Farm, newItem: U_Farm): Boolean {

@@ -29,7 +29,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:startIconDrawable="@drawable/ic_baseline_person_24"
-            app:startIconTint="?attr/colorPrimary"
+            app:startIconTint="?attr/colorAccent"
             app:boxStrokeColor="?attr/colorPrimary"
             style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
@@ -51,7 +51,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/name"
             app:startIconDrawable="@drawable/ic_baseline_mail_24"
-            app:startIconTint="?attr/colorPrimary"
+            app:startIconTint="?attr/colorAccent"
             app:boxStrokeColor="?attr/colorPrimary"
             style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox.Dense">
             <com.google.android.material.textfield.TextInputEditText
@@ -73,7 +73,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/email"
             app:startIconDrawable="@drawable/ic_baseline_vpn_key_24"
-            app:startIconTint="?attr/colorPrimary"
+            app:startIconTint="?attr/colorAccent"
             app:boxStrokeColor="?attr/colorPrimary"
             style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox.Dense">
             <com.google.android.material.textfield.TextInputEditText
@@ -91,6 +91,7 @@
             android:text="@string/register"
             android:textSize="16sp"
             app:elevation="2dp"
+            android:textColor="?attr/colorAccent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/password" />
         <TextView

@@ -4,7 +4,9 @@
         <!-- Primary brand color. -->
         <item name="colorPrimary">#C4C4C4</item>
         <item name="colorPrimaryDark">#C4C4C4</item>
-        <item name="colorAccent">@color/white</item>
+        <item name="colorAccent">@color/black</item>
+        <item name="colorSecondary">@color/white</item>
+
         <item name="android:textColor">@color/black</item>
           <!-- Customize your theme here. -->
     </style>

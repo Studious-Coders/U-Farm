@@ -15,12 +15,23 @@
             android:id="@+id/action_home_to_news"
             app:destination="@id/news"
             />
+        <action
+            android:id="@+id/action_home_to_addProblemsActivity"
+            app:destination="@id/addProblemsActivity" />
+        <action
+            android:id="@+id/action_home_to_solutionsActivity"
+            app:destination="@id/solutionsActivity" />
+
     </fragment>
     <fragment
         android:id="@+id/news"
         android:name="com.example.u_farm.news.NewsFragment"
         android:label="News"
-        tools:layout="@layout/fragment_news" />
+        tools:layout="@layout/fragment_news" >
+        <action
+            android:id="@+id/action_news_to_profile"
+            app:destination="@id/profile" />
+    </fragment>
     <fragment
         android:id="@+id/profile"
         android:name="com.example.u_farm.profile.ProfileFragment"
@@ -35,10 +46,10 @@
         android:id="@+id/addSolutionsActivity"
         android:name="com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity"
         android:label="AddSolutionsActivity"
-        tools:layout="@layout/activity_solutions"/>
+        tools:layout="@layout/activity_add_solutions"/>
     <activity
         android:id="@+id/solutionsActivity"
         android:name="com.example.u_farm.home.solutions.SolutionsActivity"
         android:label="SolutionsActivity"
-        tools:layout="@layout/activity_add_solutions"/>
+        tools:layout="@layout/activity_solutions"/>
 </navigation>

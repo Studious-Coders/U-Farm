@@ -10,7 +10,6 @@ xmlns:tools="http://schemas.android.com/tools">
 
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
-    android:background="?attr/colorAccent"
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -23,6 +22,7 @@ xmlns:tools="http://schemas.android.com/tools">
             android:layout_height="?attr/actionBarSize"
             app:title="@string/app_name"
             app:menu="@menu/top_app_bar"
+            app:titleTextColor="?attr/colorAccent"
             android:backgroundTint="?attr/colorPrimary"
             style="@style/Widget.MaterialComponents.Toolbar.Primary"
             />
@@ -32,7 +32,7 @@ xmlns:tools="http://schemas.android.com/tools">
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="?attr/colorAccent"
-        android:backgroundTint="?attr/colorAccent"
+        android:backgroundTint="?attr/colorSecondary"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
         <!-- Note: A RecyclerView can also be used -->
 
@@ -57,6 +57,8 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="8dp"
                 android:contentDescription="TODO"
+                app:borderWidth="0dp"
+                android:onClick="@{()-> homeViewModel.navigateToAddProblemsPage()}"
                 android:backgroundTint="?attr/colorPrimary"
                 android:src="@drawable/ic_outline_add_24"
                 app:layout_constraintBottom_toBottomOf="parent"

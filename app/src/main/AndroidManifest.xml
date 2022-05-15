@@ -10,19 +10,19 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UFarm">
         <activity
-            android:name=".SearchBox"
-            android:exported="false" />
+            android:name=".home.solutions.SolutionsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".profile.editprofile.EditProfileActivity"
+            android:exported="true" />
         <activity
             android:name=".AppBar"
-            android:exported="false" />
+            android:exported="true" />
         <activity
             android:name=".home.solutions.addsolutions.AddSolutionsActivity"
             android:exported="true" />
         <activity
             android:name=".home.addproblems.AddProblemsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".home.solutions.SolutionsActivity"
             android:exported="true" />
         <activity
             android:name=".HomeActivity"
