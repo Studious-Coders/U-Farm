@@ -188,12 +188,10 @@ class AuthRepository(application: Application){
         }
 
     fun uploadImageToFirebaseStorage(image: Uri) {
-        val ref = FirebaseStorage.getInstance()
-            .getReference("/images/" + UUID.randomUUID().toString())
+        val ref =FirebaseStorage.getInstance().getReference("/images/" + UUID.randomUUID().toString())
 
         val uploadTask = ref.putFile(image)
-        val urlTasK =
-            uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+        val urlTasK = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
                 if (!task.isSuccessful) {
                     task.exception?.let {
                         throw it

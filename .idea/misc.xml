@@ -9,6 +9,7 @@
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_arrow_drop_down_24.xml" value="0.163" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_arrow_drop_up_24.xml" value="0.2025" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_article_24.xml" value="0.163" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.1465" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.163" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_error_outline_24.xml" value="0.228" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_expand_less_24.xml" value="0.163" />
@@ -31,6 +32,7 @@
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_share_24.xml" value="0.163" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_translate_24.xml" value="0.1635" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_vpn_key_24.xml" value="0.215" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_work_24.xml" value="0.1465" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_facebook.xml" value="0.228" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_google.xml" value="0.1685" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_home.xml" value="0.228" />
@@ -41,6 +43,7 @@
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/layout/activity_add_problems.xml" value="0.2421875" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/layout/activity_add_solutions.xml" value="0.2421875" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/layout/activity_app_bar.xml" value="0.228125" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/layout/activity_comments.xml" value="0.2421875" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/layout/activity_editprofile.xml" value="0.2421875" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/layout/activity_home.xml" value="0.2421875" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/layout/activity_login.xml" value="0.228125" />

@@ -21,7 +21,7 @@ class NewsFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding: FragmentNewsBinding =
             DataBindingUtil.inflate(inflater,R.layout.fragment_news,container,false)
-        (activity as AppCompatActivity).supportActionBar?.title="News"
+
 
         return binding.root
     }

@@ -13,6 +13,8 @@
     <string name="home">Home</string>
     <string name="news">News</string>
     <string name="share">Share</string>
+    <string name="share_text">My profile in U_Farm App</string>
+    <string name="sharing_not_available">U_Farm App</string>
     <string name="copylink">Copylink</string>
     <string name="save">Save</string>
     <string name="problem1">Verticillium wit is a fungal disease that affects hundreds of species of trees shrubs, edibles and ornamentals.</string>

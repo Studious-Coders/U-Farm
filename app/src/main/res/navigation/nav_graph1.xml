@@ -43,7 +43,11 @@
         android:id="@+id/profile"
         android:name="com.example.u_farm.profile.ProfileFragment"
         android:label="Profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profile_to_editProfileActivity"
+            app:destination="@id/editProfileActivity" />
+    </fragment>
     <activity
         android:id="@+id/addProblemsActivity"
         android:name="com.example.u_farm.home.addproblems.AddProblemsActivity"
@@ -69,5 +73,10 @@
         android:name="com.example.u_farm.login.LoginActivity"
         android:label="LoginActivity"
         tools:layout="@layout/activity_login"/>
+    <activity
+        android:id="@+id/editProfileActivity"
+        android:name="com.example.u_farm.profile.editprofile.EditProfileActivity"
+        android:label="EditProfileActivity"
+        tools:layout="@layout/activity_editprofile"/>
 
 </navigation>

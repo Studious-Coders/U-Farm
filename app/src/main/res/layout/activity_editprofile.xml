@@ -1,13 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<layout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    >
+    <data>
+        <variable
+            name="editProfileViewModel"
+            type="com.example.u_farm.profile.editprofile.EditProfileViewModel" />
+        <variable
+            name="u_farm"
+            type="com.example.u_farm.model.U_Farm" />
+
+
+    </data>
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
+
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/userdp1"
@@ -16,90 +29,119 @@
             android:layout_marginTop="24dp"
             app:civ_border_color="#918D8D"
             app:civ_border_width="1dp"
-            android:background="@drawable/farmer"
+            app:imgUrl="@{editProfileViewModel.getData.profilePicture}"
+            android:onClick="@{()-> editProfileViewModel.imageFormating()}"
+            android:background="@drawable/ic_baseline_account_circle_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/displaytext"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:padding="2dp"
-            android:text="@string/name"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.021"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/userdp1" />
-
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameprofile"
+            style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:inputType="text"
-            android:textColor="@color/black"
+            android:hint="Name"
+            app:boxBackgroundMode="filled"
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:boxStrokeWidthFocused="2dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/displaytext" />
+            app:layout_constraintTop_toBottomOf="@+id/userdp1"
+            app:startIconDrawable="@drawable/ic_baseline_person_24"
+            app:startIconTint="?attr/colorAccent">
 
-        <TextView
-            android:id="@+id/textprofile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/email"
-            android:textStyle="bold"
-            android:padding="2dp"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.021"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/nameprofile" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={editProfileViewModel.getData.username}"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <EditText
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailprofile"
+            style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:textColor="@color/black"
-            android:inputType="textEmailAddress"
+            android:hint="Email"
+            app:boxBackgroundMode="filled"
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:boxStrokeWidthFocused="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textprofile" />
+            app:layout_constraintTop_toBottomOf="@+id/nameprofile"
+            app:startIconDrawable="@drawable/ic_baseline_mail_24"
+            app:startIconTint="?attr/colorAccent">
 
-
-        <TextView
-            android:id="@+id/textView9"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="2dp"
-            android:text="Phone number"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.026"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/emailprofile" />
-
-        <EditText
-            android:id="@+id/mobileno"
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={editProfileViewModel.getData.email}"/>
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneprofile"
+            style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:inputType="number"
-            android:textColor="@color/black"
+            android:hint="Phone number"
+            app:boxBackgroundMode="filled"
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:boxStrokeWidthFocused="2dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/textView9" />
+            app:layout_constraintTop_toBottomOf="@+id/emailprofile"
+            app:startIconDrawable="@drawable/ic_baseline_phone_android_24"
+            app:startIconTint="?attr/colorAccent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={editProfileViewModel.getData.phonenumber}"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/jobprofile"
+            style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Work"
+            app:boxBackgroundMode="filled"
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:boxStrokeWidthFocused="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phoneprofile"
+            app:startIconDrawable="@drawable/ic_baseline_work_24"
+            app:startIconTint="?attr/colorAccent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={editProfileViewModel.getData.job}"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/locationprofile"
+            style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Location"
+            app:boxBackgroundMode="filled"
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:boxStrokeWidthFocused="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/jobprofile"
+            app:startIconDrawable="@drawable/ic_baseline_location_on_24"
+            app:startIconTint="?attr/colorAccent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@={editProfileViewModel.getData.location}"/>
+        </com.google.android.material.textfield.TextInputLayout>
 
 
         <ImageButton
@@ -107,7 +149,9 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:layout_margin="8dp"
-            android:backgroundTint="@color/black"
+            android:background="@android:color/transparent"
+            android:onClick="@{()-> editProfileViewModel.updateData(editProfileViewModel.getData.username,editProfileViewModel.getData.email,editProfileViewModel.getData.password,editProfileViewModel.getData.phonenumber,editProfileViewModel.getData.job,editProfileViewModel.getData.location)}"
+            android:src="@drawable/ic_baseline_check_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.958"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,13 +162,13 @@
             style="@style/Widget.AppCompat.ProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="invisible"
+            android:backgroundTint="?attr/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.542"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="1.0" />
-
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
+</layout>
