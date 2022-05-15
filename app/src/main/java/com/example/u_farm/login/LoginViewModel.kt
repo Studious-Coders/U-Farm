@@ -1,5 +1,6 @@
 package com.example.u_farm.login
 
+import android.app.Activity
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,16 +10,13 @@ import com.example.u_farm.model.U_Farm
 import com.google.firebase.auth.FirebaseUser
 import org.kodein.di.android.subKodein
 
-class LoginViewModel(application: Application): ViewModel() {
+class LoginViewModel(application: Application,activity: Activity): ViewModel() {
 
     private var authRepository: AuthRepository
     private val _navigateToRegister = MutableLiveData<Boolean>()
     val navigateToRegister: LiveData<Boolean>
         get() = _navigateToRegister
 
-      fun skipAuthentication(){
-          _skip.value=true
-      }
 
 
     fun navigateToRegister() {
@@ -31,11 +29,6 @@ class LoginViewModel(application: Application): ViewModel() {
 
     val firebaseUser:LiveData<FirebaseUser?>
         get()=authRepository.getFirebaseUserMutableLiveData()
-
-    private val _skip = MutableLiveData<Boolean>()
-    val skip: LiveData<Boolean>
-        get() = _skip
-
     init{
         authRepository= AuthRepository(application)
     }

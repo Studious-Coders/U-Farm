@@ -8,10 +8,14 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivityAddProblemsBinding
 import com.example.u_farm.databinding.ActivitySolutionsBinding
+import com.example.u_farm.home.HomeFragmentDirections
 import com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity
+import com.example.u_farm.login.LoginActivity
+import com.google.firebase.auth.FirebaseAuth
 
 class SolutionsActivity : AppCompatActivity() {
     private lateinit var solutionsViewModel: SolutionsViewModel
@@ -33,10 +37,21 @@ class SolutionsActivity : AppCompatActivity() {
 
        solutionsViewModel.navigateToAddSolutions.observe(this, Observer {
            if(it) {
-               val intent = Intent(this, AddSolutionsActivity::class.java)
-               startActivity(intent)
-               solutionsViewModel.navigateToAddSolutionsDone()
-           }
+               if(FirebaseAuth.getInstance().uid!=null){
+                   if(it){
+                       val intent = Intent(this, AddSolutionsActivity::class.java)
+
+                       startActivity(intent)
+                       solutionsViewModel.navigateToAddSolutionsDone()
+                   }
+               }else{
+                   val intent = Intent(this, LoginActivity::class.java)
+
+                   startActivity(intent)
+
+               }
+
+            }
        })
 
 

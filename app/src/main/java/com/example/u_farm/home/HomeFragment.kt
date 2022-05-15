@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentHomeBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class HomeFragment : Fragment() {
 
@@ -53,22 +54,21 @@ class HomeFragment : Fragment() {
         homeViewModel.navigateToSolutionsPage.observe(viewLifecycleOwner, Observer {
             if(it!=""){
                 this.findNavController().navigate(HomeFragmentDirections.actionHomeToSolutionsActivity())
-//                val intent= Intent(application, SolutionsActivity::class.java)
-//
-//                startActivity(intent)
                 homeViewModel.navigateToSolutionsPageDone()
       }
         })
 
         homeViewModel.navigateToAddProblemsPage.observe(viewLifecycleOwner, Observer {
-            if(it){
-                this.findNavController().navigate(HomeFragmentDirections.actionHomeToAddProblemsActivity())
 
-//                val intent= Intent(application, AddProblemsActivity::class.java)
-//
-//                startActivity(intent)
-              homeViewModel.navigateToAddProblemsPageDone()
+            if(FirebaseAuth.getInstance().uid!=null){
+                if(it){
+                    this.findNavController().navigate(HomeFragmentDirections.actionHomeToAddProblemsActivity())
+                    homeViewModel.navigateToAddProblemsPageDone()
+                }
+            }else{
+               this.findNavController().navigate(HomeFragmentDirections.actionHomeToLoginActivity())
             }
+
         })
 
         return binding.root

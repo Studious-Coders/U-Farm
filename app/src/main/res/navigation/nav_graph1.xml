@@ -22,6 +22,13 @@
             android:id="@+id/action_home_to_solutionsActivity"
             app:destination="@id/solutionsActivity" />
 
+        <action
+            android:id="@+id/action_home_to_registerActivity"
+            app:destination="@id/registerActivity" />
+        <action
+            android:id="@+id/action_home_to_loginActivity"
+            app:destination="@id/loginActivity" />
+
     </fragment>
     <fragment
         android:id="@+id/news"
@@ -52,4 +59,15 @@
         android:name="com.example.u_farm.home.solutions.SolutionsActivity"
         android:label="SolutionsActivity"
         tools:layout="@layout/activity_solutions"/>
+    <activity
+        android:id="@+id/registerActivity"
+        android:name="com.example.u_farm.register.RegisterActivity"
+        android:label="RegisterActivity"
+        tools:layout="@layout/activity_register"/>
+    <activity
+        android:id="@+id/loginActivity"
+        android:name="com.example.u_farm.login.LoginActivity"
+        android:label="LoginActivity"
+        tools:layout="@layout/activity_login"/>
+
 </navigation>
