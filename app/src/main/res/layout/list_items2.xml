@@ -2,6 +2,14 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="data"
+            type="com.example.u_farm.model.U_Farm" />
+        <variable
+            name="clicklistener"
+            type="com.example.u_farm.home.SolutionsListener" />
+    </data>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card6"

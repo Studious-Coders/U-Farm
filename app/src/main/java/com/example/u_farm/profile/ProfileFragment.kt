@@ -18,6 +18,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.u_farm.HomeActivity
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentProfileBinding
+import com.example.u_farm.profile.language.LanguageActivity
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_profile.*
 
 class ProfileFragment : Fragment() {
@@ -43,6 +45,9 @@ class ProfileFragment : Fragment() {
         binding.profileViewModel=profileViewModel
         binding.lifecycleOwner=this
 
+        if(FirebaseAuth.getInstance().uid==null){
+            loading_spinner1.visibility=View.GONE
+        }
 
 
         profileViewModel.navigateToEditProfile.observe(viewLifecycleOwner, Observer {
@@ -51,6 +56,16 @@ class ProfileFragment : Fragment() {
                 profileViewModel.navigateToEditProfileDone()
             }
         })
+
+        profileViewModel.language.observe(viewLifecycleOwner, Observer {
+            if(it==true) {
+                val intent=Intent(application,LanguageActivity::class.java)
+                startActivity(intent)
+                profileViewModel.languageIntentDone()
+            }
+        })
+
+
 
         profileViewModel.getData.observe(viewLifecycleOwner, Observer {
             if(it!=null){

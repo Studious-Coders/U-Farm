@@ -27,6 +27,10 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     val share: LiveData<Boolean?>
         get()=_share
 
+    private val _language= MutableLiveData<Boolean?>()
+    val language: LiveData<Boolean?>
+        get()=_language
+
     val value= MediatorLiveData<U_Farm>()
 
     val getData: LiveData<U_Farm?>
@@ -73,6 +77,15 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         _share.value=false
 
     }
+    
+    fun languageIntent(){
+        _language.value=true
+    }
+
+    fun languageIntentDone(){
+        _language.value=false
+    }
+
 
 
 

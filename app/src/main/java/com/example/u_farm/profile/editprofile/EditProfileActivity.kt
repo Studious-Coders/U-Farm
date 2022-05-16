@@ -21,6 +21,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivityEditprofileBinding
 import com.example.u_farm.model.U_Farm
+import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_editprofile.*
 
@@ -49,7 +50,8 @@ class EditProfileActivity : AppCompatActivity() {
         binding.editProfileViewModel = editProfileViewModel
         binding.lifecycleOwner = this
 
-        editProfileViewModel.setData.observe(this, Observer {
+
+          editProfileViewModel.setData.observe(this, Observer {
             if(it==true){
                 loading_spinner.visibility= View.GONE
                 Toast.makeText(this,"Your profile is updated successfully",Toast.LENGTH_LONG).show()

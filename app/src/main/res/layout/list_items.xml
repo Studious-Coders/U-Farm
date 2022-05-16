@@ -8,7 +8,7 @@
             type="com.example.u_farm.model.U_Farm" />
         <variable
             name="clicklistener"
-            type="com.example.u_farm.home.SolutionListener" />
+            type="com.example.u_farm.home.ProblemsListener" />
     </data>
 
 <com.google.android.material.card.MaterialCardView
