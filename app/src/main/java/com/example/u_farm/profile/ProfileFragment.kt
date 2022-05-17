@@ -1,15 +1,21 @@
 package com.example.u_farm.profile
 
+
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
+import android.content.Context.LAYOUT_INFLATER_SERVICE
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -19,8 +25,8 @@ import com.example.u_farm.HomeActivity
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentProfileBinding
 import com.example.u_farm.profile.language.LanguageActivity
-import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_profile.*
+
 
 class ProfileFragment : Fragment() {
 
@@ -45,9 +51,6 @@ class ProfileFragment : Fragment() {
         binding.profileViewModel=profileViewModel
         binding.lifecycleOwner=this
 
-        if(FirebaseAuth.getInstance().uid==null){
-            loading_spinner1.visibility=View.GONE
-        }
 
 
         profileViewModel.navigateToEditProfile.observe(viewLifecycleOwner, Observer {
@@ -58,10 +61,19 @@ class ProfileFragment : Fragment() {
         })
 
         profileViewModel.language.observe(viewLifecycleOwner, Observer {
-            if(it==true) {
-                val intent=Intent(application,LanguageActivity::class.java)
-                startActivity(intent)
-                profileViewModel.languageIntentDone()
+           if(it==true) {
+//                val popupView: View = layoutInflater.inflate(R.layout.activity_language, null)
+//                val width = LinearLayout.LayoutParams.WRAP_CONTENT
+//                val height = LinearLayout.LayoutParams.WRAP_CONTENT
+//                val focusable = true // lets taps outside the popup also dismiss it
+//
+//                val popupWindow = PopupWindow(popupView, width, height, focusable)
+//
+//                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
+
+//                val intent=Intent(application,LanguageActivity::class.java)
+//                startActivity(intent)
+              profileViewModel.languageIntentDone()
             }
         })
 
@@ -69,7 +81,7 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.getData.observe(viewLifecycleOwner, Observer {
             if(it!=null){
-                loading_spinner1.visibility=View.GONE
+
                 profileViewModel.function()
             }
         })

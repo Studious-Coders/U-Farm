@@ -15,6 +15,7 @@ import com.example.u_farm.databinding.ActivitySolutionsBinding
 import com.example.u_farm.home.HomeFragmentDirections
 import com.example.u_farm.home.ProblemsAdapter
 import com.example.u_farm.home.ProblemsListener
+import com.example.u_farm.home.SolutionsAdapter
 import com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity
 import com.example.u_farm.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -37,16 +38,16 @@ class SolutionsActivity : AppCompatActivity() {
 
         binding.lifecycleOwner = this
 
-        //val adapter=U_FarmAdapter()
+        val adapter=SolutionsAdapter()
         //Initialize the adapter onClick event happen on each object (lamba function)
-        val adapter= SolutionsAdapter(ProblemsListener { username ->
-            homeViewMode.navigateToSolutionsPage(username)
+//        val adapter= SolutionsAdapter(ProblemsListener { username ->
+//            solutionsViewModel.navigateToSolutionsPage(username)
+//
+//        })
 
-        })
+        binding.recyclerView1.adapter=adapter
 
-        binding.recyclerView.adapter=adapter
-
-        homeViewModel.allData.observe(viewLifecycleOwner, Observer {
+        solutionsViewModel.allData.observe(this, Observer {
             it?.let{
                 adapter.submitList(it)
             }

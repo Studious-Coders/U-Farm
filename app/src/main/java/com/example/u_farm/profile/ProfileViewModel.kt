@@ -77,8 +77,31 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         _share.value=false
 
     }
-    
+
+    fun updateLanguage(lang:String){
+        authRepository.singleRecord(lang,"language")
+    }
     fun languageIntent(){
+
+        alert.setTitle("Choose a language")
+
+        val options = arrayOf("Tamil", "English","Hindi")
+
+        alert.setItems(options) { dialog, which ->
+            dialog.dismiss()
+
+            when (which) {
+                /* execute here your actions */
+                0 ->   updateLanguage(options[0])
+                1 ->   updateLanguage(options[1])
+                2 ->updateLanguage(options[2])
+            }
+
+
+        }
+
+
+        alert.show()
         _language.value=true
     }
 

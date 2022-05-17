@@ -60,10 +60,10 @@ class ProblemsDiffCallback : DiffUtil.ItemCallback<U_Farm>() {
             }
         }
 
-class SolutionsAdapter(val clickListener:SolutionsListener) : ListAdapter<U_Farm,SolutionsAdapter.ViewHolder>(U_FarmDiffCallback()) {
+class SolutionsAdapter() : ListAdapter<U_Farm,SolutionsAdapter.ViewHolder>(U_FarmDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item,clickListener)
+        holder.bind(item)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -73,9 +73,12 @@ class SolutionsAdapter(val clickListener:SolutionsListener) : ListAdapter<U_Farm
     class ViewHolder private constructor(val binding: ListItems2Binding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: U_Farm,clickListener: SolutionsListener) {
+        fun bind(item: U_Farm) {
             binding.data=item
-            binding.clicklistener=clickListener
+            binding.username1.text=item.username
+            binding.selectphoto5.setImageResource(R.drawable.plantdiseases)
+            binding.solutionstatement.setText(R.string.solutions)
+//            binding.clicklistener=clickListener
             binding.executePendingBindings()
         }
 
@@ -89,12 +92,12 @@ class SolutionsAdapter(val clickListener:SolutionsListener) : ListAdapter<U_Farm
     }
 }
 
-class SolutionsListener(val clickListener: (sleepId:String) -> Unit){
-    fun onClick(model:U_Farm)=clickListener(model.username)
-
-
-
-}
+//class SolutionsListener(val clickListener: (sleepId:String) -> Unit){
+//    fun onClick(model:U_Farm)=clickListener(model.username)
+//
+//
+//
+//}
 
 
 class U_FarmDiffCallback : DiffUtil.ItemCallback<U_Farm>() {
