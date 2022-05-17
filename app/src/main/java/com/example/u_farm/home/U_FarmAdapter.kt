@@ -77,7 +77,7 @@ class SolutionsAdapter() : ListAdapter<U_Farm,SolutionsAdapter.ViewHolder>(U_Far
             binding.data=item
             binding.username1.text=item.username
             binding.selectphoto5.setImageResource(R.drawable.plantdiseases)
-            binding.solutionstatement.setText(R.string.solutions)
+            binding.solutionstatement.setText(R.string.solution1)
 //            binding.clicklistener=clickListener
             binding.executePendingBindings()
         }

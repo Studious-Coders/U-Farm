@@ -24,8 +24,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.u_farm.HomeActivity
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentProfileBinding
-import com.example.u_farm.profile.language.LanguageActivity
-import kotlinx.android.synthetic.main.fragment_profile.*
+
 
 
 class ProfileFragment : Fragment() {
@@ -62,17 +61,7 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.language.observe(viewLifecycleOwner, Observer {
            if(it==true) {
-//                val popupView: View = layoutInflater.inflate(R.layout.activity_language, null)
-//                val width = LinearLayout.LayoutParams.WRAP_CONTENT
-//                val height = LinearLayout.LayoutParams.WRAP_CONTENT
-//                val focusable = true // lets taps outside the popup also dismiss it
-//
-//                val popupWindow = PopupWindow(popupView, width, height, focusable)
-//
-//                popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
 
-//                val intent=Intent(application,LanguageActivity::class.java)
-//                startActivity(intent)
               profileViewModel.languageIntentDone()
             }
         })
