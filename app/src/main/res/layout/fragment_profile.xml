@@ -9,6 +9,7 @@
             name="profileViewModel"
             type="com.example.u_farm.profile.ProfileViewModel" />
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -19,10 +20,10 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="24dp"
-            app:imgUrl="@{profileViewModel.value.profilePicture}"
             android:src="@drawable/farmer"
             app:civ_border_color="#918D8D"
             app:civ_border_width="0.5dp"
+            app:imgUrl="@{profileViewModel.value.profilePicture}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.52"
             app:layout_constraintStart_toStartOf="parent"
@@ -34,13 +35,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            app:userDetails="@{profileViewModel.value.username}"
+            android:text="User"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:text="User"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dp" />
+            app:layout_constraintTop_toBottomOf="@+id/dp"
+            app:userDetails="@{profileViewModel.value.username}" />
+
         <TextView
             android:id="@+id/desgintion"
             android:layout_width="wrap_content"
@@ -48,118 +50,128 @@
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
             android:text="Farmer"
-            app:userDetails="@{profileViewModel.value.job}"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/displayname" />
+            app:layout_constraintTop_toBottomOf="@id/displayname"
+            app:userDetails="@{profileViewModel.value.job}" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/editprofile"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
-            android:layout_weight="1"
-            android:onClick="@{()->profileViewModel.navigateToEditProfile()}"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="24dp"
-            android:text="EditProfile"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
+            android:onClick="@{()->profileViewModel.navigateToEditProfile()}"
             android:padding="16dp"
-            app:cornerRadius="50dp"
-            app:iconTint="?attr/colorAccent"
+            android:text="EditProfile"
             android:textColor="?attr/colorAccent"
-            app:strokeColor="?attr/colorAccent"
+            app:cornerRadius="50dp"
             app:icon="@drawable/ic_baseline_edit_24"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-
+            app:iconTint="?attr/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/desgintion" />
+            app:layout_constraintTop_toBottomOf="@id/desgintion"
+            app:strokeColor="?attr/colorAccent" />
 
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/notify"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
-            android:text="Notification"
-            app:iconTint="?attr/colorAccent"
-            android:textColor="?attr/colorAccent"
-            app:strokeColor="?attr/colorAccent"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
             android:padding="16dp"
+            android:text="Notification"
+            android:textColor="?attr/colorAccent"
             app:cornerRadius="50dp"
             app:icon="@drawable/ic_baseline_notifications_none_24"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:iconTint="?attr/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editprofile" />
+            app:layout_constraintTop_toBottomOf="@id/editprofile"
+            app:strokeColor="?attr/colorAccent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/language"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
-            android:text="Language"
-            android:padding="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
             android:onClick="@{()->profileViewModel.languageIntent()}"
-            app:cornerRadius="50dp"
-            app:iconTint="?attr/colorAccent"
+            android:padding="16dp"
+            android:text="Language"
             android:textColor="?attr/colorAccent"
-            app:strokeColor="?attr/colorAccent"
+            app:cornerRadius="50dp"
             app:icon="@drawable/ic_baseline_translate_24"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:iconTint="?attr/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/notify" />
+            app:layout_constraintTop_toBottomOf="@id/notify"
+            app:strokeColor="?attr/colorAccent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/share"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
-            android:text="share"
-            android:padding="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
             android:onClick="@{()->profileViewModel.shareIntent()}"
-            app:cornerRadius="50dp"
-            app:iconTint="?attr/colorAccent"
+            android:padding="16dp"
+            android:text="share"
             android:textColor="?attr/colorAccent"
-            app:strokeColor="?attr/colorAccent"
+            app:cornerRadius="50dp"
             app:icon="@drawable/ic_baseline_share_24"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:iconTint="?attr/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/language" />
+            app:layout_constraintTop_toBottomOf="@id/language"
+            app:strokeColor="?attr/colorAccent" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/logout"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
             android:layout_width="0dp"
-            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
             android:layout_marginTop="8dp"
-            android:text="logout"
+            android:layout_marginRight="16dp"
+            android:layout_weight="1"
             android:onClick="@{()->profileViewModel.logOutAlertDialogBox()}"
             android:padding="16dp"
-            app:cornerRadius="50dp"
-            app:iconTint="?attr/colorAccent"
+            android:text="logout"
             android:textColor="?attr/colorAccent"
-            app:strokeColor="?attr/colorAccent"
+            app:cornerRadius="50dp"
             app:icon="@drawable/ic_baseline_logout_24"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:iconTint="?attr/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/share" />
+            app:layout_constraintTop_toBottomOf="@id/share"
+            app:strokeColor="?attr/colorAccent" />
+
+        <ImageButton
+            android:id="@+id/savechanges"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_baseline_check_circle_24"
+            app:layout_constraintStart_toEndOf="@+id/displayname"
+            app:layout_constraintTop_toBottomOf="@+id/dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

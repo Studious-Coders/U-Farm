@@ -37,9 +37,9 @@
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                app:imgUrl="@{data.profilePicture}"
                 app:civ_border_color="#000000"
                 app:civ_border_width="0.5dp"
+                app:imgUrl="@{data.profilePicture}"
                 tools:src="@drawable/plantdiseases" />
 
             <TextView
@@ -50,11 +50,11 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="12dp"
-                app:userDetails="@{data.username}"
                 android:layout_toEndOf="@id/selectphoto1"
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:userDetails="@{data.username}"
                 tools:text="Farmer" />
 
             <ImageButton

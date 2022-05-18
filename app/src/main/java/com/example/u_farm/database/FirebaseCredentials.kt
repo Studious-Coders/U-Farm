@@ -47,8 +47,8 @@ class AuthRepository(application: Application){
         this.application=application
         firebaseDatabase= FirebaseDatabase.getInstance()
         reference=firebaseDatabase.getReference("UFARMDB")
-        reference1=firebaseDatabase.getReference("PROBLEM")
-        reference2=firebaseDatabase.getReference("SOLUTION")
+        reference1=firebaseDatabase.getReference("PROBLEM").push()
+        reference2=firebaseDatabase.getReference("SOLUTION").push()
         storage=FirebaseStorage.getInstance()
         auth= FirebaseAuth.getInstance()
         if(auth.currentUser!=null){
@@ -110,7 +110,7 @@ class AuthRepository(application: Application){
             .addOnCompleteListener{
                 if(!it.isSuccessful) return@addOnCompleteListener
                 firebaseUserAuthRepository.postValue(auth.currentUser)
-                val ufarm=U_Farm(username,email,password)
+                val ufarm=U_Farm(auth.currentUser!!.uid,username,email,password)
                 setUserData(ufarm)
                 Log.d("SignUp", "${it.result?.user?.uid}")
             }
@@ -191,11 +191,11 @@ class AuthRepository(application: Application){
 
     /**Problem Model Function**/
 
-    fun setProblemData(problem: Problem,key:String){
+    fun setProblemData(problem: Problem){
         reference1.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (auth.currentUser?.uid != null) {
-                    reference1.child(key).setValue(problem)
+                    reference1.setValue(problem)
                 }
                 setProblemDataRepository.postValue(true)
             }
@@ -206,7 +206,8 @@ class AuthRepository(application: Application){
     }
 
     fun ProblemDataList(){
-    reference1.addValueEventListener(object :ValueEventListener {
+        val ref=firebaseDatabase.getReference("PROBLEM")
+    ref.addValueEventListener(object :ValueEventListener {
         override fun onDataChange(snapshot: DataSnapshot) {
                         for (postSnapshot in snapshot.children) {
                             val problem = postSnapshot.getValue(Problem::class.java)
@@ -223,6 +224,7 @@ class AuthRepository(application: Application){
             })
 
         }
+
 
     fun setSolutionData(solution: Solution){
 

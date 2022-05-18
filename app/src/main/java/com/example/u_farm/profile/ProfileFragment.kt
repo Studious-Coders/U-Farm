@@ -39,8 +39,6 @@ class ProfileFragment : Fragment() {
         val binding:FragmentProfileBinding=
             DataBindingUtil.inflate(inflater,R.layout.fragment_profile,container,false)
 
-        (activity as AppCompatActivity).supportActionBar?.title="Profile"
-
 
         val application: Application = requireNotNull(this.activity).application
         val activity: Activity = this.requireActivity()

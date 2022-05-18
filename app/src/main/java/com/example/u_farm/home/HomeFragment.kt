@@ -50,7 +50,11 @@ class HomeFragment : Fragment() {
                      }
         })
 
-
+     homeViewModel.newData.observe(viewLifecycleOwner,Observer{
+         if(it==true){
+             homeViewModel.function()
+         }
+     })
         homeViewModel.navigateToSolutionsPage.observe(viewLifecycleOwner, Observer {
             if(it!=""){
                 this.findNavController().navigate(HomeFragmentDirections.actionHomeToSolutionsActivity())

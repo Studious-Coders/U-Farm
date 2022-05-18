@@ -21,7 +21,6 @@ import com.google.firebase.database.FirebaseDatabase
 import java.io.IOException
 
 private const val LOG_TAG = "AudioRecordTest"
-private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
 
 class AddProblemsViewModel(application: Application,activity: Activity): ViewModel() {
     var _image= MutableLiveData<Boolean>()
@@ -50,14 +49,15 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
     init {
         authRepository = AuthRepository(application)
         authRepository.getUserData()
+        authRepository.ProblemDataList()
 
     }
 
     fun imageFormating() {
         _image.value=true
     }
-    var str:String?=null
-    var str1:String?=""
+    var str1:String?=null
+    var str:String?=""
 
     var str2:String?=""
 
@@ -73,7 +73,7 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
         }
 
         val problem= Problem(key,getData.value!!.uid,getData.value!!.username,getData.value!!.profilePicture,str!!,str1!!,str2!!)
-        authRepository.setProblemData(problem,key)
+        authRepository.setProblemData(problem)
         _spinner.value=true
     }
 
@@ -83,10 +83,10 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
 
 
     fun imageFormatingDone(dp: Uri){
-        authRepository.uploadImageToFirebaseStorage(dp,"images")
+        authRepository.uploadImageToFirebaseStorage(dp,"diseasesAffectedPlants")
         _image.value=false
     }
-    private var fileName: String = ""
+
     private var recorder: MediaRecorder? = null
 
     private var player: MediaPlayer? = null
@@ -95,7 +95,7 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
           recorder = MediaRecorder().apply {
               setAudioSource(MediaRecorder.AudioSource.MIC)
               setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
-              setOutputFile(fileName)
+              setOutputFile(folder)
               setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
 //              setOutputFormat(MediaRecorder.ENCODING_PCM_16BIT);
 //              setAudioEncoder(MediaRecorder.AudioEncoder.AAC);

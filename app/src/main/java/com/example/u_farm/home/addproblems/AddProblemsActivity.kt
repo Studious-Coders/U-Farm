@@ -1,9 +1,11 @@
 package com.example.u_farm.home.addproblems
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -14,17 +16,39 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivityAddProblemsBinding
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_problems.*
 import kotlinx.android.synthetic.main.activity_editprofile.*
 
+
+private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
 class AddProblemsActivity : AppCompatActivity() {
     private lateinit var addProblemsViewModel:AddProblemsViewModel
+    private var permissionToRecordAccepted = false
+    private var permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        permissionToRecordAccepted = if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
+            grantResults[0] == PackageManager.PERMISSION_GRANTED
+        } else {
+            false
+        }
+        if (!permissionToRecordAccepted) finish()
+    }
+
+
+
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +56,9 @@ class AddProblemsActivity : AppCompatActivity() {
             this,
             R.layout.activity_add_problems
         )
+        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
+
+
         supportActionBar?.title="Add Problems"
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -66,10 +93,12 @@ class AddProblemsActivity : AppCompatActivity() {
         })
         addProblemsViewModel.setData.observe(this, Observer {
             if(it==true){
-                loading_spinner.visibility= View.GONE
+
+                loading_spinner2.visibility= View.GONE
                 Toast.makeText(this,"Your Problem is Added", Toast.LENGTH_LONG).show()
                     addProblemsViewModel.function()
                 finish()
+
             }
         })
 
@@ -78,6 +107,7 @@ class AddProblemsActivity : AppCompatActivity() {
 
         addProblemsViewModel.image.observe(this, Observer {
             if(it==true) {
+
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.type = "image/*"
                 startActivityForResult(intent, 0)
@@ -86,13 +116,15 @@ class AddProblemsActivity : AppCompatActivity() {
         })
             addProblemsViewModel.setImage.observe(this, Observer {
             if(it!=null){
-                loading_spinner.visibility= View.GONE
+                loading_spinner2.visibility= View.GONE
+
             }
         })
 
+
         addProblemsViewModel.spinner.observe(this, Observer {
             if(it==true){
-                loading_spinner.visibility= View.VISIBLE
+                loading_spinner2.visibility= View.VISIBLE
             }
         })
 
@@ -104,10 +136,14 @@ class AddProblemsActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0 && resultCode == AppCompatActivity.RESULT_OK && data != null) {
             Log.d("EditProfile", "Photo was selected")
+            textView.visibility=View.GONE
+            imageView2.visibility=View.GONE
+
             selectedPhotoUri = data.data
             addProblemsViewModel.imageFormatingDone(selectedPhotoUri!!)
             Picasso.with(this).load(selectedPhotoUri).into(imageView)
-            loading_spinner.visibility= View.VISIBLE
+            loading_spinner2.visibility= View.VISIBLE
+
 
 
         }

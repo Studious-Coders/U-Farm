@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser
 
 class ProfileViewModel(application: Application, activity: Activity): ViewModel() {
     private var alert: AlertDialog.Builder
+    private var alert0: AlertDialog.Builder
 
     private var _navigateToEditProfile= MutableLiveData<Boolean>()
     val navigateToEditProfile: LiveData<Boolean>
@@ -42,6 +43,7 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     init {
         authRepository = AuthRepository(application)
         alert = AlertDialog.Builder(activity)
+        alert0 = AlertDialog.Builder(activity)
         authRepository.getUserData()
         value.addSource(getData,value::setValue)
 
@@ -84,11 +86,11 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     }
     fun languageIntent(){
 
-        alert.setTitle("Choose a language")
+        alert0.setTitle("Choose a language")
 
         val options = arrayOf("Tamil", "English","Hindi")
 
-        alert.setItems(options) { dialog, which ->
+        alert0.setItems(options) { dialog, which ->
             dialog.dismiss()
 
             when (which) {
@@ -102,7 +104,7 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         }
 
 
-        alert.show()
+        alert0.show()
         _language.value=true
     }
 

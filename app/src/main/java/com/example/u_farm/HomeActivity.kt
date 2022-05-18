@@ -1,8 +1,10 @@
 package com.example.u_farm
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Application
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -28,18 +30,17 @@ import java.lang.reflect.Array.get
 
 class HomeActivity : AppCompatActivity() {
     lateinit var bottomNavigationView:BottomNavigationView
+
     @SuppressLint("ResourceAsColor")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         val binding=DataBindingUtil.setContentView<ActivityHomeBinding>(this,R.layout.activity_home)
 
-
-
         bottomNavigationView = binding.bottomNavigation
 
         val navController=findNavController(R.id.fragmentContainerView)
-        val appBarConfiguration= AppBarConfiguration(setOf(R.id.home,R.id.news,R.id.profile))
+        val appBarConfiguration= AppBarConfiguration(setOf(R.id.news,R.id.profile))
 
         setupActionBarWithNavController(navController,appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)

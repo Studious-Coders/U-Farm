@@ -38,8 +38,12 @@ class HomeViewModel(application: Application): ViewModel() {
         _navigateToSolutionsPage.value=username
 
     }
-    val firebaseUser: LiveData<FirebaseUser?>
-        get()= authRepository.getFirebaseUserMutableLiveData()
+    val newData: LiveData<Boolean?>
+        get()= authRepository.setProblemDataMutableLiveData()
+
+   fun function(){
+       authRepository.ProblemDataList()
+   }
 
 
     init{

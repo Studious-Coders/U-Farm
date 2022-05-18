@@ -60,13 +60,13 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
 
 
 
-    fun updateData(username:String,email:String,password:String,phoneNumber:String,job:String,location:String){
+    fun updateData(uid:String,username:String,email:String,password:String,phoneNumber:String,job:String,location:String){
         if(setImage.value!=null) {
             str=setImage.value.toString()
         }else{
             str= getData.value?.profilePicture
         }
-        val ufarm= U_Farm(username,email,password,phoneNumber,str!!,job,location,"","")
+        val ufarm= U_Farm(uid,username,email,password,phoneNumber,str!!,job,location,"","")
         authRepository.setUserData(ufarm)
         _spinner.value=true
     }
