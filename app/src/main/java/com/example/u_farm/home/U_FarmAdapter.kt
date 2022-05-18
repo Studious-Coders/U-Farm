@@ -8,9 +8,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.u_farm.R
 import com.example.u_farm.databinding.ListItems2Binding
 import com.example.u_farm.databinding.ListItemsBinding
+import com.example.u_farm.model.Problem
 import com.example.u_farm.model.U_Farm
 
-class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<U_Farm,ProblemsAdapter.ViewHolder>(ProblemsDiffCallback()) {
+class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<Problem,ProblemsAdapter.ViewHolder>(ProblemsDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item,clickListener)
@@ -23,14 +24,9 @@ class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<U_Farm,P
     class ViewHolder private constructor(val binding: ListItemsBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: U_Farm,clickListener: ProblemsListener) {
-       binding.data=item
+        fun bind(item: Problem,clickListener: ProblemsListener) {
+              binding.data=item
             binding.clicklistener=clickListener
-            binding.username.text=item.username
-            binding.photo.setImageResource(R.drawable.plantdiseases)
-            binding.selectphoto1.setImageResource(R.drawable.plantdiseases)
-            binding.description.setText(R.string.problem1)
-
            binding.executePendingBindings()
         }
 
@@ -45,22 +41,22 @@ class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<U_Farm,P
 }
 
 class ProblemsListener(val clickListener: (sleepId:String) -> Unit){
-    fun onClick(model:U_Farm)=clickListener(model.username)
+    fun onClick(model: Problem)=clickListener(model.problemUid)
 
 
 
 }
-class ProblemsDiffCallback : DiffUtil.ItemCallback<U_Farm>() {
-            override fun areItemsTheSame(oldItem: U_Farm, newItem: U_Farm): Boolean {
+class ProblemsDiffCallback : DiffUtil.ItemCallback<Problem>() {
+            override fun areItemsTheSame(oldItem: Problem, newItem: Problem): Boolean {
                 return oldItem.username == newItem.username
             }
 
-            override fun areContentsTheSame(oldItem: U_Farm, newItem: U_Farm): Boolean {
+            override fun areContentsTheSame(oldItem: Problem, newItem: Problem): Boolean {
                 return oldItem== newItem
             }
         }
 
-class SolutionsAdapter() : ListAdapter<U_Farm,SolutionsAdapter.ViewHolder>(U_FarmDiffCallback()) {
+class SolutionsAdapter() : ListAdapter<Problem,SolutionsAdapter.ViewHolder>(U_FarmDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
@@ -73,11 +69,9 @@ class SolutionsAdapter() : ListAdapter<U_Farm,SolutionsAdapter.ViewHolder>(U_Far
     class ViewHolder private constructor(val binding: ListItems2Binding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: U_Farm) {
+        fun bind(item: Problem) {
             binding.data=item
-            binding.username1.text=item.username
-            binding.selectphoto5.setImageResource(R.drawable.plantdiseases)
-            binding.solutionstatement.setText(R.string.solution1)
+
 //            binding.clicklistener=clickListener
             binding.executePendingBindings()
         }
@@ -100,12 +94,12 @@ class SolutionsAdapter() : ListAdapter<U_Farm,SolutionsAdapter.ViewHolder>(U_Far
 //}
 
 
-class U_FarmDiffCallback : DiffUtil.ItemCallback<U_Farm>() {
-    override fun areItemsTheSame(oldItem: U_Farm, newItem: U_Farm): Boolean {
+class U_FarmDiffCallback : DiffUtil.ItemCallback<Problem>() {
+    override fun areItemsTheSame(oldItem: Problem, newItem: Problem): Boolean {
         return oldItem.username == newItem.username
     }
 
-    override fun areContentsTheSame(oldItem: U_Farm, newItem: U_Farm): Boolean {
+    override fun areContentsTheSame(oldItem: Problem, newItem: Problem): Boolean {
         return oldItem== newItem
     }
 }

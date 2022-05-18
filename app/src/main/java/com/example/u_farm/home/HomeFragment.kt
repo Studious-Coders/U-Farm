@@ -37,8 +37,8 @@ class HomeFragment : Fragment() {
 
            //val adapter=U_FarmAdapter()
         //Initialize the adapter onClick event happen on each object (lamba function)
-        val adapter=ProblemsAdapter(ProblemsListener { username ->
-            homeViewModel.navigateToSolutionsPage(username)
+        val adapter=ProblemsAdapter(ProblemsListener { uid ->
+            homeViewModel.navigateToSolutionsPage(uid)
 
         })
 

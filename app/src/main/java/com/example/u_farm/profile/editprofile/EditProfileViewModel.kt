@@ -16,6 +16,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.U_Farm
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_editprofile.*
 import java.util.*
 
@@ -77,7 +78,7 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
 
 
     fun imageFormatingDone(dp: Uri){
-        authRepository.uploadImageToFirebaseStorage(dp)
+        authRepository.uploadImageToFirebaseStorage(dp,"images")
         _image.value=false
     }
 

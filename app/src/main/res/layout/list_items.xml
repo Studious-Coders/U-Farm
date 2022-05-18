@@ -5,7 +5,7 @@
     <data>
         <variable
             name="data"
-            type="com.example.u_farm.model.U_Farm" />
+            type="com.example.u_farm.model.Problem" />
         <variable
             name="clicklistener"
             type="com.example.u_farm.home.ProblemsListener" />
@@ -37,7 +37,7 @@
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:src="@mipmap/ic_launcher"
+                app:imgUrl="@{data.profilePicture}"
                 app:civ_border_color="#000000"
                 app:civ_border_width="0.5dp"
                 tools:src="@drawable/plantdiseases" />
@@ -50,6 +50,7 @@
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="12dp"
+                app:userDetails="@{data.username}"
                 android:layout_toEndOf="@id/selectphoto1"
                 android:gravity="center"
                 android:textSize="20sp"
@@ -84,6 +85,7 @@
                 android:layout_height="224dp"
                 android:contentDescription="diseases affected plants image"
                 android:scaleType="centerCrop"
+                app:imageUrl="@{data.diseaseAffectedPlantImage}"
                 tools:srcCompat="@drawable/plantdiseases" />
 
             <!-- Title, secondary and supporting text -->
@@ -91,6 +93,7 @@
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                app:userDetails="@{data.problemStatement}"
                 tools:text="@string/problem1"
                 android:textSize="16sp"
                 />

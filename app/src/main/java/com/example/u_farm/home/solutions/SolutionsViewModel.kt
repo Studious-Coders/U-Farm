@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.u_farm.database.AuthRepository
+import com.example.u_farm.model.Problem
 import com.example.u_farm.model.U_Farm
 
 class SolutionsViewModel(application: Application,activity: Activity): ViewModel()  {
@@ -22,11 +23,11 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
     private var authRepository: AuthRepository
     init{
         authRepository= AuthRepository(application)
-        authRepository.getUserDataList()
+        authRepository.ProblemDataList()
 
     }
-    val allData: MutableLiveData<MutableList<U_Farm?>>
-        get()=authRepository.userDataMutableLiveDataList()
+    val allData: MutableLiveData<MutableList<Problem?>>
+        get()=authRepository.ProblemDataMutableLiveDataList()
 
 
 
