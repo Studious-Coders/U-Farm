@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
+import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
@@ -30,7 +31,9 @@ import kotlinx.android.synthetic.main.activity_editprofile.*
 
 private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
 class AddProblemsActivity : AppCompatActivity() {
+    private lateinit var folder:String
     private lateinit var addProblemsViewModel:AddProblemsViewModel
+    private lateinit var progressBar: ProgressDialog
     private var permissionToRecordAccepted = false
     private var permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
     override fun onRequestPermissionsResult(
@@ -47,8 +50,6 @@ class AddProblemsActivity : AppCompatActivity() {
         if (!permissionToRecordAccepted) finish()
     }
 
-
-
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,7 +59,7 @@ class AddProblemsActivity : AppCompatActivity() {
         )
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
 
-
+    progressBar=ProgressDialog(this)
         supportActionBar?.title="Add Problems"
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -79,18 +80,30 @@ class AddProblemsActivity : AppCompatActivity() {
             }
         })
 
+        folder = "${externalCacheDir?.absolutePath}/audiorecordtest.3gp"
         floating_action_button.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
             when (motionEvent.action){
                 MotionEvent.ACTION_DOWN -> {
                   addProblemsViewModel.stopRecording()
+
                 }
                 MotionEvent.ACTION_UP -> {
-                    val folder = "${externalCacheDir?.absolutePath}/audiorecordtest.3gp"
+
                     addProblemsViewModel.startRecording(folder)
                 }
             }
             return@OnTouchListener false
         })
+
+        addProblemsViewModel.convertAudio.observe(this,Observer{
+            if(it!=null) {
+                progressBar.setMessage("Uploading Audio....")
+                progressBar.show()
+                addProblemsViewModel.saveAudio(folder)
+            }
+        })
+
+
         addProblemsViewModel.setData.observe(this, Observer {
             if(it==true){
 
@@ -117,6 +130,7 @@ class AddProblemsActivity : AppCompatActivity() {
             addProblemsViewModel.setImage.observe(this, Observer {
             if(it!=null){
                 loading_spinner2.visibility= View.GONE
+                progressBar.dismiss()
 
             }
         })

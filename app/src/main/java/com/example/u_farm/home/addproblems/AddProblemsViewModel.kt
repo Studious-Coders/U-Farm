@@ -18,6 +18,7 @@ import com.example.u_farm.model.Problem
 import com.example.u_farm.model.U_Farm
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import java.io.File
 import java.io.IOException
 
 private const val LOG_TAG = "AudioRecordTest"
@@ -31,9 +32,9 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
     val spinner: LiveData<Boolean>
         get()=_spinner
 
-    private var _convertText= MutableLiveData<String>()
-    val convertText: LiveData<String>
-        get()=_convertText
+    private var _convertAudio= MutableLiveData<String>()
+    val convertAudio: LiveData<String>
+        get()=_convertAudio
 
     private var authRepository: AuthRepository
 
@@ -72,6 +73,7 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
             str1= ""
         }
 
+
         val problem= Problem(key,getData.value!!.uid,getData.value!!.username,getData.value!!.profilePicture,str!!,str1!!,str2!!)
         authRepository.setProblemData(problem)
         _spinner.value=true
@@ -90,13 +92,16 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
     private var recorder: MediaRecorder? = null
 
     private var player: MediaPlayer? = null
+//    private var filename:String?=null
     
     fun startRecording(folder:String){
+//        filename=folder
           recorder = MediaRecorder().apply {
               setAudioSource(MediaRecorder.AudioSource.MIC)
               setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP)
               setOutputFile(folder)
               setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB)
+
 //              setOutputFormat(MediaRecorder.ENCODING_PCM_16BIT);
 //              setAudioEncoder(MediaRecorder.AudioEncoder.AAC);
 //              setAudioChannels(1);
@@ -112,7 +117,7 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
 
               start()
           }
-          convertTextToAudio()
+          convertAudioToText()
       }
 
     fun stopRecording(){
@@ -124,10 +129,16 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
 
     }
 
-    fun convertTextToAudio(){
+    fun saveAudio(folder:String){
+        val uri:Uri=Uri.fromFile(File(folder))
+        authRepository.uploadImageToFirebaseStorage(uri,"AudioToText")
+    }
 
-       _convertText.value="ConvertText"
-        str=_convertText.value
+
+    fun convertAudioToText(){
+
+       _convertAudio.value="ConvertText"
+        str=_convertAudio.value
 
     }
     private var _edit= MutableLiveData<Boolean>()
