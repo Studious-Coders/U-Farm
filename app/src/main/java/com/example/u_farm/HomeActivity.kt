@@ -39,8 +39,9 @@ class HomeActivity : AppCompatActivity() {
 
         bottomNavigationView = binding.bottomNavigation
 
+         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
         val navController=findNavController(R.id.fragmentContainerView)
-        val appBarConfiguration= AppBarConfiguration(setOf(R.id.news,R.id.profile))
+      val appBarConfiguration= AppBarConfiguration(setOf(R.id.home,R.id.news,R.id.profile))
 
         setupActionBarWithNavController(navController,appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)

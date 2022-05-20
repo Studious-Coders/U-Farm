@@ -6,6 +6,8 @@ import android.app.Activity
 import android.app.Application
 import android.content.Context.LAYOUT_INFLATER_SERVICE
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
 import android.view.Gravity
@@ -24,7 +26,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.u_farm.HomeActivity
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentProfileBinding
-
+import com.google.android.material.snackbar.Snackbar
 
 
 class ProfileFragment : Fragment() {
@@ -34,13 +36,11 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         // Inflate the layout for this fragment
         val binding:FragmentProfileBinding=
             DataBindingUtil.inflate(inflater,R.layout.fragment_profile,container,false)
-
-
-        val application: Application = requireNotNull(this.activity).application
+         val application: Application = requireNotNull(this.activity).application
         val activity: Activity = this.requireActivity()
         val viewModelFactory= ProfileViewModelFactory(application,activity)
         val profileViewModel = ViewModelProvider(this,viewModelFactory).get(ProfileViewModel::class.java)
@@ -48,12 +48,19 @@ class ProfileFragment : Fragment() {
         binding.profileViewModel=profileViewModel
         binding.lifecycleOwner=this
 
-
+       profileViewModel.snackbar.observe(viewLifecycleOwner,Observer{
+           if(it==true){
+               Snackbar.make(binding.root, "Login to access the settings", Snackbar.LENGTH_SHORT)
+                   .show()
+           }
+       })
 
         profileViewModel.navigateToEditProfile.observe(viewLifecycleOwner, Observer {
-            if(it==true) {
+            if(it==true && profileViewModel.getData.value?.uid!=null) {
                 this.findNavController().navigate(ProfileFragmentDirections.actionProfileToEditProfileActivity())
                 profileViewModel.navigateToEditProfileDone()
+            }else{
+                profileViewModel.snackbar()
             }
         })
 
@@ -84,7 +91,7 @@ class ProfileFragment : Fragment() {
             }
         })
         profileViewModel.share.observe(viewLifecycleOwner, Observer {
-           if(it==true) {
+           if(it==true && profileViewModel.getData.value?.uid!=null) {
                val something= Uri.parse("http://www.u-farm.com/profile/")
                        .buildUpon()
                        .appendPath("1")

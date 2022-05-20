@@ -1,9 +1,8 @@
 package com.example.u_farm.home
 
+import android.app.Application
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -13,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
@@ -23,15 +23,15 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding:FragmentHomeBinding=DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
 
+     setHasOptionsMenu(true)
 
-        (activity as AppCompatActivity).supportActionBar?.hide()
+
+
         val application= requireNotNull(this.activity).application
         val viewModelFactory=HomeViewModelFactory(application)
         val homeViewModel= ViewModelProvider(this,viewModelFactory).get(HomeViewModel::class.java)
 
-
         binding.homeViewModel=homeViewModel
-
 
         binding.lifecycleOwner=this
 
@@ -77,6 +77,10 @@ class HomeFragment : Fragment() {
 
         return binding.root
     }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.top_app_bar, menu)
+    }
+
 }
 
 

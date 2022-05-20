@@ -16,12 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UFarm">
         <activity
-            android:name=".profile.language.LanguageActivity"
-            android:exported="true" />
-        <activity
-            android:name=".CommentsActivity"
-            android:exported="true" />
-        <activity
             android:name=".register.RegisterActivity"
             android:exported="true" />
         <activity
@@ -31,34 +25,37 @@
             android:name=".home.solutions.SolutionsActivity"
             android:exported="true" />
         <activity
+            android:name=".home.addproblems.AddProblemsActivity"
+            android:exported="true" />
+
+        <activity
+            android:name=".home.solutions.addsolutions.AddSolutionsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".CommentsActivity"
+            android:exported="true" />
+        <activity
             android:name=".profile.editprofile.EditProfileActivity"
             android:exported="true" />
         <activity
             android:name=".AppBar"
             android:exported="true" />
         <activity
-            android:name=".home.solutions.addsolutions.AddSolutionsActivity"
-            android:exported="true" />
-        <activity
-            android:name=".home.addproblems.AddProblemsActivity"
-            android:exported="true" />
-        <activity
             android:name=".MainActivity"
             android:exported="true" />
         <activity
             android:name=".HomeActivity"
-            android:exported="true">
-            <tools:validation testUrl="http://www.u-farm.com/profile" />
+            android:exported="true"
+            android:theme="@style/Theme.UFarm">
             <tools:validation testUrl="http://www.u-farm.com/profile" />
 
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
@@ -66,8 +63,8 @@
                     android:host="www.u-farm.com"
                     android:pathPrefix="/profile"
                     android:scheme="http" />
+
             </intent-filter>
         </activity>
     </application>
-
 </manifest>

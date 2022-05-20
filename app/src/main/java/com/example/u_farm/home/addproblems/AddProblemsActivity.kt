@@ -80,7 +80,7 @@ class AddProblemsActivity : AppCompatActivity() {
             }
         })
 
-        folder = "${externalCacheDir?.absolutePath}/audiorecordtest.3gp"
+
         floating_action_button.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
             when (motionEvent.action){
                 MotionEvent.ACTION_DOWN -> {
@@ -89,17 +89,27 @@ class AddProblemsActivity : AppCompatActivity() {
                 }
                 MotionEvent.ACTION_UP -> {
 
-                    addProblemsViewModel.startRecording(folder)
+                    addProblemsViewModel.startRecording()
                 }
             }
             return@OnTouchListener false
         })
 
-        addProblemsViewModel.convertAudio.observe(this,Observer{
+
+        addProblemsViewModel.spinner.observe(this,Observer{
             if(it!=null) {
-                progressBar.setMessage("Uploading Audio....")
+                progressBar.setMessage("Uploading the Problem.....")
                 progressBar.show()
-                addProblemsViewModel.saveAudio(folder)
+                addProblemsViewModel.upload()
+
+            }
+        })
+
+
+        addProblemsViewModel.setImage.observe(this,Observer{
+            if(it!=null) {
+                addProblemsViewModel.upload1()
+
             }
         })
 
@@ -109,7 +119,8 @@ class AddProblemsActivity : AppCompatActivity() {
 
                 loading_spinner2.visibility= View.GONE
                 Toast.makeText(this,"Your Problem is Added", Toast.LENGTH_LONG).show()
-                    addProblemsViewModel.function()
+                progressBar.dismiss()
+                addProblemsViewModel.function()
                 finish()
 
             }

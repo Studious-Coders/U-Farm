@@ -38,7 +38,9 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     val getData: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
 
-
+    private val _snackbar= MutableLiveData<Boolean?>()
+    val snackbar: LiveData<Boolean?>
+        get()=_snackbar
 
     init {
         authRepository = AuthRepository(application)
@@ -62,7 +64,13 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
             }).setNegativeButton("NO", null)
 
         val alert1: AlertDialog = alert.create()
-        alert1.show()
+        if(getData.value?.uid!=null) {
+
+            alert.show()
+        }else{
+            _snackbar.value=true
+        }
+
     }
     fun navigateToEditProfile(){
         _navigateToEditProfile.value=true
@@ -76,11 +84,16 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         _share.value=true
     }
 
-    fun shareIntentDone(){
-        _share.value=false
-
+    fun shareIntentDone() {
+        _share.value = false
+    }
+    fun snackbarDone(){
+        _snackbar.value=false
     }
 
+    fun snackbar(){
+        _snackbar.value=true
+    }
     fun updateLanguage(lang:String){
         authRepository.singleRecord(lang,"language")
     }
@@ -102,9 +115,12 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
 
 
         }
+        if(getData.value?.uid!=null) {
 
-
-        alert0.show()
+            alert0.show()
+        }else{
+            _snackbar.value=true
+        }
         _language.value=true
     }
 

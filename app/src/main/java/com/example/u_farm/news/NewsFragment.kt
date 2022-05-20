@@ -1,5 +1,8 @@
 package com.example.u_farm.news
 
+import android.app.Application
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,7 +25,7 @@ class NewsFragment : Fragment() {
         val binding: FragmentNewsBinding =
             DataBindingUtil.inflate(inflater,R.layout.fragment_news,container,false)
 
-
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         return binding.root
     }
 }

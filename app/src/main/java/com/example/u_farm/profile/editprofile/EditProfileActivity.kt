@@ -51,11 +51,9 @@ class EditProfileActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
 
-          editProfileViewModel.setData.observe(this, Observer {
-            if(it==true){
-                loading_spinner.visibility= View.GONE
-                Toast.makeText(this,"Your profile is updated successfully",Toast.LENGTH_LONG).show()
-                editProfileViewModel.function()
+          editProfileViewModel.hope.observe(this, Observer {
+            if(it!=null){
+                editProfileViewModel.upload()
             }
         })
 
@@ -64,15 +62,23 @@ class EditProfileActivity : AppCompatActivity() {
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.type = "image/*"
                 startActivityForResult(intent, 0)
-
             }
         })
 
         editProfileViewModel.setImage.observe(this, Observer {
-            if(it!=null){
-                loading_spinner.visibility=View.GONE
-            }
+              editProfileViewModel.upload1()
         })
+
+        editProfileViewModel.setData.observe(this,Observer{
+            loading_spinner.visibility= View.GONE
+            Toast.makeText(this,"Your profile is updated successfully",Toast.LENGTH_LONG).show()
+            editProfileViewModel.function()
+        })
+
+
+
+
+
 
         editProfileViewModel.spinner.observe(this, Observer {
             if(it==true){
@@ -91,8 +97,8 @@ class EditProfileActivity : AppCompatActivity() {
             selectedPhotoUri = data.data
             editProfileViewModel.imageFormatingDone(selectedPhotoUri!!)
             Picasso.with(this).load(selectedPhotoUri).into(userdp1)
-            loading_spinner.visibility=View.VISIBLE
-
+//            loading_spinner.visibility=View.VISIBLE
+//
 
         }
     }

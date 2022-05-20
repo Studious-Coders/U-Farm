@@ -3,6 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <data>
+
+    <variable
+        name="solution"
+        type="com.example.u_farm.model.Solution"/>
     <variable
         name="addSolutionsViewModel"
         type="com.example.u_farm.home.solutions.addsolutions.AddSolutionsViewModel" />
