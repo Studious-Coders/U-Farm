@@ -1,28 +1,37 @@
 package com.example.u_farm.home.addproblems
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.media.AudioFormat
 import android.media.AudioFormat.ENCODING_PCM_16BIT
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.net.Uri
+import android.os.Bundle
 import android.os.Environment
 import android.speech.RecognizerIntent
 import android.speech.SpeechRecognizer
+import android.speech.tts.TextToSpeech
 import android.util.Log
+import android.widget.Toast
+import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.U_Farm
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
+import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
+import java.util.*
 
 private const val LOG_TAG = "AudioRecordTest"
 
@@ -52,6 +61,8 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
 
     val setImage:LiveData<String?>
         get()=authRepository.uploadedDataMutuableLiveData()
+
+    private lateinit var textToSpeechEngine: TextToSpeech
 
     init {
         authRepository = AuthRepository(application)
@@ -108,71 +119,77 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
     private var recorder: MediaRecorder? = null
     private var player: MediaPlayer? = null
 
+    private lateinit var startForResult: ActivityResultLauncher<Intent>
+
+    fun initial(
+         launcher: ActivityResultLauncher<Intent>
+    ) = viewModelScope.launch {
+//        textToSpeechEngine = engine
+        startForResult = launcher
+    }
 
 
     
-    fun startRecording(){
+    fun startRecording() {
 
-          recorder = MediaRecorder().apply {
-              setAudioSource(MediaRecorder.AudioSource.MIC)
-              setOutputFormat(MediaRecorder.OutputFormat.DEFAULT)
-              setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT)
-              setOutputFile(Environment.getExternalStorageDirectory()
-                  .getAbsolutePath()+"/myrecording.mp3")
+        startForResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale("in_ID"))
+            putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
+        })
 
-              try {
-                  prepare()
-              } catch (e: IOException) {
-                  Log.e(LOG_TAG, "prepare() failed")
-              }
 
-              start()
-          }
-          convertAudioToText()
-      }
-
-    fun stopRecording(){
-        recorder?.apply {
-            stop()
-            release()
-        }
-        recorder = null
-
-    }
-
-    fun convertAudioToText(){
-//
-//
 //        speech = SpeechRecognizer.createSpeechRecognizer(this)
 ////        Log.i(logTag, "isRecognitionAvailable: " + SpeechRecognizer.isRecognitionAvailable(this))
 //        speech.setRecognitionListener(this)
 //        recognizerIntent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
 //        recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_PREFERENCE, "US-en")
-//        recognizerIntent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-//            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+//        recognizerIntent.putExtra(
+//            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+//            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+//        )
 //        recognizerIntent.putExtra(RecognizerIntent.EXTRA_MAX_RESULTS, 3)
+
+//          recorder = MediaRecorder().apply {
+//              setAudioSource(MediaRecorder.AudioSource.MIC)
+//              setOutputFormat(MediaRecorder.OutputFormat.DEFAULT)
+//              setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT)
+//              setOutputFile(Environment.getExternalStorageDirectory()
+//                  .getAbsolutePath()+"/myrecording.mp3")
+
+//              try {
+//                  prepare()
+//              } catch (e: IOException) {
+//                  Log.e(LOG_TAG, "prepare() failed")
+//              }
 //
-//        if (isChecked) {
-//            progressBar.visibility = View.VISIBLE
-//            progressBar.isIndeterminate = true
-//            ActivityCompat.requestPermissions(this@MainActivity,
-//                arrayOf(Manifest.permission.RECORD_AUDIO),
-//                permission)
-//        } else {
-//            progressBar.isIndeterminate = false
-//            progressBar.visibility = View.VISIBLE
-//            speech.stopListening()
+//              start()
+//          }
+//          convertAudioToText()
+      }
+//
+//    fun stopRecording(){
+//        recorder?.apply {
+//            stop()
+//            release()
 //        }
+//        recorder = null
 //
-//        override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>,
+//    }
+
+
+//    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String?>,
 //                                                grantResults: IntArray) {
 //            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 //            when (requestCode) {
-//                permission -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager
+//                Manifest.permission -> if (grantResults.isNotEmpty() && grantResults[0] == PackageManager
 //                        .PERMISSION_GRANTED) {
 //                    speech.startListening(recognizerIntent)
 //                } else {
-//                    Toast.makeText(this@MainActivity, "Permission Denied!",
+//                    Toast.makeText(this@AddProblemsViewModel, "Permission Denied!",
 //                        Toast.LENGTH_SHORT).show()
 //                }
 //            }
@@ -237,10 +254,34 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
 //      """.trimIndent()
 //            returnedText.text = text
 //        }
-       _convertAudio.value="ConvertText"
-        str=_convertAudio.value
+//       _convertAudio.value="ConvertText"
+//        str=_convertAudio.value
+
+    fun convertAudioToText(){
+//
+//
+//
+//        if (isChecked) {
+//            progressBar.visibility = View.VISIBLE
+//            progressBar.isIndeterminate = true
+//            ActivityCompat.requestPermissions(this@MainActivity,
+//                arrayOf(Manifest.permission.RECORD_AUDIO),
+//                permission)
+//        } else {
+//            progressBar.isIndeterminate = false
+//            progressBar.visibility = View.VISIBLE
+//            speech.stopListening()
+//        }
+//
+//
 
     }
+
+
+    fun speak(text: String) = viewModelScope.launch{
+        textToSpeechEngine.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
+    }
+
     private var _edit= MutableLiveData<Boolean>()
     val edit: LiveData<Boolean>
         get()=_edit

@@ -11,11 +11,15 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.RecognizerIntent
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
@@ -27,6 +31,7 @@ import com.example.u_farm.databinding.ActivityAddProblemsBinding
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_problems.*
 import kotlinx.android.synthetic.main.activity_editprofile.*
+import java.util.*
 
 
 private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
@@ -36,6 +41,8 @@ class AddProblemsActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressDialog
     private var permissionToRecordAccepted = false
     private var permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
+
+    private val model: AddProblemsViewModel by viewModels()
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
@@ -57,6 +64,35 @@ class AddProblemsActivity : AppCompatActivity() {
             this,
             R.layout.activity_add_problems
         )
+
+        val startForResult = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val spokenText: String? =
+                    result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                        .let { text -> text?.get(0) }
+                binding.convertText1.setText(spokenText)
+            }
+        }
+
+//        val textToSpeechEngine: TextToSpeech by lazy {
+//            TextToSpeech(this) {
+//                if (it == TextToSpeech.SUCCESS) textToSpeechEngine.language = Locale("in_ID")
+//            }
+//        }
+
+        model.initial(startForResult)
+        with(binding) {
+            floating_action_button.setOnClickListener { model.startRecording() }
+//            fabPlay.setOnClickListener {
+//                val text = edtText.text?.trim().toString()
+//                model.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
+//            }
+        }
+
+
+
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
 
     progressBar=ProgressDialog(this)
@@ -81,19 +117,21 @@ class AddProblemsActivity : AppCompatActivity() {
         })
 
 
-        floating_action_button.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
-            when (motionEvent.action){
-                MotionEvent.ACTION_DOWN -> {
-                  addProblemsViewModel.stopRecording()
+//        floating_action_button.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
+//            when (motionEvent.action){
+//                MotionEvent.ACTION_DOWN -> {
+//                  addProblemsViewModel.stopRecording()
+//
+//                }
+//                MotionEvent.ACTION_UP -> {
+//
+//                    addProblemsViewModel.startRecording()
+//                }
+//            }
+//            return@OnTouchListener false
+//        })
 
-                }
-                MotionEvent.ACTION_UP -> {
 
-                    addProblemsViewModel.startRecording()
-                }
-            }
-            return@OnTouchListener false
-        })
 
 
         addProblemsViewModel.spinner.observe(this,Observer{
@@ -152,6 +190,8 @@ class AddProblemsActivity : AppCompatActivity() {
                 loading_spinner2.visibility= View.VISIBLE
             }
         })
+
+
 
     }
 
