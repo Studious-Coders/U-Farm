@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
      })
         homeViewModel.navigateToSolutionsPage.observe(viewLifecycleOwner, Observer {
             if(it!=""){
-                this.findNavController().navigate(HomeFragmentDirections.actionHomeToSolutionsActivity())
+                this.findNavController().navigate(HomeFragmentDirections.actionHomeToSolutionsActivity("problemUid"))
                 homeViewModel.navigateToSolutionsPageDone()
       }
         })

@@ -20,8 +20,11 @@
             app:destination="@id/addProblemsActivity" />
         <action
             android:id="@+id/action_home_to_solutionsActivity"
-            app:destination="@id/solutionsActivity" />
-
+            app:destination="@id/solutionsActivity">
+        <argument
+            android:name="problemUid"
+            app:argType="String" />
+        </action>
         <action
             android:id="@+id/action_home_to_registerActivity"
             app:destination="@id/registerActivity" />

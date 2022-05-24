@@ -41,7 +41,13 @@ class AuthRepository(application: Application){
     private var setProblemDataRepository=MutableLiveData<Boolean?>()
     private var storage:FirebaseStorage
     private var ProblemDataMutableLiveDataList=MutableLiveData<MutableList<Problem?>>()
-     var problemList=mutableListOf<Problem?>()
+
+    private var SolutionDataMutableLiveDataList=MutableLiveData<MutableList<Solution?>>()
+
+    var problemList=mutableListOf<Problem?>()
+
+    var solutionList=mutableListOf<Solution?>()
+
 
     init{
         this.application=application
@@ -86,6 +92,11 @@ class AuthRepository(application: Application){
 
     fun ProblemDataMutableLiveDataList(): MutableLiveData<MutableList<Problem?>> {
         return ProblemDataMutableLiveDataList
+    }
+
+
+    fun SolutionDataMutableLiveDataList(): MutableLiveData<MutableList<Solution?>> {
+        return SolutionDataMutableLiveDataList
     }
 
 
@@ -191,20 +202,6 @@ class AuthRepository(application: Application){
 
     /**Problem Model Function**/
 
-    fun setProblemData(problem: Problem){
-        reference1.addListenerForSingleValueEvent(object :ValueEventListener{
-            override fun onDataChange(snapshot: DataSnapshot) {
-                if (auth.currentUser?.uid != null) {
-                    reference1.setValue(problem)
-                }
-                setProblemDataRepository.postValue(true)
-            }
-            override fun onCancelled(error: DatabaseError) {
-                setProblemDataRepository.postValue(false)
-            }
-        })
-    }
-
     fun ProblemDataList(){
         val ref=firebaseDatabase.getReference("PROBLEM")
     ref.addValueEventListener(object :ValueEventListener {
@@ -225,13 +222,51 @@ class AuthRepository(application: Application){
 
         }
 
+    fun setProblemData(problem: Problem){
+        reference1.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (auth.currentUser?.uid != null) {
+                    reference1.setValue(problem)
+                }
+                setProblemDataRepository.postValue(true)
+            }
+            override fun onCancelled(error: DatabaseError) {
+                setProblemDataRepository.postValue(false)
+            }
+        })
+    }
+
+
+    /**Solution Model Function**/
+
+    fun SolutionDataList(problemUid:String){
+        val ref=firebaseDatabase.getReference("/SOLUTION/$problemUid")
+        ref.addValueEventListener(object :ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (postSnapshot in snapshot.children) {
+                    val solution = postSnapshot.getValue(Solution::class.java)
+                    if (solution != null) {
+                        solutionList.add(solution)
+                    }
+                }
+                SolutionDataMutableLiveDataList.postValue(solutionList)
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+
+    }
+
+
 
     fun setSolutionData(solution: Solution){
 
-        reference.addListenerForSingleValueEvent(object :ValueEventListener{
+        reference2.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (auth.currentUser?.uid != null) {
-                    reference.child(auth.currentUser!!.uid).setValue(solution)
+                    reference2.child(auth.currentUser!!.uid).setValue(solution)
                 }
                 setSolutionDataRepository.postValue(true)
             }

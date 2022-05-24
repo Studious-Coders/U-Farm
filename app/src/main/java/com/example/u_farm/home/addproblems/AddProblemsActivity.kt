@@ -7,6 +7,8 @@ import android.app.Application
 import android.app.ProgressDialog
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
@@ -58,8 +60,10 @@ class AddProblemsActivity : AppCompatActivity() {
             R.layout.activity_add_problems
         )
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
 
-    progressBar=ProgressDialog(this)
+
+        progressBar=ProgressDialog(this)
         supportActionBar?.title="Add Problems"
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -80,7 +84,6 @@ class AddProblemsActivity : AppCompatActivity() {
             }
         })
 
-
         floating_action_button.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
             when (motionEvent.action){
                 MotionEvent.ACTION_DOWN -> {
@@ -95,7 +98,6 @@ class AddProblemsActivity : AppCompatActivity() {
             return@OnTouchListener false
         })
 
-
         addProblemsViewModel.spinner.observe(this,Observer{
             if(it!=null) {
                 progressBar.setMessage("Uploading the Problem.....")
@@ -105,14 +107,12 @@ class AddProblemsActivity : AppCompatActivity() {
             }
         })
 
-
         addProblemsViewModel.setImage.observe(this,Observer{
             if(it!=null) {
                 addProblemsViewModel.upload1()
 
             }
         })
-
 
         addProblemsViewModel.setData.observe(this, Observer {
             if(it==true){
@@ -126,33 +126,27 @@ class AddProblemsActivity : AppCompatActivity() {
             }
         })
 
-
-
-
         addProblemsViewModel.image.observe(this, Observer {
             if(it==true) {
 
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.type = "image/*"
                 startActivityForResult(intent, 0)
-
             }
         })
+
             addProblemsViewModel.setImage.observe(this, Observer {
             if(it!=null){
                 loading_spinner2.visibility= View.GONE
                 progressBar.dismiss()
-
             }
         })
-
 
         addProblemsViewModel.spinner.observe(this, Observer {
             if(it==true){
                 loading_spinner2.visibility= View.VISIBLE
             }
         })
-
     }
 
     var selectedPhotoUri: Uri? = null
@@ -168,9 +162,6 @@ class AddProblemsActivity : AppCompatActivity() {
             addProblemsViewModel.imageFormatingDone(selectedPhotoUri!!)
             Picasso.with(this).load(selectedPhotoUri).into(imageView)
             loading_spinner2.visibility= View.VISIBLE
-
-
-
         }
     }
 
@@ -183,11 +174,4 @@ class AddProblemsActivity : AppCompatActivity() {
         }
         return super.onContextItemSelected(item)
     }
-
-
-
-
-
-
-
 }

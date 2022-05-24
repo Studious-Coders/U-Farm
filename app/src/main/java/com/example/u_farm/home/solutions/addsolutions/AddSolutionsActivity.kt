@@ -2,6 +2,8 @@ package com.example.u_farm.home.solutions.addsolutions
 
 import android.app.Activity
 import android.app.Application
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -18,6 +20,8 @@ class AddSolutionsActivity : AppCompatActivity() {
             R.layout.activity_add_solutions
         )
         supportActionBar?.title="Add Problems"
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
+
 
         val application: Application = requireNotNull(this).application
         val activity: Activity =this

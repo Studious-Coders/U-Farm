@@ -3,6 +3,8 @@ package com.example.u_farm.home.solutions
 import android.app.Activity
 import android.app.Application
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -28,7 +30,9 @@ class SolutionsActivity : AppCompatActivity() {
             this,
             R.layout.activity_solutions
         )
-        supportActionBar?.hide()
+
+        supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
+
         val application: Application = requireNotNull(this).application
         val activity: Activity =this
         val viewModelFactory = SolutionsViewModelFactory(application,activity)

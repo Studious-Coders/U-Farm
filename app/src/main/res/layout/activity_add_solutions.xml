@@ -77,7 +77,8 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
                         android:layout_height="224dp"
-                        android:gravity="top|start" />
+                        android:gravity="top|start"
+                        android:text="@={solution.solutionStatement}"/>
 
                 </com.google.android.material.textfield.TextInputLayout>
 
