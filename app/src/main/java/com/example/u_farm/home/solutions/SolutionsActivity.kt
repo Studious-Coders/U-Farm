@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +20,8 @@ import com.example.u_farm.home.SolutionsAdapter
 import com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity
 import com.example.u_farm.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.list_items2.*
+import java.util.*
 
 class SolutionsActivity : AppCompatActivity() {
     private lateinit var solutionsViewModel: SolutionsViewModel
@@ -72,8 +75,17 @@ class SolutionsActivity : AppCompatActivity() {
             }
        })
 
-
-
+//        solutionsViewModel.initial(textToSpeechEngine)
+//        floating_action_button6.setOnClickListener {
+//            val text = solutionstatement.text?.trim().toString()
+//            solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
+//        }
 
     }
+
+//    val textToSpeechEngine: TextToSpeech by lazy {
+//        TextToSpeech(this) {
+//            if (it == TextToSpeech.SUCCESS) textToSpeechEngine.language = Locale("in_ID")
+//        }
+//    }
 }
