@@ -20,11 +20,7 @@
             app:destination="@id/addProblemsActivity" />
         <action
             android:id="@+id/action_home_to_solutionsActivity"
-            app:destination="@id/solutionsActivity">
-        <argument
-            android:name="problemUid"
-            app:argType="String" />
-        </action>
+            app:destination="@id/solutionsActivity"/>
         <action
             android:id="@+id/action_home_to_registerActivity"
             app:destination="@id/registerActivity" />
@@ -55,17 +51,30 @@
         android:id="@+id/addProblemsActivity"
         android:name="com.example.u_farm.home.addproblems.AddProblemsActivity"
         android:label="AddProblemsActivity"
-        tools:layout="@layout/activity_add_problems"/>
+        tools:layout="@layout/activity_add_problems">
+
+
+</activity>
     <activity
         android:id="@+id/addSolutionsActivity"
         android:name="com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity"
         android:label="AddSolutionsActivity"
-        tools:layout="@layout/activity_add_solutions"/>
+        tools:layout="@layout/activity_add_solutions">
+        <argument
+            android:name="problemUid"
+            app:argType="string"
+            app:nullable="true" />
+</activity>
     <activity
         android:id="@+id/solutionsActivity"
         android:name="com.example.u_farm.home.solutions.SolutionsActivity"
         android:label="SolutionsActivity"
-        tools:layout="@layout/activity_solutions"/>
+        tools:layout="@layout/activity_solutions">
+    <argument
+        android:name="problemUid"
+        app:argType="string"
+        app:nullable="true" />
+    </activity>
     <activity
         android:id="@+id/registerActivity"
         android:name="com.example.u_farm.register.RegisterActivity"

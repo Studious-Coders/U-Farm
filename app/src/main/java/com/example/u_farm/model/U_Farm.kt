@@ -26,6 +26,7 @@ data class Problem(
 
 data class Solution(
     var solutionUid:String="",
+    var problemUid:String="",
     var userUid:String="",
     var username:String="",
     var profilePicture:String="",

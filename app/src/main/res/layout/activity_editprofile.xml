@@ -155,7 +155,7 @@
             android:layout_height="32dp"
             android:layout_margin="8dp"
             android:background="@android:color/transparent"
-            android:onClick="@{()-> editProfileViewModel.updateData(editProfileViewModel.getData.uid,editProfileViewModel.getData.username,editProfileViewModel.getData.email,editProfileViewModel.getData.password,editProfileViewModel.getData.phonenumber,editProfileViewModel.getData.job,editProfileViewModel.getData.location)}"
+            android:onClick="@{()-> editProfileViewModel.updateData(editProfileViewModel.getData.uid,editProfileViewModel.getData.username,editProfileViewModel.getData.email,editProfileViewModel.getData.password,editProfileViewModel.getData.phonenumber,editProfileViewModel.getData.location)}"
             android:src="@drawable/ic_baseline_check_24"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.958"

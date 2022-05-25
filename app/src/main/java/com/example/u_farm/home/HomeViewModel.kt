@@ -34,8 +34,8 @@ class HomeViewModel(application: Application): ViewModel() {
         _navigateToAddProblemsPage.value=false
     }
 
-    fun navigateToSolutionsPage(username: String) {
-        _navigateToSolutionsPage.value=username
+    fun navigateToSolutionsPage(puid: String) {
+        _navigateToSolutionsPage.value=puid
 
     }
     val newData: LiveData<Boolean?>

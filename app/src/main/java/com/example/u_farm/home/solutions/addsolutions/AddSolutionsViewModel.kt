@@ -12,15 +12,16 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.Problem
+import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
 import java.io.IOException
 
 class AddSolutionsViewModel(application: Application, activity: Activity): ViewModel() {
 
-
     private var _spinner= MutableLiveData<Boolean>()
     val spinner: LiveData<Boolean>
         get()=_spinner
+
 
     private var authRepository: AuthRepository
 
@@ -28,48 +29,41 @@ class AddSolutionsViewModel(application: Application, activity: Activity): ViewM
         get()=authRepository.getUserDataMutableLiveData()
 
     val setData: LiveData<Boolean?>
-        get()=authRepository.setProblemDataMutableLiveData()
+        get()=authRepository.setSolutionDataMutableLiveData()
 
+
+    var str:String?=null
+
+    fun arguments(args:String){
+        str=args
+    }
 
     init {
         authRepository = AuthRepository(application)
         authRepository.getUserData()
-        authRepository.SolutionDataList("String")
+       _spinner.value=true
+//        Log.d("Dhanush2","${str}")
+//        authRepository.SolutionDataList(str!!)
 
     }
 
-
-    var str1:String?=null
-    var str:String?=""
-
-    var str2:String?=""
-
-
-
-    val key:String= authRepository.reference1.key.toString()
-    var uri: Uri?=null
-    fun postProblems(){
-        _spinner.value=true
-
-        val problem= Problem(key,getData.value!!.uid,getData.value!!.username,str!!,str2!!)
-        authRepository.setProblemData(problem)
-
-    }
-
-
-    fun function(){
+    fun argumentsPassed(){
         _spinner.value=false
     }
 
-    private var recorder: MediaRecorder? = null
-    private var player: MediaPlayer? = null
+    val key1:String= authRepository.reference2.key.toString()
+
+   fun postSolutions(solutionStatement:String){
+          Log.d("Dhanush1","${str}")
+        val solution= Solution(key1,str!!,getData.value!!.uid,getData.value!!.username,"",solutionStatement,"")
+        authRepository.setSolutionData(solution)
+
+    }
 
 
-
-
-    fun convertAudioToText(){
-//
-//
+//    private var recorder: MediaRecorder? = null
+//    private var player: MediaPlayer? = null
+//    fun convertAudioToText(){
 //        speech = SpeechRecognizer.createSpeechRecognizer(this)
 ////        Log.i(logTag, "isRecognitionAvailable: " + SpeechRecognizer.isRecognitionAvailable(this))
 //        speech.setRecognitionListener(this)
@@ -163,18 +157,18 @@ class AddSolutionsViewModel(application: Application, activity: Activity): ViewM
 //      $result
 //      """.trimIndent()
 //            returnedText.text = text
-//        }
-    }
-    private var _edit= MutableLiveData<Boolean>()
-    val edit: LiveData<Boolean>
-        get()=_edit
-
-
-    fun edit(){
-        _edit.value=true
-    }
-
-    fun editDone(){
-        _edit.value=false
-    }
+////        }
+//    }
+//    private var _edit= MutableLiveData<Boolean>()
+//    val edit: LiveData<Boolean>
+//        get()=_edit
+//
+//
+//    fun edit(){
+//        _edit.value=true
+//    }
+//
+//    fun editDone(){
+//        _edit.value=false
+//    }
 }

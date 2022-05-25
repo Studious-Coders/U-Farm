@@ -6,9 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.u_farm.database.AuthRepository
-import com.example.u_farm.model.U_Farm
 import com.google.firebase.auth.FirebaseUser
-import org.kodein.di.android.subKodein
 
 class LoginViewModel(application: Application,activity: Activity): ViewModel() {
 

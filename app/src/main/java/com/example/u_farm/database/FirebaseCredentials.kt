@@ -222,6 +222,29 @@ class AuthRepository(application: Application){
 
         }
 
+
+
+    /**Solution Model Function**/
+
+    fun SolutionDataList(problemUid:String){
+        val ref=firebaseDatabase.getReference("SOLUTION")
+        ref.addValueEventListener(object :ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (postSnapshot in snapshot.children) {
+                    val solution = postSnapshot.getValue(Solution::class.java)
+                    if (solution?.problemUid != problemUid) {
+                        solutionList.add(solution)
+                    }
+                }
+                SolutionDataMutableLiveDataList.postValue(solutionList)
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+
+        })
+
+    }
     fun setProblemData(problem: Problem){
         reference1.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -237,36 +260,13 @@ class AuthRepository(application: Application){
     }
 
 
-    /**Solution Model Function**/
-
-    fun SolutionDataList(problemUid:String){
-        val ref=firebaseDatabase.getReference("/SOLUTION/$problemUid")
-        ref.addValueEventListener(object :ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (postSnapshot in snapshot.children) {
-                    val solution = postSnapshot.getValue(Solution::class.java)
-                    if (solution != null) {
-                        solutionList.add(solution)
-                    }
-                }
-                SolutionDataMutableLiveDataList.postValue(solutionList)
-            }
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
-        })
-
-    }
-
-
 
     fun setSolutionData(solution: Solution){
 
         reference2.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (auth.currentUser?.uid != null) {
-                    reference2.child(auth.currentUser!!.uid).setValue(solution)
+                    reference2.setValue(solution)
                 }
                 setSolutionDataRepository.postValue(true)
             }

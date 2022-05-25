@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.Problem
+import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
 import java.io.File
 import java.io.IOException
@@ -19,20 +20,33 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
     val navigateToAddSolutions: LiveData<Boolean>
         get()=_navigateToAddSolutions
 
+    private var _argument= MutableLiveData<Boolean>()
+    val argument: LiveData<Boolean>
+        get()=_argument
+
+
+
     fun navigateToAddSolutions(){
         _navigateToAddSolutions.value=true
     }
     fun navigateToAddSolutionsDone(){
         _navigateToAddSolutions.value=false
     }
+
+    fun getSolutionOfTheGetProblem(args1: SolutionsActivityArgs) {
+
+        authRepository.SolutionDataList(args1.problemUid.toString())
+    }
+
     private var authRepository: AuthRepository
     init{
         authRepository= AuthRepository(application)
-        authRepository.ProblemDataList()
+        _argument.value=true
+
 
     }
-    val allData: MutableLiveData<MutableList<Problem?>>
-        get()=authRepository.ProblemDataMutableLiveDataList()
+    val allData: MutableLiveData<MutableList<Solution?>>
+        get()=authRepository.SolutionDataMutableLiveDataList()
 //    fun saveAudio(folder:String){
 //        val uri: Uri = Uri.fromFile(File(folder))
 //        authRepository.uploadImageToFirebaseStorage(uri,"AudioToText")

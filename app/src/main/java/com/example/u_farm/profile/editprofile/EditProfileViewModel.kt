@@ -76,7 +76,7 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
 
 
      var uri:Uri?=null
-    fun updateData(uid:String,username:String,email:String,password:String,phoneNumber:String,job:String,location:String){
+    fun updateData(uid:String,username:String,email:String,password:String,phoneNumber:String,location:String){
         _spinner.value=true
         val ufarm= U_Farm(uid,username,email,password,phoneNumber,"",job,location,"","")
         authRepository.setUserData(ufarm)
@@ -113,9 +113,11 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
         uri=dp
     }
 
-    fun updateJob(job:String){
-        authRepository.singleRecord(job,"job")
-    }
+//    fun updateJob(job:String){
+//        authRepository.singleRecord(job,"job")
+//    }
+//
+    var job:String=""
    fun jobSelection(){
        alert.setTitle("Choose a job title")
 
@@ -126,9 +128,9 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
 
            when (which) {
                /* execute here your actions */
-               0 ->   updateJob(options[0])
-               1 ->   updateJob(options[1])
-               2 ->updateJob(options[2])
+               0 ->  job=options[0]
+               1 ->  job=options[1]
+               2 ->job=options[2]
            }
 
 

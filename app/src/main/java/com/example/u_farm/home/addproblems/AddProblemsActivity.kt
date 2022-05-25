@@ -135,19 +135,24 @@ class AddProblemsActivity : AppCompatActivity() {
             }
         })
 
-            addProblemsViewModel.setImage.observe(this, Observer {
-            if(it!=null){
-                loading_spinner2.visibility= View.GONE
-                progressBar.dismiss()
-            }
-        })
-
-        addProblemsViewModel.spinner.observe(this, Observer {
-            if(it==true){
-                loading_spinner2.visibility= View.VISIBLE
-            }
-        })
-    }
+//            addProblemsViewModel.setImage.observe(this, Observer {
+//            if(it!=null){
+//                loading_spinner2.visibility= View.GONE
+//             }
+//        })
+//
+//        addProblemsViewModel.spinner.observe(this, Observer {
+//            if(it==true){
+//                loading_spinner2.visibility= View.VISIBLE
+//            }
+//        })
+//
+    addProblemsViewModel.setData.observe(this, Observer {
+        if(it==true){
+     progressBar.dismiss()
+        }
+    })
+}
 
     var selectedPhotoUri: Uri? = null
     @RequiresApi(Build.VERSION_CODES.P)

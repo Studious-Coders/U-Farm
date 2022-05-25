@@ -9,6 +9,7 @@ import com.example.u_farm.R
 import com.example.u_farm.databinding.ListItems2Binding
 import com.example.u_farm.databinding.ListItemsBinding
 import com.example.u_farm.model.Problem
+import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
 
 class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<Problem,ProblemsAdapter.ViewHolder>(ProblemsDiffCallback()) {
@@ -56,7 +57,7 @@ class ProblemsDiffCallback : DiffUtil.ItemCallback<Problem>() {
             }
         }
 
-class SolutionsAdapter() : ListAdapter<Problem,SolutionsAdapter.ViewHolder>(U_FarmDiffCallback()) {
+class SolutionsAdapter() : ListAdapter<Solution,SolutionsAdapter.ViewHolder>(SolutionsDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
@@ -69,7 +70,7 @@ class SolutionsAdapter() : ListAdapter<Problem,SolutionsAdapter.ViewHolder>(U_Fa
     class ViewHolder private constructor(val binding: ListItems2Binding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Problem) {
+        fun bind(item: Solution) {
             binding.data=item
 
 //            binding.clicklistener=clickListener
@@ -94,12 +95,12 @@ class SolutionsAdapter() : ListAdapter<Problem,SolutionsAdapter.ViewHolder>(U_Fa
 //}
 
 
-class U_FarmDiffCallback : DiffUtil.ItemCallback<Problem>() {
-    override fun areItemsTheSame(oldItem: Problem, newItem: Problem): Boolean {
+class SolutionsDiffCallback : DiffUtil.ItemCallback<Solution>() {
+    override fun areItemsTheSame(oldItem: Solution, newItem: Solution): Boolean {
         return oldItem.username == newItem.username
     }
 
-    override fun areContentsTheSame(oldItem: Problem, newItem: Problem): Boolean {
+    override fun areContentsTheSame(oldItem: Solution, newItem: Solution): Boolean {
         return oldItem== newItem
     }
 }

@@ -27,6 +27,7 @@ import com.example.u_farm.HomeActivity
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentProfileBinding
 import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class ProfileFragment : Fragment() {
@@ -56,13 +57,19 @@ class ProfileFragment : Fragment() {
        })
 
         profileViewModel.navigateToEditProfile.observe(viewLifecycleOwner, Observer {
-            if(it==true && profileViewModel.getData.value?.uid!=null) {
+            if(it==true) {
                 this.findNavController().navigate(ProfileFragmentDirections.actionProfileToEditProfileActivity())
                 profileViewModel.navigateToEditProfileDone()
-            }else{
-                profileViewModel.snackbar()
+//            }else{
+//                profileViewModel.snackbar()
             }
         })
+        profileViewModel.expert.observe(viewLifecycleOwner, Observer {
+            if(it==true ) {
+            expertTick.visibility=View.VISIBLE
+            }
+        })
+
 
         profileViewModel.language.observe(viewLifecycleOwner, Observer {
            if(it==true) {
@@ -71,11 +78,8 @@ class ProfileFragment : Fragment() {
             }
         })
 
-
-
         profileViewModel.getData.observe(viewLifecycleOwner, Observer {
             if(it!=null){
-
                 profileViewModel.function()
             }
         })
@@ -88,10 +92,11 @@ class ProfileFragment : Fragment() {
                 startActivity(intent)
 
 
+
             }
         })
         profileViewModel.share.observe(viewLifecycleOwner, Observer {
-           if(it==true && profileViewModel.getData.value?.uid!=null) {
+           if(it==true) {
                val something= Uri.parse("http://www.u-farm.com/profile/")
                        .buildUpon()
                        .appendPath("1")

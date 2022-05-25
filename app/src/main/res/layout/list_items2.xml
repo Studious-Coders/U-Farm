@@ -5,7 +5,7 @@
     <data>
         <variable
             name="data"
-            type="com.example.u_farm.model.Problem" />
+            type="com.example.u_farm.model.Solution" />
 <!--        <variable-->
 <!--            name="clicklistener"-->
 <!--            type="com.example.u_farm.home.SolutionsListener" />-->

@@ -11,13 +11,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import androidx.navigation.navArgs
 import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivityAddProblemsBinding
 import com.example.u_farm.databinding.ActivitySolutionsBinding
-import com.example.u_farm.home.HomeFragmentDirections
-import com.example.u_farm.home.ProblemsAdapter
-import com.example.u_farm.home.ProblemsListener
-import com.example.u_farm.home.SolutionsAdapter
+import com.example.u_farm.home.*
 import com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity
 import com.example.u_farm.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -30,6 +29,7 @@ class SolutionsActivity : AppCompatActivity() {
             this,
             R.layout.activity_solutions
         )
+        val args1:SolutionsActivityArgs by navArgs()
 
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
 
@@ -51,33 +51,43 @@ class SolutionsActivity : AppCompatActivity() {
 
         binding.recyclerView1.adapter=adapter
 
+
         solutionsViewModel.allData.observe(this, Observer {
             it?.let{
                 adapter.submitList(it)
             }
         })
 
-       solutionsViewModel.navigateToAddSolutions.observe(this, Observer {
+        solutionsViewModel.argument.observe(this, Observer {
+            if(it==true){
+                solutionsViewModel.getSolutionOfTheGetProblem(args1)
+            }
+        })
+
+
+        solutionsViewModel.navigateToAddSolutions.observe(this, Observer {
            if(it) {
                if(FirebaseAuth.getInstance().uid!=null){
                    if(it){
                        val intent = Intent(this, AddSolutionsActivity::class.java)
+                       intent.putExtra(USER_KEY,args1.toString())
+
 
                        startActivity(intent)
                        solutionsViewModel.navigateToAddSolutionsDone()
                    }
                }else{
                    val intent = Intent(this, LoginActivity::class.java)
-
                    startActivity(intent)
 
                }
 
             }
        })
-
-
-
-
     }
+
+    companion object{
+        val USER_KEY="problem"
+    }
+
 }

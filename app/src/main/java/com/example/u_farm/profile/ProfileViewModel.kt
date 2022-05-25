@@ -33,14 +33,25 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     val language: LiveData<Boolean?>
         get()=_language
 
+    private val _expert= MutableLiveData<Boolean?>()
+    val expert: LiveData<Boolean?>
+        get()=_expert
+
+
     val value= MediatorLiveData<U_Farm>()
 
     val getData: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
 
+    val setData: LiveData<Boolean?>
+        get()=authRepository.setUserDataMutableLiveData()
+
+
     private val _snackbar= MutableLiveData<Boolean?>()
     val snackbar: LiveData<Boolean?>
         get()=_snackbar
+
+
 
     init {
         authRepository = AuthRepository(application)
@@ -48,6 +59,9 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         alert0 = AlertDialog.Builder(activity)
         authRepository.getUserData()
         value.addSource(getData,value::setValue)
+        if(getData.value?.job=="Expert"){
+            _expert.value=true
+        }
 
 
     }
@@ -64,12 +78,12 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
             }).setNegativeButton("NO", null)
 
         val alert1: AlertDialog = alert.create()
-        if(getData.value?.uid!=null) {
+//        if(getData.value?.uid!=null) {
 
             alert.show()
-        }else{
-            _snackbar.value=true
-        }
+//        }else{
+//            _snackbar.value=true
+//        }
 
     }
     fun navigateToEditProfile(){
@@ -115,12 +129,12 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
 
 
         }
-        if(getData.value?.uid!=null) {
+//        if(getData.value?.uid!=null) {
 
             alert0.show()
-        }else{
-            _snackbar.value=true
-        }
+//        }else{
+//            _snackbar.value=true
+//        }
         _language.value=true
     }
 
