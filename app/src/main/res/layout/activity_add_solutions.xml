@@ -59,6 +59,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/selectphoto">
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
@@ -77,6 +78,7 @@
                     app:layout_constraintTop_toTopOf="parent">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/convertText1"
                         android:layout_width="match_parent"
                         android:layout_height="224dp"
                         android:gravity="top|start"
@@ -85,11 +87,28 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/floating_action_button"
+                    android:id="@+id/mic"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
+                    android:backgroundTint="?attr/colorPrimary"
+                    android:contentDescription="Voice Description"
+                    android:gravity="center_horizontal|center"
+                    android:src="@drawable/ic_baseline_mic_24"
+                    app:borderWidth="0dp"
+                    app:elevation="5dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/floating_action_button"
+                    app:layout_constraintTop_toBottomOf="@+id/description" />
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                    app:layout_constraintTop_toBottomOf="@+id/description" />
+
+                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                    android:id="@+id/floating_action_button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="16dp"
                     android:backgroundTint="?attr/colorPrimary"
                     android:contentDescription="Voice Description"
                     android:gravity="center_horizontal|center"

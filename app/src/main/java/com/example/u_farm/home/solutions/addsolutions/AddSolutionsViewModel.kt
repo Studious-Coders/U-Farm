@@ -7,6 +7,9 @@ import android.media.MediaRecorder
 import android.net.Uri
 import android.os.Environment
 import android.util.Log
+import android.content.Intent
+import android.speech.RecognizerIntent
+import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -15,6 +18,9 @@ import com.example.u_farm.model.Problem
 import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
 import java.io.IOException
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
+import java.util.*
 
 class AddSolutionsViewModel(application: Application, activity: Activity): ViewModel() {
 
@@ -34,6 +40,10 @@ class AddSolutionsViewModel(application: Application, activity: Activity): ViewM
 
     var str:String?=null
 
+    var str1:String?=null
+
+    fun navigateToHomePage(){
+        _postSolutions.value=true
     fun arguments(args:String){
         str=args
     }
@@ -49,6 +59,40 @@ class AddSolutionsViewModel(application: Application, activity: Activity): ViewM
 
     fun argumentsPassed(){
         _spinner.value=false
+    }
+
+    private lateinit var startForResult: ActivityResultLauncher<Intent>
+
+    fun initial(
+        launcher: ActivityResultLauncher<Intent>
+    ) = viewModelScope.launch {
+//        textToSpeechEngine = engine
+        startForResult = launcher
+    }
+
+    fun startRecording() {
+
+        startForResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale("in_ID"))
+            putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
+        })
+    }
+
+    private var _edit= MutableLiveData<Boolean>()
+    val edit: LiveData<Boolean>
+        get()=_edit
+
+
+    fun edit(){
+        _edit.value=true
+    }
+
+    fun editDone(){
+        _edit.value=false
     }
 
     val key1:String= authRepository.reference2.key.toString()
