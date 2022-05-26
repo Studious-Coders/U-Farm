@@ -43,14 +43,9 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
     val image: LiveData<Boolean>
         get()=_image
 
-    private var _spinner= MutableLiveData<Boolean>()
-    val spinner: LiveData<Boolean>
-        get()=_spinner
-
-    private var _convertAudio= MutableLiveData<String>()
-    val convertAudio: LiveData<String>
-        get()=_convertAudio
-
+    private var _uploading= MutableLiveData<Boolean>()
+    val uploading: LiveData<Boolean>
+        get()=_uploading
     private var authRepository: AuthRepository
 
     val getData: LiveData<U_Farm?>
@@ -74,19 +69,27 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
     fun imageFormating() {
         _image.value=true
     }
-    var str1:String?=null
+
     var str:String?=""
 
-    var str2:String?=""
+    var str1:String?=""
 
 
+    fun convertAudioToText(convertText :String){
+        str1=convertText
+
+    }
+
+    fun uploaded(){
+        _uploading.value=false
+    }
 
     val key:String= authRepository.reference1.key.toString()
     var uri:Uri?=null
     fun postProblems(){
-        _spinner.value=true
+        _uploading.value=true
 
-        val problem= Problem(key,getData.value!!.uid,getData.value!!.username,str!!,str2!!)
+        val problem= Problem(key,getData.value!!.uid,getData.value!!.username,getData.value!!.profilePicture,str1!!,str!!)
         authRepository.setProblemData(problem)
 
     }
@@ -99,16 +102,13 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
         if(setImage.value!=null) {
             str=setImage.value.toString()
         }else{
-            str= getData.value?.profilePicture
+            str= null
         }
-        authRepository.singleRecord(str!!,"profilePicture")
+        authRepository.singleRecord(str!!,"diseasesAffectedPlants")
 
     }
 
 
-    fun function(){
-        _spinner.value=false
-    }
 
 
     fun imageFormatingDone(dp: Uri){
@@ -142,6 +142,28 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
         })
 
 
+
+
+//    private var _edit= MutableLiveData<Boolean>()
+//    val edit: LiveData<Boolean>
+//        get()=_edit
+//
+//
+//    fun edit(){
+//        _edit.value=true
+//    }
+//
+//    fun editDone(){
+//        _edit.value=false
+//    }
+
+
+
+
+
+}
+
+
 //        speech = SpeechRecognizer.createSpeechRecognizer(this)
 ////        Log.i(logTag, "isRecognitionAvailable: " + SpeechRecognizer.isRecognitionAvailable(this))
 //        speech.setRecognitionListener(this)
@@ -169,7 +191,7 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
 //              start()
 //          }
 //          convertAudioToText()
-      }
+}
 //
 //    fun stopRecording(){
 //        recorder?.apply {
@@ -256,8 +278,6 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
 //        }
 //       _convertAudio.value="ConvertText"
 //        str=_convertAudio.value
-
-    fun convertAudioToText(){
 //
 //
 //
@@ -274,29 +294,3 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
 //        }
 //
 //
-
-    }
-
-
-    fun speak(text: String) = viewModelScope.launch{
-        textToSpeechEngine.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
-    }
-
-    private var _edit= MutableLiveData<Boolean>()
-    val edit: LiveData<Boolean>
-        get()=_edit
-
-
-    fun edit(){
-        _edit.value=true
-    }
-
-    fun editDone(){
-        _edit.value=false
-    }
-
-
-
-
-
-}

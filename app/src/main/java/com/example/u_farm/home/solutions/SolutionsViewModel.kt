@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import android.media.MediaPlayer
+import android.media.MediaRecorder
 import android.net.Uri
 import android.speech.tts.TextToSpeech
 import android.util.Log
@@ -62,6 +63,20 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
 
 
     }
+
+    private var recorder: MediaRecorder? = null
+    private var player: MediaPlayer? = null
+
+    private lateinit var startForResult: ActivityResultLauncher<Intent>
+
+
+    fun initial(
+        launcher: ActivityResultLauncher<Intent>
+    ) = viewModelScope.launch {
+//        textToSpeechEngine = engine
+        startForResult = launcher
+    }
+
     val allData: MutableLiveData<MutableList<Solution?>>
         get()=authRepository.SolutionDataMutableLiveDataList()
 //    fun saveAudio(folder:String){
@@ -84,3 +99,6 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
 
 
 
+//fun speak(text: String) = viewModelScope.launch{
+//    textToSpeechEngine.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
+//}

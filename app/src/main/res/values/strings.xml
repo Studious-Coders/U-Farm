@@ -37,4 +37,5 @@
         <item>Tamil</item>
         <item>Hindi</item>
     </string-array>
+    <string name="title_activity_list_items3">list_items3</string>
 </resources>

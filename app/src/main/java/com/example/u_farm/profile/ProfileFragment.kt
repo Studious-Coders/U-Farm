@@ -1,6 +1,5 @@
 package com.example.u_farm.profile
 
-import android.content.DialogInterface
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -15,7 +14,6 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity
@@ -41,13 +39,9 @@ class ProfileFragment : Fragment() {
     ): View? {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         // Inflate the layout for this fragment
-        val binding: FragmentProfileBinding =
-            DataBindingUtil.inflate(inflater, R.layout.fragment_profile,container,false)
-        (activity as AppCompatActivity).supportActionBar?.title="Profile"
-        //val application= requireNotNull(this.activity).application
         val binding:FragmentProfileBinding=
             DataBindingUtil.inflate(inflater,R.layout.fragment_profile,container,false)
-         val application: Application = requireNotNull(this.activity).application
+        val application: Application = requireNotNull(this.activity).application
         val activity: Activity = this.requireActivity()
         val viewModelFactory= ProfileViewModelFactory(application,activity)
         val profileViewModel = ViewModelProvider(this,viewModelFactory).get(ProfileViewModel::class.java)
@@ -55,12 +49,12 @@ class ProfileFragment : Fragment() {
         binding.profileViewModel=profileViewModel
         binding.lifecycleOwner=this
 
-       profileViewModel.snackbar.observe(viewLifecycleOwner,Observer{
-           if(it==true){
-               Snackbar.make(binding.root, "Login to access the settings", Snackbar.LENGTH_SHORT)
-                   .show()
-           }
-       })
+        profileViewModel.snackbar.observe(viewLifecycleOwner,Observer{
+            if(it==true){
+                Snackbar.make(binding.root, "Login to access the settings", Snackbar.LENGTH_SHORT)
+                    .show()
+            }
+        })
 
         profileViewModel.navigateToEditProfile.observe(viewLifecycleOwner, Observer {
             if(it==true) {
@@ -72,15 +66,15 @@ class ProfileFragment : Fragment() {
         })
         profileViewModel.expert.observe(viewLifecycleOwner, Observer {
             if(it==true ) {
-            expertTick.visibility=View.VISIBLE
+                expertTick.visibility=View.VISIBLE
             }
         })
 
 
         profileViewModel.language.observe(viewLifecycleOwner, Observer {
-           if(it==true) {
+            if(it==true) {
 
-              profileViewModel.languageIntentDone()
+                profileViewModel.languageIntentDone()
             }
         })
 
@@ -102,44 +96,31 @@ class ProfileFragment : Fragment() {
             }
         })
         profileViewModel.share.observe(viewLifecycleOwner, Observer {
-           if(it==true) {
-               val something= Uri.parse("http://www.u-farm.com/profile/")
-                       .buildUpon()
-                       .appendPath("1")
+            if(it==true) {
+                val something= Uri.parse("http://www.u-farm.com/profile/")
+                    .buildUpon()
+                    .appendPath("1")
 
-               val shareIntent = androidx.core.app.ShareCompat.IntentBuilder.from(activity)
-                   .setText(getString(R.string.share_text, something))
-                   .setType("text/plain")
-                   .intent
-               try {
-                   startActivity(shareIntent)
-               } catch (ex: android.content.ActivityNotFoundException) {
-                   android.widget.Toast.makeText(
-                       application, getString(R.string.sharing_not_available),
-                       android.widget.Toast.LENGTH_LONG
-                   ).show()
-               }
-               profileViewModel.shareIntentDone()
-           }
+                val shareIntent = androidx.core.app.ShareCompat.IntentBuilder.from(activity)
+                    .setText(getString(R.string.share_text, something))
+                    .setType("text/plain")
+                    .intent
+                try {
+                    startActivity(shareIntent)
+                } catch (ex: android.content.ActivityNotFoundException) {
+                    android.widget.Toast.makeText(
+                        application, getString(R.string.sharing_not_available),
+                        android.widget.Toast.LENGTH_LONG
+                    ).show()
+                }
+                profileViewModel.shareIntentDone()
+            }
         })
 
         return binding.root
     }
 
-//    fun onpreferredlang()
-//    {
-//        val builder = AlertDialog.Builder()
-//        builder.setTitle("Languages")
-//            .setItems(R.array.languageslist,
-//                DialogInterface.OnClickListener { dialog, which ->
-//                    // The 'which' argument contains the index position
-//                    // of the selected item
-//                })
-//        builder.create()
-//    }
-
 }
-
 
 
 

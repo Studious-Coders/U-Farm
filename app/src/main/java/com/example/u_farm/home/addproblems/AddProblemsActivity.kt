@@ -65,11 +65,6 @@ class AddProblemsActivity : AppCompatActivity() {
             R.layout.activity_add_problems
         )
 
-
-
-
-
-
        // ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
@@ -89,27 +84,9 @@ class AddProblemsActivity : AppCompatActivity() {
 
         binding.lifecycleOwner = this
 
-//        addProblemsViewModel.edit.observe(this, Observer {
-//            if(it==true){
-//             addProblemsViewModel.str= convertText1.text.toString()
-//                addProblemsViewModel.editDone()
-//            }
-//        })
+        (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
-
-//        floating_action_button.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
-//            when (motionEvent.action){
-//                MotionEvent.ACTION_DOWN -> {
-//                  addProblemsViewModel.stopRecording()
-//
-//                }
-//                MotionEvent.ACTION_UP -> {
-//
-//                    addProblemsViewModel.startRecording()
-//                }
-//            }
-//            return@OnTouchListener false
-//        })
+        //Speech ToText
         val startForResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
         ) { result ->
@@ -118,33 +95,17 @@ class AddProblemsActivity : AppCompatActivity() {
                     result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
                         .let { text -> text?.get(0) }
                 binding.convertText1.setText(spokenText)
-                addProblemsViewModel.editDone()
+               addProblemsViewModel.convertAudioToText(spokenText.toString())
+//                addProblemsViewModel.editDone()
             }
         }
 
         addProblemsViewModel.initial(startForResult)
-//        with(binding) {
+
             floating_action_button.setOnClickListener { addProblemsViewModel.startRecording() }
-//            fabPlay.setOnClickListener {
-//                val text = edtText.text?.trim().toString()
-//                model.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
-//            }
-//        }
-
-        floating_action_button.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
-            when (motionEvent.action){
-                MotionEvent.ACTION_DOWN -> {
-                  addProblemsViewModel.stopRecording()
 
 
-//        val textToSpeechEngine: TextToSpeech by lazy {
-//            TextToSpeech(this) {
-//                if (it == TextToSpeech.SUCCESS) textToSpeechEngine.language = Locale("in_ID")
-//            }
-//        }
-
-
-        addProblemsViewModel.spinner.observe(this,Observer{
+        addProblemsViewModel.uploading.observe(this,Observer{
             if(it!=null) {
                 progressBar.setMessage("Uploading the Problem.....")
                 progressBar.show()
@@ -165,8 +126,8 @@ class AddProblemsActivity : AppCompatActivity() {
 
                 loading_spinner2.visibility= View.GONE
                 Toast.makeText(this,"Your Problem is Added", Toast.LENGTH_LONG).show()
+                addProblemsViewModel.uploaded()
                 progressBar.dismiss()
-                addProblemsViewModel.function()
                 finish()
 
             }
@@ -189,35 +150,8 @@ class AddProblemsActivity : AppCompatActivity() {
         })
 
 
-        addProblemsViewModel.spinner.observe(this, Observer {
-            if(it==true){
-                loading_spinner2.visibility= View.VISIBLE
-            }
-        })
-
-
 
     }
-
-//            addProblemsViewModel.setImage.observe(this, Observer {
-//            if(it!=null){
-//                loading_spinner2.visibility= View.GONE
-//             }
-//        })
-//
-//        addProblemsViewModel.spinner.observe(this, Observer {
-//            if(it==true){
-//                loading_spinner2.visibility= View.VISIBLE
-//            }
-//        })
-//
-    addProblemsViewModel.setData.observe(this, Observer {
-        if(it==true){
-     progressBar.dismiss()
-        }
-    })
-}
-
     var selectedPhotoUri: Uri? = null
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -244,3 +178,64 @@ class AddProblemsActivity : AppCompatActivity() {
         return super.onContextItemSelected(item)
     }
 }
+
+
+
+
+
+
+//            addProblemsViewModel.setImage.observe(this, Observer {
+//            if(it!=null){
+//                loading_spinner2.visibility= View.GONE
+//             }
+//        })
+//
+//        addProblemsViewModel.spinner.observe(this, Observer {
+//            if(it==true){
+//                loading_spinner2.visibility= View.VISIBLE
+//            }
+//        })
+//
+//        floating_action_button.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
+//            when (motionEvent.action) {
+//                MotionEvent.ACTION_DOWN -> {
+//                    addProblemsViewModel.stopRecording()
+//                }
+//            }
+//        }
+
+//        val textToSpeechEngine: TextToSpeech by lazy {
+//            TextToSpeech(this) {
+//                if (it == TextToSpeech.SUCCESS) textToSpeechEngine.language = Locale("in_ID")
+//            }
+//        }
+
+
+
+//        with(binding) {
+//            fabPlay.setOnClickListener {
+//                val text = edtText.text?.trim().toString()
+//                model.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
+//            }
+//        }
+//        addProblemsViewModel.edit.observe(this, Observer {
+//            if(it==true){
+//             addProblemsViewModel.str= convertText1.text.toString()
+//                addProblemsViewModel.editDone()
+//            }
+//        })
+
+
+//        floating_action_button.setOnTouchListener(View.OnTouchListener { view, motionEvent ->
+//            when (motionEvent.action){
+//                MotionEvent.ACTION_DOWN -> {
+//                  addProblemsViewModel.stopRecording()
+//
+//                }
+//                MotionEvent.ACTION_UP -> {
+//
+//                    addProblemsViewModel.startRecording()
+//                }
+//            }
+//            return@OnTouchListener false
+//        })

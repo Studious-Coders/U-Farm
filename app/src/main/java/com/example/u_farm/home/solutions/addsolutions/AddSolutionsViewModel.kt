@@ -29,7 +29,7 @@ class AddSolutionsViewModel(application: Application, activity: Activity): ViewM
         get()=_spinner
 
 
-    private var authRepository: AuthRepository
+    private lateinit var authRepository: AuthRepository
 
     val getData: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
@@ -42,8 +42,8 @@ class AddSolutionsViewModel(application: Application, activity: Activity): ViewM
 
     var str1:String?=null
 
-    fun navigateToHomePage(){
-        _postSolutions.value=true
+//    fun navigateToHomePage(){
+//        _postSolutions.value=true
     fun arguments(args:String){
         str=args
     }

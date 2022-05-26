@@ -123,7 +123,6 @@
                         android:id="@+id/convertText1"
                         android:layout_width="match_parent"
                         android:layout_height="224dp"
-                        android:onClick="@{()->addProblemsViewModel.edit()}"
                         android:text="@{addProblemsViewModel.str1}"
                         android:gravity="top|start"
                         />
@@ -146,23 +145,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/description" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/floating_action_button1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    app:borderWidth="0dp"
-                    android:backgroundTint="?attr/colorPrimary"
-                    android:contentDescription="EditText"
-                    android:gravity="center_horizontal|center"
-                    android:src="@drawable/ic_baseline_edit_24"
-                    app:elevation="5dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/floating_action_button"
-                    app:layout_constraintTop_toBottomOf="@+id/description"
-                    app:layout_constraintVertical_bias="0.0" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
 

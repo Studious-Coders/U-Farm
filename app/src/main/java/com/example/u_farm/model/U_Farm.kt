@@ -20,7 +20,6 @@ data class Problem(
     var profilePicture:String="",
     var problemStatement:String="",
     var DiseaseAffectedPlantImage:String="",
-    var voiceOverOfText:String="",
 
 )
 

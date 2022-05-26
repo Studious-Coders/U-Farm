@@ -103,7 +103,6 @@
         <com.google.android.material.button.MaterialButton
             android:id="@+id/language"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:id="@+id/lang"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
@@ -111,7 +110,6 @@
             android:layout_marginRight="16dp"
             android:layout_weight="1"
             android:onClick="@{()->profileViewModel.languageIntent()}"
-            android:text="Preferred Language"
             android:padding="16dp"
             android:text="Language"
             android:textColor="?attr/colorAccent"
@@ -135,7 +133,6 @@
             android:onClick="@{()->profileViewModel.shareIntent()}"
             android:padding="16dp"
             android:text="share"
-            android:padding="16dp"
             app:cornerRadius="50dp"
             app:icon="@drawable/ic_baseline_share_24"
             app:iconTint="?attr/colorAccent"

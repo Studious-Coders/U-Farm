@@ -106,4 +106,4 @@ class SolutionsActivity : AppCompatActivity() {
 //            if (it == TextToSpeech.SUCCESS) textToSpeechEngine.language = Locale("in_ID")
 //        }
 //    }
-}
+
