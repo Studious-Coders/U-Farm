@@ -1,5 +1,6 @@
 package com.example.u_farm.profile
 
+import android.content.DialogInterface
 
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -14,6 +15,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity
@@ -39,6 +41,10 @@ class ProfileFragment : Fragment() {
     ): View? {
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
         // Inflate the layout for this fragment
+        val binding: FragmentProfileBinding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_profile,container,false)
+        (activity as AppCompatActivity).supportActionBar?.title="Profile"
+        //val application= requireNotNull(this.activity).application
         val binding:FragmentProfileBinding=
             DataBindingUtil.inflate(inflater,R.layout.fragment_profile,container,false)
          val application: Application = requireNotNull(this.activity).application
@@ -119,6 +125,18 @@ class ProfileFragment : Fragment() {
 
         return binding.root
     }
+
+//    fun onpreferredlang()
+//    {
+//        val builder = AlertDialog.Builder()
+//        builder.setTitle("Languages")
+//            .setItems(R.array.languageslist,
+//                DialogInterface.OnClickListener { dialog, which ->
+//                    // The 'which' argument contains the index position
+//                    // of the selected item
+//                })
+//        builder.create()
+//    }
 
 }
 
