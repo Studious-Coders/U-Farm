@@ -128,7 +128,6 @@ class AddProblemsActivity : AppCompatActivity() {
                 Toast.makeText(this,"Your Problem is Added", Toast.LENGTH_LONG).show()
                 addProblemsViewModel.uploaded()
                 progressBar.dismiss()
-                finish()
 
             }
         })

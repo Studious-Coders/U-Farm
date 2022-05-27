@@ -52,12 +52,10 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
         get()=authRepository.getUserDataMutableLiveData()
 
     val setData: LiveData<Boolean?>
-        get()=authRepository.setProblemDataMutableLiveData()
+        get()=authRepository.singleRecordDataMutuableLiveData()
 
     val setImage:LiveData<String?>
         get()=authRepository.uploadedDataMutuableLiveData()
-
-    private lateinit var textToSpeechEngine: TextToSpeech
 
     init {
         authRepository = AuthRepository(application)
@@ -94,7 +92,7 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
 
     }
     fun upload(){
-        authRepository.uploadImageToFirebaseStorage(uri!!,"images")
+        authRepository.uploadImageToFirebaseStorage(uri!!,"diseasesAffectedPlants")
 
     }
 
@@ -104,7 +102,7 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
         }else{
             str= null
         }
-        authRepository.singleRecord(str!!,"diseasesAffectedPlants")
+        authRepository.singleRecordProblem(str!!,"diseaseAffectedPlantImage")
 
     }
 

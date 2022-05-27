@@ -57,7 +57,7 @@ class ProblemsDiffCallback : DiffUtil.ItemCallback<Problem>() {
             }
         }
 
-class SolutionsAdapter() : ListAdapter<Solution,SolutionsAdapter.ViewHolder>(SolutionsDiffCallback()) {
+class SolutionsAdapter(solutionsListener: SolutionsListener) : ListAdapter<Solution,SolutionsAdapter.ViewHolder>(SolutionsDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item)
@@ -87,12 +87,9 @@ class SolutionsAdapter() : ListAdapter<Solution,SolutionsAdapter.ViewHolder>(Sol
     }
 }
 
-//class SolutionsListener(val clickListener: (sleepId:String) -> Unit){
-//    fun onClick(model:U_Farm)=clickListener(model.username)
-//
-//
-//
-//}
+class SolutionsListener(val clickListener: (sleepId:String) -> Unit){
+    fun onClick(model:U_Farm)=clickListener(model.username)
+}
 
 
 class SolutionsDiffCallback : DiffUtil.ItemCallback<Solution>() {

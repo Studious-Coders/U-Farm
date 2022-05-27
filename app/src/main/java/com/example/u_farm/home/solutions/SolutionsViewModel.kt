@@ -26,17 +26,21 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
     val navigateToAddSolutions: LiveData<Boolean>
         get()=_navigateToAddSolutions
 
+    private var _read= MutableLiveData<Boolean>()
+    val read: LiveData<Boolean>
+        get()=_read
+
+
     private var _argument= MutableLiveData<Boolean>()
     val argument: LiveData<Boolean>
         get()=_argument
 
 
+    lateinit var textToSpeechEngine: TextToSpeech
 
-    private lateinit var textToSpeechEngine: TextToSpeech
 
-    fun initial(
-        engine: TextToSpeech,
-    ) = viewModelScope.launch {
+
+    fun initial(engine: TextToSpeech, ) = viewModelScope.launch {
         textToSpeechEngine = engine
     }
 
@@ -49,7 +53,16 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
     }
     fun navigateToAddSolutionsDone(){
         _navigateToAddSolutions.value=false
+
     }
+
+    fun textToSpeech(str:String){
+        _read.value=true
+    }
+    fun textToSpeechDone(){
+        _read.value=false
+    }
+
 
     fun getSolutionOfTheGetProblem(args1: SolutionsActivityArgs) {
 
@@ -67,15 +80,7 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
     private var recorder: MediaRecorder? = null
     private var player: MediaPlayer? = null
 
-    private lateinit var startForResult: ActivityResultLauncher<Intent>
 
-
-    fun initial(
-        launcher: ActivityResultLauncher<Intent>
-    ) = viewModelScope.launch {
-//        textToSpeechEngine = engine
-        startForResult = launcher
-    }
 
     val allData: MutableLiveData<MutableList<Solution?>>
         get()=authRepository.SolutionDataMutableLiveDataList()
@@ -98,7 +103,3 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
 
 
 
-
-//fun speak(text: String) = viewModelScope.launch{
-//    textToSpeechEngine.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
-//}

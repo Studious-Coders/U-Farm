@@ -245,6 +245,21 @@ class AuthRepository(application: Application){
         })
 
     }
+
+    fun singleRecordProblem(data:String,parameter:String){
+        reference1.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (auth.currentUser?.uid != null) {
+                    reference1.child("/$parameter/").setValue(data)
+                }
+                singleRecordDataRepository.postValue(true)
+            }
+            override fun onCancelled(error: DatabaseError) {
+                singleRecordDataRepository.postValue(false)
+            }
+        })
+    }
+
     fun setProblemData(problem: Problem){
         reference1.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {

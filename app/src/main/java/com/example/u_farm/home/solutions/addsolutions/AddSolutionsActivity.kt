@@ -44,23 +44,23 @@ class AddSolutionsActivity : AppCompatActivity() {
 
         binding.lifecycleOwner = this
 
-        val startForResult = registerForActivityResult(
-            ActivityResultContracts.StartActivityForResult()
-        ) { result ->
-            if (result.resultCode == RESULT_OK) {
-                val spokenText: String? =
-                    result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                        .let { text -> text?.get(0) }
-                binding.convertText1.setText(spokenText)
-                addSolutionsViewModel.editDone()
-            }
-        }
-
-        addSolutionsViewModel.initial(startForResult)
-//        with(binding) {
-        mic.setOnClickListener { addSolutionsViewModel.startRecording() }
-//            fabPlay.setOnClickListener {
-//                val text = edtText.text?.trim().toString()
+//        val startForResult = registerForActivityResult(
+//            ActivityResultContracts.StartActivityForResult()
+//        ) { result ->
+//            if (result.resultCode == RESULT_OK) {
+//                val spokenText: String? =
+//                    result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+//                        .let { text -> text?.get(0) }
+//                binding.convertText1.setText(spokenText)
+//                addSolutionsViewModel.editDone()
+//            }
+//        }
+//
+//        addSolutionsViewModel.initial(startForResult)
+////        with(binding) {
+//        mic.setOnClickListener { addSolutionsViewModel.startRecording() }
+////            fabPlay.setOnClickListener {
+////                val text = edtText.text?.trim().toString()
 //                model.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
 //            }
 //        }
@@ -69,7 +69,7 @@ class AddSolutionsActivity : AppCompatActivity() {
 
         addSolutionsViewModel.spinner.observe(this,Observer{
             if(it==true){
-                Log.d("Dhanush","$problem")
+
                 addSolutionsViewModel.arguments(problem)
                 addSolutionsViewModel.argumentsPassed()
             }

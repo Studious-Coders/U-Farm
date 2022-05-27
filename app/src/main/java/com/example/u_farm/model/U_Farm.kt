@@ -19,7 +19,7 @@ data class Problem(
     var username:String="",
     var profilePicture:String="",
     var problemStatement:String="",
-    var DiseaseAffectedPlantImage:String="",
+    var diseaseAffectedPlantImage:String="",
 
 )
 
@@ -30,7 +30,6 @@ data class Solution(
     var username:String="",
     var profilePicture:String="",
     var solutionStatement:String="",
-    var voiceOverOfText:String="",
     )
 
 data class Image(
