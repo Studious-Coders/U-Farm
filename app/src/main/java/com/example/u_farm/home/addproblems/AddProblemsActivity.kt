@@ -30,6 +30,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivityAddProblemsBinding
+import com.example.u_farm.model.Problem
+import com.example.u_farm.model.Solution
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_problems.*
 import kotlinx.android.synthetic.main.activity_editprofile.*
@@ -37,7 +39,7 @@ import java.util.*
 
 private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
 class AddProblemsActivity : AppCompatActivity() {
-
+    private var problem: Problem =Problem()
     private lateinit var addProblemsViewModel:AddProblemsViewModel
     private lateinit var progressBar: ProgressDialog
     private var permissionToRecordAccepted = false
@@ -81,7 +83,7 @@ class AddProblemsActivity : AppCompatActivity() {
         addProblemsViewModel =
             ViewModelProvider(this, viewModelFactory).get(AddProblemsViewModel::class.java)
         binding.addProblemsViewModel=addProblemsViewModel
-
+        binding.problem=problem
         binding.lifecycleOwner = this
 
         (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)

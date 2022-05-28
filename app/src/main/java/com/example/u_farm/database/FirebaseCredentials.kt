@@ -25,8 +25,8 @@ class AuthRepository(application: Application){
     private var auth: FirebaseAuth
     private var firebaseDatabase:FirebaseDatabase
     private var reference:DatabaseReference
-    public var reference1:DatabaseReference
-    public var reference2:DatabaseReference
+    var reference1:DatabaseReference
+    var reference2:DatabaseReference
     private var application:Application
     private var firebaseUserAuthRepository= MutableLiveData<FirebaseUser?>()
     private var userLoggedAuthRepository=MutableLiveData<Boolean?>()

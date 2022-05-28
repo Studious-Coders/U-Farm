@@ -31,7 +31,3 @@ data class Solution(
     var profilePicture:String="",
     var solutionStatement:String="",
     )
-
-data class Image(
-    var image:String="",
-)

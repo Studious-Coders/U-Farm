@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import com.example.u_farm.R
-import com.example.u_farm.databinding.ActivityAddSolutionsBinding
 import com.example.u_farm.databinding.ActivityLoginBinding
 import com.example.u_farm.databinding.ActivityRegisterBinding
 import com.example.u_farm.login.LoginActivity

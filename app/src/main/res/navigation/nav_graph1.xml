@@ -59,7 +59,7 @@
         android:id="@+id/addSolutionsActivity"
         android:name="com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity"
         android:label="AddSolutionsActivity"
-        tools:layout="@layout/activity_add_solutions">
+        tools:layout="@layout/add_solutions">
         <argument
             android:name="problemUid"
             app:argType="string"
