@@ -232,7 +232,7 @@ class AuthRepository(application: Application){
             override fun onDataChange(snapshot: DataSnapshot) {
                 for (postSnapshot in snapshot.children) {
                     val solution = postSnapshot.getValue(Solution::class.java)
-                    if (solution?.problemUid != problemUid) {
+                    if (solution?.problemUid == problemUid) {
                         solutionList.add(solution)
                     }
                 }

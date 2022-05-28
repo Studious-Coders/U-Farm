@@ -6,9 +6,9 @@
         <variable
             name="data"
             type="com.example.u_farm.model.Solution" />
-<!--        <variable-->
-<!--            name="clicklistener"-->
-<!--            type="com.example.u_farm.home.SolutionsListener" />-->
+        <variable
+            name="clicklistener"
+            type="com.example.u_farm.home.SolutionsListener" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -35,10 +35,11 @@
                     android:id="@+id/selectphoto5"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
+                    app:imgUrl="@{data.profilePicture}"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:background="@drawable/ic_baseline_account_circle_24"
-                    android:src="@mipmap/ic_launcher"
+                    tools:src="@drawable/plantdiseases"
                     app:civ_border_color="#000000"
                     app:civ_border_width="0.5dp" />
 
@@ -51,7 +52,8 @@
                     android:layout_marginTop="8dp"
                     android:layout_toEndOf="@+id/selectphoto5"
                     android:gravity="center"
-                    android:text="Siva"
+                    tools:text="Farmer"
+                    app:userDetails="@{data.username}"
                     android:textSize="20sp"
                     android:textStyle="bold" />
             </RelativeLayout>
@@ -118,7 +120,8 @@
                         android:id="@+id/solutionstatement"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/solution1"
+                        android:text="@{data.solutionStatement}"
+                        tools:text="@string/solution1"
                         app:layout_constraintBottom_toTopOf="@+id/floating_action_button6"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"

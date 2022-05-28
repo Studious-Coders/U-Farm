@@ -64,9 +64,10 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
     }
 
 
-    fun getSolutionOfTheGetProblem(args1: SolutionsActivityArgs) {
+    fun getSolutionOfTheGetProblem(args1: String) {
 
-        authRepository.SolutionDataList(args1.problemUid.toString())
+        authRepository.SolutionDataList(args1)
+
     }
 
     private var authRepository: AuthRepository

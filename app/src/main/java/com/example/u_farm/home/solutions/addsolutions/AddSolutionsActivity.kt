@@ -3,6 +3,7 @@
 import android.app.Activity
 import android.app.Application
 import android.app.ProgressDialog
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
@@ -12,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
+import androidx.navigation.navArgument
 import com.example.u_farm.R
 import com.example.u_farm.databinding.AddSolutionsBinding
 import com.example.u_farm.home.solutions.SolutionsActivity
@@ -38,9 +40,10 @@ import com.example.u_farm.model.Solution
         supportActionBar?.title = "Add Problems"
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        val args1: AddSolutionsActivityArgs by navArgs()
 
-        problem= intent.getStringExtra(SolutionsActivity.USER_KEY).toString()
+
+        problem= intent.getStringExtra("problemUid").toString()
+
         val application: Application = requireNotNull(this).application
         val activity: Activity = this
         val viewModelFactory = AddSolutionsViewModelFactory(application, activity)
@@ -52,7 +55,7 @@ import com.example.u_farm.model.Solution
 
         addSolutionsViewModel.initial.observe(this, Observer {
             if(it==true){
-              addSolutionsViewModel.passArguments(args1.toString())
+              addSolutionsViewModel.passArguments(problem)
 
             }
         })

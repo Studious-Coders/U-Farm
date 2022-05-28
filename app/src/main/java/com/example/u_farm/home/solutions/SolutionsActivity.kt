@@ -64,7 +64,7 @@ class SolutionsActivity : AppCompatActivity() {
 
         solutionsViewModel.argument.observe(this, Observer {
             if (it == true) {
-                solutionsViewModel.getSolutionOfTheGetProblem(args1)
+                solutionsViewModel.getSolutionOfTheGetProblem(args1.problemUid.toString())
             }
         })
 
@@ -74,8 +74,7 @@ class SolutionsActivity : AppCompatActivity() {
                 if (FirebaseAuth.getInstance().uid != null) {
                     if (it) {
                         val intent = Intent(this, AddSolutionsActivity::class.java)
-                        intent.putExtra(USER_KEY, args1.toString())
-
+                        intent.putExtra("problemUid", args1.problemUid.toString())
 
                         startActivity(intent)
                         solutionsViewModel.navigateToAddSolutionsDone()

@@ -39,6 +39,7 @@
                 android:layout_alignParentTop="true"
                 app:civ_border_color="#000000"
                 app:civ_border_width="0.5dp"
+                android:background="@drawable/ic_baseline_account_circle_24"
                 app:imgUrl="@{data.profilePicture}"
                 tools:src="@drawable/plantdiseases" />
 
