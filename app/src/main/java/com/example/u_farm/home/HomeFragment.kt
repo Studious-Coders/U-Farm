@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.chaquo.python.Python
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -82,6 +83,7 @@ class HomeFragment : Fragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.top_app_bar, menu)
     }
+
 
 }
 

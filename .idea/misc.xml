@@ -3,6 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/activity_home.xml" value="0.1734375" />
+        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/fragment_home.xml" value="0.1734375" />
+        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/fragment_profile.xml" value="0.1734375" />
+        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/list_items.xml" value="0.1734375" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.228" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_arrow_circle_down_24.xml" value="0.1635" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_arrow_circle_up_24.xml" value="0.1635" />

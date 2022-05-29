@@ -17,6 +17,8 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     private var alert: AlertDialog.Builder
     private var alert0: AlertDialog.Builder
 
+    var chosedlang=1
+
     private var _navigateToEditProfile= MutableLiveData<Boolean>()
     val navigateToEditProfile: LiveData<Boolean>
         get()=_navigateToEditProfile
@@ -50,6 +52,7 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     private val _snackbar= MutableLiveData<Boolean?>()
     val snackbar: LiveData<Boolean?>
         get()=_snackbar
+
 
 
 
@@ -108,23 +111,23 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     fun snackbar(){
         _snackbar.value=true
     }
-    fun updateLanguage(lang:String){
-        authRepository.singleRecord(lang,"language")
+    val  options = arrayOf("Tamil", "English","Hindi")
+    fun updateLanguage(lang:Int){
+        chosedlang=lang
+        authRepository.singleRecord(options[lang],"language")
     }
     fun languageIntent(){
 
         alert0.setTitle("Choose a language")
-
-        val options = arrayOf("Tamil", "English","Hindi")
 
         alert0.setItems(options) { dialog, which ->
             dialog.dismiss()
 
             when (which) {
                 /* execute here your actions */
-                0 ->   updateLanguage(options[0])
-                1 ->   updateLanguage(options[1])
-                2 ->updateLanguage(options[2])
+                0 ->   updateLanguage(0)
+                1 ->   updateLanguage(1)
+                2 ->   updateLanguage(2)
             }
 
 

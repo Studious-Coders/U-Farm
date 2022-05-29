@@ -128,6 +128,30 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
 
 
     
+    fun startRecordingta() {
+
+        startForResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ta-IN")
+            putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
+        })
+    }
+
+    fun startRecordinghi() {
+
+        startForResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "hi-IN")
+            putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
+        })
+    }
+
     fun startRecording() {
 
         startForResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
@@ -135,9 +159,10 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale("in_ID"))
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
             putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
         })
+    }
 
 
 
@@ -189,7 +214,7 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
 //              start()
 //          }
 //          convertAudioToText()
-}
+
 //
 //    fun stopRecording(){
 //        recorder?.apply {

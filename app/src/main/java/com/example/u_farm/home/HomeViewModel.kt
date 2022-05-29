@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.chaquo.python.Python
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.U_Farm
@@ -53,6 +54,15 @@ class HomeViewModel(application: Application): ViewModel() {
     }
     val allData: MutableLiveData<MutableList<Problem?>>
         get()=authRepository.ProblemDataMutableLiveDataList()
+
+    fun convert()
+    {
+        val py = Python.getInstance();
+        val pyobj = py.getModule("translate")
+        val text="Solution"
+        val converttext= pyobj.callAttr("tam",text)
+        //return converttext
+    }
 
 
 }

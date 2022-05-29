@@ -1,12 +1,19 @@
 package com.example.u_farm.util
 
+
 import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
+import com.chaquo.python.Python
+import com.chaquo.python.android.AndroidPlatform
+import com.example.u_farm.profile.ProfileViewModel
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
+
+var option= ProfileViewModel().chosedlang
+
 
 
 @SuppressLint("SetTextI18n")
@@ -14,6 +21,10 @@ import de.hdodenhof.circleimageview.CircleImageView
 fun TextView.setUserDetails(item: String?) {
     item?.let {
         text=item
+        val py = Python.getInstance();
+        val pyobj = py.getModule("translate")
+        //if()
+        text=pyobj.callAttr("tam",item).toString()
     }
 }
 
