@@ -96,8 +96,6 @@ class SolutionsActivity : AppCompatActivity() {
         solutionsViewModel.textToSpeechDone()
     })
 
-
-
     }
     private val textToSpeechEngine: TextToSpeech by lazy {
         TextToSpeech(this) {

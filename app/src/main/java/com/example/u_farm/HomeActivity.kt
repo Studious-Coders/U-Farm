@@ -20,7 +20,10 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.chaquo.python.Python
+import com.chaquo.python.android.AndroidPlatform
 import com.example.u_farm.databinding.ActivityHomeBinding
+import com.example.u_farm.util.setUserDetails
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
@@ -41,10 +44,15 @@ class HomeActivity : AppCompatActivity() {
 
          supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
         val navController=findNavController(R.id.fragmentContainerView)
-      val appBarConfiguration= AppBarConfiguration(setOf(R.id.home,R.id.news,R.id.profile))
+        val appBarConfiguration= AppBarConfiguration(setOf(R.id.home,R.id.news,R.id.profile))
 
         setupActionBarWithNavController(navController,appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)
+
+        if (! Python.isStarted()) {
+            Python.start(AndroidPlatform(this))
+        }
+
     }
 
 

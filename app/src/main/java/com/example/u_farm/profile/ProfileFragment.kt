@@ -23,6 +23,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.chaquo.python.Python
+import com.chaquo.python.android.AndroidPlatform
 import com.example.u_farm.HomeActivity
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentProfileBinding
@@ -117,7 +119,9 @@ class ProfileFragment : Fragment() {
             }
         })
 
-        return binding.root
+
+
+            return binding.root
     }
 
 }
