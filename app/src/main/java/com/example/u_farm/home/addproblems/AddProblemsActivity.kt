@@ -142,13 +142,13 @@ class AddProblemsActivity : AppCompatActivity() {
                 startActivityForResult(intent, 0)
             }
         })
-            addProblemsViewModel.setImage.observe(this, Observer {
-            if(it!=null){
-                loading_spinner2.visibility= View.GONE
-                progressBar.dismiss()
-
-            }
-        })
+//            addProblemsViewModel.setImage.observe(this, Observer {
+//            if(it!=null){
+//                loading_spinner2.visibility= View.GONE
+//                progressBar.dismiss()
+//
+//            }
+//        })
 
 
 

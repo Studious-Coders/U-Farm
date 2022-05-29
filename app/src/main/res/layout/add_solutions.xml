@@ -111,19 +111,19 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:layout_margin="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="Post Problems"
-            android:onClick="@{()->addSolutionsViewModel.postSolutions(solution.solutionStatement)}"
             android:background="@drawable/rounded"
             android:backgroundTint="?attr/colorPrimary"
+            android:onClick="@{()->addSolutionsViewModel.postSolutions(solution.solutionStatement,solution.rating)}"
+            android:text="Post Problems"
             android:textColor="?attr/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.537"
+            app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card1"/>
+            app:layout_constraintTop_toBottomOf="@id/card1"
+            app:layout_constraintVertical_bias="0.098" />
 
-     </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>
 

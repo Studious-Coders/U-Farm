@@ -30,4 +30,5 @@ data class Solution(
     var username:String="",
     var profilePicture:String="",
     var solutionStatement:String="",
+    var rating: Int=0,
     )

@@ -49,8 +49,8 @@ class AddSolutionsViewModel(application: Application,activity: Activity): ViewMo
     }
 
 
-    fun postSolutions(solutionStatement:String){
-         val solutionr= Solution(key1,arguments!!,getData.value!!.uid,getData.value!!.username,getData.value!!.profilePicture,solutionStatement)
+    fun postSolutions(solutionStatement:String,rating:Int){
+         val solutionr= Solution(key1,arguments!!,getData.value!!.uid,getData.value!!.username,getData.value!!.profilePicture,solutionStatement,rating)
          authRepository.setSolutionData(solutionr)
 
      }

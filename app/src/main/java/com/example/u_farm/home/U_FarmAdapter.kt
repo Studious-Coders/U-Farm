@@ -43,9 +43,6 @@ class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<Problem,
 
 class ProblemsListener(val clickListener: (sleepId:String) -> Unit){
     fun onClick(model: Problem)=clickListener(model.problemUid)
-
-
-
 }
 class ProblemsDiffCallback : DiffUtil.ItemCallback<Problem>() {
             override fun areItemsTheSame(oldItem: Problem, newItem: Problem): Boolean {
@@ -57,10 +54,10 @@ class ProblemsDiffCallback : DiffUtil.ItemCallback<Problem>() {
             }
         }
 
-class SolutionsAdapter(solutionsListener: SolutionsListener) : ListAdapter<Solution,SolutionsAdapter.ViewHolder>(SolutionsDiffCallback()) {
+class SolutionsAdapter(val clickListener: SolutionsListener,val increaseListener: IncreaseListener,val decreaseListener: DecreaseListener) : ListAdapter<Solution,SolutionsAdapter.ViewHolder>(SolutionsDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item)
+        holder.bind(item,clickListener,increaseListener,decreaseListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -70,10 +67,12 @@ class SolutionsAdapter(solutionsListener: SolutionsListener) : ListAdapter<Solut
     class ViewHolder private constructor(val binding: ListItems2Binding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Solution) {
+        fun bind(item: Solution,clickListener: SolutionsListener,increaseListener: IncreaseListener,decreaseListener: DecreaseListener) {
             binding.data=item
 
-//            binding.clicklistener=clickListener
+            binding.clicklistener=clickListener
+            binding.increaseListener=increaseListener
+            binding.decreaseListener=decreaseListener
             binding.executePendingBindings()
         }
 
@@ -87,9 +86,19 @@ class SolutionsAdapter(solutionsListener: SolutionsListener) : ListAdapter<Solut
     }
 }
 
-class SolutionsListener(val clickListener: (sleepId:String) -> Unit){
-    fun onClick(model:U_Farm)=clickListener(model.username)
+class SolutionsListener(val clickListener: (sleepId: String)-> Unit){
+    fun onClick(model:Solution)=clickListener(model.solutionStatement)
 }
+
+class IncreaseListener(val clickListener: (sleepId:Int,sleepId2:String) -> Unit){
+    fun onClick(model:Solution)=clickListener(model.rating,model.solutionUid)
+}
+
+class DecreaseListener(val clickListener: (sleepId:Int,sleepId2:String) -> Unit){
+    fun onClick(model:Solution)=clickListener(model.rating,model.solutionUid)
+}
+
+
 
 
 class SolutionsDiffCallback : DiffUtil.ItemCallback<Solution>() {

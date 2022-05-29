@@ -16,6 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UFarm">
         <activity
+            android:name=".home.brief.BriefActivity"
+            android:exported="false" />
+        <activity
             android:name=".list_items3"
             android:exported="false"
             android:label="@string/title_activity_list_items3"
@@ -36,7 +39,7 @@
             android:name=".home.solutions.addsolutions.AddSolutionsActivity"
             android:exported="true" />
         <activity
-            android:name=".CommentsActivity"
+            android:name=".home.solutions.comment.CommentsActivity"
             android:exported="true" />
         <activity
             android:name=".profile.editprofile.EditProfileActivity"

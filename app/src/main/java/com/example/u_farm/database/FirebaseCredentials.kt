@@ -20,7 +20,6 @@ import kotlinx.coroutines.NonCancellable.children
 import java.io.File
 import java.util.*
 
-
 class AuthRepository(application: Application){
     private var auth: FirebaseAuth
     private var firebaseDatabase:FirebaseDatabase
@@ -33,21 +32,14 @@ class AuthRepository(application: Application){
     private var setUserDataRepository=MutableLiveData<Boolean?>()
     private var getUserDataRepository=MutableLiveData<U_Farm?>()
     private var singleRecordDataRepository=MutableLiveData<Boolean?>()
-
     private var uploadedDataRepository=MutableLiveData<String?>()
-
     private var setSolutionDataRepository=MutableLiveData<Boolean?>()
-
     private var setProblemDataRepository=MutableLiveData<Boolean?>()
     private var storage:FirebaseStorage
     private var ProblemDataMutableLiveDataList=MutableLiveData<MutableList<Problem?>>()
-
     private var SolutionDataMutableLiveDataList=MutableLiveData<MutableList<Solution?>>()
-
     var problemList=mutableListOf<Problem?>()
-
     var solutionList=mutableListOf<Solution?>()
-
 
     init{
         this.application=application
@@ -59,7 +51,6 @@ class AuthRepository(application: Application){
         auth= FirebaseAuth.getInstance()
         if(auth.currentUser!=null){
             firebaseUserAuthRepository.postValue(auth.currentUser)
-
         }
     }
 
@@ -83,33 +74,27 @@ class AuthRepository(application: Application){
         return setProblemDataRepository
     }
 
-
-
     fun getUserDataMutableLiveData(): MutableLiveData<U_Farm?> {
         return getUserDataRepository
     }
-
 
     fun ProblemDataMutableLiveDataList(): MutableLiveData<MutableList<Problem?>> {
         return ProblemDataMutableLiveDataList
     }
 
-
     fun SolutionDataMutableLiveDataList(): MutableLiveData<MutableList<Solution?>> {
         return SolutionDataMutableLiveDataList
     }
-
 
     fun singleRecordDataMutuableLiveData(): MutableLiveData<Boolean?>{
         return singleRecordDataRepository
     }
 
-
     fun uploadedDataMutuableLiveData(): MutableLiveData<String?>{
         return uploadedDataRepository
     }
 
-
+    /** Authentication Function**/
 
     fun register(username:String,email:String,password:String){
         if(email.isEmpty()||password.isEmpty()){
@@ -152,7 +137,6 @@ class AuthRepository(application: Application){
     fun signOut(){
         auth.signOut()
         userLoggedAuthRepository.postValue(true)
-
     }
 
     /**U_Farm Model Function**/
@@ -217,34 +201,8 @@ class AuthRepository(application: Application){
                         override fun onCancelled(error: DatabaseError) {
 
                 }
-
             })
-
         }
-
-
-
-    /**Solution Model Function**/
-
-    fun SolutionDataList(problemUid:String){
-        val ref=firebaseDatabase.getReference("SOLUTION")
-        ref.addValueEventListener(object :ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (postSnapshot in snapshot.children) {
-                    val solution = postSnapshot.getValue(Solution::class.java)
-                    if (solution?.problemUid == problemUid) {
-                        solutionList.add(solution)
-                    }
-                }
-                SolutionDataMutableLiveDataList.postValue(solutionList)
-            }
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-
-        })
-
-    }
 
     fun singleRecordProblem(data:String,parameter:String){
         reference1.addListenerForSingleValueEvent(object :ValueEventListener{
@@ -274,10 +232,42 @@ class AuthRepository(application: Application){
         })
     }
 
+    /**Solution Model Function**/
 
+    fun SolutionDataList(problemUid:String){
+        val ref=firebaseDatabase.getReference("SOLUTION")
+        ref.addValueEventListener(object :ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (postSnapshot in snapshot.children) {
+                    val solution = postSnapshot.getValue(Solution::class.java)
+                    if (solution?.problemUid == problemUid) {
+                        solutionList.add(solution)
+                    }
+                }
+                SolutionDataMutableLiveDataList.postValue(solutionList)
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
+  fun singleRecordSolution(data:Int,parameter:String,suid:String) {
+    val ref=firebaseDatabase.getReference("SOLUTION")
+    ref.addListenerForSingleValueEvent(object :ValueEventListener{
+        override fun onDataChange(snapshot: DataSnapshot) {
+            if (auth.currentUser?.uid != null) {
+                ref.child("$suid/$parameter").setValue(data)
+            }
+            singleRecordDataRepository.postValue(true)
+        }
+        override fun onCancelled(error: DatabaseError) {
+            singleRecordDataRepository.postValue(false)
+        }
+    })
+}
 
     fun setSolutionData(solution: Solution){
-
         reference2.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (auth.currentUser?.uid != null) {
@@ -319,29 +309,31 @@ class AuthRepository(application: Application){
     }
 
 
-    fun uploadAudioToFirebaseStorage(filename: File) {
-        val ref =FirebaseStorage.getInstance().getReference("/Audio/" + UUID.randomUUID().toString())
-        val uri:Uri=Uri.fromFile(filename)
-        val uploadTask = ref.putFile(uri)
-        val urlTasK = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-            if (!task.isSuccessful) {
-                task.exception?.let {
-                    throw it
-                }
-            }
-            return@Continuation ref.downloadUrl
 
-        }).addOnCompleteListener { task ->
-            if (task.isSuccessful) {
-                val downloadUri = task.result
-                Log.d("AuthRepository", "Downloaded URL: is ${downloadUri}")
-                val downloadUrl = downloadUri.toString()
-                uploadedDataRepository.postValue(downloadUrl)
-            } else {
-                uploadedDataRepository.postValue(null)
-            }
-        }.addOnFailureListener {
-            uploadedDataRepository.postValue(null)
-        }
-    }
+//
+//    fun uploadAudioToFirebaseStorage(filename: File) {
+//        val ref =FirebaseStorage.getInstance().getReference("/Audio/" + UUID.randomUUID().toString())
+//        val uri:Uri=Uri.fromFile(filename)
+//        val uploadTask = ref.putFile(uri)
+//        val urlTasK = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
+//            if (!task.isSuccessful) {
+//                task.exception?.let {
+//                    throw it
+//                }
+//            }
+//            return@Continuation ref.downloadUrl
+//
+//        }).addOnCompleteListener { task ->
+//            if (task.isSuccessful) {
+//                val downloadUri = task.result
+//                Log.d("AuthRepository", "Downloaded URL: is ${downloadUri}")
+//                val downloadUrl = downloadUri.toString()
+//                uploadedDataRepository.postValue(downloadUrl)
+//            } else {
+//                uploadedDataRepository.postValue(null)
+//            }
+//        }.addOnFailureListener {
+//            uploadedDataRepository.postValue(null)
+//        }
+//    }
 }

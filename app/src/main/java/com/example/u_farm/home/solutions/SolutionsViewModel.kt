@@ -2,19 +2,14 @@ package com.example.u_farm.home.solutions
 
 import android.app.Activity
 import android.app.Application
-import android.content.Intent
 import android.media.MediaPlayer
 import android.media.MediaRecorder
-import android.net.Uri
 import android.speech.tts.TextToSpeech
-import android.util.Log
-import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.u_farm.database.AuthRepository
-import com.example.u_farm.model.Problem
 import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
 import kotlinx.coroutines.launch
@@ -26,9 +21,32 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
     val navigateToAddSolutions: LiveData<Boolean>
         get()=_navigateToAddSolutions
 
-    private var _read= MutableLiveData<Boolean>()
-    val read: LiveData<Boolean>
+    private var _read= MutableLiveData<String?>()
+    val read: LiveData<String?>
         get()=_read
+
+
+    val singleChanges: LiveData<Boolean?>
+        get()=authRepository.singleRecordDataMutuableLiveData()
+
+
+
+
+    fun increaseRating(inc:Int,suid:String){
+            authRepository.singleRecordSolution(inc+1,"rating",suid)
+
+    }
+
+    fun decreaseRating(dec:Int,suid:String) {
+
+            authRepository.singleRecordSolution(dec-1,"rating",suid)
+
+
+    }
+
+    fun intiate(){
+        authRepository.SolutionDataList(read.toString())
+    }
 
 
     private var _argument= MutableLiveData<Boolean>()
@@ -57,10 +75,10 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
     }
 
     fun textToSpeech(str:String){
-        _read.value=true
+        _read.value=str
     }
     fun textToSpeechDone(){
-        _read.value=false
+        _read.value=null
     }
 
 
@@ -76,6 +94,7 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
         _argument.value=true
 
 
+
     }
 
     private var recorder: MediaRecorder? = null
@@ -84,23 +103,7 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
 
 
     val allData: MutableLiveData<MutableList<Solution?>>
-        get()=authRepository.SolutionDataMutableLiveDataList()
-//    fun saveAudio(folder:String){
-//        val uri: Uri = Uri.fromFile(File(folder))
-//        authRepository.uploadImageToFirebaseStorage(uri,"AudioToText")
-//    }
-//
-//    fun playAudio(folder:String){
-//        player = MediaPlayer().apply {
-//            try {
-//                setDataSource(folder)
-//                prepare()
-//                start()
-//            } catch (e: IOException) {
-//                Log.e(LOG_TAG, "prepare() failed")
-//            }
-//        }
-  }
+        get()=authRepository.SolutionDataMutableLiveDataList()  }
 
 
 
