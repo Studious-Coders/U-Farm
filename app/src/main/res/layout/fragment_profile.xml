@@ -68,7 +68,7 @@
             android:layout_weight="1"
             android:onClick="@{()->profileViewModel.navigateToEditProfile()}"
             android:padding="16dp"
-            android:text="EditProfile"
+            android:text="Edit Profile"
             android:textColor="?attr/colorAccent"
             app:cornerRadius="50dp"
             app:icon="@drawable/ic_baseline_edit_24"

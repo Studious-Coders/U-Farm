@@ -12,7 +12,8 @@ import com.example.u_farm.profile.ProfileViewModel
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-//var option= ProfileViewModel().chosedlang
+var chosedlang=0
+
 
 @SuppressLint("SetTextI18n")
 @BindingAdapter("userDetails")
@@ -21,8 +22,12 @@ fun TextView.setUserDetails(item: String?) {
         text=item
         val py = Python.getInstance();
         val pyobj = py.getModule("translate")
-        //if()
-        text=pyobj.callAttr("hin",item).toString()
+        if(chosedlang==0)
+          text=pyobj.callAttr("tam",item).toString()
+        else if(chosedlang==1)
+            text=pyobj.callAttr("eng",item).toString()
+        else
+            text=pyobj.callAttr("hin",item).toString()
     }
 }
 
