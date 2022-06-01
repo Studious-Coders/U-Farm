@@ -34,8 +34,7 @@ class SolutionsActivity : AppCompatActivity() {
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
 
         val application: Application = requireNotNull(this).application
-        val activity: Activity = this
-        val viewModelFactory = SolutionsViewModelFactory(application, activity)
+        val viewModelFactory = SolutionsViewModelFactory(application, args1.problemUid.toString())
         solutionsViewModel =
             ViewModelProvider(this, viewModelFactory).get(SolutionsViewModel::class.java)
         binding.solutionsViewModel = solutionsViewModel
@@ -70,12 +69,6 @@ class SolutionsActivity : AppCompatActivity() {
         solutionsViewModel.allData.observe(this, Observer {
             it?.let {
                 adapter.submitList(it)
-            }
-        })
-
-        solutionsViewModel.argument.observe(this, Observer {
-            if (it == true) {
-                solutionsViewModel.getSolutionOfTheGetProblem(args1.problemUid.toString())
             }
         })
 

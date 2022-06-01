@@ -5,18 +5,17 @@ import android.app.Application
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.speech.tts.TextToSpeech
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.example.u_farm.database.AuthRepository
+import com.example.u_farm.model.Problem
 import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
 
-class SolutionsViewModel(application: Application,activity: Activity): ViewModel()  {
+class SolutionsViewModel(application: Application,problemUid: String): ViewModel()  {
+    var puid:String = ""
     private var _navigateToAddSolutions= MutableLiveData<Boolean>()
     val navigateToAddSolutions: LiveData<Boolean>
         get()=_navigateToAddSolutions
@@ -34,13 +33,14 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
 
     fun increaseRating(inc:Int,suid:String){
             authRepository.singleRecordSolution(inc+1,"rating",suid)
+           authRepository.SolutionDataList(puid)
 
     }
 
     fun decreaseRating(dec:Int,suid:String) {
 
             authRepository.singleRecordSolution(dec-1,"rating",suid)
-
+            authRepository.SolutionDataList(puid)
 
     }
 
@@ -48,10 +48,6 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
         authRepository.SolutionDataList(read.toString())
     }
 
-
-    private var _argument= MutableLiveData<Boolean>()
-    val argument: LiveData<Boolean>
-        get()=_argument
 
 
     lateinit var textToSpeechEngine: TextToSpeech
@@ -80,27 +76,19 @@ class SolutionsViewModel(application: Application,activity: Activity): ViewModel
     fun textToSpeechDone(){
         _read.value=null
     }
+    val value= MediatorLiveData<Problem>()
 
-
-    fun getSolutionOfTheGetProblem(args1: String) {
-
-        authRepository.SolutionDataList(args1)
-
-    }
+    val getData: LiveData<Problem?>
+        get()=authRepository.getProblemMutableLiveData()
 
     private var authRepository: AuthRepository
     init{
         authRepository= AuthRepository(application)
-        _argument.value=true
-
-
-
+        authRepository.SolutionDataList(problemUid)
+        authRepository.getProblem(problemUid)
+        value.addSource(getData,value::setValue)
+        puid=problemUid
     }
-
-    private var recorder: MediaRecorder? = null
-    private var player: MediaPlayer? = null
-
-
 
     val allData: MutableLiveData<MutableList<Solution?>>
         get()=authRepository.SolutionDataMutableLiveDataList()  }

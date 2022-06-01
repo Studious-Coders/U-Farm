@@ -72,15 +72,19 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
         _image.value=true
     }
     var str:String?=null
+    var str1:String?=null
 
 
 
-     var uri:Uri?=null
+
+    var uri:Uri?=null
     fun updateData(uid:String,username:String,email:String,password:String,phoneNumber:String,location:String){
         _spinner.value=true
         val ufarm= U_Farm(uid,username,email,password,phoneNumber,"",job,location,"","")
         authRepository.setUserData(ufarm)
-
+        authRepository.updateProblem(username,uid,"username")
+        authRepository.updateSolution(username,uid,"username")
+        str1=uid
         _hope.value=true
 
 
@@ -98,6 +102,9 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
          str= getData.value?.profilePicture
      }
      authRepository.singleRecord(str!!,"profilePicture")
+     authRepository.updateSolution(str!!,str1!!,"profilePicture")
+
+     authRepository.updateProblem(str!!,str1!!,"profilePicture")
 
  }
     fun function(){

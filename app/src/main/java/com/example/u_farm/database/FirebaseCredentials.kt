@@ -46,6 +46,8 @@ class AuthRepository(application: Application){
     private var userLoggedAuthRepository=MutableLiveData<Boolean?>()
     private var setUserDataRepository=MutableLiveData<Boolean?>()
     private var getUserDataRepository=MutableLiveData<U_Farm?>()
+        private var getProblemRepository=MutableLiveData<Problem?>()
+
     private var singleRecordDataRepository=MutableLiveData<Boolean?>()
     private var uploadedDataRepository=MutableLiveData<String?>()
     private var setSolutionDataRepository=MutableLiveData<Boolean?>()
@@ -103,6 +105,11 @@ class AuthRepository(application: Application){
     fun getUserDataMutableLiveData(): MutableLiveData<U_Farm?> {
         return getUserDataRepository
     }
+
+    fun getProblemMutableLiveData(): MutableLiveData<Problem?> {
+        return getProblemRepository
+    }
+
 
     fun ProblemDataMutableLiveDataList(): MutableLiveData<MutableList<Problem?>> {
         return ProblemDataMutableLiveDataList
@@ -272,6 +279,22 @@ class AuthRepository(application: Application){
         })
     }
 
+    fun getProblem(problemId:String){
+        val userData:Query=firebaseDatabase.getReference("/PROBLEM/${problemId}")
+        userData.addValueEventListener(object :ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val problem = snapshot.getValue(Problem::class.java)
+                if (problem != null) {
+                    getProblemRepository.postValue(problem)
+                }
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
+
     /**Solution Model Function**/
 
     fun SolutionDataList(problemUid:String){
@@ -307,6 +330,40 @@ class AuthRepository(application: Application){
     })
 }
 
+    fun updateProblem(data:String,uid:String,parameter:String) {
+        val ref=firebaseDatabase.getReference("PROBLEM")
+        ref.addValueEventListener(object :ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (postSnapshot in snapshot.children) {
+                    val problem = postSnapshot.getValue(Problem::class.java)
+                    if (problem?.userUid == uid) {
+                        ref.child("/$parameter").setValue(data)
+                    }
+                }
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+    fun updateSolution(data:String,uid:String,parameter: String) {
+        val ref=firebaseDatabase.getReference("SOLUTION")
+        ref.addValueEventListener(object :ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (postSnapshot in snapshot.children) {
+                    val solution = postSnapshot.getValue(Solution::class.java)
+                    if (solution?.userUid == uid) {
+                        ref.child("/$parameter").setValue(data)
+                    }
+                }
+
+            }
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
     fun setSolutionData(solution: Solution){
         reference2.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
@@ -347,33 +404,4 @@ class AuthRepository(application: Application){
                 uploadedDataRepository.postValue(null)
             }
     }
-
-
-
-//
-//    fun uploadAudioToFirebaseStorage(filename: File) {
-//        val ref =FirebaseStorage.getInstance().getReference("/Audio/" + UUID.randomUUID().toString())
-//        val uri:Uri=Uri.fromFile(filename)
-//        val uploadTask = ref.putFile(uri)
-//        val urlTasK = uploadTask.continueWithTask(Continuation<UploadTask.TaskSnapshot, Task<Uri>> { task ->
-//            if (!task.isSuccessful) {
-//                task.exception?.let {
-//                    throw it
-//                }
-//            }
-//            return@Continuation ref.downloadUrl
-//
-//        }).addOnCompleteListener { task ->
-//            if (task.isSuccessful) {
-//                val downloadUri = task.result
-//                Log.d("AuthRepository", "Downloaded URL: is ${downloadUri}")
-//                val downloadUrl = downloadUri.toString()
-//                uploadedDataRepository.postValue(downloadUrl)
-//            } else {
-//                uploadedDataRepository.postValue(null)
-//            }
-//        }.addOnFailureListener {
-//            uploadedDataRepository.postValue(null)
-//        }
-//    }
 }

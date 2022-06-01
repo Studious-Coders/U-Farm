@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">"नाम "</string>
+    <string name="email">ईमेल</string>
+    <string name="name">नाम</string>
+    <string name="email">ईमेल</string>
+    <string name="password">पासवर्ड</string>
+    <string name="already_have_a_account">"पहले से खाता है? "</string>
+    <string name="login">"लॉग इन करें "</string>
+    <string name="app_name">U - Farm</string>
+    <string name="register">" पंजीकरण करवाना "</string>
+    <string name="don_t_have_a_account">"  खाता नहीं है? "</string>
+    <string name="home">" घर "</string>
+    <string name="news">समाचार</string>
+    <string name="share">" शेयर करना "</string>
+    <string name="share_text">U_Farm ऐप में मेरी प्रोफ़ाइल</string>
+    <string name="sharing_not_available">U - Farm ऐप</string>
+    <string name="copylink">"प्रतिरूप जोड़ना "</string>
+    <string name="save">बचाना</string>
+    <string name="solutions">समाधान</string>
+    <string name="userprofile">उपयोगकर्ता रूपरेखा</string>
+    <string name="search">खोज</string>
+    <string name="problem1">"वर्टिसिलियम विट एक कवक रोग है जो पेड़ों की सैकड़ों प्रजातियों, झाड़ियों, खाद्य पदार्थों और आभूषणों को प्रभावित करता है। "</string>
+    <string name="solution1">"पौधों को अच्छी जल निकासी और पर्याप्त वायु परिसंचरण दें। रात में ओवरहेड वॉटरिंग से बचने के लिए; शाम से पहले पत्ते को सूखने देने के लिए मध्य सुबह को प्राथमिकता दी जाती है। "</string>
+    <string name="work">काम</string>
+    <string name="phone_number">"फ़ोन नंबर "</string>
+    <string name="location">स्थान</string>
+    <string name="edit_profile">प्रोफ़ाइल संपादित करें</string>
+    <string name="continue_with_google">गूगल के साथ जारी रखें</string>
+    <string name="continue_using_phone_number">"फ़ोन का इस्तेमाल जारी रखें "</string>
+    <string name="add_solutions">समाधान जोड़ें</string>
+    <string name="problem">संकट</string>
+    <string name="add_problems">"समस्याएं जोड़ें "</string>
+    <string name="farmer">किसान</string>
+    <string name="notification">अधिसूचना</string>
+    <string name="language">भाषा</string>
+    <string name="logout">लॉग आउट</string>
+    <string name="post_solutions">समाधान अपलोड करें</string>
+    <string name="post_problems">समस्याएं अपलोड करें</string>
+    <string name="or">और</string>
+</resources>

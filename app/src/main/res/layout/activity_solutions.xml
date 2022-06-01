@@ -1,15 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="solutionsViewModel"
             type="com.example.u_farm.home.solutions.SolutionsViewModel" />
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -19,15 +23,114 @@
             <!-- Note: A RecyclerView can also be used -->
 
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/card1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <RelativeLayout
+                        android:id="@+id/relativelayout1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/selectphoto1"
+                            android:layout_width="50dp"
+                            android:layout_height="50dp"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:background="@drawable/ic_baseline_account_circle_24"
+                            app:civ_border_color="#000000"
+                            app:civ_border_width="0.5dp"
+                            app:imgUrl="@{solutionsViewModel.value.profilePicture}"
+                            tools:src="@drawable/plantdiseases" />
+
+                        <TextView
+                            android:id="@+id/username"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentTop="true"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_toEndOf="@id/selectphoto1"
+                            android:gravity="center"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            app:userDetails="@{solutionsViewModel.value.username}"
+                            tools:text="@string/name" />
+
+                        <ImageButton
+                            android:id="@+id/postmenus1"
+                            android:layout_width="24dp"
+                            android:layout_height="24dp"
+                            android:layout_alignParentTop="true"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="12dp"
+                            android:layout_marginBottom="12dp"
+                            android:background="@drawable/ic_baseline_more_horiz_24"
+                            android:backgroundTint="?attr/colorAccent"
+                            android:contentDescription="@string/already_have_a_account" />
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:orientation="vertical">
+                        <!-- Media -->
+                        <ImageView
+                            android:id="@+id/photo"
+                            android:layout_width="wrap_content"
+                            android:layout_height="224dp"
+                            android:contentDescription="@string/diseases_affected_plants_image"
+                            android:scaleType="centerCrop"
+                            app:imageUrl="@{solutionsViewModel.value.diseaseAffectedPlantImage}"
+                            tools:srcCompat="@drawable/plantdiseases" />
+
+                        <!-- Title, secondary and supporting text -->
+                        <TextView
+                            android:id="@+id/description"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="16sp"
+                            android:layout_margin="8dp"
+                            app:userDetails="@{solutionsViewModel.value.problemStatement}"
+                            tools:text="@string/problem1" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler_view1"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:layout_marginTop="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toTopOf="@+id/btn_asset_photo1"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card1"
                 />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
