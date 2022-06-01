@@ -43,13 +43,13 @@
                     android:id="@+id/selectphoto5"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
-                    app:imgUrl="@{data.profilePicture}"
                     android:layout_alignParentStart="true"
                     android:layout_alignParentTop="true"
                     android:background="@drawable/ic_baseline_account_circle_24"
-                    tools:src="@drawable/plantdiseases"
                     app:civ_border_color="#000000"
-                    app:civ_border_width="0.5dp" />
+                    app:civ_border_width="0.5dp"
+                    app:imgUrl="@{data.profilePicture}"
+                    tools:src="@drawable/plantdiseases" />
 
                 <TextView
                     android:id="@+id/username1"
@@ -60,10 +60,10 @@
                     android:layout_marginTop="8dp"
                     android:layout_toEndOf="@+id/selectphoto5"
                     android:gravity="center"
-                    tools:text="Farmer"
-                    app:userDetails="@{data.username}"
                     android:textSize="20sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    app:userDetails="@{data.username}"
+                    tools:text="@string/name" />
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -80,21 +80,22 @@
                         android:id="@+id/imageButton6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
                         android:elevation="25dp"
                         android:onClick="@{()->increaseListener.onClick(data)}"
-
                         android:layout_marginTop="16dp"
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_baseline_arrow_circle_up_24"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:contentDescription="@string/increasing_button" />
 
                     <TextView
                         android:id="@+id/rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="2dp"
+                        tools:text="@string/_1"
                         android:text="@{String.valueOf(data.rating)}"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toTopOf="@id/imageButton7"
@@ -108,13 +109,14 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="32dp"
-                        android:layout_marginLeft="4dp"
+                        android:layout_marginStart="4dp"
                         android:onClick="@{()->decreaseListener.onClick(data)}"
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_baseline_arrow_circle_down_24"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageButton6" />
+                        app:layout_constraintTop_toBottomOf="@+id/imageButton6"
+                        android:contentDescription="@string/decreasing_button" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -150,7 +152,8 @@
                         android:onClick="@{()->clicklistener.onClick(data)}"
                         android:background="@android:color/transparent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent" />
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:contentDescription="@string/speech_to_text" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

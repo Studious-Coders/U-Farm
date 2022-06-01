@@ -17,9 +17,7 @@
     <string name="sharing_not_available">U_Farm App</string>
     <string name="copylink">Copylink</string>
     <string name="save">Save</string>
-    <string name="problem1">Verticillium wit is a fungal disease that affects hundreds of species of trees shrubs, edibles and ornamentals.</string>
     <string name="solutions">solutions</string>
-    <string name="solution1">Give plants good drainage and ample air circulation. To Avoid overhead watering at night; mid-morning is preferred to allow foliage to dry before evening.</string>
     <string name="userprofile">UserProfile</string>
     <string name="search">Search</string>
     <string name="to_search_using_images">To search using images</string>
@@ -29,8 +27,10 @@
     <string name="second_fragment_label">Second Fragment</string>
     <string name="next">Next</string>
     <string name="previous">Previous</string>
+   <string name="problem1">Verticillium wit is a fungal disease that affects hundreds of species of trees shrubs, edibles and ornamentals.</string>
+<string name="solution1">Give plants good drainage and ample air circulation. To Avoid overhead watering at night; mid-morning is preferred to allow foliage to dry before evening.</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
+<string name="hello_first_fragment">Hello first fragment</string>
     <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
     <string-array name="language">
         <item>English</item>
@@ -38,4 +38,28 @@
         <item>Hindi</item>
     </string-array>
     <string name="title_activity_list_items3">list_items3</string>
+    <string name="diseases_affected_plants_image">diseases affected plants image</string>
+    <string name="upload_a_image">upload a image</string>
+    <string name="description">Description</string>
+    <string name="voice_description">Voice Description</string>
+    <string name="post_problems">Post Problems</string>
+    <string name="increasing_button">Increasing Button</string>
+    <string name="_1">-1</string>
+    <string name="decreasing_button">Decreasing Button</string>
+    <string name="speech_to_text">Speech To Text</string>
+    <string name="phone_number">Phone number</string>
+    <string name="work">Work</string>
+    <string name="location">Location</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="continue_with_google">Continue with google</string>
+    <string name="continue_using_phone_number">Continue using phone number</string>
+    <string name="add_solutions">Add Solutions</string>
+    <string name="post_solutions">Post Solutions</string>
+    <string name="problem">Problem:</string>
+    <string name="menu_button">Menu Button</string>
+    <string name="add_problems">Add Problems</string>
+    <string name="farmer">Farmer</string>
+    <string name="notification">Notification</string>
+    <string name="language">Language</string>
+    <string name="logout">logout</string>
 </resources>

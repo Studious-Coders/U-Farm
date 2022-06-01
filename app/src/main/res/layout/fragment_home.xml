@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:tools="http://schemas.android.com/tools"
     app:theme="@style/Theme.UFarm.NoActionBar">
 <data>
     <variable
@@ -12,24 +11,6 @@ xmlns:tools="http://schemas.android.com/tools"
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
-<!--    <com.google.android.material.appbar.AppBarLayout-->
-<!--        android:id="@+id/appbar"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="wrap_content">-->
-
-<!--        <com.google.android.material.appbar.MaterialToolbar-->
-<!--            android:id="@+id/topAppBar"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="?attr/actionBarSize"-->
-<!--            app:title="@string/app_name"-->
-<!--            app:menu="@menu/top_app_bar"-->
-<!--            app:titleTextColor="?attr/colorAccent"-->
-<!--            android:backgroundTint="?attr/colorPrimary"-->
-<!--            style="@style/Widget.MaterialComponents.Toolbar.Primary"-->
-<!--            />-->
-
-<!--    </com.google.android.material.appbar.AppBarLayout>-->
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -56,9 +37,9 @@ xmlns:tools="http://schemas.android.com/tools"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
                 android:layout_marginTop="4dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
                 android:layout_marginBottom="8dp"
-                android:contentDescription="TODO"
+                android:contentDescription="@string/add_problems"
                 app:borderWidth="0dp"
                 android:onClick="@{()-> homeViewModel.navigateToAddProblemsPage()}"
                 android:backgroundTint="?attr/colorPrimary"

@@ -1,18 +1,28 @@
 package com.example.u_farm.database
 
+import android.app.Activity
 import android.app.Application
+import android.content.Intent
 import android.net.Uri
+import android.os.Build
 import android.util.Log
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.android.gms.tasks.Continuation
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
@@ -21,6 +31,11 @@ import java.io.File
 import java.util.*
 
 class AuthRepository(application: Application){
+    private companion object {
+        private const val TAG = "signup"
+        private const val RC_SIGN_IN = 78
+    }
+
     private var auth: FirebaseAuth
     private var firebaseDatabase:FirebaseDatabase
     private var reference:DatabaseReference
@@ -40,8 +55,19 @@ class AuthRepository(application: Application){
     private var SolutionDataMutableLiveDataList=MutableLiveData<MutableList<Solution?>>()
     var problemList=mutableListOf<Problem?>()
     var solutionList=mutableListOf<Solution?>()
+    private var gso: GoogleSignInOptions
+    private var googleSignInClient: GoogleSignInClient
+
+
 
     init{
+
+        gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("492960336873-kpmq8gmn37riibaoasms8h9ld5s8r6qo.apps.googleusercontent.com")
+            .requestEmail()
+            .build()
+        googleSignInClient = GoogleSignIn.getClient(application, gso)
+
         this.application=application
         firebaseDatabase= FirebaseDatabase.getInstance()
         reference=firebaseDatabase.getReference("UFARMDB")
@@ -94,7 +120,21 @@ class AuthRepository(application: Application){
         return uploadedDataRepository
     }
 
-    /** Authentication Function**/
+
+    fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        auth.signInWithCredential(credential).addOnCompleteListener {
+            if (it.isSuccessful) {
+                firebaseUserAuthRepository.postValue(auth.currentUser)
+                val user=auth.currentUser
+                val ufarm=U_Farm(user!!.uid,user.displayName.toString(),user.email.toString(),"",user.phoneNumber.toString(),user.photoUrl.toString())
+                setUserData(ufarm)
+
+            }
+        }
+    }
+
+        /** Authentication Function**/
 
     fun register(username:String,email:String,password:String){
         if(email.isEmpty()||password.isEmpty()){

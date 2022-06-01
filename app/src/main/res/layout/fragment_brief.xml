@@ -40,7 +40,7 @@
                     android:layout_marginEnd="12dp"
                     android:layout_toEndOf="@id/selectphoto1"
                     android:gravity="center"
-                    android:text="Siva"
+                    android:text="@string/name"
                     android:textSize="20sp"
                     android:textStyle="bold" />
 
@@ -54,7 +54,8 @@
                     android:layout_marginEnd="12dp"
                     android:layout_marginBottom="12dp"
                     android:background="@drawable/ic_baseline_more_horiz_24"
-                    android:backgroundTint="?attr/colorAccent" />
+                    android:backgroundTint="?attr/colorAccent"
+                    android:contentDescription="@string/menu_button" />
 
             </RelativeLayout>
 
@@ -67,7 +68,7 @@
                 <ImageView
                     android:layout_width="wrap_content"
                     android:layout_height="224dp"
-                    android:contentDescription="diseases affected plants image"
+                    android:contentDescription="@string/diseases_affected_plants_image"
                     android:scaleType="centerCrop"
                     app:srcCompat="@drawable/plantdiseases" />
 
@@ -76,7 +77,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="Problem:"
+                    android:text="@string/problem"
                     android:textSize="24sp"
                     android:layout_marginTop="16dp" />
                 <TextView

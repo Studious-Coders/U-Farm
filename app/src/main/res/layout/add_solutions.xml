@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
@@ -42,7 +41,7 @@
             android:gravity="center"
             android:text="@string/name"
             app:userDetails="@{addSolutionsViewModel.getData.username}"
-            android:textSize="20dp"
+            android:textSize="20sp"
             android:textStyle="bold"
             app:layout_constraintStart_toEndOf="@+id/selectphoto"
             app:layout_constraintTop_toTopOf="parent" />
@@ -70,7 +69,7 @@
                 style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox.Dense"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Description"
+                android:hint="@string/description"
                 app:boxBackgroundMode="outline"
                 app:boxStrokeColor="?attr/colorPrimary"
                 app:boxStrokeWidthFocused="2dp"
@@ -94,7 +93,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
                 android:backgroundTint="?attr/colorPrimary"
-                android:contentDescription="Voice Description"
+                android:contentDescription="@string/voice_description"
                 android:gravity="center_horizontal|center"
                 android:src="@drawable/ic_baseline_mic_24"
                 app:elevation="5dp"
@@ -114,7 +113,7 @@
             android:background="@drawable/rounded"
             android:backgroundTint="?attr/colorPrimary"
             android:onClick="@{()->addSolutionsViewModel.postSolutions(solution.solutionStatement,solution.rating)}"
-            android:text="Post Problems"
+            android:text="@string/post_solutions"
             android:textColor="?attr/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

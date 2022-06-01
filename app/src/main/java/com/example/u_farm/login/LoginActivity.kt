@@ -16,9 +16,14 @@ import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivityLoginBinding
 import com.example.u_farm.model.U_Farm
 import com.example.u_farm.register.RegisterActivity
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.common.api.ApiException
 
 class LoginActivity : AppCompatActivity() {
-
+    companion object {
+        private const val RC_SIGN_IN = 9001
+    }
     private var u_farm: U_Farm = U_Farm()
     private lateinit var loginViewModel: LoginViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,7 +38,12 @@ class LoginActivity : AppCompatActivity() {
 
         val application: Application = requireNotNull(this).application
         val activity: Activity =this
-        val viewModelFactory = LoginViewModelFactory(application,activity)
+
+        val viewModelFactory = LoginViewModelFactory(application, object : OnSignInStartedListener {
+            override fun onSignInStarted(client: GoogleSignInClient?) {
+                startActivityForResult(client?.signInIntent, RC_SIGN_IN)
+            }
+        })
         loginViewModel =
             ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
         binding.loginViewModel=loginViewModel
@@ -63,4 +73,23 @@ class LoginActivity : AppCompatActivity() {
 
 
     }
+    @Deprecated("Deprecated in Java")
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == RC_SIGN_IN) {
+            // this task is responsible for getting ACCOUNT SELECTED
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            try {
+                val account = task.getResult(ApiException::class.java)!!
+
+                loginViewModel.gsign(account.idToken!!)
+
+                Toast.makeText(this, "Signed In Successfully", Toast.LENGTH_SHORT).show()
+
+            } catch (e: ApiException) {
+                Toast.makeText(this, e.localizedMessage, Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 }
+
