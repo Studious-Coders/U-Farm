@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
+import com.chaquo.python.Python
 import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivitySolutionsBinding
 import com.example.u_farm.home.*
@@ -20,6 +21,7 @@ import com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity
 import com.example.u_farm.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import java.util.*
+var chosedlang=0
 
 class SolutionsActivity : AppCompatActivity() {
     private lateinit var solutionsViewModel: SolutionsViewModel
@@ -96,7 +98,15 @@ class SolutionsActivity : AppCompatActivity() {
             if (it !=null) {
                 solutionsViewModel.initial(textToSpeechEngine)
 
-                val text = it.trim()
+                var text = it.trim()
+                val py = Python.getInstance();
+                val pyobj = py.getModule("translate")
+                if(chosedlang ==0)
+                    text=pyobj.callAttr("tam",text).toString()
+                else if(chosedlang ==1)
+                    text=pyobj.callAttr("eng",text).toString()
+                else
+                    text=pyobj.callAttr("hin",text).toString()
                 solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
                 solutionsViewModel.textToSpeechDone()
             }
@@ -107,8 +117,15 @@ class SolutionsActivity : AppCompatActivity() {
 
     private val textToSpeechEngine: TextToSpeech by lazy {
         TextToSpeech(this) {
-            if (it == TextToSpeech.SUCCESS)
-                textToSpeechEngine.language = Locale("in_ID")
+            if (it == TextToSpeech.SUCCESS) {
+                if(chosedlang ==0)
+                    textToSpeechEngine.language = Locale("ta-IN")
+                else if(chosedlang ==1)
+                    textToSpeechEngine.language = Locale("en-US")
+                else
+                    textToSpeechEngine.language = Locale("hi-IN")
+
+            }
         }
     }
     companion object {

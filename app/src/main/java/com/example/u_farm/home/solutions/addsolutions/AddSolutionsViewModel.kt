@@ -38,6 +38,16 @@ class AddSolutionsViewModel(application: Application,activity: Activity): ViewMo
 
     }
 
+    var str:String?=""
+
+    var str1:String?=""
+
+
+    fun convertAudioToText(convertText :String){
+        str1=convertText
+
+    }
+
     val getData: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
 
@@ -54,6 +64,54 @@ class AddSolutionsViewModel(application: Application,activity: Activity): ViewMo
          authRepository.setSolutionData(solutionr)
 
      }
+
+    private lateinit var startForResult: ActivityResultLauncher<Intent>
+
+    fun initial(
+        launcher: ActivityResultLauncher<Intent>
+    ) = viewModelScope.launch {
+//        textToSpeechEngine = engine
+        startForResult = launcher
+    }
+
+
+
+    fun startRecordingta() {
+
+        startForResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ta-IN")
+            putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
+        })
+    }
+
+    fun startRecordinghi() {
+
+        startForResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "hi-IN")
+            putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
+        })
+    }
+
+    fun startRecordingen() {
+
+        startForResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(
+                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+            )
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
+            putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
+        })
+    }
+
 
 
 }

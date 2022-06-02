@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
     <data>
         <variable
             name="profileViewModel"
@@ -33,7 +35,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:text="@string/name"
+            android:text="User"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -47,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="8dp"
-            android:text="@string/farmer"
+            android:text="Farmer"
             android:textSize="16sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -66,7 +68,7 @@
             android:layout_weight="1"
             android:onClick="@{()->profileViewModel.navigateToEditProfile()}"
             android:padding="16dp"
-            android:text="@string/edit_profile"
+            android:text="Edit Profile"
             android:textColor="?attr/colorAccent"
             app:cornerRadius="50dp"
             app:icon="@drawable/ic_baseline_edit_24"
@@ -88,7 +90,7 @@
             android:layout_marginRight="16dp"
             android:layout_weight="1"
             android:padding="16dp"
-            android:text="@string/notification"
+            android:text="Notification"
             android:textColor="?attr/colorAccent"
             app:cornerRadius="50dp"
             app:icon="@drawable/ic_baseline_notifications_none_24"
@@ -109,7 +111,7 @@
             android:layout_weight="1"
             android:onClick="@{()->profileViewModel.languageIntent()}"
             android:padding="16dp"
-            android:text="@string/language"
+            android:text="Language"
             android:textColor="?attr/colorAccent"
             app:cornerRadius="50dp"
             app:icon="@drawable/ic_baseline_translate_24"
@@ -127,11 +129,10 @@
             android:layout_marginLeft="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginRight="16dp"
-            android:textColor="?attr/colorAccent"
             android:layout_weight="1"
             android:onClick="@{()->profileViewModel.shareIntent()}"
             android:padding="16dp"
-            android:text="@string/share"
+            android:text="share"
             app:cornerRadius="50dp"
             app:icon="@drawable/ic_baseline_share_24"
             app:iconTint="?attr/colorAccent"
@@ -139,6 +140,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/language"
             app:strokeColor="?attr/colorAccent" />
+            app:layout_constraintTop_toBottomOf="@id/lang" />
+
         <com.google.android.material.button.MaterialButton
             android:id="@+id/logout"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton"
@@ -150,7 +153,7 @@
             android:layout_weight="1"
             android:onClick="@{()->profileViewModel.logOutAlertDialogBox()}"
             android:padding="16dp"
-            android:text="@string/logout"
+            android:text="logout"
             android:textColor="?attr/colorAccent"
             app:cornerRadius="50dp"
             app:icon="@drawable/ic_baseline_logout_24"

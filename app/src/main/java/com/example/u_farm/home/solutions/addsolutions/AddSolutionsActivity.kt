@@ -8,7 +8,9 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.RecognizerIntent
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -16,10 +18,13 @@ import androidx.navigation.navArgs
 import androidx.navigation.navArgument
 import com.example.u_farm.R
 import com.example.u_farm.databinding.AddSolutionsBinding
+import com.example.u_farm.home.addproblems.chosedlang
 import com.example.u_farm.home.solutions.SolutionsActivity
 import com.example.u_farm.home.solutions.SolutionsActivity.Companion.USER_KEY
 import com.example.u_farm.home.solutions.SolutionsActivityArgs
 import com.example.u_farm.model.Solution
+import kotlinx.android.synthetic.main.activity_add_problems.*
+import kotlinx.android.synthetic.main.add_solutions.*
 
  class AddSolutionsActivity : AppCompatActivity() {
     private var solution: Solution = Solution()
@@ -69,6 +74,30 @@ import com.example.u_farm.model.Solution
 
             }
         })
+
+        //Speech ToText
+        val startForResult = registerForActivityResult(
+            ActivityResultContracts.StartActivityForResult()
+        ) { result ->
+            if (result.resultCode == RESULT_OK) {
+                val spokenText: String? =
+                    result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                        .let { text -> text?.get(0) }
+                binding.convertText1.setText(spokenText)
+                addSolutionsViewModel.convertAudioToText(spokenText.toString())
+//                addProblemsViewModel.editDone()
+            }
+        }
+
+        addSolutionsViewModel.initial(startForResult)
+
+        if(chosedlang ==0)
+            mic.setOnClickListener { addSolutionsViewModel.startRecordingta() }
+        else if(chosedlang ==1)
+            mic.setOnClickListener { addSolutionsViewModel.startRecordingen() }
+        else
+            mic.setOnClickListener { addSolutionsViewModel.startRecordinghi() }
+
 
 
     }

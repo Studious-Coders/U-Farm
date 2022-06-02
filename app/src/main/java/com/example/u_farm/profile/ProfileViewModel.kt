@@ -8,6 +8,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.chaquo.python.Python
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.U_Farm
 import com.google.firebase.auth.FirebaseAuth
@@ -18,6 +19,7 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     private var alert0: AlertDialog.Builder
 
     var chosedlang=1
+
 
     private var _navigateToEditProfile= MutableLiveData<Boolean>()
     val navigateToEditProfile: LiveData<Boolean>
@@ -112,9 +114,10 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         _snackbar.value=true
     }
     val  options = arrayOf("Tamil", "English","Hindi")
-    fun updateLanguage(lang:Int){
+    fun updateLanguage(lang:Int): Int{
         chosedlang=lang
         authRepository.singleRecord(options[lang],"language")
+        return chosedlang
     }
     fun languageIntent(){
 
@@ -143,6 +146,13 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
 
     fun languageIntentDone(){
         _language.value=false
+    }
+
+    val py = Python.getInstance();
+    val pyobj = py.getModule("translate")
+
+    fun convertlang(): String{
+        return pyobj.callAttr("tam","Edit Profile").toString()
     }
 
 

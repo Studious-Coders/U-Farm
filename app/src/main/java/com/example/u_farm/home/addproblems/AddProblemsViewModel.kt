@@ -152,7 +152,7 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
         })
     }
 
-    fun startRecording() {
+    fun startRecordingen() {
 
         startForResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(
