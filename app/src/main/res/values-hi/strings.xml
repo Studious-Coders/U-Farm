@@ -2,8 +2,6 @@
 <resources>
     <string name="name">"नाम "</string>
     <string name="email">ईमेल</string>
-    <string name="name">नाम</string>
-    <string name="email">ईमेल</string>
     <string name="password">पासवर्ड</string>
     <string name="already_have_a_account">"पहले से खाता है? "</string>
     <string name="login">"लॉग इन करें "</string>

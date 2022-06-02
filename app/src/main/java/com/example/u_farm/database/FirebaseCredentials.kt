@@ -216,6 +216,7 @@ class AuthRepository(application: Application){
         })
     }
 
+
     fun getUserData(){
         val userData:Query=firebaseDatabase.getReference("/UFARMDB/${auth.currentUser?.uid}")
         userData.addValueEventListener(object :ValueEventListener {

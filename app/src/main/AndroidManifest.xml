@@ -16,14 +16,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UFarm">
         <activity
-            android:name=".home.brief.BriefActivity"
-            android:exported="false" />
-        <activity
-            android:name=".list_items3"
-            android:exported="false"
-            android:label="@string/title_activity_list_items3"
-            android:theme="@style/Theme.UFarm.NoActionBar" />
-        <activity
             android:name=".register.RegisterActivity"
             android:exported="true" />
         <activity

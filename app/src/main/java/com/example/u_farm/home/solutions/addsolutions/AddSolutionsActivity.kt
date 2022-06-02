@@ -90,10 +90,11 @@ import kotlinx.android.synthetic.main.add_solutions.*
         }
 
         addSolutionsViewModel.initial(startForResult)
+        chosedlang=addSolutionsViewModel.getData.value!!.language
 
-        if(chosedlang ==0)
+        if(chosedlang =="Tamil")
             mic.setOnClickListener { addSolutionsViewModel.startRecordingta() }
-        else if(chosedlang ==1)
+        else if(chosedlang =="English")
             mic.setOnClickListener { addSolutionsViewModel.startRecordingen() }
         else
             mic.setOnClickListener { addSolutionsViewModel.startRecordinghi() }

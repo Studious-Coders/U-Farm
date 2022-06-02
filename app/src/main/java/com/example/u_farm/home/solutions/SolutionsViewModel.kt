@@ -5,6 +5,7 @@ import android.app.Application
 import android.media.MediaPlayer
 import android.media.MediaRecorder
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import androidx.lifecycle.*
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.Problem
@@ -15,7 +16,7 @@ import java.io.File
 import java.io.IOException
 
 class SolutionsViewModel(application: Application,problemUid: String): ViewModel()  {
-    var puid:String = ""
+    var puid:String
     private var _navigateToAddSolutions= MutableLiveData<Boolean>()
     val navigateToAddSolutions: LiveData<Boolean>
         get()=_navigateToAddSolutions
@@ -33,6 +34,7 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
 
     fun increaseRating(inc:Int,suid:String){
             authRepository.singleRecordSolution(inc+1,"rating",suid)
+        Log.d("Manogari",puid)
            authRepository.SolutionDataList(puid)
 
     }
@@ -40,7 +42,10 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
     fun decreaseRating(dec:Int,suid:String) {
 
             authRepository.singleRecordSolution(dec-1,"rating",suid)
-            authRepository.SolutionDataList(puid)
+        Log.d("Manogari","$puid")
+
+
+        authRepository.SolutionDataList(puid)
 
     }
 

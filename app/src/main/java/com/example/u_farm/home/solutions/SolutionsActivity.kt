@@ -101,9 +101,9 @@ class SolutionsActivity : AppCompatActivity() {
                 var text = it.trim()
                 val py = Python.getInstance();
                 val pyobj = py.getModule("translate")
-                if(chosedlang ==0)
+                if(com.example.u_farm.home.addproblems.chosedlang =="Tamil")
                     text=pyobj.callAttr("tam",text).toString()
-                else if(chosedlang ==1)
+                else if(com.example.u_farm.home.addproblems.chosedlang =="English")
                     text=pyobj.callAttr("eng",text).toString()
                 else
                     text=pyobj.callAttr("hin",text).toString()
@@ -112,15 +112,17 @@ class SolutionsActivity : AppCompatActivity() {
             }
     })
 
+
     }
+
 
 
     private val textToSpeechEngine: TextToSpeech by lazy {
         TextToSpeech(this) {
             if (it == TextToSpeech.SUCCESS) {
-                if(chosedlang ==0)
+                if(com.example.u_farm.home.addproblems.chosedlang =="Tamil")
                     textToSpeechEngine.language = Locale("ta-IN")
-                else if(chosedlang ==1)
+                else if(com.example.u_farm.home.addproblems.chosedlang =="English")
                     textToSpeechEngine.language = Locale("en-US")
                 else
                     textToSpeechEngine.language = Locale("hi-IN")

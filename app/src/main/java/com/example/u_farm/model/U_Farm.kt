@@ -32,3 +32,12 @@ data class Solution(
     var solutionStatement:String="",
     var rating: Int=0,
     )
+
+data class Comments(
+    var commentUid:String="",
+    var solutionUid: String="",
+    var userUid:String="",
+    var username:String="",
+    var profilePicture:String="",
+    var commentStatement:String="",
+    )

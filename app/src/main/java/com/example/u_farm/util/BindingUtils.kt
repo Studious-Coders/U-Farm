@@ -8,11 +8,13 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
-import com.example.u_farm.profile.ProfileViewModel
+import com.example.u_farm.home.addproblems.chosedlang
+import com.example.u_farm.profile.ProfileFragment
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
-var chosedlang=0
+var option= chosedlang
+//chosedlang=chosedlang
 
 
 @SuppressLint("SetTextI18n")
@@ -22,9 +24,9 @@ fun TextView.setUserDetails(item: String?) {
         text=item
         val py = Python.getInstance();
         val pyobj = py.getModule("translate")
-        if(chosedlang==0)
+        if(option=="Tamil")
           text=pyobj.callAttr("tam",item).toString()
-        else if(chosedlang==1)
+        else if(option=="English")
             text=pyobj.callAttr("eng",item).toString()
         else
             text=pyobj.callAttr("hin",item).toString()

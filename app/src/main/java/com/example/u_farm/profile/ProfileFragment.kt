@@ -4,28 +4,21 @@ package com.example.u_farm.profile
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
-import android.content.Context.LAYOUT_INFLATER_SERVICE
 import android.content.Intent
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Bundle
-import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.LinearLayout
-import android.widget.PopupWindow
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.databinding.BindingAdapter
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.chaquo.python.Python
-import com.chaquo.python.android.AndroidPlatform
 import com.example.u_farm.HomeActivity
+import com.example.u_farm.MainActivity
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentProfileBinding
 import com.google.android.material.snackbar.Snackbar
@@ -33,7 +26,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
 
 
 class ProfileFragment : Fragment() {
-
+  lateinit var choseAValue:String
     @SuppressLint("ResourceType", "StringFormatInvalid")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -71,6 +64,16 @@ class ProfileFragment : Fragment() {
                 expertTick.visibility=View.VISIBLE
             }
         })
+
+        profileViewModel.arguments.observe(viewLifecycleOwner, Observer {
+            if(it!=-1) {
+            choseAValue=arguments.toString()
+                val intent=Intent(application,HomeActivity::class.java)
+                startActivity(intent)
+
+                }
+        })
+
 
 
         profileViewModel.language.observe(viewLifecycleOwner, Observer {

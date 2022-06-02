@@ -54,4 +54,5 @@
     <string name="notification">Notification</string>
     <string name="language">Language</string>
     <string name="logout">logout</string>
-  </resources>
+    <string name="comment1">The given solution is very help for me. Now my plants are growing well</string>
+</resources>

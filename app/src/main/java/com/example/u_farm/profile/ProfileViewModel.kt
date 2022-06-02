@@ -4,6 +4,9 @@ import android.app.Activity
 import android.app.AlertDialog
 import android.app.Application
 import android.content.DialogInterface
+import android.content.res.Resources
+import androidx.databinding.BindingAdapter
+import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,13 +16,16 @@ import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.U_Farm
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import java.util.*
 
+@Suppress("DEPRECATION")
 class ProfileViewModel(application: Application, activity: Activity): ViewModel() {
     private var alert: AlertDialog.Builder
     private var alert0: AlertDialog.Builder
+    lateinit var locale: Locale
 
-    var chosedlang=1
 
+    var chosedlang="English"
 
     private var _navigateToEditProfile= MutableLiveData<Boolean>()
     val navigateToEditProfile: LiveData<Boolean>
@@ -41,6 +47,11 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     val expert: LiveData<Boolean?>
         get()=_expert
 
+    private val _arguments= MutableLiveData<Int?>()
+    val arguments: LiveData<Int?>
+        get()=_arguments
+
+
 
     val value= MediatorLiveData<U_Farm>()
 
@@ -56,7 +67,7 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         get()=_snackbar
 
 
-
+    var currentLanguage:String=""
 
     init {
         authRepository = AuthRepository(application)
@@ -67,7 +78,7 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         if(getData.value?.job=="Expert"){
             _expert.value=true
         }
-
+//          currentLanguage=getData.value!!.language
 
     }
 
@@ -113,13 +124,15 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     fun snackbar(){
         _snackbar.value=true
     }
+
     val  options = arrayOf("Tamil", "English","Hindi")
-    fun updateLanguage(lang:Int): Int{
-        chosedlang=lang
-        authRepository.singleRecord(options[lang],"language")
-        return chosedlang
+    fun updateLanguage(lang:String){
+        //_arguments.value=lang
+
+        authRepository.singleRecord(lang,"language")
+
     }
-    fun languageIntent(){
+    fun languageIntent() {
 
         alert0.setTitle("Choose a language")
 
@@ -128,9 +141,19 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
 
             when (which) {
                 /* execute here your actions */
-                0 ->   updateLanguage(0)
-                1 ->   updateLanguage(1)
-                2 ->   updateLanguage(2)
+                0 -> {
+                    setLocale("ta")
+                    updateLanguage(options[0])
+                }
+                1 -> {
+                    setLocale("en")
+                    updateLanguage(options[1])
+                }
+                2 -> {
+                    setLocale("hi")
+                    updateLanguage(options[2])
+                }
+
             }
 
 
@@ -143,10 +166,23 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
 //        }
         _language.value=true
     }
+    var reso:Resources=application.resources
+    fun setLocale(localeName: String) {
+            locale = Locale(localeName)
+            val res = reso
+            val dm = res.displayMetrics
+            val conf = res.configuration
+            conf.locale = locale
+            res.updateConfiguration(conf, dm)
 
-    fun languageIntentDone(){
-        _language.value=false
     }
+
+
+
+
+        fun languageIntentDone() {
+            _language.value = false
+        }
 
     val py = Python.getInstance();
     val pyobj = py.getModule("translate")
@@ -154,9 +190,6 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     fun convertlang(): String{
         return pyobj.callAttr("tam","Edit Profile").toString()
     }
-
-
-
 
 
 
