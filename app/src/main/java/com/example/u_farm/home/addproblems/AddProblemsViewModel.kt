@@ -43,6 +43,11 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
     val image: LiveData<Boolean>
         get()=_image
 
+
+    var _choselang= MutableLiveData<String>()
+    val choselang: LiveData<String>
+        get()=_choselang
+
     private var _uploading= MutableLiveData<Boolean>()
     val uploading: LiveData<Boolean>
         get()=_uploading
@@ -71,6 +76,7 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
     var str:String?=""
 
     var str1:String?=""
+
 
 
     fun convertAudioToText(convertText :String){
@@ -128,38 +134,21 @@ class AddProblemsViewModel(application: Application,activity: Activity): ViewMod
 
 
     
-    fun startRecordingta() {
+    fun startRecording() {
+
+        _choselang.value=getData.value!!.language
 
         startForResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ta-IN")
-            putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
-        })
-    }
-
-    fun startRecordinghi() {
-
-        startForResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-            putExtra(
-                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-            )
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "hi-IN")
-            putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
-        })
-    }
-
-    fun startRecordingen() {
-
-        startForResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
-            putExtra(
-                RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-                RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-            )
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
+            if(_choselang.value=="Tamil")
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ta-IN")
+            else if(_choselang.value=="English")
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
+            else
+                putExtra(RecognizerIntent.EXTRA_LANGUAGE, "hi-IN")
             putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
         })
     }

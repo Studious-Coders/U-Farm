@@ -38,7 +38,7 @@ import kotlinx.android.synthetic.main.activity_editprofile.*
 import java.util.*
 
 private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
-var chosedlang="English"
+
 class AddProblemsActivity : AppCompatActivity() {
     private var problem: Problem =Problem()
     private lateinit var addProblemsViewModel:AddProblemsViewModel
@@ -106,14 +106,15 @@ class AddProblemsActivity : AppCompatActivity() {
 
         addProblemsViewModel.initial(startForResult)
 
-        chosedlang=addProblemsViewModel.getData.value!!.language
 
-        if(chosedlang =="Tamil")
-            floating_action_button.setOnClickListener { addProblemsViewModel.startRecordingta() }
-        else if(chosedlang =="English")
-            floating_action_button.setOnClickListener { addProblemsViewModel.startRecordingen() }
-        else
-            floating_action_button.setOnClickListener { addProblemsViewModel.startRecordinghi() }
+        //choselang=addProblemsViewModel.getData.value!!.language
+
+        //if(choselang =="Tamil")
+            floating_action_button.setOnClickListener { addProblemsViewModel.startRecording() }
+//        else if(choselang =="English")
+//            floating_action_button.setOnClickListener { addProblemsViewModel.startRecordingen() }
+//        else
+//            floating_action_button.setOnClickListener { addProblemsViewModel.startRecordinghi() }
 
 
 

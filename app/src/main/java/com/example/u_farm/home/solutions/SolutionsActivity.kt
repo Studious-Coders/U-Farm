@@ -21,7 +21,7 @@ import com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity
 import com.example.u_farm.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import java.util.*
-var chosedlang=0
+var chosedlang="English"
 
 class SolutionsActivity : AppCompatActivity() {
     private lateinit var solutionsViewModel: SolutionsViewModel
@@ -101,9 +101,9 @@ class SolutionsActivity : AppCompatActivity() {
                 var text = it.trim()
                 val py = Python.getInstance();
                 val pyobj = py.getModule("translate")
-                if(com.example.u_farm.home.addproblems.chosedlang =="Tamil")
+                if(chosedlang =="Tamil")
                     text=pyobj.callAttr("tam",text).toString()
-                else if(com.example.u_farm.home.addproblems.chosedlang =="English")
+                else if(chosedlang =="English")
                     text=pyobj.callAttr("eng",text).toString()
                 else
                     text=pyobj.callAttr("hin",text).toString()
@@ -120,9 +120,9 @@ class SolutionsActivity : AppCompatActivity() {
     private val textToSpeechEngine: TextToSpeech by lazy {
         TextToSpeech(this) {
             if (it == TextToSpeech.SUCCESS) {
-                if(com.example.u_farm.home.addproblems.chosedlang =="Tamil")
+                if(chosedlang =="Tamil")
                     textToSpeechEngine.language = Locale("ta-IN")
-                else if(com.example.u_farm.home.addproblems.chosedlang =="English")
+                else if(chosedlang =="English")
                     textToSpeechEngine.language = Locale("en-US")
                 else
                     textToSpeechEngine.language = Locale("hi-IN")

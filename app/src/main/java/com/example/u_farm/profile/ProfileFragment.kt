@@ -21,6 +21,7 @@ import com.example.u_farm.HomeActivity
 import com.example.u_farm.MainActivity
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentProfileBinding
+
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_profile.*
 
@@ -75,7 +76,6 @@ class ProfileFragment : Fragment() {
         })
 
 
-
         profileViewModel.language.observe(viewLifecycleOwner, Observer {
             if(it==true) {
 
@@ -121,6 +121,8 @@ class ProfileFragment : Fragment() {
                 profileViewModel.shareIntentDone()
             }
         })
+
+
 
 
 
