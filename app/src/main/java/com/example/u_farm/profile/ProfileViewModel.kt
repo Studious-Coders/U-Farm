@@ -125,7 +125,7 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         _snackbar.value=true
     }
 
-    val  options = arrayOf("Tamil", "English","Hindi")
+    val  options = arrayOf("ta_IN", "en_US","hi_IN")
     fun updateLanguage(lang:String){
         //_arguments.value=lang
 

@@ -19,7 +19,6 @@ import androidx.navigation.navArgument
 import com.example.u_farm.R
 import com.example.u_farm.databinding.AddSolutionsBinding
 import com.example.u_farm.home.solutions.SolutionsActivity
-import com.example.u_farm.home.solutions.SolutionsActivity.Companion.USER_KEY
 import com.example.u_farm.home.solutions.SolutionsActivityArgs
 import com.example.u_farm.model.Solution
 import kotlinx.android.synthetic.main.activity_add_problems.*

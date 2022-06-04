@@ -24,22 +24,21 @@ import java.util.*
 
 class SolutionsActivity : AppCompatActivity() {
     private lateinit var solutionsViewModel: SolutionsViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivitySolutionsBinding>(
             this,
             R.layout.activity_solutions
         )
-        val args1: SolutionsActivityArgs by navArgs()
 
+        val args1: SolutionsActivityArgs by navArgs()
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
 
         val application: Application = requireNotNull(this).application
         val viewModelFactory = SolutionsViewModelFactory(application, args1.problemUid.toString())
-        solutionsViewModel =
-            ViewModelProvider(this, viewModelFactory).get(SolutionsViewModel::class.java)
+        solutionsViewModel = ViewModelProvider(this, viewModelFactory).get(SolutionsViewModel::class.java)
         binding.solutionsViewModel = solutionsViewModel
-
         binding.lifecycleOwner = this
 
         val adapter = SolutionsAdapter(SolutionsListener { statement->
@@ -47,17 +46,10 @@ class SolutionsActivity : AppCompatActivity() {
         }, IncreaseListener{ increase,suid ->
             Log.d("Clicking","Clicked")
             solutionsViewModel.increaseRating(increase,suid)
-
         },DecreaseListener {  decrease,suid ->
               solutionsViewModel.decreaseRating(decrease,suid)
 
         })
-
-        //Initialize the adapter onClick event happen on each object (lamba function)
-//        val adapter= SolutionsAdapter(ProblemsListener { username ->
-//            solutionsViewModel.navigateToSolutionsPage(username)
-//
-//        })
 
         binding.recyclerView1.adapter = adapter
 
@@ -73,14 +65,12 @@ class SolutionsActivity : AppCompatActivity() {
             }
         })
 
-
         solutionsViewModel.navigateToAddSolutions.observe(this, Observer {
             if (it) {
                 if (FirebaseAuth.getInstance().uid != null) {
                     if (it) {
                         val intent = Intent(this, AddSolutionsActivity::class.java)
                         intent.putExtra("problemUid", args1.problemUid.toString())
-
                         startActivity(intent)
                         solutionsViewModel.navigateToAddSolutionsDone()
                     }
@@ -95,37 +85,12 @@ class SolutionsActivity : AppCompatActivity() {
 
         solutionsViewModel.read.observe(this,Observer {
             if (it !=null) {
-                solutionsViewModel.initial(textToSpeechEngine)
-
+                solutionsViewModel.initial(solutionsViewModel.textToSpeechEngine)
                 var text = it.trim()
                 solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
                 solutionsViewModel.textToSpeechDone()
             }
     })
 
-
     }
-
-
-
-    private val textToSpeechEngine: TextToSpeech by lazy {
-        TextToSpeech(this) {
-            if (it == TextToSpeech.SUCCESS) {
-                    textToSpeechEngine.language = Locale("en-US")
-
-            }
-        }
-    }
-    companion object {
-        val USER_KEY = "problem"
-    }
-
 }
-
-
-//    val textToSpeechEngine: TextToSpeech by lazy {
-//        TextToSpeech(this) {
-//            if (it == TextToSpeech.SUCCESS) textToSpeechEngine.language = Locale("in_ID")
-//        }
-//    }
-

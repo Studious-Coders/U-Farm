@@ -14,6 +14,7 @@ import com.example.u_farm.model.U_Farm
 import kotlinx.coroutines.launch
 import java.io.File
 import java.io.IOException
+import java.util.*
 
 class SolutionsViewModel(application: Application,problemUid: String): ViewModel()  {
     var puid:String
@@ -32,6 +33,15 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
 
     val get: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
+
+    val textToSpeechEngine: TextToSpeech by lazy {
+        TextToSpeech(application) {
+            if (it == TextToSpeech.SUCCESS) {
+                textToSpeechEngine.language = Locale(get.value!!.language)
+
+            }
+        }
+    }
 
 
 
@@ -58,16 +68,16 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
 
 
 
-    lateinit var textToSpeechEngine: TextToSpeech
+    lateinit var textToSpeechEngine1: TextToSpeech
 
 
 
     fun initial(engine: TextToSpeech, ) = viewModelScope.launch {
-        textToSpeechEngine = engine
+        textToSpeechEngine1 = engine
     }
 
     fun speak(text: String) = viewModelScope.launch{
-        textToSpeechEngine.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
+        textToSpeechEngine1.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }
 
     fun navigateToAddSolutions(){

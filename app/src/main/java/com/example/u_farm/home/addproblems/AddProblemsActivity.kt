@@ -105,6 +105,13 @@ class AddProblemsActivity : AppCompatActivity() {
             }
         })
 
+        addProblemsViewModel.expection.observe(this,Observer{
+            if(it!=null) {
+                Toast.makeText(this,"You have to both upload a picture and give some description about it.", Toast.LENGTH_LONG).show()
+            }
+        })
+
+
         addProblemsViewModel.image.observe(this, Observer {
             if(it==true) {
                 val intent = Intent(Intent.ACTION_PICK)

@@ -40,6 +40,11 @@ class AddProblemsViewModel(application: Application): ViewModel() {
     val uploading: LiveData<Boolean>
         get()=_uploading
 
+    private var _expection= MutableLiveData<Boolean>()
+    val expection: LiveData<Boolean>
+        get()=_expection
+
+
     val getData: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
 
@@ -67,17 +72,21 @@ class AddProblemsViewModel(application: Application): ViewModel() {
     }
 
     fun postProblems(problemStatement:String){
-        viewModelScope.launch {
-             _uploading.value = true
-            val problem = Problem(
-                key,
-                getData.value!!.uid,
-                getData.value!!.username,
-                getData.value!!.profilePicture,
-                problemStatement,
-                setImage.value.toString()
-            )
-            upload(problem)
+        if(problemStatement=="" || setImage.value.toString()==""){
+            _expection.value=true
+        }else {
+            viewModelScope.launch {
+                _uploading.value = true
+                val problem = Problem(
+                    key,
+                    getData.value!!.uid,
+                    getData.value!!.username,
+                    getData.value!!.profilePicture,
+                    problemStatement,
+                    setImage.value.toString()
+                )
+                upload(problem)
+            }
         }
     }
 
@@ -89,6 +98,7 @@ class AddProblemsViewModel(application: Application): ViewModel() {
 
     fun uploaded(){
         _uploading.value=false
+        _expection.value=false
     }
 
     fun initial(

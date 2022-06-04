@@ -41,8 +41,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/dp"
-            app:text="@{profileViewModel.value.username}"
-            app:lang="@{profileViewModel.getData.language}"/>
+            app:userDetails="@{profileViewModel.value.username}" />
 
         <TextView
             android:id="@+id/desgintion"
@@ -56,8 +55,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/displayname"
-            app:text="@{profileViewModel.value.job}"
-            app:lang="@{profileViewModel.getData.language}"/>
+            app:userDetails="@{profileViewModel.value.job}" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/editprofile"
