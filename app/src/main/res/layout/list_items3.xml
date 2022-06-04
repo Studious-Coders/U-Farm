@@ -2,22 +2,6 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <data>
-        <variable
-            name="data"
-            type="com.example.u_farm.model.Solution" />
-        <variable
-            name="clicklistener"
-            type="com.example.u_farm.home.SolutionsListener" />
-        <variable
-            name="increaseListener"
-            type="com.example.u_farm.home.IncreaseListener" />
-
-        <variable
-            name="decreaseListener"
-            type="com.example.u_farm.home.DecreaseListener" />
-
-    </data>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card6"
@@ -48,7 +32,6 @@
                     android:background="@drawable/ic_baseline_account_circle_24"
                     app:civ_border_color="#000000"
                     app:civ_border_width="0.5dp"
-                    app:imgUrl="@{data.profilePicture}"
                     tools:src="@drawable/plantdiseases" />
 
                 <TextView
@@ -62,7 +45,6 @@
                     android:gravity="center"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:userDetails="@{data.username}"
                     tools:text="@string/name" />
             </RelativeLayout>
             <LinearLayout
@@ -84,7 +66,6 @@
                         android:id="@+id/solutionstatement"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:userDetails="@{data.solutionStatement}"
                         tools:text="@string/comment1"
                         app:layout_constraintBottom_toTopOf="@+id/floating_action_button6"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -100,7 +81,6 @@
                         android:layout_margin="8dp"
                         android:src="@drawable/ic_baseline_play_circle_filled_24"
                         app:elevation="25dp"
-                        android:onClick="@{()->clicklistener.onClick(data)}"
                         android:background="@android:color/transparent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

@@ -18,7 +18,6 @@ import androidx.navigation.navArgs
 import androidx.navigation.navArgument
 import com.example.u_farm.R
 import com.example.u_farm.databinding.AddSolutionsBinding
-import com.example.u_farm.home.addproblems.chosedlang
 import com.example.u_farm.home.solutions.SolutionsActivity
 import com.example.u_farm.home.solutions.SolutionsActivity.Companion.USER_KEY
 import com.example.u_farm.home.solutions.SolutionsActivityArgs
@@ -90,17 +89,7 @@ import kotlinx.android.synthetic.main.add_solutions.*
         }
 
         addSolutionsViewModel.initial(startForResult)
-        chosedlang=addSolutionsViewModel.getData.value!!.language
-
-        if(chosedlang =="Tamil")
             mic.setOnClickListener { addSolutionsViewModel.startRecordingta() }
-        else if(chosedlang =="English")
-            mic.setOnClickListener { addSolutionsViewModel.startRecordingen() }
-        else
-            mic.setOnClickListener { addSolutionsViewModel.startRecordinghi() }
-
-
-
     }
 
 

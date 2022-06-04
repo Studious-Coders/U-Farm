@@ -30,6 +30,9 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
         get()=authRepository.singleRecordDataMutuableLiveData()
 
 
+    val get: LiveData<U_Farm?>
+        get()=authRepository.getUserDataMutableLiveData()
+
 
 
     fun increaseRating(inc:Int,suid:String){

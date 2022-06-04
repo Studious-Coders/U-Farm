@@ -122,7 +122,7 @@
                         android:id="@+id/convertText1"
                         android:layout_width="match_parent"
                         android:layout_height="224dp"
-                        android:text="@{addProblemsViewModel.str1}"
+                        android:text="@={problem.problemStatement}"
                         android:gravity="top|start"
                         />
 
@@ -156,7 +156,7 @@
             android:layout_margin="16dp"
             android:layout_marginBottom="16dp"
             android:text="@string/post_problems"
-            android:onClick="@{()->addProblemsViewModel.postProblems()}"
+            android:onClick="@{()->addProblemsViewModel.postProblems(problem.problemStatement)}"
             android:background="@drawable/rounded"
             android:backgroundTint="?attr/colorPrimary"
             android:textColor="?attr/colorAccent"
@@ -165,20 +165,6 @@
             app:layout_constraintHorizontal_bias="0.537"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card1"/>
-
-        <ProgressBar
-            android:id="@+id/loading_spinner2"
-            style="@style/Widget.AppCompat.ProgressBar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:visibility="invisible"
-            android:backgroundTint="?attr/colorAccent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,5 +1,7 @@
 package com.example.u_farm.model
 
+import android.net.Uri
+
 data class U_Farm(
     var uid:String="",
     var username:String="#Username",
@@ -19,9 +21,9 @@ data class Problem(
     var username:String="",
     var profilePicture:String="",
     var problemStatement:String="",
-    var diseaseAffectedPlantImage:String="",
+    var diseaseAffectedPlantImage: String="",
 
-)
+    )
 
 data class Solution(
     var solutionUid:String="",
