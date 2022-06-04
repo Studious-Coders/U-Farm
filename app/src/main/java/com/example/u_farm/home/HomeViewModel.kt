@@ -21,6 +21,13 @@ class HomeViewModel(application: Application): ViewModel() {
     val navigateToAddProblemsPage: LiveData<Boolean>
         get()=_navigateToAddProblemsPage
 
+    val getData: LiveData<U_Farm?>
+        get()=authRepository.getUserDataMutableLiveData()
+
+    private var _choselang= MutableLiveData<String>()
+    val choselang: LiveData<String>
+        get()=_choselang
+
 
     fun navigateToSolutionsPageDone() {
         _navigateToSolutionsPage.value=""
@@ -45,10 +52,18 @@ class HomeViewModel(application: Application): ViewModel() {
    fun function(){
        authRepository.ProblemDataList()
    }
+    fun languageset():String{
+        _choselang.value=getData.value!!.language
+        var option=_choselang.value.toString()
+        return option
+    }
+
+    //var chosedlang=getData.value!!.language
 
 
     init{
         authRepository= AuthRepository(application)
+        authRepository.getUserData()
         authRepository.ProblemDataList()
 
     }

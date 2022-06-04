@@ -19,17 +19,20 @@ import com.google.firebase.auth.FirebaseUser
 import java.util.*
 
 @Suppress("DEPRECATION")
+var chosedlang="English"
 class ProfileViewModel(application: Application, activity: Activity): ViewModel() {
     private var alert: AlertDialog.Builder
     private var alert0: AlertDialog.Builder
     lateinit var locale: Locale
 
 
-    var chosedlang="English"
+
 
     private var _navigateToEditProfile= MutableLiveData<Boolean>()
     val navigateToEditProfile: LiveData<Boolean>
         get()=_navigateToEditProfile
+
+
 
     private var authRepository: AuthRepository
     val loggedUser: LiveData<Boolean?>

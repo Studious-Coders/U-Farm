@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.RecognizerIntent
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
@@ -18,11 +19,13 @@ import androidx.navigation.navArgs
 import androidx.navigation.navArgument
 import com.example.u_farm.R
 import com.example.u_farm.databinding.AddSolutionsBinding
+//import com.example.u_farm.home.addproblems.chosedlang
 import com.example.u_farm.home.solutions.SolutionsActivity
 import com.example.u_farm.home.solutions.SolutionsActivityArgs
 import com.example.u_farm.model.Solution
 import kotlinx.android.synthetic.main.activity_add_problems.*
 import kotlinx.android.synthetic.main.add_solutions.*
+
 
  class AddSolutionsActivity : AppCompatActivity() {
     private var solution: Solution = Solution()
@@ -89,6 +92,10 @@ import kotlinx.android.synthetic.main.add_solutions.*
 
         addSolutionsViewModel.initial(startForResult)
             mic.setOnClickListener { addSolutionsViewModel.startRecordingta() }
+        mic.setOnClickListener { addSolutionsViewModel.startRecording() }
+
+
+
     }
 
 

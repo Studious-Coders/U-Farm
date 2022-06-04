@@ -88,6 +88,19 @@ class AddProblemsActivity : AppCompatActivity() {
                 addProblemsViewModel.startRecordingta()
             }
 
+
+        //choselang=addProblemsViewModel.getData.value!!.language
+
+        //if(choselang =="Tamil")
+            floating_action_button.setOnClickListener { addProblemsViewModel.startRecording() }
+//        else if(choselang =="English")
+//            floating_action_button.setOnClickListener { addProblemsViewModel.startRecordingen() }
+//        else
+//            floating_action_button.setOnClickListener { addProblemsViewModel.startRecordinghi() }
+
+
+
+
         addProblemsViewModel.uploading.observe(this,Observer{
             if(it!=null) {
                 progressBar.setMessage("Uploading the Prblem.....")

@@ -21,6 +21,7 @@ import com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity
 import com.example.u_farm.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import java.util.*
+var chosedlang="English"
 
 class SolutionsActivity : AppCompatActivity() {
     private lateinit var solutionsViewModel: SolutionsViewModel
@@ -87,6 +88,14 @@ class SolutionsActivity : AppCompatActivity() {
             if (it !=null) {
                 solutionsViewModel.initial(solutionsViewModel.textToSpeechEngine)
                 var text = it.trim()
+                val py = Python.getInstance();
+                val pyobj = py.getModule("translate")
+                if(chosedlang =="Tamil")
+                    text=pyobj.callAttr("tam",text).toString()
+                else if(chosedlang =="English")
+                    text=pyobj.callAttr("eng",text).toString()
+                else
+                    text=pyobj.callAttr("hin",text).toString()
                 solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
                 solutionsViewModel.textToSpeechDone()
             }

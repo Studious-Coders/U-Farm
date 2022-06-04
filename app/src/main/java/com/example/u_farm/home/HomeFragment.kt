@@ -12,9 +12,10 @@ import androidx.navigation.fragment.findNavController
 import com.chaquo.python.Python
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentHomeBinding
+
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_home.*
-
+var langselect="English"
 class HomeFragment : Fragment() {
 
     override fun onCreateView(
@@ -45,15 +46,26 @@ class HomeFragment : Fragment() {
 
         binding.recyclerView.adapter=adapter
 
+
         homeViewModel.allData.observe(viewLifecycleOwner, Observer {
                                  it?.let{
                          adapter.submitList(it)
+                         langselect=homeViewModel.languageset()
                      }
         })
+
+//        homeViewModel.choselang.observe(viewLifecycleOwner,Observer{
+//            if(it!=null)
+//            {
+//                langselect =it
+//            }
+//        }
+//        )
 
      homeViewModel.newData.observe(viewLifecycleOwner,Observer{
          if(it==true){
              homeViewModel.function()
+
          }
      })
 

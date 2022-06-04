@@ -8,6 +8,13 @@ import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
+import com.example.u_farm.home.langselect
+//import com.example.u_farm.home.langselect
+
+//import com.example.u_farm.home.addproblems.chosedlang
+import com.example.u_farm.profile.ProfileFragment
+//import com.example.u_farm.profile.chosedlang
+
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 //
@@ -15,6 +22,11 @@ import de.hdodenhof.circleimageview.CircleImageView
 ////chosedlang=chosedlang
 //
 
+
+//var option= "Tamil"
+//chosedlang=chosedlang
+
+//var langselect="Tamil"
 @SuppressLint("SetTextI18n")
 @BindingAdapter("bind:text","bind:lang")
 fun TextView.setUser(item: String?,item1:String) {
@@ -23,7 +35,9 @@ fun TextView.setUser(item: String?,item1:String) {
         val py = Python.getInstance();
         val pyobj = py.getModule("translate")
         if(item1=="Tamil")
+        if(langselect=="Tamil")
           text=pyobj.callAttr("tam",item).toString()
+        else if(langselect=="English")
         else if(item1=="English")
             text=pyobj.callAttr("eng",item).toString()
         else
