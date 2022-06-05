@@ -46,6 +46,19 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
         }
     }
 
+    fun speakOutTheProblem(problemStatement:String){
+        Log.d("Priya",problemStatement+textToSpeechEngine)
+        initial(textToSpeechEngine)
+        val text = problemStatement.trim()
+//        val py = Python.getInstance();
+//        val pyobj = py.getModule("translate")
+//        text=pyobj.callAttr(get.value!!.language,text).toString()
+        speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
+
+
+    }
+
+
 
 
     fun increaseRating(inc:Int,suid:String){
@@ -112,6 +125,7 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
 
     fun initiate(){
         authRepository.SolutionDataList(puid)
+        allData=authRepository.SolutionDataMutableLiveDataList()
     }
 
     fun initializeSolutionList(){
@@ -130,9 +144,8 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
 
 
 
-    val allData: MutableLiveData<MutableList<Solution?>>
-        get()=authRepository.SolutionDataMutableLiveDataList()
-}
+    var allData: MutableLiveData<MutableList<Solution?>> =authRepository.SolutionDataMutableLiveDataList()
+       }
 
 
 

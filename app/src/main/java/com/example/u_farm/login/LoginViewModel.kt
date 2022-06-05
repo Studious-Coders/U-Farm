@@ -6,13 +6,14 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.u_farm.database.AuthRepository
+import com.example.u_farm.model.U_Farm
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 
-class LoginViewModel(private val application: Application,private val listener: OnSignInStartedListener): ViewModel() {
+class LoginViewModel(application: Application,activity:Activity,private val listener: OnSignInStartedListener): ViewModel() {
 
     private var authRepository: AuthRepository
     private val _navigateToRegister = MutableLiveData<Boolean>()
@@ -39,24 +40,37 @@ class LoginViewModel(private val application: Application,private val listener: 
         authRepository.login(email, password)
 
     }
-    val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-        .requestIdToken("492960336873-kpmq8gmn37riibaoasms8h9ld5s8r6qo.apps.googleusercontent.com")
-        .requestEmail()
-        .build()
-
-    private val googleSignInClient = GoogleSignIn.getClient(application, gso)
 
 
-
-
-    fun signIn() {
-        listener.onSignInStarted(googleSignInClient)
-    }
+//
+//
+//    fun signIn() {
+//        listener.onSignInStarted(googleSignInClient)
+//    }
 
      fun gsign(idToken:String){
          authRepository.firebaseAuthWithGoogle(idToken)
      }
 
+
+    fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        authRepository.auth.signInWithCredential(credential).addOnCompleteListener {
+            if (it.isSuccessful) {
+                authRepository.firebaseUserAuthRepository.postValue(authRepository.auth.currentUser)
+                val user = authRepository.auth.currentUser
+                val ufarm = U_Farm(
+                    user!!.uid,
+                    user.displayName.toString(),
+                    user.email.toString(),
+                    "",
+                    user.phoneNumber.toString(),
+                    user.photoUrl.toString()
+                )
+               authRepository.setUserData(ufarm)
+            }
+        }
+    }
 
 
 

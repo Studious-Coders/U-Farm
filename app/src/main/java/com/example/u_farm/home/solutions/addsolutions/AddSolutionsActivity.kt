@@ -78,8 +78,8 @@ import kotlinx.android.synthetic.main.fragment_profile.*
         }
     }
 
-//     override fun onBackPressed() {
-//         super.onBackPressed()
-//         startActivity(Intent(this,SolutionsActivity::class.java))
-//     }
+     override fun onBackPressed() {
+         super.onBackPressed()
+         startActivity(Intent(this,SolutionsActivity::class.java))
+     }
  }

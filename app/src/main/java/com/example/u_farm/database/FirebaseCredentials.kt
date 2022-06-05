@@ -27,13 +27,13 @@ class AuthRepository(application: Application) {
         private const val RC_SIGN_IN = 78
     }
 
-    private var auth: FirebaseAuth
+    var auth: FirebaseAuth
     private var firebaseDatabase: FirebaseDatabase
     private var reference: DatabaseReference
     var reference1: DatabaseReference
     var reference2: DatabaseReference
     private var application: Application
-    private var firebaseUserAuthRepository = MutableLiveData<FirebaseUser?>()
+    var firebaseUserAuthRepository = MutableLiveData<FirebaseUser?>()
     private var userLoggedAuthRepository = MutableLiveData<Boolean?>()
     private var setUserDataRepository = MutableLiveData<Boolean?>()
     private var getUserDataRepository = MutableLiveData<U_Farm?>()

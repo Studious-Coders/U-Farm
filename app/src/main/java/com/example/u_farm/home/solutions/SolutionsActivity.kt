@@ -20,6 +20,7 @@ import com.example.u_farm.home.*
 import com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity
 import com.example.u_farm.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.list_items.*
 import java.util.*
 var chosedlang="English"
 
@@ -55,11 +56,6 @@ class SolutionsActivity : AppCompatActivity() {
 
         binding.recyclerView1.adapter = adapter
 
-//      solutionsViewModel.singleChanges.observe(this,Observer{
-//          if(it==true) {
-//              solutionsViewModel.intiate()
-//          }
-//      })
 
         solutionsViewModel.allData.observe(this, Observer {
             it?.let {
@@ -89,10 +85,10 @@ class SolutionsActivity : AppCompatActivity() {
             if (it !=null) {
                 solutionsViewModel.initial(solutionsViewModel.textToSpeechEngine)
                 var text = it.trim()
-                val py = Python.getInstance();
-                val pyobj = py.getModule("translate")
-                text=pyobj.callAttr(solutionsViewModel.get.value!!.language,text).toString()
-                solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
+//                val py = Python.getInstance();
+//                val pyobj = py.getModule("translate")
+//                text=pyobj.callAttr(solutionsViewModel.get.value!!.language,text).toString()
+              solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
                 solutionsViewModel.textToSpeechDone()
 
             }

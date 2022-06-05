@@ -18,7 +18,9 @@ import com.example.u_farm.model.U_Farm
 import com.example.u_farm.register.RegisterActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
+import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     companion object {
@@ -33,13 +35,10 @@ class LoginActivity : AppCompatActivity() {
             R.layout.activity_login
         )
         supportActionBar?.hide()
-
-
-
         val application: Application = requireNotNull(this).application
         val activity: Activity =this
 
-        val viewModelFactory = LoginViewModelFactory(application, object : OnSignInStartedListener {
+        val viewModelFactory = LoginViewModelFactory(application,activity, object : OnSignInStartedListener {
             override fun onSignInStarted(client: GoogleSignInClient?) {
                 startActivityForResult(client?.signInIntent, RC_SIGN_IN)
             }
@@ -67,12 +66,26 @@ class LoginActivity : AppCompatActivity() {
             }
         })
 
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken("492960336873-n43hme2dfhsrml7ofcp0fc51ljinp944.apps.googleusercontent.com")
+            .requestEmail()
+            .build()
 
+        val googleSignInClient = GoogleSignIn.getClient(activity, gso)
 
+        signInButton.setOnClickListener{
+            val signInIntent = googleSignInClient.signInIntent
+            startActivityForResult(signInIntent, RC_SIGN_IN)
 
+//            override fun onSignInStarted(client: GoogleSignInClient?) {
+//                startActivityForResult(client?.signInIntent, RC_SIGN_IN)
+//            }
+
+        }
 
 
     }
+
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
@@ -80,9 +93,9 @@ class LoginActivity : AppCompatActivity() {
             // this task is responsible for getting ACCOUNT SELECTED
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                val account = task.getResult(ApiException::class.java)!!
-
-                loginViewModel.gsign(account.idToken!!)
+                val account = task.getResult(ApiException::class.java)
+                   loginViewModel.firebaseAuthWithGoogle(account.idToken!!)
+//                loginViewModel.gsign(account.idToken!!)
 
                 Toast.makeText(this, "Signed In Successfully", Toast.LENGTH_SHORT).show()
 

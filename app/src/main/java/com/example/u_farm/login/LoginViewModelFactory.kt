@@ -12,11 +12,11 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
  *
  * Provides the key for the night and the SleepDatabaseDao to the ViewModel.
  */
-class LoginViewModelFactory (private val application: Application,private val listener: OnSignInStartedListener) : ViewModelProvider.Factory {
+class LoginViewModelFactory (private val application: Application,private val activity:Activity,private val listener: OnSignInStartedListener) : ViewModelProvider.Factory {
     @Suppress("unchecked_cast")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(LoginViewModel::class.java)) {
-            return LoginViewModel(application,listener) as T
+            return LoginViewModel(application,activity,listener) as T
             //Returns the values from the fragment
         }
         throw IllegalArgumentException("Unknown ViewModel class")

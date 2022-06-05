@@ -1,14 +1,18 @@
 package com.example.u_farm.home
 
 import android.app.Application
+import android.speech.tts.TextToSpeech
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.chaquo.python.Python
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.U_Farm
 import com.google.firebase.auth.FirebaseUser
+import kotlinx.coroutines.launch
+import java.util.*
 
 class HomeViewModel(application: Application): ViewModel() {
 
