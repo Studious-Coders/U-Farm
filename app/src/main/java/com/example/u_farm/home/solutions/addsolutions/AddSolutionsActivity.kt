@@ -40,7 +40,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
         progressBar = ProgressDialog(this)
         supportActionBar?.setTitle(R.string.add_solutions)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
         problem= intent.getStringExtra("problemUid").toString()
 
         val application: Application = requireNotNull(this).application

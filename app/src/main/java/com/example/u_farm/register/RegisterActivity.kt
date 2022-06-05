@@ -32,7 +32,7 @@ class RegisterActivity : AppCompatActivity() {
 
         val application: Application = requireNotNull(this).application
         val activity: Activity =this
-        val viewModelFactory = RegisterViewModelFactory(application,activity)
+        val viewModelFactory = RegisterViewModelFactory(application)
         registerViewModel =
             ViewModelProvider(this, viewModelFactory).get(RegisterViewModel::class.java)
         binding.registerViewModel=registerViewModel

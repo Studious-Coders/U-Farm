@@ -62,8 +62,6 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
         authRepository.getUserData()
         act = activity
         alert = AlertDialog.Builder(activity)
-
-
     }
 
 
@@ -82,8 +80,6 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
         _spinner.value=true
         val ufarm= U_Farm(uid,username,email,password,phoneNumber,"",job,location,"","")
         authRepository.setUserData(ufarm)
-        authRepository.updateProblem(username,uid,"username")
-        authRepository.updateSolution(username,uid,"username")
         str1=uid
         _hope.value=true
 
@@ -102,9 +98,6 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
          str= getData.value?.profilePicture
      }
      authRepository.singleRecord(str!!,"profilePicture")
-     authRepository.updateSolution(str!!,str1!!,"profilePicture")
-
-     authRepository.updateProblem(str!!,str1!!,"profilePicture")
 
  }
     fun function(){

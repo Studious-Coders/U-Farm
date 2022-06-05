@@ -5,6 +5,7 @@ import android.app.Application
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -24,7 +25,8 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
     companion object {
-        private const val RC_SIGN_IN = 9001
+        private const val TAG="signIn"
+        private const val RC_SIGN_IN = 78
     }
     private var u_farm: U_Farm = U_Farm()
     private lateinit var loginViewModel: LoginViewModel
@@ -71,7 +73,7 @@ class LoginActivity : AppCompatActivity() {
             .requestEmail()
             .build()
 
-        val googleSignInClient = GoogleSignIn.getClient(activity, gso)
+        val googleSignInClient = GoogleSignIn.getClient(this, gso)
 
         signInButton.setOnClickListener{
             val signInIntent = googleSignInClient.signInIntent
@@ -89,13 +91,16 @@ class LoginActivity : AppCompatActivity() {
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
+        Log.w(TAG, "Signup" + requestCode)
+
         if (requestCode == RC_SIGN_IN) {
+
             // this task is responsible for getting ACCOUNT SELECTED
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-                val account = task.getResult(ApiException::class.java)
-                   loginViewModel.firebaseAuthWithGoogle(account.idToken!!)
-//                loginViewModel.gsign(account.idToken!!)
+                val account = task.getResult(ApiException::class.java)!!
+                loginViewModel.signInWithGoogle(account.idToken!!)
+//                   loginViewModel.firebaseAuthWithGoogle(account.idToken!!)
 
                 Toast.makeText(this, "Signed In Successfully", Toast.LENGTH_SHORT).show()
 

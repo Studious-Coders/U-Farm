@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModel
 import com.example.u_farm.database.AuthRepository
 import com.google.firebase.auth.FirebaseUser
 
-class RegisterViewModel(application: Application,activity:Activity): ViewModel() {
+class RegisterViewModel(application: Application): ViewModel() {
 
     private var authRepository: AuthRepository
     private val _navigateToLogin= MutableLiveData<Boolean>()

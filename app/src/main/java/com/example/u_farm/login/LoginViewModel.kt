@@ -42,35 +42,32 @@ class LoginViewModel(application: Application,activity:Activity,private val list
     }
 
 
-//
-//
-//    fun signIn() {
-//        listener.onSignInStarted(googleSignInClient)
-//    }
-
-     fun gsign(idToken:String){
-         authRepository.firebaseAuthWithGoogle(idToken)
-     }
 
 
-    fun firebaseAuthWithGoogle(idToken: String) {
-        val credential = GoogleAuthProvider.getCredential(idToken, null)
-        authRepository.auth.signInWithCredential(credential).addOnCompleteListener {
-            if (it.isSuccessful) {
-                authRepository.firebaseUserAuthRepository.postValue(authRepository.auth.currentUser)
-                val user = authRepository.auth.currentUser
-                val ufarm = U_Farm(
-                    user!!.uid,
-                    user.displayName.toString(),
-                    user.email.toString(),
-                    "",
-                    user.phoneNumber.toString(),
-                    user.photoUrl.toString()
-                )
-               authRepository.setUserData(ufarm)
-            }
+    fun signInWithGoogle(idToken: String) {
+       authRepository.firebaseAuthWithGoogle(idToken)
         }
-    }
+
+//
+//
+//    fun firebaseAuthWithGoogle(idToken: String) {
+//        val credential = GoogleAuthProvider.getCredential(idToken, null)
+//        authRepository.auth.signInWithCredential(credential).addOnCompleteListener {
+//            if (it.isSuccessful) {
+//                authRepository.firebaseUserAuthRepository.postValue(authRepository.auth.currentUser)
+//                val user = authRepository.auth.currentUser
+//                val ufarm = U_Farm(
+//                    user!!.uid,
+//                    user.displayName.toString(),
+//                    user.email.toString(),
+//                    "",
+//                    user.phoneNumber.toString(),
+//                    user.photoUrl.toString()
+//                )
+//               authRepository.setUserData(ufarm)
+//            }
+//        }
+//    }
 
 
 

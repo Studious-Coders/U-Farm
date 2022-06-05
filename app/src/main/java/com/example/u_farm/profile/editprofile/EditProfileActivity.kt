@@ -37,6 +37,9 @@ class EditProfileActivity : AppCompatActivity() {
             this,
             R.layout.activity_editprofile
         )
+
+
+
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
         supportActionBar?.title = "EditProfile"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)

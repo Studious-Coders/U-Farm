@@ -17,43 +17,14 @@ import com.example.u_farm.profile.ProfileFragment
 
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
-//
-//var option= chosedlang
-////chosedlang=chosedlang
-//
-
-
-//var option= "Tamil"
-//chosedlang=chosedlang
-
-////var langselect="Tamil"
-//@SuppressLint("SetTextI18n")
-//@BindingAdapter("bind:text","bind:lang")
-//fun TextView.setUser(item: String?,item1:String) {
-//    item?.let {
-//        text=item
-//
-//}
-
-
 
 @SuppressLint("SetTextI18n")
 @BindingAdapter("userDetails")
 fun TextView.setUserDetails(item: String?) {
     item?.let {
         text=item
-//        val py = Python.getInstance();
-//        val pyobj = py.getModule("translate")
-//
-//            if(langselect=="Tamil")
-//                text=pyobj.callAttr("tam",item).toString()
-//            else if(langselect=="English")
-//                text=pyobj.callAttr("eng",item).toString()
-//            else
-//                text=pyobj.callAttr("hin",item).toString()
    }
 }
-
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl:String?) {

@@ -147,15 +147,7 @@ class AddProblemsActivity : AppCompatActivity() {
           }
     }
 
-    override fun onContextItemSelected(item: MenuItem): Boolean{
-        when(item.itemId){
-            android.R.id.home -> {
-                finish()
-                return true
-            }
-        }
-        return super.onContextItemSelected(item)
-    }
+
 }
 
 
