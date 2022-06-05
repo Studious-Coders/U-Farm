@@ -32,6 +32,7 @@ class SolutionsActivity : AppCompatActivity() {
             this,
             R.layout.activity_solutions
         )
+        Log.d("priya","Created")
 
         val args1: SolutionsActivityArgs by navArgs()
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
@@ -54,11 +55,11 @@ class SolutionsActivity : AppCompatActivity() {
 
         binding.recyclerView1.adapter = adapter
 
-      solutionsViewModel.singleChanges.observe(this,Observer{
-          if(it==true) {
-              solutionsViewModel.intiate()
-          }
-      })
+//      solutionsViewModel.singleChanges.observe(this,Observer{
+//          if(it==true) {
+//              solutionsViewModel.intiate()
+//          }
+//      })
 
         solutionsViewModel.allData.observe(this, Observer {
             it?.let {
@@ -90,16 +91,29 @@ class SolutionsActivity : AppCompatActivity() {
                 var text = it.trim()
                 val py = Python.getInstance();
                 val pyobj = py.getModule("translate")
-                if(chosedlang =="Tamil")
-                    text=pyobj.callAttr("tam",text).toString()
-                else if(chosedlang =="English")
-                    text=pyobj.callAttr("eng",text).toString()
-                else
-                    text=pyobj.callAttr("hin",text).toString()
+                text=pyobj.callAttr(solutionsViewModel.get.value!!.language,text).toString()
                 solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
                 solutionsViewModel.textToSpeechDone()
+
             }
+
     })
 
     }
+      override fun onStart(){
+          super.onStart()
+
+        solutionsViewModel.initiate()
+          Log.d("priya","Started")
+
+      }
+
+    override fun onRestart() {
+        super.onRestart()
+        solutionsViewModel.initiate()
+
+        Log.d("priya","Restart")
+
+    }
+
 }

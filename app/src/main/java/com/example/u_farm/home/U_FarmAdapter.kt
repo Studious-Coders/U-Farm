@@ -69,7 +69,6 @@ class SolutionsAdapter(val clickListener: SolutionsListener,val increaseListener
 
         fun bind(item: Solution,clickListener: SolutionsListener,increaseListener: IncreaseListener,decreaseListener: DecreaseListener) {
             binding.data=item
-
             binding.clicklistener=clickListener
             binding.increaseListener=increaseListener
             binding.decreaseListener=decreaseListener

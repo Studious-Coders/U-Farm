@@ -7,11 +7,14 @@ import android.media.MediaRecorder
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import androidx.lifecycle.*
+import com.chaquo.python.Python
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
 import java.io.IOException
 import java.util.*
@@ -26,9 +29,9 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
     val read: LiveData<String?>
         get()=_read
 
-
-    val singleChanges: LiveData<Boolean?>
-        get()=authRepository.singleRecordDataMutuableLiveData()
+//
+//    val singleChanges: LiveData<Boolean?>
+//        get()=authRepository.singleRecordDataMutuableLiveData()
 
 
     val get: LiveData<U_Farm?>
@@ -47,25 +50,22 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
 
     fun increaseRating(inc:Int,suid:String){
             authRepository.singleRecordSolution(inc+1,"rating",suid)
-        Log.d("Manogari",puid)
-           authRepository.SolutionDataList(puid)
+            Log.d("Manogari",puid)
+            initializeSolutionList()
 
     }
 
     fun decreaseRating(dec:Int,suid:String) {
-
-            authRepository.singleRecordSolution(dec-1,"rating",suid)
-        Log.d("Manogari","$puid")
-
-
-        authRepository.SolutionDataList(puid)
+        authRepository.singleRecordSolution(dec-1,"rating",suid)
+        Log.d("Manogari",puid)
+        initializeSolutionList()
 
     }
 
-    fun intiate(){
-        authRepository.SolutionDataList(read.toString())
-    }
-
+//    fun intiate(){
+//        authRepository.SolutionDataList(puid)
+//    }
+//
 
 
     lateinit var textToSpeechEngine1: TextToSpeech
@@ -90,7 +90,8 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
 
     fun textToSpeech(str:String){
         _read.value=str
-    }
+     }
+
     fun textToSpeechDone(){
         _read.value=null
     }
@@ -104,12 +105,34 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
         authRepository= AuthRepository(application)
         authRepository.SolutionDataList(problemUid)
         authRepository.getProblem(problemUid)
+        authRepository.getUserData()
         value.addSource(getData,value::setValue)
         puid=problemUid
     }
 
+    fun initiate(){
+        authRepository.SolutionDataList(puid)
+    }
+
+    fun initializeSolutionList(){
+        viewModelScope.launch{
+            run()
+          }
+
+        }
+
+    private suspend fun run(){
+        withContext(Dispatchers.IO){
+            authRepository.SolutionDataList(puid)
+
+        }
+    }
+
+
+
     val allData: MutableLiveData<MutableList<Solution?>>
-        get()=authRepository.SolutionDataMutableLiveDataList()  }
+        get()=authRepository.SolutionDataMutableLiveDataList()
+}
 
 
 

@@ -2,7 +2,6 @@ package com.example.u_farm.home.addproblems
 
 import android.Manifest
 import android.annotation.SuppressLint
-import android.app.Activity
 import android.app.Application
 import android.app.ProgressDialog
 import android.content.Intent
@@ -85,19 +84,8 @@ class AddProblemsActivity : AppCompatActivity() {
 
         addProblemsViewModel.initial(startForResult)
             floating_action_button.setOnClickListener {
-                addProblemsViewModel.startRecordingta()
+                addProblemsViewModel.startRecording()
             }
-
-
-        //choselang=addProblemsViewModel.getData.value!!.language
-
-        //if(choselang =="Tamil")
-            floating_action_button.setOnClickListener { addProblemsViewModel.startRecording() }
-//        else if(choselang =="English")
-//            floating_action_button.setOnClickListener { addProblemsViewModel.startRecordingen() }
-//        else
-//            floating_action_button.setOnClickListener { addProblemsViewModel.startRecordinghi() }
-
 
 
 
@@ -127,18 +115,28 @@ class AddProblemsActivity : AppCompatActivity() {
 
         addProblemsViewModel.image.observe(this, Observer {
             if(it==true) {
+                progressBar.setMessage("Uploaing Picture")
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.type = "image/*"
                 startActivityForResult(intent, 0)
             }
         })
+
+        addProblemsViewModel.setImage.observe(this, Observer {
+            if(it!=null) {
+                progressBar.dismiss()
+            }
+        })
+
     }
+
 
     var selectedPhotoUri: Uri? = null
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == 0 && resultCode == AppCompatActivity.RESULT_OK && data != null) {
+            progressBar.show()
             Log.d("Add Problems", "Photo was selected")
             textView.visibility=View.GONE
             imageView2.visibility=View.GONE

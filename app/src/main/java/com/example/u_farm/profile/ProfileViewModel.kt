@@ -85,6 +85,16 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
 
     }
 
+    private var _choselang= MutableLiveData<String>()
+    val choselang: LiveData<String>
+        get()=_choselang
+
+    fun languageset():String{
+        _choselang.value=getData.value!!.language
+        val option=_choselang.value.toString()
+        return option
+    }
+
     fun function(){
         authRepository.getUserData()
     }
@@ -128,7 +138,7 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         _snackbar.value=true
     }
 
-    val  options = arrayOf("ta_IN", "en_US","hi_IN")
+    val  options = arrayOf("Tamil", "English","Hindi")
     fun updateLanguage(lang:String){
         //_arguments.value=lang
 
@@ -146,16 +156,16 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
                 /* execute here your actions */
                 0 -> {
                     setLocale("ta")
-                    updateLanguage(options[0])
-                }
+                    updateLanguage("ta_IN")
+                   }
                 1 -> {
                     setLocale("en")
-                    updateLanguage(options[1])
-                }
+                    updateLanguage("en_US")
+                  }
                 2 -> {
                     setLocale("hi")
-                    updateLanguage(options[2])
-                }
+                    updateLanguage("hi_IN")
+                  }
 
             }
 

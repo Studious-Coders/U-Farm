@@ -24,9 +24,6 @@ class HomeViewModel(application: Application): ViewModel() {
     val getData: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
 
-    private var _choselang= MutableLiveData<String>()
-    val choselang: LiveData<String>
-        get()=_choselang
 
 
     fun navigateToSolutionsPageDone() {
@@ -52,11 +49,6 @@ class HomeViewModel(application: Application): ViewModel() {
    fun function(){
        authRepository.ProblemDataList()
    }
-    fun languageset():String{
-        _choselang.value=getData.value!!.language
-        var option=_choselang.value.toString()
-        return option
-    }
 
     //var chosedlang=getData.value!!.language
 
@@ -69,9 +61,9 @@ class HomeViewModel(application: Application): ViewModel() {
     }
     val allData: MutableLiveData<MutableList<Problem?>>
         get()=authRepository.ProblemDataMutableLiveDataList()
-
     fun convert()
     {
+
         val py = Python.getInstance();
         val pyobj = py.getModule("translate")
         val text="Solution"

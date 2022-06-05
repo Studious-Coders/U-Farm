@@ -4,14 +4,14 @@ from googletrans import Translator
 
 translator = Translator()
 
-def tam(convert):
+def ta_IN(convert):
   translated_text = translator.translate(convert, dest='ta')
   return translated_text.text
 
-def hin(convert):
+def hi_IN(convert):
   translated_text = translator.translate(convert, dest='hi')
   return translated_text.text
 
-def eng(convert):
+def en_US(convert):
   translated_text = translator.translate(convert, dest='en')
   return translated_text.text

@@ -20,86 +20,64 @@ import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
 import java.io.IOException
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
-class AddSolutionsViewModel(application: Application,activity: Activity): ViewModel() {
+class AddSolutionsViewModel(application: Application,problemUid:String): ViewModel() {
     private var authRepository: AuthRepository
-    var _initial= MutableLiveData<Boolean>()
-    val initial: LiveData<Boolean>
-        get()=_initial
+    var puid:String
+    init {
+        authRepository = AuthRepository(application)
+        authRepository.getUserData()
+       puid=problemUid
 
-    var _choselang= MutableLiveData<String>()
-    val choselang: LiveData<String>
-        get()=_choselang
+    }
+    private lateinit var startForResult: ActivityResultLauncher<Intent>
+
+    val key1:String= authRepository.reference2.key.toString()
 
     val setData:LiveData<Boolean?>
         get()=authRepository.setSolutionDataMutableLiveData()
 
-    init {
-        authRepository = AuthRepository(application)
-        authRepository.getUserData()
-        _initial.value=true
-
-    }
-
-    var str:String?=""
-
-    var str1:String?=""
-
-
-    fun convertAudioToText(convertText :String){
-        str1=convertText
-
-    }
-
     val getData: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
 
-    val key1:String= authRepository.reference2.key.toString()
+    fun postSolutions(solutionStatement:String,rating:Int){
+        viewModelScope.launch {
+            val solution= Solution(key1, puid,getData.value!!.uid,getData.value!!.username,getData.value!!.profilePicture,solutionStatement,rating)
+            upload(solution)
+        }
+     }
 
-    var arguments:String?=""
-    fun passArguments(args:String){
-          arguments=args
+    private suspend fun upload(solution:Solution){
+        withContext(Dispatchers.IO){
+            authRepository.setSolutionData(solution)
+         }
+
     }
 
 
-    fun postSolutions(solutionStatement:String,rating:Int){
-         val solutionr= Solution(key1,arguments!!,getData.value!!.uid,getData.value!!.username,getData.value!!.profilePicture,solutionStatement,rating)
-         authRepository.setSolutionData(solutionr)
+    val get: MutableLiveData<MutableList<Solution?>>
+        get()=authRepository.SolutionDataMutableLiveDataList()
 
-     }
-
-    private lateinit var startForResult: ActivityResultLauncher<Intent>
 
     fun initial(
         launcher: ActivityResultLauncher<Intent>
     ) = viewModelScope.launch {
-//        textToSpeechEngine = engine
         startForResult = launcher
     }
 
 
     fun startRecording() {
-
-        _choselang.value=getData.value!!.language
-
         startForResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
-            if(_choselang.value=="Tamil")
-                putExtra(RecognizerIntent.EXTRA_LANGUAGE, "ta-IN")
-            else if(_choselang.value=="English")
-                putExtra(RecognizerIntent.EXTRA_LANGUAGE, "en-US")
-            else
-                putExtra(RecognizerIntent.EXTRA_LANGUAGE, "hi-IN")
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, getData.value!!.language)
             putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
         })
     }
-
-
-
-
 }
 

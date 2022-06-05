@@ -7,12 +7,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.u_farm.home.addproblems.AddProblemsViewModel
 
-class AddSolutionsViewModelFactory(private val application: Application, private val activity: Activity) : ViewModelProvider.Factory {
+class AddSolutionsViewModelFactory(private val application: Application, private val problemUid: String) : ViewModelProvider.Factory {
     @RequiresApi(Build.VERSION_CODES.N)
     @Suppress("unchecked_cast")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(AddSolutionsViewModel::class.java)) {
-            return AddSolutionsViewModel(application,activity) as T
+            return AddSolutionsViewModel(application,problemUid) as T
             //Returns the values from the fragment
         }
         throw IllegalArgumentException("Unknown ViewModel class")

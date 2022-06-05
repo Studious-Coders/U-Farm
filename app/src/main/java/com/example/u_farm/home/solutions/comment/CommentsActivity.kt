@@ -9,7 +9,6 @@ import android.os.Bundle
 import androidx.databinding.DataBindingUtil
 import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivityCommentsBinding
-import com.example.u_farm.home.solutions.addsolutions.AddSolutionsViewModel
 import com.example.u_farm.home.solutions.addsolutions.AddSolutionsViewModelFactory
 
 class CommentsActivity : AppCompatActivity() {
@@ -32,8 +31,8 @@ class CommentsActivity : AppCompatActivity() {
 
         val application: Application = requireNotNull(this).application
         val activity: Activity = this
-        val viewModelFactory = AddSolutionsViewModelFactory(application, activity)
-//        addSolutionsViewModel =
+//        val viewModelFactory = AddSolutionsViewModelFactory(application, activity)
+////        addSolutionsViewModel =
 //            ViewModelProvider(this, viewModelFactory).get(AddSolutionsViewModel::class.java)
 //        binding.addSolutionsViewModel = addSolutionsViewModel
 //        binding.solution=solution

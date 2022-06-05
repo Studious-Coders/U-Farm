@@ -37,6 +37,7 @@ class AuthRepository(application: Application) {
     private var userLoggedAuthRepository = MutableLiveData<Boolean?>()
     private var setUserDataRepository = MutableLiveData<Boolean?>()
     private var getUserDataRepository = MutableLiveData<U_Farm?>()
+    private var getDataRepository = MutableLiveData<U_Farm?>()
     private var getProblemRepository = MutableLiveData<Problem?>()
     private var getSolutionRepository = MutableLiveData<Solution?>()
     private var singleRecordDataRepository = MutableLiveData<Boolean?>()
@@ -91,6 +92,10 @@ class AuthRepository(application: Application) {
 
     fun getUserDataMutableLiveData(): MutableLiveData<U_Farm?> {
         return getUserDataRepository
+    }
+
+    fun getDataMutableLiveData(): MutableLiveData<U_Farm?> {
+        return getDataRepository
     }
 
     fun getProblemMutableLiveData(): MutableLiveData<Problem?> {
@@ -252,7 +257,7 @@ class AuthRepository(application: Application) {
         val ref = firebaseDatabase.getReference("PROBLEM")
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
-                for (postSnapshot in snapshot.children) {
+                for  (postSnapshot in snapshot.children) {
                     val problem = postSnapshot.getValue(Problem::class.java)
                     if (problem != null) {
                         problemList.add(problem)

@@ -25,7 +25,7 @@ import com.example.u_farm.databinding.FragmentProfileBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_profile.*
 
-
+var langselect="English"
 class ProfileFragment : Fragment() {
   lateinit var choseAValue:String
     @SuppressLint("ResourceType", "StringFormatInvalid")
@@ -78,7 +78,7 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.language.observe(viewLifecycleOwner, Observer {
             if(it==true) {
-
+                langselect =profileViewModel.languageset()
                 profileViewModel.languageIntentDone()
             }
         })
