@@ -47,11 +47,19 @@ class HomeViewModel(application: Application): ViewModel() {
         _navigateToSolutionsPage.value=puid
 
     }
-    val newData: LiveData<Boolean?>
-        get()= authRepository.setProblemDataMutableLiveData()
+//    val newData: LiveData<Boolean?>
+//        get()= authRepository.setProblemDataMutableLiveData()
 
-   fun function(){
+    private val _newData= MutableLiveData<Boolean?>()
+    val newData: LiveData<Boolean?>
+        get()=authRepository.setProblemDataMutableLiveData()
+
+
+
+
+    fun function(){
        authRepository.ProblemDataList()
+       _newData.value=false
    }
 
     //var chosedlang=getData.value!!.language
@@ -65,6 +73,7 @@ class HomeViewModel(application: Application): ViewModel() {
     }
     val allData: MutableLiveData<MutableList<Problem?>>
         get()=authRepository.ProblemDataMutableLiveDataList()
+
     fun convert()
     {
 

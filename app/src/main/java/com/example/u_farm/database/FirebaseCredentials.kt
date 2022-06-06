@@ -5,6 +5,7 @@ import android.net.Uri
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import com.example.u_farm.model.Comments
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
@@ -19,6 +20,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
+import org.w3c.dom.Comment
 import java.util.*
 
 class AuthRepository(application: Application) {
@@ -32,6 +34,7 @@ class AuthRepository(application: Application) {
     private var reference: DatabaseReference
     var reference1: DatabaseReference
     var reference2: DatabaseReference
+    var reference3: DatabaseReference
     private var application: Application
     var firebaseUserAuthRepository = MutableLiveData<FirebaseUser?>()
     private var userLoggedAuthRepository = MutableLiveData<Boolean?>()
@@ -40,15 +43,22 @@ class AuthRepository(application: Application) {
     private var getDataRepository = MutableLiveData<U_Farm?>()
     private var getProblemRepository = MutableLiveData<Problem?>()
     private var getSolutionRepository = MutableLiveData<Solution?>()
+
     private var singleRecordDataRepository = MutableLiveData<Boolean?>()
     private var uploadedDataRepository = MutableLiveData<String?>()
     private var setSolutionDataRepository = MutableLiveData<Boolean?>()
     private var setProblemDataRepository = MutableLiveData<Boolean?>()
+    private var setCommentDataRepository = MutableLiveData<Boolean?>()
+
     private var storage: FirebaseStorage
     private var ProblemDataMutableLiveDataList = MutableLiveData<MutableList<Problem?>>()
     private var SolutionDataMutableLiveDataList = MutableLiveData<MutableList<Solution?>>()
+    private var CommentDataMutableLiveDataList = MutableLiveData<MutableList<Comments?>>()
+
     var problemList = mutableListOf<Problem?>()
     var solutionList = mutableListOf<Solution?>()
+    var commentList = mutableListOf<Comments?>()
+
     private var gso: GoogleSignInOptions
     private var googleSignInClient: GoogleSignInClient
 
@@ -63,6 +73,7 @@ class AuthRepository(application: Application) {
         reference = firebaseDatabase.getReference("UFARMDB")
         reference1 = firebaseDatabase.getReference("PROBLEM").push()
         reference2 = firebaseDatabase.getReference("SOLUTION").push()
+            reference3=firebaseDatabase.getReference("COMMENT").push()
         storage = FirebaseStorage.getInstance()
         auth = FirebaseAuth.getInstance()
         if (auth.currentUser != null) {
@@ -86,6 +97,10 @@ class AuthRepository(application: Application) {
         return setSolutionDataRepository
     }
 
+    fun setCommentDataMutableLiveData(): MutableLiveData<Boolean?> {
+        return setCommentDataRepository
+    }
+
     fun setProblemDataMutableLiveData(): MutableLiveData<Boolean?> {
         return setProblemDataRepository
     }
@@ -107,6 +122,7 @@ class AuthRepository(application: Application) {
         return getSolutionRepository
     }
 
+
     fun ProblemDataMutableLiveDataList(): MutableLiveData<MutableList<Problem?>> {
         return ProblemDataMutableLiveDataList
     }
@@ -114,6 +130,11 @@ class AuthRepository(application: Application) {
     fun SolutionDataMutableLiveDataList(): MutableLiveData<MutableList<Solution?>> {
         return SolutionDataMutableLiveDataList
     }
+
+    fun CommentDataMutableLiveDataList(): MutableLiveData<MutableList<Comments?>> {
+        return CommentDataMutableLiveDataList
+    }
+
 
     fun singleRecordDataMutuableLiveData(): MutableLiveData<Boolean?> {
         return singleRecordDataRepository
@@ -433,6 +454,45 @@ class AuthRepository(application: Application) {
             }
         })
     }
+
+    /**Comments Model Function**/
+
+    //Make a list of Solutions to display in the recyclerView
+    fun CommentsDataList(solutionUid:String) {
+        val ref = firebaseDatabase.getReference("COMMENT")
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (postSnapshot in snapshot.children) {
+                    val comment= postSnapshot.getValue(Comments::class.java)
+                    if (comment?.solutionUid == solutionUid) {
+                        commentList.add(comment)
+                    }
+                }
+                CommentDataMutableLiveDataList.postValue(commentList)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+    }
+
+    //Set the solution data to the Solution Model
+    fun setCommentData(comment: Comments) {
+        reference2.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (auth.currentUser?.uid != null) {
+                    reference2.setValue(comment)
+                }
+                setCommentDataRepository.postValue(true)
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                setCommentDataRepository.postValue(false)
+            }
+        })
+    }
+
 
     //Store the Image to the Firebase
     fun uploadImageToFirebaseStorage(image: Uri, folder: String) {

@@ -1,19 +1,16 @@
 package com.example.u_farm.home.solutions
 
-import android.app.Activity
 import android.app.Application
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.speech.tts.TextToSpeech
 import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
-import com.chaquo.python.Python
 import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivitySolutionsBinding
 import com.example.u_farm.home.*
@@ -21,8 +18,7 @@ import com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity
 import com.example.u_farm.home.solutions.comment.CommentsActivity
 import com.example.u_farm.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.main.list_items.*
-import java.util.*
+
 var chosedlang="English"
 
 class SolutionsActivity : AppCompatActivity() {
