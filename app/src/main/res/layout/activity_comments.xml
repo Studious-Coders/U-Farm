@@ -5,6 +5,9 @@
         <variable
             name="commentsViewModel"
             type="com.example.u_farm.home.solutions.comment.CommentsViewModel" />
+        <variable
+            name="comments"
+            type="com.example.u_farm.model.Comments" />
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
@@ -17,32 +20,64 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/comments"/>
+        app:layout_constraintBottom_toTopOf="@id/commentsLayout"/>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/comments"
-        style="@style/Widget.Material3.AutoCompleteTextView.FilledBox.Dense"
+    <LinearLayout
+        android:id="@+id/commentsLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:hint="Add Comments"
-        app:boxBackgroundMode="filled"
-        android:drawableStart="@drawable/ic_baseline_account_circle_24"
-
-        app:boxStrokeColor="?attr/colorPrimary"
-        app:boxStrokeWidthFocused="2dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent">
 
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/convertText1"
-            android:layout_width="match_parent"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/commentsText"
+            style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox.Dense"
+            android:layout_width="275dp"
             android:layout_height="wrap_content"
-            android:gravity="top|start" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:drawableStart="@drawable/ic_baseline_account_circle_24"
+            android:hint="Add Comments"
+            app:boxBackgroundMode="filled"
+            android:padding="8dp"
+            app:boxStrokeColor="?attr/colorPrimary"
+            app:boxStrokeWidthFocused="2dp">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/convertText1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_action_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="?attr/colorPrimary"
+            android:contentDescription="@string/voice_description"
+            android:src="@drawable/ic_baseline_mic_24"
+            app:elevation="5dp"
+            app:borderWidth="0dp" />
+
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/floating_action_button1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="4dp"
+            android:layout_gravity="center_vertical"
+            android:backgroundTint="?attr/colorPrimary"
+            android:contentDescription="@string/voice_description"
+            android:src="@drawable/ic_baseline_check_24"
+            app:elevation="5dp"
+            app:borderWidth="0dp" />
+
+
+
+
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.u_farm.R
 import com.example.u_farm.databinding.ListItems2Binding
+import com.example.u_farm.databinding.ListItems3Binding
 import com.example.u_farm.databinding.ListItemsBinding
+import com.example.u_farm.model.Comments
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
@@ -54,10 +56,10 @@ class ProblemsDiffCallback : DiffUtil.ItemCallback<Problem>() {
             }
         }
 
-class SolutionsAdapter(val clickListener: SolutionsListener,val increaseListener: IncreaseListener,val decreaseListener: DecreaseListener) : ListAdapter<Solution,SolutionsAdapter.ViewHolder>(SolutionsDiffCallback()) {
+class SolutionsAdapter(val solutionsListener1: SolutionsListener1,val clickListener: SolutionsListener,val increaseListener: IncreaseListener,val decreaseListener: DecreaseListener) : ListAdapter<Solution,SolutionsAdapter.ViewHolder>(SolutionsDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
-        holder.bind(item,clickListener,increaseListener,decreaseListener)
+        holder.bind(item,solutionsListener1,clickListener,increaseListener,decreaseListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -67,8 +69,9 @@ class SolutionsAdapter(val clickListener: SolutionsListener,val increaseListener
     class ViewHolder private constructor(val binding: ListItems2Binding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Solution,clickListener: SolutionsListener,increaseListener: IncreaseListener,decreaseListener: DecreaseListener) {
+        fun bind(item: Solution,solutionsListener1: SolutionsListener1,clickListener: SolutionsListener,increaseListener: IncreaseListener,decreaseListener: DecreaseListener) {
             binding.data=item
+            binding.solutionListener1=solutionsListener1
             binding.clicklistener=clickListener
             binding.increaseListener=increaseListener
             binding.decreaseListener=decreaseListener
@@ -83,6 +86,9 @@ class SolutionsAdapter(val clickListener: SolutionsListener,val increaseListener
             }
         }
     }
+}
+class SolutionsListener1(val clickListener: (sleepId: String)-> Unit){
+    fun onClick(model:Solution)=clickListener(model.solutionUid)
 }
 
 class SolutionsListener(val clickListener: (sleepId: String)-> Unit){
@@ -109,3 +115,46 @@ class SolutionsDiffCallback : DiffUtil.ItemCallback<Solution>() {
         return oldItem== newItem
     }
 }
+
+class CommentsAdapter(val clickListener:CommentsListener) : ListAdapter<Comments,CommentsAdapter.ViewHolder>(CommentsDiffCallback()) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.bind(item,clickListener)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent)
+    }
+
+    class ViewHolder private constructor(val binding: ListItems3Binding)
+        : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: Comments,clickListener: CommentsListener) {
+            binding.data=item
+            binding.clicklistener=clickListener
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ListItems3Binding.inflate(layoutInflater, parent, false)
+                return ViewHolder(binding)
+            }
+        }
+    }
+}
+
+class CommentsListener(val clickListener: (sleepId:String) -> Unit){
+    fun onClick(model: Comments)=clickListener(model.commentStatement)
+}
+class CommentsDiffCallback : DiffUtil.ItemCallback<Comments>() {
+    override fun areItemsTheSame(oldItem: Comments, newItem: Comments): Boolean {
+        return oldItem.username == newItem.username
+    }
+
+    override fun areContentsTheSame(oldItem: Comments, newItem: Comments): Boolean {
+        return oldItem== newItem
+    }
+}
+

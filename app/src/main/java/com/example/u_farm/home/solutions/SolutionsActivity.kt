@@ -18,6 +18,7 @@ import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivitySolutionsBinding
 import com.example.u_farm.home.*
 import com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity
+import com.example.u_farm.home.solutions.comment.CommentsActivity
 import com.example.u_farm.login.LoginActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.list_items.*
@@ -44,7 +45,13 @@ class SolutionsActivity : AppCompatActivity() {
         binding.solutionsViewModel = solutionsViewModel
         binding.lifecycleOwner = this
 
-        val adapter = SolutionsAdapter(SolutionsListener { statement->
+        val adapter = SolutionsAdapter(SolutionsListener1 { it ->
+            val intent = Intent(this, CommentsActivity::class.java)
+            intent.putExtra("solutionUid", it)
+            startActivity(intent)
+
+
+        },SolutionsListener { statement->
             solutionsViewModel.textToSpeech(statement)
         }, IncreaseListener{ increase,suid ->
             Log.d("Clicking","Clicked")

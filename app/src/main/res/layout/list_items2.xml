@@ -19,6 +19,10 @@
         <variable
             name="decreaseListener"
             type="com.example.u_farm.home.DecreaseListener" />
+        <variable
+            name="solutionListener1"
+            type="com.example.u_farm.home.SolutionsListener1" />
+
 
     </data>
     <com.google.android.material.card.MaterialCardView
@@ -27,7 +31,8 @@
         android:background="?attr/colorSecondary"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp">
+        android:layout_margin="8dp"
+        android:onClick="@{()->solutionListener1.onClick(data)}">
 
 
         <LinearLayout

@@ -45,7 +45,8 @@ class ProfileFragment : Fragment() {
         binding.profileViewModel=profileViewModel
         binding.lifecycleOwner=this
 
-        profileViewModel.snackbar.observe(viewLifecycleOwner,Observer{
+
+                profileViewModel.snackbar.observe(viewLifecycleOwner,Observer{
             if(it==true){
                 Snackbar.make(binding.root, "Login to access the settings", Snackbar.LENGTH_SHORT)
                     .show()
@@ -62,7 +63,14 @@ class ProfileFragment : Fragment() {
         })
         profileViewModel.expert.observe(viewLifecycleOwner, Observer {
             if(it==true ) {
-                expertTick.visibility=View.VISIBLE
+                if(desgintion.text=="Expert") {
+                    expertTick.visibility = View.VISIBLE
+                    }else{
+                    expertTick.visibility = View.GONE
+
+                }
+                profileViewModel.expertTickDone()
+
             }
         })
 

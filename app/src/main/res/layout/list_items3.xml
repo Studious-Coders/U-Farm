@@ -2,6 +2,18 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="commentsViewModel"
+            type="com.example.u_farm.home.solutions.comment.CommentsViewModel" />
+        <variable
+            name="data"
+            type="com.example.u_farm.model.Comments" />
+        <variable
+            name="clicklistener"
+            type="com.example.u_farm.home.CommentsListener" />
+
+    </data>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/card6"

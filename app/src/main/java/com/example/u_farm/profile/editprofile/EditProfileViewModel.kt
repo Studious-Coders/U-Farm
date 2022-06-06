@@ -70,17 +70,15 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
         _image.value=true
     }
     var str:String?=null
-    var str1:String?=null
 
 
 
 
     var uri:Uri?=null
-    fun updateData(uid:String,username:String,email:String,password:String,phoneNumber:String,location:String){
+    fun updateData(uid:String,username:String,email:String,password:String,phoneNumber:String,profilePicture:String,job:String,location:String,language:String){
         _spinner.value=true
-        val ufarm= U_Farm(uid,username,email,password,phoneNumber,"",job,location,"","")
+        val ufarm= U_Farm(uid,username,email,password,phoneNumber,profilePicture,job,location,language,"")
         authRepository.setUserData(ufarm)
-        str1=uid
         _hope.value=true
 
 
@@ -117,26 +115,24 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
 //        authRepository.singleRecord(job,"job")
 //    }
 //
-    var job:String=""
-   fun jobSelection(){
+    fun jobSelection(){
        alert.setTitle("Choose a job title")
-
        val options = arrayOf("Farmer","Expert","Other")
-
        alert.setItems(options) { dialog, which ->
            dialog.dismiss()
-
            when (which) {
                /* execute here your actions */
-               0 ->  job=options[0]
-               1 ->  job=options[1]
-               2 ->job=options[2]
+               0 ->  {
+                   authRepository.singleRecord(options[0],"job")
+               }
+               1 ->  {
+                   authRepository.singleRecord(options[1],"job")
+               }
+               2 ->{
+                   authRepository.singleRecord(options[2],"job")
+               }
            }
-
-
        }
-
-
        alert.show()
 
    }

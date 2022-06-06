@@ -78,10 +78,7 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         alert0 = AlertDialog.Builder(activity)
         authRepository.getUserData()
         value.addSource(getData,value::setValue)
-        if(getData.value?.job=="Expert"){
             _expert.value=true
-        }
-//          currentLanguage=getData.value!!.language
 
     }
 
@@ -95,8 +92,12 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         return option
     }
 
+    fun expertTickDone(){
+        _expert.value=false
+    }
     fun function(){
         authRepository.getUserData()
+        _expert.value=true
     }
 
     fun logOutAlertDialogBox(){

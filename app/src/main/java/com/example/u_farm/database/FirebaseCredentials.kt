@@ -137,7 +137,7 @@ class AuthRepository(application: Application) {
                     user.displayName.toString(),
                     user.email.toString(),
                     "",
-                    user.phoneNumber.toString(),
+                    "",
                     user.photoUrl.toString()
                 )
                 setUserData(ufarm)

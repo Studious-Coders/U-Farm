@@ -31,7 +31,7 @@ android {
           buildPython "C:/Users/dell/AppData/Local/Programs/Python/Python310/python.exe"
 //            buildPython "C:/Users/ELCOT/anaconda3/python.exe"
             pip {
-                install "googletrans==4.0.0-rc1"
+//                install "googletrans==4.0.0-rc1"
                 //install "deepImageSearch"
             }
         }

@@ -43,12 +43,22 @@ class AddSolutionsViewModel(application: Application,problemUid:String): ViewMod
     val getData: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
 
+    private var _expection= MutableLiveData<Boolean>()
+    val expection: LiveData<Boolean>
+        get()=_expection
+
+
+
     fun postSolutions(solutionStatement:String,rating:Int){
+        if(solutionStatement.length<100){
+            _expection.value=true
+        }else{
         viewModelScope.launch {
             val solution= Solution(key1, puid,getData.value!!.uid,getData.value!!.username,getData.value!!.profilePicture,solutionStatement,rating)
             upload(solution)
         }
-     }
+       }
+    }
 
     private suspend fun upload(solution:Solution){
         withContext(Dispatchers.IO){

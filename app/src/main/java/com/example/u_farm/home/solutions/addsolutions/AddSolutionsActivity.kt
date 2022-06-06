@@ -57,6 +57,12 @@ import kotlinx.android.synthetic.main.fragment_profile.*
                }
         })
 
+        addSolutionsViewModel.expection.observe(this,Observer{
+            if(it==true){
+                Toast.makeText(this,"Solution must contains atleast 100 letters.",Toast.LENGTH_LONG).show()
+            }
+        })
+
         //Speech ToText
         val startForResult = registerForActivityResult(
             ActivityResultContracts.StartActivityForResult()
@@ -78,8 +84,5 @@ import kotlinx.android.synthetic.main.fragment_profile.*
         }
     }
 
-     override fun onBackPressed() {
-         super.onBackPressed()
-         startActivity(Intent(this,SolutionsActivity::class.java))
-     }
+
  }

@@ -39,6 +39,9 @@ class EditProfileActivity : AppCompatActivity() {
         )
 
 
+        jobText.showSoftInputOnFocus=false
+
+
 
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
         supportActionBar?.title = "EditProfile"
@@ -54,11 +57,11 @@ class EditProfileActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
 
-          editProfileViewModel.hope.observe(this, Observer {
-            if(it!=null){
-                editProfileViewModel.upload()
-            }
-        })
+//          editProfileViewModel.hope.observe(this, Observer {
+//            if(it!=null){
+//                editProfileViewModel.upload()
+//            }
+//        })
 
         editProfileViewModel.image.observe(this, Observer {
             if(it==true) {
@@ -68,8 +71,10 @@ class EditProfileActivity : AppCompatActivity() {
             }
         })
 
+
+
         editProfileViewModel.setImage.observe(this, Observer {
-              editProfileViewModel.upload1()
+
         })
 
         editProfileViewModel.setData.observe(this,Observer{
@@ -77,8 +82,6 @@ class EditProfileActivity : AppCompatActivity() {
             Toast.makeText(this,"Your profile is updated successfully",Toast.LENGTH_LONG).show()
             editProfileViewModel.function()
         })
-
-
 
 
 
@@ -106,14 +109,5 @@ class EditProfileActivity : AppCompatActivity() {
         }
     }
 
-    override fun onContextItemSelected(item: MenuItem): Boolean{
-        when(item.itemId){
-            android.R.id.home -> {
-                finish()
-                return true
-            }
-        }
-        return super.onContextItemSelected(item)
-    }
 
 }
