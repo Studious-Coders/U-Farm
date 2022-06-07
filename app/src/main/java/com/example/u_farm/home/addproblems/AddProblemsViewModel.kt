@@ -78,6 +78,7 @@ class AddProblemsViewModel(application: Application): ViewModel() {
                     getData.value!!.uid,
                     getData.value!!.username,
                     getData.value!!.profilePicture,
+                    getData.value!!.language,
                     problemStatement,
                     setImage.value.toString()
                 )

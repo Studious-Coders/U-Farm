@@ -4,17 +4,7 @@ package com.example.u_farm.util
 import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
-import com.chaquo.python.Python
-import com.chaquo.python.android.AndroidPlatform
-import com.example.u_farm.profile.langselect
-//import com.example.u_farm.home.langselect
-
-//import com.example.u_farm.home.addproblems.chosedlang
-import com.example.u_farm.profile.ProfileFragment
-//import com.example.u_farm.profile.chosedlang
-
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -30,7 +20,9 @@ fun TextView.setUserDetails(item: String?) {
 fun bindImage(imgView: ImageView, imgUrl:String?) {
     imgUrl?.let{
         if(it!=""){
-            Picasso.with(imgView.context).load(imgUrl).into(imgView)
+            Picasso.with(imgView.context)
+                .load(imgUrl)
+                .into(imgView)
         }
     }
 }

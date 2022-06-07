@@ -73,7 +73,7 @@ class AuthRepository(application: Application) {
         reference = firebaseDatabase.getReference("UFARMDB")
         reference1 = firebaseDatabase.getReference("PROBLEM").push()
         reference2 = firebaseDatabase.getReference("SOLUTION").push()
-            reference3=firebaseDatabase.getReference("COMMENT").push()
+        reference3=firebaseDatabase.getReference("COMMENT").push()
         storage = FirebaseStorage.getInstance()
         auth = FirebaseAuth.getInstance()
         if (auth.currentUser != null) {
@@ -479,10 +479,10 @@ class AuthRepository(application: Application) {
 
     //Set the solution data to the Solution Model
     fun setCommentData(comment: Comments) {
-        reference2.addListenerForSingleValueEvent(object : ValueEventListener {
+        reference3.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 if (auth.currentUser?.uid != null) {
-                    reference2.setValue(comment)
+                    reference3.setValue(comment)
                 }
                 setCommentDataRepository.postValue(true)
             }

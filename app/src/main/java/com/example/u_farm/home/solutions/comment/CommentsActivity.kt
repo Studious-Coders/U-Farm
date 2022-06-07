@@ -72,6 +72,14 @@ class CommentsActivity : AppCompatActivity() {
 
         })
 
+        commentsViewModel.expection.observe(this, Observer{
+            if(it==true) {
+                Toast.makeText(this,"Comment must be more than 50 words!",Toast.LENGTH_LONG).show()
+              }
+
+        })
+
+
 
         commentsViewModel.set.observe(this,Observer{
             Toast.makeText(this,"Comment is Added",Toast.LENGTH_LONG).show()

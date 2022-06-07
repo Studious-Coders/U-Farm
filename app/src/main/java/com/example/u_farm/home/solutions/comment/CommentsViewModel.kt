@@ -29,6 +29,11 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
     val read: LiveData<String?>
         get()=_read
 
+    private var _expection= MutableLiveData<Boolean?>()
+    val expection: LiveData<Boolean?>
+        get()=_expection
+
+
     val get: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
 
@@ -41,7 +46,6 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
 
     init{
         authRepository= AuthRepository(application)
-//        authRepository.CommentsDataList(solutionUid)
         authRepository.getUserData()
         authRepository.CommentsDataList(solutionUid)
         suid=solutionUid
@@ -69,7 +73,7 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
 
     fun postComments(commentStatement:String){
         if(commentStatement.length<50){
-
+              _expection.value=true
         }else {
             viewModelScope.launch {
                 val commentsData = Comments(
@@ -78,6 +82,7 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
                     get.value!!.uid,
                     get.value!!.username,
                     get.value!!.profilePicture,
+                    get.value!!.language,
                     commentStatement
                 )
                 upload(commentsData)

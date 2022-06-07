@@ -74,15 +74,6 @@ class HomeViewModel(application: Application): ViewModel() {
     val allData: MutableLiveData<MutableList<Problem?>>
         get()=authRepository.ProblemDataMutableLiveDataList()
 
-    fun convert()
-    {
-
-        val py = Python.getInstance();
-        val pyobj = py.getModule("translate")
-        val text="Solution"
-        val converttext= pyobj.callAttr("tam",text)
-        //return converttext
-    }
 
 
 }
