@@ -6,10 +6,6 @@
         <variable
             name="data"
             type="com.example.u_farm.model.Problem" />
-
-        <variable
-            name="data1"
-            type="com.example.u_farm.model.U_Farm" />
         <variable
             name="clicklistener"
             type="com.example.u_farm.home.ProblemsListener" />
@@ -59,8 +55,8 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:userDetails1="@{data.username}"
-                app:lang="@{data1.get.language}"
+                app:language="@{data.language.toString()}"
+                app:textData="@{data.username}"
                 tools:text="Farmer" />
 
             <ImageButton
@@ -99,8 +95,8 @@
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:userDetails1="@{data.problemStatement}"
-                app:lang="@{data1.get.language}"
+                app:textData="@{data.problemStatement}"
+                app:language="@{data.language.toString()}"
                 tools:text="@string/problem1"
                 android:textSize="16sp"
                 />
