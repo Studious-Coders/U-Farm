@@ -47,6 +47,7 @@ class SolutionsActivity : AppCompatActivity() {
         binding.solutionsViewModel = solutionsViewModel
         binding.lifecycleOwner = this
 
+
         val adapter = SolutionsAdapter(SolutionsListener1 { it ->
             val intent = Intent(this, CommentsActivity::class.java)
             intent.putExtra(USER_KEY, it)

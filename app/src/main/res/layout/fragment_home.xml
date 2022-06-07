@@ -31,22 +31,22 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 app:layout_constraintTop_toTopOf="parent"
                 />
 
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/btn_asset_photo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="end|bottom"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:contentDescription="@string/add_problems"
-                app:borderWidth="0dp"
-                android:onClick="@{()-> homeViewModel.navigateToAddProblemsPage()}"
-                android:backgroundTint="?attr/colorPrimary"
-                android:src="@drawable/ic_outline_add_24"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recycler_view" />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_asset_photo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@color/black"
+            android:contentDescription="@string/add_problems"
+            android:onClick="@{()-> homeViewModel.navigateToAddProblemsPage()}"
+            android:src="@drawable/ic_outline_add_24"
+            app:borderWidth="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/recycler_view" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
