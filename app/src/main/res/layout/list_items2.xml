@@ -128,39 +128,39 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:background="?attr/colorPrimary"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginRight="16dp"
                     android:layout_marginBottom="16dp"
-                    android:padding="8dp"
-                    android:layout_height="wrap_content">
+                    android:background="@color/white"
+                    android:padding="8dp">
 
                     <TextView
                         android:id="@+id/solutionstatement"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:userDetails="@{data.solutionStatement}"
-                        tools:text="@string/solution1"
                         app:layout_constraintBottom_toTopOf="@+id/floating_action_button6"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintVertical_bias="0.0"
+                        app:userDetails="@{data.solutionStatement}"
+                        tools:text="@string/solution1" />
 
                     <ImageButton
                         android:id="@+id/floating_action_button6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
+                        android:background="@android:color/transparent"
+                        android:contentDescription="@string/speech_to_text"
+                        android:onClick="@{()->clicklistener.onClick(data)}"
                         android:src="@drawable/ic_baseline_play_circle_filled_24"
                         app:elevation="25dp"
-                        android:onClick="@{()->clicklistener.onClick(data)}"
-                        android:background="@android:color/transparent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        android:contentDescription="@string/speech_to_text" />
+                        app:layout_constraintEnd_toEndOf="parent" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

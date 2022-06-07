@@ -16,6 +16,8 @@ import com.example.u_farm.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_home.*
 
+var langselect="en_US"
+
 class HomeFragment : Fragment() {
 
     override fun onCreateView(
@@ -36,6 +38,7 @@ class HomeFragment : Fragment() {
         binding.homeViewModel=homeViewModel
 
         binding.lifecycleOwner=this
+        //langselect=homeViewModel.chosedlang
 
            //val adapter=U_FarmAdapter()
         //Initialize the adapter onClick event happen on each object (lamba function)
@@ -53,10 +56,15 @@ class HomeFragment : Fragment() {
                        }
         })
 
+
+
+       // langselect=homeViewModel.choselang
+
 //        homeViewModel.choselang.observe(viewLifecycleOwner,Observer{
 //            if(it!=null)
 //            {
-//                langselect =it
+//                langselect =homeViewModel.chosenlang
+//                homeViewModel.languagechange()
 //            }
 //        }
 //        )

@@ -5,14 +5,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.u_farm.R
 import com.example.u_farm.databinding.ListItems2Binding
 import com.example.u_farm.databinding.ListItems3Binding
 import com.example.u_farm.databinding.ListItemsBinding
 import com.example.u_farm.model.Comments
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.Solution
-import com.example.u_farm.model.U_Farm
 
 class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<Problem,ProblemsAdapter.ViewHolder>(ProblemsDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -129,7 +127,7 @@ class CommentsAdapter(val clickListener:CommentsListener) : ListAdapter<Comments
     class ViewHolder private constructor(val binding: ListItems3Binding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Comments,clickListener: CommentsListener) {
+        fun bind(item: Comments, clickListener: CommentsListener) {
             binding.data=item
             binding.clicklistener=clickListener
             binding.executePendingBindings()

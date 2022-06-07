@@ -25,8 +25,14 @@ class HomeViewModel(application: Application): ViewModel() {
     val navigateToAddProblemsPage: LiveData<Boolean>
         get()=_navigateToAddProblemsPage
 
+//    private val _choselang= MutableLiveData<Boolean>()
+//    val choselang: LiveData<Boolean>
+//        get()=_choselang
+
     val getData: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
+
+   // lateinit var chosenlang:String
 
 
 
@@ -62,6 +68,11 @@ class HomeViewModel(application: Application): ViewModel() {
        _newData.value=false
    }
 
+//    fun languagechange(){
+//        chosenlang=getData.value!!.language
+//        _choselang.value=false
+//    }
+
     //var chosedlang=getData.value!!.language
 
 
@@ -69,20 +80,12 @@ class HomeViewModel(application: Application): ViewModel() {
         authRepository= AuthRepository(application)
         authRepository.getUserData()
         authRepository.ProblemDataList()
+       // _choselang.value=true
+       //chosedlang=getData.value!!.language
 
     }
     val allData: MutableLiveData<MutableList<Problem?>>
         get()=authRepository.ProblemDataMutableLiveDataList()
-
-    fun convert()
-    {
-
-        val py = Python.getInstance();
-        val pyobj = py.getModule("translate")
-        val text="Solution"
-        val converttext= pyobj.callAttr("tam",text)
-        //return converttext
-    }
 
 
 }
