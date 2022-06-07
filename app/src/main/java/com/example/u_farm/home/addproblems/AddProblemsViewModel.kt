@@ -89,7 +89,7 @@ class AddProblemsViewModel(application: Application): ViewModel() {
     private suspend fun upload(problem: Problem){
      withContext(Dispatchers.IO){
           authRepository.setProblemData(problem)
-     }
+     0}
     }
 
     fun uploaded(){

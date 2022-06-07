@@ -190,20 +190,10 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
             res.updateConfiguration(conf, dm)
 
     }
-
-
-
-
         fun languageIntentDone() {
             _language.value = false
         }
 
-    val py = Python.getInstance();
-    val pyobj = py.getModule("translate")
-
-    fun convertlang(): String{
-        return pyobj.callAttr("tam","Edit Profile").toString()
-    }
 
 
 
