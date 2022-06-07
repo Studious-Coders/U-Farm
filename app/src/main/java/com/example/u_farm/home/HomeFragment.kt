@@ -50,7 +50,7 @@ class HomeFragment : Fragment() {
         homeViewModel.allData.observe(viewLifecycleOwner, Observer {
                                  it?.let{
                          adapter.submitList(it)
-                       }
+                                   }
         })
 
 //        homeViewModel.choselang.observe(viewLifecycleOwner,Observer{
@@ -61,8 +61,10 @@ class HomeFragment : Fragment() {
 //        }
 //        )
 
+
      homeViewModel.newData.observe(viewLifecycleOwner,Observer{
          if(it==true){
+
              homeViewModel.function()
 
          }

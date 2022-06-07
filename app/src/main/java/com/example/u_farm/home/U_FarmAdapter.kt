@@ -148,6 +148,7 @@ class CommentsAdapter(val clickListener:CommentsListener) : ListAdapter<Comments
 class CommentsListener(val clickListener: (sleepId:String) -> Unit){
     fun onClick(model: Comments)=clickListener(model.commentStatement)
 }
+
 class CommentsDiffCallback : DiffUtil.ItemCallback<Comments>() {
     override fun areItemsTheSame(oldItem: Comments, newItem: Comments): Boolean {
         return oldItem.username == newItem.username

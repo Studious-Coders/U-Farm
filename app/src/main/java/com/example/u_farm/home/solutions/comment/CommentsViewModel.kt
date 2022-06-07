@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.Comments
+import com.example.u_farm.model.Problem
 import com.example.u_farm.model.U_Farm
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -124,5 +125,8 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
     fun speak(text: String) = viewModelScope.launch{
         textToSpeechEngine1.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }
+    val allData: MutableLiveData<MutableList<Comments?>>
+        get()=authRepository.CommentDataMutableLiveDataList()
+
 
 }

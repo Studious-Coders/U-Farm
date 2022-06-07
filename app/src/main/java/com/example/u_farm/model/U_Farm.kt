@@ -11,7 +11,7 @@ data class U_Farm(
     var profilePicture:String="",
     var job:String="#Farmer",
     var location:String="",
-    var language:String="English",
+    var language:String="en_US",
     var verificationDocs:String="",
 )
 

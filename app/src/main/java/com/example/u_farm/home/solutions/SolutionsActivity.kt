@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navArgs
+import com.chaquo.python.Python
 import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivitySolutionsBinding
 import com.example.u_farm.home.*
@@ -22,6 +23,10 @@ import com.google.firebase.auth.FirebaseAuth
 var chosedlang="English"
 
 class SolutionsActivity : AppCompatActivity() {
+    companion object{
+        val USER_KEY="key"
+    }
+
     private lateinit var solutionsViewModel: SolutionsViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -43,7 +48,8 @@ class SolutionsActivity : AppCompatActivity() {
 
         val adapter = SolutionsAdapter(SolutionsListener1 { it ->
             val intent = Intent(this, CommentsActivity::class.java)
-            intent.putExtra("solutionUid", it)
+            intent.putExtra(USER_KEY, it)
+            Log.d("XYZ",it)
             startActivity(intent)
 
 
@@ -88,9 +94,9 @@ class SolutionsActivity : AppCompatActivity() {
             if (it !=null) {
                 solutionsViewModel.initial(solutionsViewModel.textToSpeechEngine)
                 var text = it.trim()
-//                val py = Python.getInstance();
-//                val pyobj = py.getModule("translate")
-//                text=pyobj.callAttr(solutionsViewModel.get.value!!.language,text).toString()
+                val py = Python.getInstance();
+                val pyobj = py.getModule("translate")
+                text=pyobj.callAttr(solutionsViewModel.get.value!!.language,text).toString()
               solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
                 solutionsViewModel.textToSpeechDone()
 
@@ -115,4 +121,7 @@ class SolutionsActivity : AppCompatActivity() {
 
     }
 
+
+
 }
+

@@ -350,7 +350,7 @@ class AuthRepository(application: Application) {
                 for (postSnapshot in snapshot.children) {
                     val problem = postSnapshot.getValue(Problem::class.java)
                     if (problem?.userUid == uid) {
-                        ref.child("/$parameter").setValue(data)
+                        ref.child("${problem.problemUid}/$parameter/").setValue(data)
                     }
                 }
 

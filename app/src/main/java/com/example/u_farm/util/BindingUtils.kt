@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import com.chaquo.python.Python
 import com.squareup.picasso.Picasso
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -14,6 +15,18 @@ fun TextView.setUserDetails(item: String?) {
     item?.let {
         text=item
    }
+}
+
+@SuppressLint("SetTextI18n")
+@BindingAdapter(value=["bind:textData","bind:language"])
+fun TextView.setUserDetails(item: String?,item1:String?) {
+    if(item!=null && item1!=null){
+        text=item
+        val py = Python.getInstance()
+               val pyobj = py.getModule("translate")
+               text=pyobj.callAttr(item1,text).toString()
+
+    }
 }
 
 @BindingAdapter("imageUrl")

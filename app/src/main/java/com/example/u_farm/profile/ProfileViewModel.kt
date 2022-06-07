@@ -144,6 +144,7 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         //_arguments.value=lang
 
         authRepository.singleRecord(lang,"language")
+        authRepository.updateProblem(lang,getData.value!!.uid,"language")
 
     }
     fun languageIntent() {

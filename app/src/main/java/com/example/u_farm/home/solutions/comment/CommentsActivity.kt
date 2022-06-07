@@ -8,6 +8,7 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.RecognizerIntent
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
@@ -18,6 +19,7 @@ import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivityCommentsBinding
 import com.example.u_farm.home.CommentsAdapter
 import com.example.u_farm.home.CommentsListener
+import com.example.u_farm.home.solutions.SolutionsActivity
 import com.example.u_farm.home.solutions.SolutionsActivityArgs
 import com.example.u_farm.home.solutions.SolutionsViewModel
 import com.example.u_farm.home.solutions.SolutionsViewModelFactory
@@ -47,9 +49,9 @@ class CommentsActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
+        problem=intent.getStringExtra(SolutionsActivity.USER_KEY).toString()
 
-        problem= intent.getStringExtra("solutionUid").toString()
-
+       Log.d("IntentData",problem)
         val application: Application = requireNotNull(this).application
         val viewModelFactory = CommentsViewModelFactory(application, problem)
         commentsViewModel = ViewModelProvider(this, viewModelFactory).get(CommentsViewModel::class.java)
@@ -61,6 +63,14 @@ class CommentsActivity : AppCompatActivity() {
             commentsViewModel.textToSpeech(it)
         })
         binding.recyclerView2.adapter=adapter
+
+        commentsViewModel.allData.observe(this,Observer{
+            it?.let{
+                adapter.submitList(it)
+            }
+
+        })
+
 
         commentsViewModel.read.observe(this, Observer{
             if(it!=null) {
