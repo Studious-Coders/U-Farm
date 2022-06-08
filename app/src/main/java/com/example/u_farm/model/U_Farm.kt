@@ -18,7 +18,6 @@ data class Problem(
     var userUid:String="",
     var username: String="",
     var profilePicture: String="",
-    var language:String="",
     var problemStatement:String="",
     var diseaseAffectedPlantImage: String="",
 
@@ -30,7 +29,6 @@ data class Solution(
     var userUid:String="",
     var username: String="",
     var profilePicture: String="",
-    var language: String="",
     var solutionStatement:String="",
     var rating: Int=0,
     )
@@ -41,6 +39,5 @@ data class Comments(
     var userUid:String="",
     var username:String="",
     var profilePicture:String="",
-    var language:String="",
     var commentStatement:String="",
     )

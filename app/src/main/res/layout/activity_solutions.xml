@@ -63,8 +63,7 @@
                             android:gravity="center"
                             android:textSize="20sp"
                             android:textStyle="bold"
-                            app:textData="@{solutionsViewModel.value.username}"
-                            app:language="@{solutionsViewModel.value.language}"
+                            app:userDetails="@{solutionsViewModel.value.username}"
                             tools:text="@string/name" />
 
                         <ImageButton
@@ -105,8 +104,7 @@
                             android:layout_height="wrap_content"
                             android:textSize="16sp"
                             android:layout_margin="8dp"
-                            app:textData="@{solutionsViewModel.value.problemStatement}"
-                           app:language="@{solutionsViewModel.value.language}"
+                            app:userDetails="@{solutionsViewModel.value.problemStatement}"
                             tools:text="@string/problem1" />
 
                         <ImageButton

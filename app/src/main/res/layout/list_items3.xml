@@ -54,8 +54,7 @@
                     android:gravity="center"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:textData="@{data.username}"
-                    app:language="@{data.language}"
+                    app:userDetails="@{data.username}"
                     tools:text="@string/name" />
             </RelativeLayout>
             <LinearLayout
@@ -80,8 +79,7 @@
                         tools:text="@string/comment1"
                         app:layout_constraintBottom_toTopOf="@+id/floating_action_button6"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:textData="@{data.commentStatement}"
-                        app:language="@{data.language}"
+                        app:userDetails="@{data.commentStatement}"
                         app:layout_constraintHorizontal_bias="0.0"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
