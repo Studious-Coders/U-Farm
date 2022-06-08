@@ -72,6 +72,9 @@ class SolutionsActivity : AppCompatActivity() {
             }
         })
 
+        val py = Python.getInstance();
+        val pyobj = py.getModule("translate")
+
         solutionsViewModel.navigateToAddSolutions.observe(this, Observer {
             if (it) {
                 if (FirebaseAuth.getInstance().uid != null) {
@@ -94,8 +97,6 @@ class SolutionsActivity : AppCompatActivity() {
             if (it !=null) {
                 solutionsViewModel.initial(solutionsViewModel.textToSpeechEngine)
                 var text = it.trim()
-                val py = Python.getInstance();
-                val pyobj = py.getModule("translate")
                 text=pyobj.callAttr(solutionsViewModel.get.value!!.language,text).toString()
               solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
                 solutionsViewModel.textToSpeechDone()

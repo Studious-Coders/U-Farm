@@ -69,8 +69,7 @@
                     android:gravity="center"
                     android:textSize="20sp"
                     android:textStyle="bold"
-                    app:language="@{data.language}"
-                    app:textData="@{data.username}"
+                    app:userDetails="@{data.username}"
                     tools:text="@string/name" />
             </RelativeLayout>
             <LinearLayout
@@ -141,8 +140,7 @@
                         android:id="@+id/solutionstatement"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:textData="@{data.solutionStatement}"
-                        app:language="@{data.language}"
+                        app:userDetails="@{data.solutionStatement}"
                         tools:text="@string/solution1"
                         app:layout_constraintBottom_toTopOf="@+id/floating_action_button6"
                         app:layout_constraintEnd_toEndOf="parent"

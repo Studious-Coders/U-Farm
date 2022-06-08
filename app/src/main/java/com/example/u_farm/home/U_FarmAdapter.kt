@@ -13,6 +13,7 @@ import com.example.u_farm.model.Comments
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
+import java.util.Collections.addAll
 
 class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<Problem,ProblemsAdapter.ViewHolder>(ProblemsDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -23,6 +24,7 @@ class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<Problem,
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder.from(parent)
     }
+
 
     class ViewHolder private constructor(val binding: ListItemsBinding)
         : RecyclerView.ViewHolder(binding.root) {
@@ -117,6 +119,9 @@ class SolutionsDiffCallback : DiffUtil.ItemCallback<Solution>() {
 }
 
 class CommentsAdapter(val clickListener:CommentsListener) : ListAdapter<Comments,CommentsAdapter.ViewHolder>(CommentsDiffCallback()) {
+
+
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item,clickListener)
@@ -130,10 +135,14 @@ class CommentsAdapter(val clickListener:CommentsListener) : ListAdapter<Comments
         : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: Comments,clickListener: CommentsListener) {
+
             binding.data=item
             binding.clicklistener=clickListener
             binding.executePendingBindings()
         }
+
+
+
 
         companion object {
             fun from(parent: ViewGroup): ViewHolder {

@@ -49,17 +49,12 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
     fun speakOutTheProblem(problemStatement:String){
         Log.d("Priya",problemStatement+textToSpeechEngine)
         initial(textToSpeechEngine)
-        val text = problemStatement.trim()
-//        val py = Python.getInstance();
-//        val pyobj = py.getModule("translate")
-//        text=pyobj.callAttr(get.value!!.language,text).toString()
+        var text = problemStatement.trim()
+        val py = Python.getInstance();
+        val pyobj = py.getModule("translate")
+        text=pyobj.callAttr(get.value!!.language,text).toString()
         speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
-
-
     }
-
-
-
 
     fun increaseRating(inc:Int,suid:String){
             authRepository.singleRecordSolution(inc+1,"rating",suid)

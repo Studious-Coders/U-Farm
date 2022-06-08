@@ -1,5 +1,6 @@
 package com.example.u_farm.home
 
+import android.annotation.SuppressLint
 import android.app.Application
 import android.os.Bundle
 import android.view.*
@@ -14,10 +15,12 @@ import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentHomeBinding
 
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -49,29 +52,12 @@ class HomeFragment : Fragment() {
 
         homeViewModel.allData.observe(viewLifecycleOwner, Observer {
                                  it?.let{
-                         adapter.submitList(it)
+
+                                     adapter.submitList(it)
+
+                                    adapter.notifyDataSetChanged()
                                    }
         })
-
-//        homeViewModel.choselang.observe(viewLifecycleOwner,Observer{
-//            if(it!=null)
-//            {
-//                langselect =it
-//            }
-//        }
-//        )
-
-
-     homeViewModel.newData.observe(viewLifecycleOwner,Observer{
-         if(it==true){
-
-             homeViewModel.function()
-
-         }
-     })
-
-
-
 
         homeViewModel.navigateToSolutionsPage.observe(viewLifecycleOwner, Observer {
             if(it!=""){
@@ -94,7 +80,11 @@ class HomeFragment : Fragment() {
         })
 
         return binding.root
+
+
     }
+
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.top_app_bar, menu)
     }

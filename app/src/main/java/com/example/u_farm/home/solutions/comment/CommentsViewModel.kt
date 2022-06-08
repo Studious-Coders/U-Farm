@@ -83,7 +83,6 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
                     get.value!!.uid,
                     get.value!!.username,
                     get.value!!.profilePicture,
-                    get.value!!.language,
                     commentStatement
                 )
                 upload(commentsData)

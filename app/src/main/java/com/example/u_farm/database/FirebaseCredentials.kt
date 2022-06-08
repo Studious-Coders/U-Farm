@@ -273,10 +273,56 @@ class AuthRepository(application: Application) {
 
     /**Problem Model Function**/
 
+    val latestMessageHashMap=HashMap<String,Problem>()
+
+    private fun refreshTheLatestMessage(){
+
+        latestMessageHashMap.values.forEach{
+            problemList.add(Problem())
+
+         }
+//    recentMessage(latestMessageHashMap)
+    }
+
+
+    private fun listentoMessage(){
+
+
+    }
+
     //Make a list of Problems to display in the recyclerView
-    fun ProblemDataList() {
-        val ref = firebaseDatabase.getReference("PROBLEM")
-        ref.addValueEventListener(object : ValueEventListener {
+//    fun ProblemDataList1() {
+//        val ref = FirebaseDatabase.getInstance().getReference("PROBLEM")
+//        ref.addChildEventListener(object : ChildEventListener {
+//            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
+//                val problem = snapshot.getValue(Problem::class.java)
+//                if (problem != null) {
+//                    problemList.add(problem)
+//                }
+//                ProblemDataMutableLiveDataList.postValue(problemList)
+//
+//            }
+//
+//            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
+//            }
+//
+//            override fun onChildRemoved(snapshot: DataSnapshot) {
+//
+//            }
+//
+//            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
+//
+//            }
+//
+//            override fun onCancelled(error: DatabaseError) {
+//
+//            }
+//        })
+//    }
+
+        fun ProblemDataList() {
+                    val ref = firebaseDatabase.getReference("PROBLEM")
+                 ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 for  (postSnapshot in snapshot.children) {
                     val problem = postSnapshot.getValue(Problem::class.java)
@@ -291,7 +337,11 @@ class AuthRepository(application: Application) {
 
             }
         })
-    }
+
+
+
+
+        }
 
     //Changes a single record in Problem Model in Firebase
     fun singleRecordProblem(data: String, parameter: String) {
@@ -317,6 +367,7 @@ class AuthRepository(application: Application) {
                     reference1.setValue(problem)
                 }
                 setProblemDataRepository.postValue(true)
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -341,27 +392,6 @@ class AuthRepository(application: Application) {
             }
         })
     }
-
-    //update a single record in Problem Model
-    fun updateProblem(data: String, uid: String, parameter: String) {
-        val ref = firebaseDatabase.getReference("PROBLEM")
-        ref.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (postSnapshot in snapshot.children) {
-                    val problem = postSnapshot.getValue(Problem::class.java)
-                    if (problem?.userUid == uid) {
-                        ref.child("${problem.problemUid}/$parameter/").setValue(data)
-                    }
-                }
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
-    }
-
 
     /**Solution Model Function**/
 
@@ -393,6 +423,7 @@ class AuthRepository(application: Application) {
                 val solution = snapshot.getValue(Solution::class.java)
                 if (solution != null) {
                     getSolutionRepository.postValue(solution)
+
                 }
             }
 
@@ -418,27 +449,6 @@ class AuthRepository(application: Application) {
             }
         })
     }
-
-    //To update a single record in the Solution Model
-    fun updateSolution(data: String, uid: String, parameter: String) {
-        val ref = firebaseDatabase.getReference("SOLUTION")
-        ref.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for (postSnapshot in snapshot.children) {
-                    val solution = postSnapshot.getValue(Solution::class.java)
-                    if (solution?.userUid == uid) {
-                        ref.child("/$parameter").setValue(data)
-                    }
-                }
-
-            }
-
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
-    }
-
     //Set the solution data to the Solution Model
     fun setSolutionData(solution: Solution) {
         reference2.addListenerForSingleValueEvent(object : ValueEventListener {
@@ -492,7 +502,6 @@ class AuthRepository(application: Application) {
             }
         })
     }
-
 
     //Store the Image to the Firebase
     fun uploadImageToFirebaseStorage(image: Uri, folder: String) {

@@ -55,8 +55,7 @@
                 android:gravity="center"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                app:language="@{data.language.toString()}"
-                app:textData="@{data.username}"
+                app:userDetails="@{data.username}"
                 tools:text="Farmer" />
 
             <ImageButton
@@ -95,8 +94,7 @@
                 android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:textData="@{data.problemStatement}"
-                app:language="@{data.language.toString()}"
+                app:userDetails="@{data.problemStatement}"
                 tools:text="@string/problem1"
                 android:textSize="16sp"
                 />

@@ -54,7 +54,7 @@ class AddSolutionsViewModel(application: Application,problemUid:String): ViewMod
             _expection.value=true
         }else{
         viewModelScope.launch {
-            val solution= Solution(key1, puid,getData.value!!.uid,getData.value!!.username,getData.value!!.profilePicture,getData.value!!.language,solutionStatement,rating)
+            val solution= Solution(key1, puid,getData.value!!.uid,getData.value!!.username,getData.value!!.profilePicture,solutionStatement,rating)
             upload(solution)
         }
        }
