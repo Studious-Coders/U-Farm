@@ -18,9 +18,8 @@ import com.example.u_farm.home.*
 import com.example.u_farm.home.solutions.addsolutions.AddSolutionsActivity
 import com.example.u_farm.home.solutions.comment.CommentsActivity
 import com.example.u_farm.login.LoginActivity
+import com.example.u_farm.util.lang
 import com.google.firebase.auth.FirebaseAuth
-
-var chosedlang="English"
 
 class SolutionsActivity : AppCompatActivity() {
     companion object{
@@ -72,8 +71,6 @@ class SolutionsActivity : AppCompatActivity() {
             }
         })
 
-        val py = Python.getInstance();
-        val pyobj = py.getModule("translate")
 
         solutionsViewModel.navigateToAddSolutions.observe(this, Observer {
             if (it) {
@@ -97,7 +94,7 @@ class SolutionsActivity : AppCompatActivity() {
             if (it !=null) {
                 solutionsViewModel.initial(solutionsViewModel.textToSpeechEngine)
                 var text = it.trim()
-                text=pyobj.callAttr(solutionsViewModel.get.value!!.language,text).toString()
+                text=solutionsViewModel.pyobj.callAttr(lang,text).toString()
               solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
                 solutionsViewModel.textToSpeechDone()
 
@@ -106,21 +103,7 @@ class SolutionsActivity : AppCompatActivity() {
     })
 
     }
-      override fun onStart(){
-          super.onStart()
 
-        solutionsViewModel.initiate()
-          Log.d("priya","Started")
-
-      }
-
-    override fun onRestart() {
-        super.onRestart()
-        solutionsViewModel.initiate()
-
-        Log.d("priya","Restart")
-
-    }
 
 
 

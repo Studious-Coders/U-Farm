@@ -7,11 +7,13 @@ import android.media.MediaRecorder
 import android.speech.tts.TextToSpeech
 import android.util.Log
 import androidx.lifecycle.*
+import com.chaquo.python.PyObject
 import com.chaquo.python.Python
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
+import com.example.u_farm.util.lang
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -40,7 +42,7 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
     val textToSpeechEngine: TextToSpeech by lazy {
         TextToSpeech(application) {
             if (it == TextToSpeech.SUCCESS) {
-                textToSpeechEngine.language = Locale(get.value!!.language)
+                textToSpeechEngine.language = Locale(lang)
 
             }
         }
@@ -52,7 +54,7 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
         var text = problemStatement.trim()
         val py = Python.getInstance();
         val pyobj = py.getModule("translate")
-        text=pyobj.callAttr(get.value!!.language,text).toString()
+        text=pyobj.callAttr(lang,text).toString()
         speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
     }
 
@@ -107,6 +109,8 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
 
     val getData: LiveData<Problem?>
         get()=authRepository.getProblemMutableLiveData()
+   var py:Python
+    var pyobj:PyObject
 
     private var authRepository: AuthRepository
     init{
@@ -114,6 +118,9 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
         authRepository.SolutionDataList(problemUid)
         authRepository.getProblem(problemUid)
         authRepository.getUserData()
+        py = Python.getInstance();
+        pyobj = py.getModule("translate")
+
         value.addSource(getData,value::setValue)
         puid=problemUid
     }

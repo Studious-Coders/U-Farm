@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModel
 import com.chaquo.python.Python
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.U_Farm
+import com.example.u_farm.util.languageInitial
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import java.util.*
@@ -158,14 +159,18 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
                 0 -> {
                     setLocale("ta")
                     updateLanguage("ta_IN")
+                    languageInitial("ta_IN")
+
                    }
                 1 -> {
                     setLocale("en")
                     updateLanguage("en_US")
+                    languageInitial("en_US")
                   }
                 2 -> {
                     setLocale("hi")
                     updateLanguage("hi_IN")
+                    languageInitial("hi_IN")
                   }
 
             }

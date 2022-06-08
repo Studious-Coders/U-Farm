@@ -3,6 +3,7 @@ package com.example.u_farm.home
 import android.annotation.SuppressLint
 import android.app.Application
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -47,12 +48,16 @@ class HomeFragment : Fragment() {
 
         })
 
+
+
         binding.recyclerView.adapter=adapter
 
 
-        homeViewModel.allData.observe(viewLifecycleOwner, Observer {
-                                 it?.let{
 
+
+        homeViewModel.allData.observe(viewLifecycleOwner, Observer {
+            Log.d("Size",it.size.toString())
+                                 it?.let{
                                      adapter.submitList(it)
 
                                     adapter.notifyDataSetChanged()
@@ -61,6 +66,7 @@ class HomeFragment : Fragment() {
 
         homeViewModel.navigateToSolutionsPage.observe(viewLifecycleOwner, Observer {
             if(it!=""){
+                adapter.submitList(null)
                 this.findNavController().navigate(HomeFragmentDirections.actionHomeToSolutionsActivity(it))
                 homeViewModel.navigateToSolutionsPageDone()
       }

@@ -15,7 +15,8 @@ import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
 import java.util.Collections.addAll
 
-class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<Problem,ProblemsAdapter.ViewHolder>(ProblemsDiffCallback()) {
+class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<Problem, ProblemsAdapter.ViewHolder>(ProblemsDiffCallback()) {
+
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item,clickListener)
