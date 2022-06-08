@@ -102,7 +102,7 @@ class EditProfileActivity : AppCompatActivity() {
             Log.d("EditProfile", "Photo was selected")
             selectedPhotoUri = data.data
             editProfileViewModel.imageFormatingDone(selectedPhotoUri!!)
-            Picasso.with(this).load(selectedPhotoUri).into(userdp1)
+            Picasso.get().load(selectedPhotoUri).into(userdp1)
 //            loading_spinner.visibility=View.VISIBLE
 //
 

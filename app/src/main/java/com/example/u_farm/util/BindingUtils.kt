@@ -46,7 +46,7 @@ fun TextView.setUserDetails(item: String?,item1:String?) {
 fun bindImage(imgView: ImageView, imgUrl:String?) {
     imgUrl?.let{
         if(it!=""){
-            Picasso.with(imgView.context)
+            Picasso.get()
                 .load(imgUrl)
                 .into(imgView)
         }
@@ -57,7 +57,7 @@ fun bindImage(imgView: ImageView, imgUrl:String?) {
 fun bindImage(circleImageView: CircleImageView, imgUrl:String?) {
     imgUrl?.let{
         if(it!=""){
-            Picasso.with(circleImageView.context).load(imgUrl).into(circleImageView)
+            Picasso.get().load(imgUrl).into(circleImageView)
         }
     }
 }

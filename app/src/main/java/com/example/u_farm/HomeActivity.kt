@@ -23,6 +23,7 @@ import androidx.navigation.ui.setupWithNavController
 import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
 import com.example.u_farm.databinding.ActivityHomeBinding
+import com.example.u_farm.util.getUserData
 import com.example.u_farm.util.setUserDetails
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -52,6 +53,8 @@ class HomeActivity : AppCompatActivity() {
         if (! Python.isStarted()) {
             Python.start(AndroidPlatform(this))
         }
+
+        getUserData()
 
     }
 

@@ -143,7 +143,7 @@ class AddProblemsActivity : AppCompatActivity() {
 
             selectedPhotoUri = data.data
             addProblemsViewModel.imageFormatingDone(selectedPhotoUri!!)
-            Picasso.with(this).load(selectedPhotoUri).into(imageView)
+            Picasso.get().load(selectedPhotoUri).into(imageView)
           }
     }
 

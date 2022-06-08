@@ -63,6 +63,7 @@ class AuthRepository(application: Application) {
     private var googleSignInClient: GoogleSignInClient
 
     init {
+
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("492960336873-kpmq8gmn37riibaoasms8h9ld5s8r6qo.apps.googleusercontent.com")
             .requestEmail()
