@@ -1,7 +1,5 @@
 package com.example.u_farm.model
 
-import android.net.Uri
-
 data class U_Farm(
     var uid:String="",
     var username:String="#Username",

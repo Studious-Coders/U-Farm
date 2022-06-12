@@ -13,7 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 
-class LoginViewModel(application: Application,activity:Activity,private val listener: OnSignInStartedListener): ViewModel() {
+class LoginViewModel(application: Application): ViewModel() {
 
     private var authRepository: AuthRepository
     private val _navigateToRegister = MutableLiveData<Boolean>()
@@ -41,37 +41,8 @@ class LoginViewModel(application: Application,activity:Activity,private val list
 
     }
 
-
-
-
     fun signInWithGoogle(idToken: String) {
        authRepository.firebaseAuthWithGoogle(idToken)
         }
 
-//
-//
-//    fun firebaseAuthWithGoogle(idToken: String) {
-//        val credential = GoogleAuthProvider.getCredential(idToken, null)
-//        authRepository.auth.signInWithCredential(credential).addOnCompleteListener {
-//            if (it.isSuccessful) {
-//                authRepository.firebaseUserAuthRepository.postValue(authRepository.auth.currentUser)
-//                val user = authRepository.auth.currentUser
-//                val ufarm = U_Farm(
-//                    user!!.uid,
-//                    user.displayName.toString(),
-//                    user.email.toString(),
-//                    "",
-//                    user.phoneNumber.toString(),
-//                    user.photoUrl.toString()
-//                )
-//               authRepository.setUserData(ufarm)
-//            }
-//        }
-//    }
-
-
-
-}
-interface OnSignInStartedListener {
-    fun onSignInStarted(client: GoogleSignInClient?)
 }

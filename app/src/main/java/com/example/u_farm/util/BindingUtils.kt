@@ -20,25 +20,9 @@ import com.example.u_farm.util.lang
 fun TextView.setUserDetails(item: String?) {
     item?.let {
         text = item
-//        val lang= language
         val py = Python.getInstance()
         val pyobj = py.getModule("translate")
         text=pyobj.callAttr(lang,text).toString()
-
-
-
-
-
-    }
-}
-
-@SuppressLint("SetTextI18n")
-@BindingAdapter(value=["bind:textData","bind:language"])
-fun TextView.setUserDetails(item: String?,item1:String?) {
-    if(item!=null && item1!=null){
-        text=item
-
-
     }
 }
 

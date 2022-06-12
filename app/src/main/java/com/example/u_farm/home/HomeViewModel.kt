@@ -56,9 +56,4 @@ class HomeViewModel(application: Application): ViewModel() {
     }
     val allData: MutableLiveData<MutableList<Problem?>>
         get()=authRepository.ProblemDataMutableLiveDataList()
-
-
-
-
-
 }

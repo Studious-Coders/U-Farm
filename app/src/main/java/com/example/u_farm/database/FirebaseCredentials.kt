@@ -20,50 +20,47 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.*
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
-import org.w3c.dom.Comment
 import java.util.*
 
 class AuthRepository(application: Application) {
-    private companion object {
-        private const val TAG = "signup"
-        private const val RC_SIGN_IN = 78
-    }
 
     var auth: FirebaseAuth
     private var firebaseDatabase: FirebaseDatabase
     private var reference: DatabaseReference
+
     var reference1: DatabaseReference
     var reference2: DatabaseReference
     var reference3: DatabaseReference
+
     private var application: Application
     var firebaseUserAuthRepository = MutableLiveData<FirebaseUser?>()
     private var userLoggedAuthRepository = MutableLiveData<Boolean?>()
     private var setUserDataRepository = MutableLiveData<Boolean?>()
     private var getUserDataRepository = MutableLiveData<U_Farm?>()
     private var getDataRepository = MutableLiveData<U_Farm?>()
-    private var getProblemRepository = MutableLiveData<Problem?>()
-    private var getSolutionRepository = MutableLiveData<Solution?>()
-
     private var singleRecordDataRepository = MutableLiveData<Boolean?>()
-    private var uploadedDataRepository = MutableLiveData<String?>()
-    private var setSolutionDataRepository = MutableLiveData<Boolean?>()
+
+    private var getProblemRepository = MutableLiveData<Problem?>()
     private var setProblemDataRepository = MutableLiveData<Boolean?>()
+    private var ProblemDataMutableLiveDataList = MutableLiveData<MutableList<Problem?>>()
+    var problemList = mutableListOf<Problem?>()
+
+    private var getSolutionRepository = MutableLiveData<Solution?>()
+    private var setSolutionDataRepository = MutableLiveData<Boolean?>()
+    private var SolutionDataMutableLiveDataList = MutableLiveData<MutableList<Solution?>>()
+    var solutionList = mutableListOf<Solution?>()
+
+    private var CommentDataMutableLiveDataList = MutableLiveData<MutableList<Comments?>>()
     private var setCommentDataRepository = MutableLiveData<Boolean?>()
+    var commentList = mutableListOf<Comments?>()
 
     private var storage: FirebaseStorage
-    private var ProblemDataMutableLiveDataList = MutableLiveData<MutableList<Problem?>>()
-    private var SolutionDataMutableLiveDataList = MutableLiveData<MutableList<Solution?>>()
-    private var CommentDataMutableLiveDataList = MutableLiveData<MutableList<Comments?>>()
-
-    var problemList = mutableListOf<Problem?>()
-    var solutionList = mutableListOf<Solution?>()
-    var commentList = mutableListOf<Comments?>()
+    private var uploadedDataRepository = MutableLiveData<String?>()
 
     private var gso: GoogleSignInOptions
     private var googleSignInClient: GoogleSignInClient
 
     init {
-
         gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
             .requestIdToken("492960336873-kpmq8gmn37riibaoasms8h9ld5s8r6qo.apps.googleusercontent.com")
             .requestEmail()
@@ -90,22 +87,6 @@ class AuthRepository(application: Application) {
         return userLoggedAuthRepository
     }
 
-    fun setUserDataMutableLiveData(): MutableLiveData<Boolean?> {
-        return setUserDataRepository
-    }
-
-    fun setSolutionDataMutableLiveData(): MutableLiveData<Boolean?> {
-        return setSolutionDataRepository
-    }
-
-    fun setCommentDataMutableLiveData(): MutableLiveData<Boolean?> {
-        return setCommentDataRepository
-    }
-
-    fun setProblemDataMutableLiveData(): MutableLiveData<Boolean?> {
-        return setProblemDataRepository
-    }
-
     fun getUserDataMutableLiveData(): MutableLiveData<U_Farm?> {
         return getUserDataRepository
     }
@@ -114,31 +95,44 @@ class AuthRepository(application: Application) {
         return getDataRepository
     }
 
+    fun singleRecordDataMutuableLiveData(): MutableLiveData<Boolean?> {
+        return singleRecordDataRepository
+    }
+
+    fun setUserDataMutableLiveData(): MutableLiveData<Boolean?> {
+        return setUserDataRepository
+    }
+
+    fun setProblemDataMutableLiveData(): MutableLiveData<Boolean?> {
+        return setProblemDataRepository
+    }
+
     fun getProblemMutableLiveData(): MutableLiveData<Problem?> {
         return getProblemRepository
     }
 
+    fun ProblemDataMutableLiveDataList(): MutableLiveData<MutableList<Problem?>> {
+        return ProblemDataMutableLiveDataList
+    }
+
+    fun setSolutionDataMutableLiveData(): MutableLiveData<Boolean?> {
+        return setSolutionDataRepository
+    }
 
     fun getSolutionMutableLiveData(): MutableLiveData<Solution?> {
         return getSolutionRepository
-    }
-
-
-    fun ProblemDataMutableLiveDataList(): MutableLiveData<MutableList<Problem?>> {
-        return ProblemDataMutableLiveDataList
     }
 
     fun SolutionDataMutableLiveDataList(): MutableLiveData<MutableList<Solution?>> {
         return SolutionDataMutableLiveDataList
     }
 
-    fun CommentDataMutableLiveDataList(): MutableLiveData<MutableList<Comments?>> {
-        return CommentDataMutableLiveDataList
+    fun setCommentDataMutableLiveData(): MutableLiveData<Boolean?> {
+        return setCommentDataRepository
     }
 
-
-    fun singleRecordDataMutuableLiveData(): MutableLiveData<Boolean?> {
-        return singleRecordDataRepository
+    fun CommentDataMutableLiveDataList(): MutableLiveData<MutableList<Comments?>> {
+        return CommentDataMutableLiveDataList
     }
 
     fun uploadedDataMutuableLiveData(): MutableLiveData<String?> {
@@ -178,6 +172,7 @@ class AuthRepository(application: Application) {
                 .show()
             return
         }
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (!it.isSuccessful) return@addOnCompleteListener
@@ -203,6 +198,7 @@ class AuthRepository(application: Application) {
                 .show()
             return
         }
+
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (!it.isSuccessful) return@addOnCompleteListener
@@ -272,55 +268,6 @@ class AuthRepository(application: Application) {
         })
     }
 
-    /**Problem Model Function**/
-
-    val latestMessageHashMap=HashMap<String,Problem>()
-
-    private fun refreshTheLatestMessage(){
-
-        latestMessageHashMap.values.forEach{
-            problemList.add(Problem())
-
-         }
-//    recentMessage(latestMessageHashMap)
-    }
-
-
-    private fun listentoMessage(){
-
-
-    }
-
-    //Make a list of Problems to display in the recyclerView
-//    fun ProblemDataList1() {
-//        val ref = FirebaseDatabase.getInstance().getReference("PROBLEM")
-//        ref.addChildEventListener(object : ChildEventListener {
-//            override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-//                val problem = snapshot.getValue(Problem::class.java)
-//                if (problem != null) {
-//                    problemList.add(problem)
-//                }
-//                ProblemDataMutableLiveDataList.postValue(problemList)
-//
-//            }
-//
-//            override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-//            }
-//
-//            override fun onChildRemoved(snapshot: DataSnapshot) {
-//
-//            }
-//
-//            override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-//
-//            }
-//
-//            override fun onCancelled(error: DatabaseError) {
-//
-//            }
-//        })
-//    }
-
         fun ProblemDataList() {
                     val ref = firebaseDatabase.getReference("PROBLEM")
                  ref.addValueEventListener(object : ValueEventListener {
@@ -338,10 +285,6 @@ class AuthRepository(application: Application) {
 
             }
         })
-
-
-
-
         }
 
     //Changes a single record in Problem Model in Firebase
@@ -450,6 +393,7 @@ class AuthRepository(application: Application) {
             }
         })
     }
+
     //Set the solution data to the Solution Model
     fun setSolutionData(solution: Solution) {
         reference2.addListenerForSingleValueEvent(object : ValueEventListener {

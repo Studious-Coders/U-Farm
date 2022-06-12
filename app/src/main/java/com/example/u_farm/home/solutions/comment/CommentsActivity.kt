@@ -34,7 +34,6 @@ class CommentsActivity : AppCompatActivity() {
     private lateinit var commentsViewModel: CommentsViewModel
     private var comments:Comments= Comments()
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityCommentsBinding>(
@@ -45,7 +44,7 @@ class CommentsActivity : AppCompatActivity() {
 
 
         progressBar = ProgressDialog(this)
-       supportActionBar?.title = "Comments"
+       supportActionBar?.setTitle(R.string.comments)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 

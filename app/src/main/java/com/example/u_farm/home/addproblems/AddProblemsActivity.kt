@@ -13,7 +13,6 @@ import android.os.Build
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -28,7 +27,6 @@ import com.example.u_farm.databinding.ActivityAddProblemsBinding
 import com.example.u_farm.model.Problem
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_problems.*
-import java.lang.StringBuilder
 
 private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
 

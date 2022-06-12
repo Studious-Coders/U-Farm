@@ -115,7 +115,6 @@
                             android:layout_margin="8dp"
                             android:background="@android:color/transparent"
                             android:contentDescription="@string/speech_to_text"
-                            android:onClick="@{()->solutionsViewModel.speakOutTheProblem(solutionsViewModel.value.problemStatement)}"
                             android:src="@drawable/ic_baseline_play_circle_filled_24"
                             app:elevation="25dp"
                             app:layout_constraintBottom_toBottomOf="parent"

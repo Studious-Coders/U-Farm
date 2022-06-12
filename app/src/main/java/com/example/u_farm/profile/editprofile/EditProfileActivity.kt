@@ -38,13 +38,9 @@ class EditProfileActivity : AppCompatActivity() {
             R.layout.activity_editprofile
         )
 
-
         jobText.showSoftInputOnFocus=false
-
-
-
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
-        supportActionBar?.title = "EditProfile"
+        supportActionBar?.setTitle(R.string.edit_profile)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val application: Application = requireNotNull(this).application
@@ -55,13 +51,6 @@ class EditProfileActivity : AppCompatActivity() {
         binding.uFarm=u_farm
         binding.editProfileViewModel = editProfileViewModel
         binding.lifecycleOwner = this
-
-
-//          editProfileViewModel.hope.observe(this, Observer {
-//            if(it!=null){
-//                editProfileViewModel.upload()
-//            }
-//        })
 
         editProfileViewModel.image.observe(this, Observer {
             if(it==true) {
@@ -74,7 +63,7 @@ class EditProfileActivity : AppCompatActivity() {
 
 
         editProfileViewModel.setImage.observe(this, Observer {
-
+              editProfileViewModel.upload1()
         })
 
         editProfileViewModel.setData.observe(this,Observer{
@@ -103,9 +92,6 @@ class EditProfileActivity : AppCompatActivity() {
             selectedPhotoUri = data.data
             editProfileViewModel.imageFormatingDone(selectedPhotoUri!!)
             Picasso.get().load(selectedPhotoUri).into(userdp1)
-//            loading_spinner.visibility=View.VISIBLE
-//
-
         }
     }
 

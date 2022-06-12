@@ -14,13 +14,14 @@ import androidx.lifecycle.ViewModel
 import com.chaquo.python.Python
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.U_Farm
+import com.example.u_farm.util.getUserData
 import com.example.u_farm.util.languageInitial
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import java.util.*
 
 @Suppress("DEPRECATION")
-var chosedlang="English"
+
 class ProfileViewModel(application: Application, activity: Activity): ViewModel() {
     private var alert: AlertDialog.Builder
     private var alert0: AlertDialog.Builder
@@ -69,10 +70,6 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     private val _snackbar= MutableLiveData<Boolean?>()
     val snackbar: LiveData<Boolean?>
         get()=_snackbar
-
-
-    var currentLanguage:String=""
-
     init {
         authRepository = AuthRepository(application)
         alert = AlertDialog.Builder(activity)
@@ -81,16 +78,6 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         value.addSource(getData,value::setValue)
             _expert.value=true
 
-    }
-
-    private var _choselang= MutableLiveData<String>()
-    val choselang: LiveData<String>
-        get()=_choselang
-
-    fun languageset():String{
-        _choselang.value=getData.value!!.language
-        val option=_choselang.value.toString()
-        return option
     }
 
     fun expertTickDone(){
@@ -106,15 +93,12 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         alert.setMessage("Are you sure you want to Signout?")
             .setPositiveButton("YES", DialogInterface.OnClickListener { dialog, which ->
                 authRepository.signOut()
+                getUserData()
             }).setNegativeButton("NO", null)
 
         val alert1: AlertDialog = alert.create()
-//        if(getData.value?.uid!=null) {
 
             alert.show()
-//        }else{
-//            _snackbar.value=true
-//        }
 
     }
     fun navigateToEditProfile(){
@@ -132,17 +116,9 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     fun shareIntentDone() {
         _share.value = false
     }
-    fun snackbarDone(){
-        _snackbar.value=false
-    }
-
-    fun snackbar(){
-        _snackbar.value=true
-    }
 
     val  options = arrayOf("Tamil", "English","Hindi")
     fun updateLanguage(lang:String){
-        //_arguments.value=lang
         authRepository.singleRecord(lang,"language")
 
 
@@ -177,12 +153,8 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
 
 
         }
-//        if(getData.value?.uid!=null) {
 
             alert0.show()
-//        }else{
-//            _snackbar.value=true
-//        }
         _language.value=true
     }
     var reso:Resources=application.resources

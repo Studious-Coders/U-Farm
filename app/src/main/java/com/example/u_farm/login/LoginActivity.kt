@@ -17,6 +17,7 @@ import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivityLoginBinding
 import com.example.u_farm.model.U_Farm
 import com.example.u_farm.register.RegisterActivity
+import com.example.u_farm.util.getUserData
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
@@ -40,11 +41,8 @@ class LoginActivity : AppCompatActivity() {
         val application: Application = requireNotNull(this).application
         val activity: Activity =this
 
-        val viewModelFactory = LoginViewModelFactory(application,activity, object : OnSignInStartedListener {
-            override fun onSignInStarted(client: GoogleSignInClient?) {
-                startActivityForResult(client?.signInIntent, RC_SIGN_IN)
-            }
-        })
+        val viewModelFactory = LoginViewModelFactory(application)
+
         loginViewModel =
             ViewModelProvider(this, viewModelFactory).get(LoginViewModel::class.java)
         binding.loginViewModel=loginViewModel
@@ -53,6 +51,7 @@ class LoginActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         loginViewModel.firebaseUser.observe(this, Observer{
             if(it!=null){
+                getUserData()
                 (activity as AppCompatActivity).finish()
                 Toast.makeText(application,"Welcome back!", Toast.LENGTH_LONG).show()
             }
@@ -78,11 +77,6 @@ class LoginActivity : AppCompatActivity() {
         signInButton.setOnClickListener{
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
-
-//            override fun onSignInStarted(client: GoogleSignInClient?) {
-//                startActivityForResult(client?.signInIntent, RC_SIGN_IN)
-//            }
-
         }
 
 
@@ -100,7 +94,6 @@ class LoginActivity : AppCompatActivity() {
             try {
                 val account = task.getResult(ApiException::class.java)!!
                 loginViewModel.signInWithGoogle(account.idToken!!)
-//                   loginViewModel.firebaseAuthWithGoogle(account.idToken!!)
 
                 Toast.makeText(this, "Signed In Successfully", Toast.LENGTH_SHORT).show()
 

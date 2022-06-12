@@ -6,6 +6,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -20,6 +21,7 @@ import com.example.u_farm.home.solutions.comment.CommentsActivity
 import com.example.u_farm.login.LoginActivity
 import com.example.u_farm.util.lang
 import com.google.firebase.auth.FirebaseAuth
+import java.util.*
 
 class SolutionsActivity : AppCompatActivity() {
     companion object{
@@ -34,7 +36,7 @@ class SolutionsActivity : AppCompatActivity() {
             this,
             R.layout.activity_solutions
         )
-        Log.d("priya","Created")
+        Log.d("onCreate","Created")
 
         val args1: SolutionsActivityArgs by navArgs()
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
@@ -48,7 +50,7 @@ class SolutionsActivity : AppCompatActivity() {
         val adapter = SolutionsAdapter(SolutionsListener1 { it ->
             val intent = Intent(this, CommentsActivity::class.java)
             intent.putExtra(USER_KEY, it)
-            Log.d("XYZ",it)
+            Log.d("solutionUid",it)
             startActivity(intent)
 
 
@@ -92,7 +94,7 @@ class SolutionsActivity : AppCompatActivity() {
 
         solutionsViewModel.read.observe(this,Observer {
             if (it !=null) {
-                solutionsViewModel.initial(solutionsViewModel.textToSpeechEngine)
+                solutionsViewModel.initial(textToSpeechEngine)
                 var text = it.trim()
                 text=solutionsViewModel.pyobj.callAttr(lang,text).toString()
               solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
@@ -102,7 +104,19 @@ class SolutionsActivity : AppCompatActivity() {
 
     })
 
+
+
     }
+    val textToSpeechEngine: TextToSpeech by lazy {
+        TextToSpeech(application) {
+            if (it == TextToSpeech.SUCCESS) {
+                Log.d("Success",it.toString()+ lang)
+                textToSpeechEngine.language = Locale(lang)
+
+            }
+        }
+    }
+
 
 
 

@@ -28,17 +28,6 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
     val image: LiveData<Boolean>
         get()=_image
 
-    var _hope= MutableLiveData<Boolean>()
-    val hope: LiveData<Boolean>
-        get()=_hope
-
-    var _done= MutableLiveData<Boolean>()
-    val done: LiveData<Boolean>
-        get()=_done
-
-
-
-
     private var _spinner= MutableLiveData<Boolean>()
     val spinner: LiveData<Boolean>
         get()=_spinner
@@ -64,32 +53,24 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
         alert = AlertDialog.Builder(activity)
     }
 
-
-
     fun imageFormating() {
         _image.value=true
     }
+
     var str:String?=null
-
-
-
 
     var uri:Uri?=null
     fun updateData(uid:String,username:String,email:String,password:String,phoneNumber:String,profilePicture:String,job:String,location:String,language:String){
         _spinner.value=true
         val ufarm= U_Farm(uid,username,email,password,phoneNumber,profilePicture,job,location,language,"")
         authRepository.setUserData(ufarm)
-        _hope.value=true
-
-
     }
 
     fun upload(){
         authRepository.uploadImageToFirebaseStorage(uri!!,"images")
-        _done.value=true
        }
 
- fun upload1(){
+    fun upload1(){
      if(setImage.value!=null) {
          str=setImage.value.toString()
      }else{
@@ -100,28 +81,20 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
  }
     fun function(){
         authRepository.getUserData()
-
-        _hope.value=false
-
-        _spinner.value=false
+         _spinner.value=false
     }
-
 
     fun imageFormatingDone(dp: Uri){
         uri=dp
+        upload()
     }
 
-//    fun updateJob(job:String){
-//        authRepository.singleRecord(job,"job")
-//    }
-//
     fun jobSelection(){
        alert.setTitle("Choose a job title")
        val options = arrayOf("Farmer","Expert","Other")
        alert.setItems(options) { dialog, which ->
            dialog.dismiss()
            when (which) {
-               /* execute here your actions */
                0 ->  {
                    authRepository.singleRecord(options[0],"job")
                }
@@ -134,10 +107,5 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
            }
        }
        alert.show()
-
    }
-
-
-
-
 }

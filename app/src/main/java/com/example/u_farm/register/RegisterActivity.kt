@@ -16,6 +16,7 @@ import com.example.u_farm.databinding.ActivityLoginBinding
 import com.example.u_farm.databinding.ActivityRegisterBinding
 import com.example.u_farm.login.LoginActivity
 import com.example.u_farm.model.U_Farm
+import com.example.u_farm.util.getUserData
 import kotlinx.android.synthetic.main.activity_register.*
 
 class RegisterActivity : AppCompatActivity() {
@@ -41,6 +42,7 @@ class RegisterActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
         registerViewModel.firebaseUser.observe(this, Observer {
             if(it!=null){
+                getUserData()
                 Toast.makeText(application,"Welcome ${u_farm.username}!", Toast.LENGTH_LONG).show()
                 (activity as AppCompatActivity).finish()
             }

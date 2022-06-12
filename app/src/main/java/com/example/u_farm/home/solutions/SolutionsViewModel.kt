@@ -39,50 +39,33 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
     val get: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
 
-    val textToSpeechEngine: TextToSpeech by lazy {
-        TextToSpeech(application) {
-            if (it == TextToSpeech.SUCCESS) {
-                textToSpeechEngine.language = Locale(lang)
-
-            }
-        }
-    }
-
-    fun speakOutTheProblem(problemStatement:String){
-        Log.d("Priya",problemStatement+textToSpeechEngine)
-        initial(textToSpeechEngine)
-        var text = problemStatement.trim()
-        val py = Python.getInstance();
-        val pyobj = py.getModule("translate")
-        text=pyobj.callAttr(lang,text).toString()
-        speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
-    }
+//    fun speakOutTheProblem(problemStatement:String){
+//        Log.d("Priya",problemStatement+textToSpeechEngine)
+//        initial(textToSpeechEngine)
+//        var text = problemStatement.trim()
+//        text=pyobj.callAttr(lang,text).toString()
+//        Log.d("priya1",text)
+//        speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
+//    }
 
     fun increaseRating(inc:Int,suid:String){
             authRepository.singleRecordSolution(inc+1,"rating",suid)
-            Log.d("Manogari",puid)
             initializeSolutionList()
 
     }
 
     fun decreaseRating(dec:Int,suid:String) {
         authRepository.singleRecordSolution(dec-1,"rating",suid)
-        Log.d("Manogari",puid)
         initializeSolutionList()
 
     }
-
-//    fun intiate(){
-//        authRepository.SolutionDataList(puid)
-//    }
-//
-
 
     lateinit var textToSpeechEngine1: TextToSpeech
 
 
 
-    fun initial(engine: TextToSpeech, ) = viewModelScope.launch {
+    fun initial(engine: TextToSpeech,) = viewModelScope.launch {
+        Log.d("Success",engine.toString())
         textToSpeechEngine1 = engine
     }
 
