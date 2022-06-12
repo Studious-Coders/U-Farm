@@ -20,6 +20,7 @@ import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
 import java.io.IOException
 import androidx.lifecycle.viewModelScope
+import com.example.u_farm.util.lang
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -37,9 +38,6 @@ class AddSolutionsViewModel(application: Application,problemUid:String): ViewMod
 
     val key1:String= authRepository.reference2.key.toString()
 
-    val setData:LiveData<Boolean?>
-        get()=authRepository.setSolutionDataMutableLiveData()
-
     val getData: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
 
@@ -47,15 +45,23 @@ class AddSolutionsViewModel(application: Application,problemUid:String): ViewMod
     val expection: LiveData<Boolean>
         get()=_expection
 
-
+    private var _uploaded= MutableLiveData<Boolean>()
+    val uploaded: LiveData<Boolean>
+        get()=_uploaded
 
     fun postSolutions(solutionStatement:String,rating:Int){
-        if(solutionStatement.length<100){
+        val numberOfInputWords:Int
+        val words =solutionStatement.trim()
+        numberOfInputWords= words.split("\\s+".toRegex()).size
+        Log.d("Words in a Sentence",words+numberOfInputWords)
+
+        if(numberOfInputWords<10){
             _expection.value=true
         }else{
         viewModelScope.launch {
             val solution= Solution(key1, puid,getData.value!!.uid,getData.value!!.username,getData.value!!.profilePicture,solutionStatement,rating)
             upload(solution)
+            _uploaded.value=true
         }
        }
     }
@@ -63,13 +69,13 @@ class AddSolutionsViewModel(application: Application,problemUid:String): ViewMod
     private suspend fun upload(solution:Solution){
         withContext(Dispatchers.IO){
             authRepository.setSolutionData(solution)
-         }
-
+        }
     }
 
+    fun uploaded(){
+        _uploaded.value=false
+    }
 
-    val get: MutableLiveData<MutableList<Solution?>>
-        get()=authRepository.SolutionDataMutableLiveDataList()
 
 
     fun initial(
@@ -85,7 +91,7 @@ class AddSolutionsViewModel(application: Application,problemUid:String): ViewMod
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, getData.value!!.language)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, lang)
             putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
         })
     }

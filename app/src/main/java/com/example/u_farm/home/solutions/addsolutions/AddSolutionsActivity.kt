@@ -50,16 +50,18 @@ import kotlinx.android.synthetic.main.fragment_profile.*
         binding.solution=solution
         binding.lifecycleOwner = this
 
-        addSolutionsViewModel.setData.observe(this, Observer {
+        addSolutionsViewModel.uploaded.observe(this, Observer {
             if(it==true){
                 Toast.makeText(this,"Added Solution",Toast.LENGTH_LONG).show()
                 progressBar.dismiss()
+                addSolutionsViewModel.uploaded()
+                finish()
                }
         })
 
         addSolutionsViewModel.expection.observe(this,Observer{
             if(it==true){
-                Toast.makeText(this,"Solution must contains atleast 100 letters.",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"Solution must contains atleast 10 words.",Toast.LENGTH_LONG).show()
             }
         })
 
@@ -75,13 +77,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
                }
         }
 
-        addSolutionsViewModel.get.observe(this,Observer{
-            finish()
-        })
         addSolutionsViewModel.initial(startForResult)
-        mic.setOnClickListener {
-            addSolutionsViewModel.startRecording()
-        }
     }
 
 

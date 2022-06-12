@@ -114,6 +114,7 @@ class SolutionsActivity : AppCompatActivity() {
                 Log.d("Success",it.toString()+ lang)
                 textToSpeechEngine.language = Locale(lang)
 
+
             }
         }
     }

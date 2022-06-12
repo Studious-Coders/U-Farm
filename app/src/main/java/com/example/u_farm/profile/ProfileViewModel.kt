@@ -120,7 +120,6 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     val  options = arrayOf("Tamil", "English","Hindi")
     fun updateLanguage(lang:String){
         authRepository.singleRecord(lang,"language")
-        authRepository.updateProblem(lang,getData.value!!.uid,"language")
 
 
     }

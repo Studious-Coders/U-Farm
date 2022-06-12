@@ -57,62 +57,62 @@ class AddProblemsActivity : AppCompatActivity() {
 
         ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
-        progressBar=ProgressDialog(this)
+        progressBar = ProgressDialog(this)
         supportActionBar?.setTitle(R.string.add_problems)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         val application: Application = requireNotNull(this).application
         val viewModelFactory = AddProblemsViewModelFactory(application)
-        addProblemsViewModel = ViewModelProvider(this, viewModelFactory).get(AddProblemsViewModel::class.java)
-        binding.addProblemsViewModel=addProblemsViewModel
-        binding.problem=problem
+        addProblemsViewModel =
+            ViewModelProvider(this, viewModelFactory).get(AddProblemsViewModel::class.java)
+        binding.addProblemsViewModel = addProblemsViewModel
+        binding.problem = problem
         binding.lifecycleOwner = this
 
         //Speech ToText
-        val startForResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-        { result ->
-            if (result.resultCode == RESULT_OK) {
-                val spokenText: String? =
-                    result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-                        .let { text -> text?.get(0)
-                        }
-                binding.convertText1.setText(spokenText)
+        val startForResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                if (result.resultCode == RESULT_OK) {
+                    val spokenText: String? =
+                        result.data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                            .let { text ->
+                                text?.get(0)
+                            }
+                    binding.convertText1.setText(spokenText)
+                }
             }
-        }
 
         addProblemsViewModel.initial(startForResult)
-            floating_action_button.setOnClickListener {
-                addProblemsViewModel.startRecording()
-            }
 
-
-
-        addProblemsViewModel.uploading.observe(this,Observer{
-            if(it!=null) {
-                progressBar.setMessage("Uploading the Prblem.....")
-                progressBar.show()
-
-            }
-        })
-
-        addProblemsViewModel.setProblemData.observe(this,Observer{
-            if(it!=null) {
-                Toast.makeText(this,"Your Problem is Added", Toast.LENGTH_LONG).show()
+        addProblemsViewModel.uploading.observe(this, Observer {
+            if (it == true) {
+                Toast.makeText(this, "Your Problem is Added", Toast.LENGTH_LONG).show()
                 addProblemsViewModel.uploaded()
-                progressBar.dismiss()
-
+                finish()
             }
         })
 
-        addProblemsViewModel.expection.observe(this,Observer{
-            if(it==true) {
-                Toast.makeText(this,"You have to both upload a picture and give some description about it.", Toast.LENGTH_LONG).show()
+        addProblemsViewModel.setImage.observe(this, Observer {
+            if (it != null) {
+                Toast.makeText(this, "Picture is uploaded", Toast.LENGTH_LONG).show()
+                progressBar.dismiss()
+            }
+        })
+
+               addProblemsViewModel.expection.observe(this, Observer {
+            if (it == true) {
+                Toast.makeText(
+                    this,
+                    "You have to both upload a picture and description must contain atleast 10 words",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         })
 
 
         addProblemsViewModel.image.observe(this, Observer {
-            if(it==true) {
+            if (it == true) {
                 progressBar.setMessage("Uploaing Picture")
                 val intent = Intent(Intent.ACTION_PICK)
                 intent.type = "image/*"
@@ -120,20 +120,13 @@ class AddProblemsActivity : AppCompatActivity() {
             }
         })
 
-        addProblemsViewModel.setImage.observe(this, Observer {
-            if(it!=null) {
-                progressBar.dismiss()
-            }
-        })
-
     }
-
 
     var selectedPhotoUri: Uri? = null
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == 0 && resultCode == AppCompatActivity.RESULT_OK && data != null) {
+        if (requestCode == 0 && resultCode == RESULT_OK && data != null) {
             progressBar.show()
             Log.d("Add Problems", "Photo was selected")
             textView.visibility=View.GONE

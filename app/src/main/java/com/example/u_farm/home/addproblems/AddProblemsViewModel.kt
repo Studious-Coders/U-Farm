@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.speech.RecognizerIntent
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -12,6 +13,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.U_Farm
+import com.example.u_farm.util.lang
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -40,12 +42,8 @@ class AddProblemsViewModel(application: Application): ViewModel() {
     val expection: LiveData<Boolean>
         get()=_expection
 
-
     val getData: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
-
-    val setProblemData: LiveData<Boolean?>
-        get()=authRepository.setProblemDataMutableLiveData()
 
     val setImage:LiveData<String?>
         get()=authRepository.uploadedDataMutuableLiveData()
@@ -57,9 +55,9 @@ class AddProblemsViewModel(application: Application): ViewModel() {
     fun imageFormatingDone(dp: Uri){
         viewModelScope.launch {
             uploadImageToStorage(dp)
+            _image.value=false
         }
-        _image.value=false
-    }
+        }
 
     private suspend fun uploadImageToStorage(uriLink:Uri){
         withContext(Dispatchers.IO) {
@@ -68,7 +66,11 @@ class AddProblemsViewModel(application: Application): ViewModel() {
     }
 
     fun postProblems(problemStatement:String){
-        if(problemStatement=="" || setImage.value.toString()==""){
+         val numberOfInputWords:Int
+        val words = problemStatement.trim()
+        numberOfInputWords= words.split("\\s+".toRegex()).size
+
+        if(problemStatement=="" || setImage.value.toString()=="" || numberOfInputWords<10){
             _expection.value=true
         }else {
             viewModelScope.launch {
@@ -82,14 +84,14 @@ class AddProblemsViewModel(application: Application): ViewModel() {
                     setImage.value.toString()
                 )
                 upload(problem)
-            }
+               }
         }
     }
 
     private suspend fun upload(problem: Problem){
      withContext(Dispatchers.IO){
           authRepository.setProblemData(problem)
-     0}
+          }
     }
 
     fun uploaded(){
@@ -109,7 +111,7 @@ class AddProblemsViewModel(application: Application): ViewModel() {
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
-                   putExtra(RecognizerIntent.EXTRA_LANGUAGE, getData.value!!.language)
+                   putExtra(RecognizerIntent.EXTRA_LANGUAGE, lang)
                     putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
                 })
             }
