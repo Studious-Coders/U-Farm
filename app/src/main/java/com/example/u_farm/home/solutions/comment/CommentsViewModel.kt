@@ -4,15 +4,19 @@ import android.app.Application
 import android.content.Intent
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.chaquo.python.PyObject
+import com.chaquo.python.Python
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.Comments
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.U_Farm
+import com.example.u_farm.util.lang
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -38,10 +42,12 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
     val get: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
 
+    private var _uploaded= MutableLiveData<Boolean?>()
+    val uploaded: LiveData<Boolean?>
+        get()=_uploaded
 
-    val set: LiveData<Boolean?>
-        get()=authRepository.setCommentDataMutableLiveData()
-
+//    var py:Python
+//    var pyobj: PyObject
 
 
 
@@ -50,9 +56,13 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
         authRepository.getUserData()
         authRepository.CommentsDataList(solutionUid)
         suid=solutionUid
+//        py = Python.getInstance();
+//        pyobj = py.getModule("translate")
+
     }
 
-    fun initial(
+
+    fun initialing(
         launcher: ActivityResultLauncher<Intent>
     ) = viewModelScope.launch {
         startForResult = launcher
@@ -67,13 +77,17 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
-            putExtra(RecognizerIntent.EXTRA_LANGUAGE, get.value!!.language)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, lang)
             putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
         })
     }
 
     fun postComments(commentStatement:String){
-        if(commentStatement.length<50){
+        val numberOfInputWords:Int
+        val words =commentStatement.trim()
+        numberOfInputWords= words.split("\\s+".toRegex()).size
+
+        if(numberOfInputWords<10){
               _expection.value=true
         }else {
             viewModelScope.launch {
@@ -86,7 +100,8 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
                     commentStatement
                 )
                 upload(commentsData)
-                }
+                _uploaded.value=true
+            }
         }
 
     }
@@ -97,16 +112,9 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
         }
     }
 
-
-    val textToSpeechEngine: TextToSpeech by lazy {
-        TextToSpeech(application) {
-            if (it == TextToSpeech.SUCCESS) {
-                textToSpeechEngine.language = Locale(get.value!!.language)
-
-            }
-        }
+    fun uploaded(){
+        _uploaded.value=false
     }
-
 
     fun textToSpeech(str:String){
         _read.value=str

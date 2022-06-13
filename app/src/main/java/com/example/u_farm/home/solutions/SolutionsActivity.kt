@@ -97,7 +97,7 @@ class SolutionsActivity : AppCompatActivity() {
             if (it !=null) {
                 solutionsViewModel.initial(textToSpeechEngine)
                 var text = it.trim()
-                text=solutionsViewModel.pyobj.callAttr(lang,text).toString()
+//                text=solutionsViewModel.pyobj.callAttr(lang,text).toString()
               solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
                 solutionsViewModel.textToSpeechDone()
 

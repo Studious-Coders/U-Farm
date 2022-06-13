@@ -9,7 +9,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 //Get user data from the U_Farm Model
-var lang:String="en_US"
+var lang:String=""
 
 fun getUserData() {
     val userData: Query = FirebaseDatabase.getInstance().getReference("/UFARMDB/${FirebaseAuth.getInstance().uid}")

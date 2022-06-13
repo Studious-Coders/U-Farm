@@ -92,8 +92,8 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
 
     val getData: LiveData<Problem?>
         get()=authRepository.getProblemMutableLiveData()
-   var py:Python
-    var pyobj:PyObject
+//   var py:Python
+//    var pyobj:PyObject
 
     private var authRepository: AuthRepository
     init{
@@ -101,8 +101,8 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
         authRepository.SolutionDataList(problemUid)
         authRepository.getProblem(problemUid)
         authRepository.getUserData()
-        py = Python.getInstance();
-        pyobj = py.getModule("translate")
+//        py = Python.getInstance();
+//        pyobj = py.getModule("translate")
 
         value.addSource(getData,value::setValue)
         puid=problemUid

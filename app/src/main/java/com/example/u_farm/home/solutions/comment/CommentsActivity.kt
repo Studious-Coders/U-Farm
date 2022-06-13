@@ -1,5 +1,6 @@
 package com.example.u_farm.home.solutions.comment
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
 import android.app.ProgressDialog
@@ -8,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.speech.RecognizerIntent
+import android.speech.tts.TextToSpeech
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
@@ -26,7 +28,9 @@ import com.example.u_farm.home.solutions.SolutionsViewModelFactory
 import com.example.u_farm.home.solutions.addsolutions.AddSolutionsViewModel
 import com.example.u_farm.home.solutions.addsolutions.AddSolutionsViewModelFactory
 import com.example.u_farm.model.Comments
+import com.example.u_farm.util.lang
 import kotlinx.android.synthetic.main.activity_add_problems.*
+import java.util.*
 
 class CommentsActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressDialog
@@ -34,6 +38,7 @@ class CommentsActivity : AppCompatActivity() {
     private lateinit var commentsViewModel: CommentsViewModel
     private var comments:Comments= Comments()
 
+    @SuppressLint("NotifyDataSetChanged")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val binding = DataBindingUtil.setContentView<ActivityCommentsBinding>(
@@ -66,6 +71,7 @@ class CommentsActivity : AppCompatActivity() {
         commentsViewModel.allData.observe(this,Observer{
             it?.let{
                 adapter.submitList(it)
+                adapter.notifyDataSetChanged()
             }
 
         })
@@ -73,8 +79,9 @@ class CommentsActivity : AppCompatActivity() {
 
         commentsViewModel.read.observe(this, Observer{
             if(it!=null) {
-                commentsViewModel.initial(commentsViewModel.textToSpeechEngine)
-                val text = it.trim()
+                commentsViewModel.initial(textToSpeechEngine)
+                var text = it.trim()
+//                text=commentsViewModel.pyobj.callAttr(lang,text).toString()
                 commentsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
                 commentsViewModel.textToSpeechDone()
             }
@@ -83,15 +90,16 @@ class CommentsActivity : AppCompatActivity() {
 
         commentsViewModel.expection.observe(this, Observer{
             if(it==true) {
-                Toast.makeText(this,"Comment must be more than 50 words!",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"Comment must contain atleast 10 words!",Toast.LENGTH_LONG).show()
               }
 
         })
 
 
 
-        commentsViewModel.set.observe(this,Observer{
+        commentsViewModel.uploaded.observe(this,Observer{
             Toast.makeText(this,"Comment is Added",Toast.LENGTH_LONG).show()
+            commentsViewModel.uploaded()
 
         })
         //Speech ToText
@@ -107,14 +115,23 @@ class CommentsActivity : AppCompatActivity() {
         }
 
 
-        commentsViewModel.initial(startForResult)
-        floating_action_button.setOnClickListener {
-            commentsViewModel.startRecording()
-        }
+        commentsViewModel.initialing(startForResult)
 
 
 
     }
+
+    val textToSpeechEngine: TextToSpeech by lazy {
+        TextToSpeech(application) {
+            if (it == TextToSpeech.SUCCESS) {
+                textToSpeechEngine.language = Locale(lang)
+
+            }
+        }
+    }
+
+
+
 }
 
 

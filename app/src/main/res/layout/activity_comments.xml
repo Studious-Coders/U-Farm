@@ -58,6 +58,7 @@
             android:layout_margin="4dp"
             android:layout_gravity="center_vertical"
             android:backgroundTint="?attr/colorPrimary"
+            android:onClick="@{()->commentsViewModel.startRecording()}"
             android:contentDescription="@string/voice_description"
             android:src="@drawable/ic_baseline_mic_24"
             app:elevation="5dp"
