@@ -5,19 +5,14 @@ import android.app.AlertDialog
 import android.app.Application
 import android.content.DialogInterface
 import android.content.res.Resources
-import androidx.databinding.BindingAdapter
-import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.chaquo.python.Python
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.U_Farm
 import com.example.u_farm.util.getUserData
 import com.example.u_farm.util.languageInitial
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.FirebaseUser
 import java.util.*
 
 @Suppress("DEPRECATION")
@@ -165,6 +160,7 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
             val conf = res.configuration
             conf.locale = locale
             res.updateConfiguration(conf, dm)
+
 
     }
         fun languageIntentDone() {

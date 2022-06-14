@@ -1,9 +1,6 @@
 package com.example.u_farm.util
 
 import android.util.Log
-import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.os.LocaleListCompat
-import com.example.u_farm.home.HomeViewModel
 import com.example.u_farm.model.U_Farm
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -33,4 +30,6 @@ fun languageInitial(str:String){
 
     lang=str
 }
+
+
 

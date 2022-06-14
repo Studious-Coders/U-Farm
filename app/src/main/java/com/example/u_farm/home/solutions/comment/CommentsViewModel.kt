@@ -4,17 +4,13 @@ import android.app.Application
 import android.content.Intent
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
-import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.chaquo.python.PyObject
-import com.chaquo.python.Python
 import com.example.u_farm.database.AuthRepository
 import com.example.u_farm.model.Comments
-import com.example.u_farm.model.Problem
 import com.example.u_farm.model.U_Farm
 import com.example.u_farm.util.lang
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +22,15 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
     private var authRepository: AuthRepository
     var suid:String
     private lateinit var startForResult: ActivityResultLauncher<Intent>
+
+    val textToSpeechEngine: TextToSpeech by lazy {
+        TextToSpeech(application) {
+            if (it == TextToSpeech.SUCCESS) {
+                textToSpeechEngine.language = Locale(lang)
+
+            }
+        }
+    }
 
 
     lateinit var textToSpeechEngine1: TextToSpeech
@@ -46,8 +51,6 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
     val uploaded: LiveData<Boolean?>
         get()=_uploaded
 
-//    var py:Python
-//    var pyobj: PyObject
 
 
 
@@ -56,8 +59,6 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
         authRepository.getUserData()
         authRepository.CommentsDataList(solutionUid)
         suid=solutionUid
-//        py = Python.getInstance();
-//        pyobj = py.getModule("translate")
 
     }
 
@@ -83,6 +84,7 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
     }
 
     fun postComments(commentStatement:String){
+        allData.value?.clear()
         val numberOfInputWords:Int
         val words =commentStatement.trim()
         numberOfInputWords= words.split("\\s+".toRegex()).size
