@@ -1,23 +1,17 @@
 package com.example.u_farm.home
 
 import android.annotation.SuppressLint
-import android.app.Application
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.chaquo.python.Python
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentHomeBinding
-
 import com.google.firebase.auth.FirebaseAuth
-import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment() {
 
@@ -47,24 +41,18 @@ class HomeFragment : Fragment() {
 
         })
 
-
-
         binding.recyclerView.adapter=adapter
-
-
-
 
         homeViewModel.allData.observe(viewLifecycleOwner, Observer {
             Log.d("Size",it.size.toString())
                                  it?.let{
                                      adapter.submitList(it)
-
                                     adapter.notifyDataSetChanged()
                                    }
         })
 
         homeViewModel.navigateToSolutionsPage.observe(viewLifecycleOwner, Observer {
-            if(it!=""){
+            if(it!=null){
                 adapter.submitList(null)
                 this.findNavController().navigate(HomeFragmentDirections.actionHomeToSolutionsActivity(it))
                 homeViewModel.navigateToSolutionsPageDone()
@@ -72,9 +60,8 @@ class HomeFragment : Fragment() {
         })
 
         homeViewModel.navigateToAddProblemsPage.observe(viewLifecycleOwner, Observer {
-
             if(FirebaseAuth.getInstance().uid!=null){
-                if(it){
+                if(it==true){
                     this.findNavController().navigate(HomeFragmentDirections.actionHomeToAddProblemsActivity())
                     homeViewModel.navigateToAddProblemsPageDone()
                 }
@@ -86,9 +73,7 @@ class HomeFragment : Fragment() {
 
         return binding.root
 
-
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.top_app_bar, menu)
