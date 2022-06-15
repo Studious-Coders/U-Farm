@@ -34,141 +34,126 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:onClick="@{()->solutionListener1.onClick(data)}">
-
-
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/left_well"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
-            <RelativeLayout
-                android:id="@+id/relativeLayout69"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="8dp">
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="8dp" />
+
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/right_well"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="8dp" />
+
+
 
                 <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/selectphoto5"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentStart="true"
-                    android:layout_alignParentTop="true"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="8dp"
                     android:background="@drawable/ic_baseline_account_circle_24"
                     app:civ_border_color="#000000"
                     app:civ_border_width="0.5dp"
                     app:imgUrl="@{data.profilePicture}"
-                    tools:src="@drawable/plantdiseases" />
+                    tools:src="@drawable/plantdiseases"
+                    app:layout_constraintStart_toEndOf="@id/left_well"
+                    app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
                     android:id="@+id/username1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:layout_marginStart="16dp"
-                    android:layout_marginTop="8dp"
+                    android:layout_margin="8dp"
                     android:layout_toEndOf="@+id/selectphoto5"
                     android:gravity="center"
-                    android:textSize="20sp"
+                    android:textSize="18sp"
                     android:textStyle="bold"
                     app:userDetails="@{data.username}"
-                    tools:text="@string/name" />
-            </RelativeLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:padding="8dp">
-
+                    tools:text="@string/name"
+                    app:layout_constraintStart_toEndOf="@id/selectphoto5"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toTopOf="@id/solutionstatement"/>
 
                     <ImageButton
                         android:id="@+id/imageButton6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="4dp"
-                        android:elevation="25dp"
+                        android:elevation="5dp"
                         android:onClick="@{()->increaseListener.onClick(data)}"
-                        android:layout_marginTop="16dp"
+                        android:layout_margin="8dp"
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_baseline_arrow_circle_up_24"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toTopOf="@id/rating"
+                        app:layout_constraintStart_toEndOf="@id/left_well"
+                        app:layout_constraintTop_toBottomOf="@id/selectphoto5"
+                        app:layout_constraintEnd_toStartOf="@id/solutionstatement"
                         android:contentDescription="@string/increasing_button" />
 
                     <TextView
                         android:id="@+id/rating"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="2dp"
+                        android:layout_margin="8dp"
                         tools:text="@string/_1"
                         android:text="@{String.valueOf(data.rating)}"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toTopOf="@id/imageButton7"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/solutionstatement"
+                        app:layout_constraintStart_toEndOf="@id/left_well"
                         app:layout_constraintTop_toBottomOf="@id/imageButton6" />
 
                     <ImageButton
                         android:id="@+id/imageButton7"
-                        android:elevation="25dp"
+                        android:elevation="5dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="32dp"
-                        android:layout_marginStart="4dp"
+                        android:layout_margin="8dp"
                         android:onClick="@{()->decreaseListener.onClick(data)}"
                         android:background="@android:color/transparent"
                         android:src="@drawable/ic_baseline_arrow_circle_down_24"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/imageButton6"
+                        app:layout_constraintStart_toEndOf="@id/left_well"
+                        app:layout_constraintEnd_toStartOf="@id/solutionstatement"
+                        app:layout_constraintTop_toBottomOf="@+id/rating"
                         android:contentDescription="@string/decreasing_button" />
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:background="?attr/colorPrimary"
-                    android:layout_marginRight="16dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:padding="8dp"
-                    android:layout_height="wrap_content">
-
                     <TextView
                         android:id="@+id/solutionstatement"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         app:userDetails="@{data.solutionStatement}"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
                         tools:text="@string/solution1"
-                        app:layout_constraintBottom_toTopOf="@+id/floating_action_button6"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.0" />
+                        app:layout_constraintEnd_toStartOf="@id/right_well"
+                        app:layout_constraintStart_toEndOf="@id/rating"
+                        app:layout_constraintTop_toBottomOf="@id/selectphoto5" />
 
                     <ImageButton
                         android:id="@+id/floating_action_button6"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="8dp"
                         android:src="@drawable/ic_baseline_play_circle_filled_24"
                         app:elevation="25dp"
                         android:onClick="@{()->clicklistener.onClick(data)}"
                         android:background="@android:color/transparent"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/solutionstatement"
+                        app:layout_constraintEnd_toStartOf="@id/right_well"
                         android:contentDescription="@string/speech_to_text" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-            </LinearLayout>
-
-
-        </LinearLayout>
 
     </com.google.android.material.card.MaterialCardView>
 </layout>
