@@ -60,8 +60,6 @@ class EditProfileActivity : AppCompatActivity() {
             }
         })
 
-
-
         editProfileViewModel.setImage.observe(this, Observer {
               editProfileViewModel.upload1()
         })
@@ -71,9 +69,6 @@ class EditProfileActivity : AppCompatActivity() {
             Toast.makeText(this,"Your profile is updated successfully",Toast.LENGTH_LONG).show()
             editProfileViewModel.function()
         })
-
-
-
 
         editProfileViewModel.spinner.observe(this, Observer {
             if(it==true){

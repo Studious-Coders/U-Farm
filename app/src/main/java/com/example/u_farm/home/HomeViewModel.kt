@@ -27,6 +27,7 @@ class HomeViewModel(application: Application): ViewModel() {
     }
 
     fun navigateToAddProblemsPage(){
+        initiate()
         _navigateToAddProblemsPage.value=true
     }
 
@@ -37,6 +38,10 @@ class HomeViewModel(application: Application): ViewModel() {
     fun navigateToSolutionsPage(puid: String) {
         _navigateToSolutionsPage.value=puid
 
+    }
+
+    fun initiate(){
+        allData.value?.clear()
     }
 
     init{

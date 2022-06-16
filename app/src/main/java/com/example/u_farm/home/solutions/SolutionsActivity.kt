@@ -99,6 +99,7 @@ class SolutionsActivity : AppCompatActivity() {
             if (it !=null) {
                 solutionsViewModel.initial(solutionsViewModel.textToSpeechEngine)
                 var text = it.trim()
+
                 val py = Python.getInstance()
                 val pyobj = py.getModule("translate")
                 text=pyobj.callAttr(lang,text).toString()

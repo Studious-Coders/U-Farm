@@ -12,8 +12,6 @@ import android.speech.RecognizerIntent
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.startActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -21,8 +19,6 @@ import com.example.u_farm.R
 import com.example.u_farm.databinding.AddSolutionsBinding
 import com.example.u_farm.home.solutions.SolutionsActivity
 import com.example.u_farm.model.Solution
-import kotlinx.android.synthetic.main.add_solutions.*
-import kotlinx.android.synthetic.main.fragment_profile.*
 
 
  class AddSolutionsActivity : AppCompatActivity() {
@@ -51,13 +47,10 @@ import kotlinx.android.synthetic.main.fragment_profile.*
         binding.lifecycleOwner = this
 
         addSolutionsViewModel.uploaded.observe(this, Observer {
-
-        addSolutionsViewModel.setData.observe(this, Observer {
             if(it==true){
                 Toast.makeText(this,"Added Solution",Toast.LENGTH_LONG).show()
                 progressBar.dismiss()
                 addSolutionsViewModel.uploaded()
-                finish()
                 val intent = Intent(this, SolutionsActivity::class.java)
                 startActivity(intent)
                 finish()
@@ -67,7 +60,7 @@ import kotlinx.android.synthetic.main.fragment_profile.*
         addSolutionsViewModel.expection.observe(this,Observer{
             if(it==true){
                 Toast.makeText(this,"Solution must contains atleast 10 words.",Toast.LENGTH_LONG).show()
-                Toast.makeText(this,"Solution must contains atleast 50 characters.",Toast.LENGTH_LONG).show()
+
             }
         })
 

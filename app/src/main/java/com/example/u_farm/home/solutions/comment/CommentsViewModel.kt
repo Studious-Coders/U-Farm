@@ -4,6 +4,7 @@ import android.app.Application
 import android.content.Intent
 import android.speech.RecognizerIntent
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -23,14 +24,6 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
     var suid:String
     private lateinit var startForResult: ActivityResultLauncher<Intent>
 
-    val textToSpeechEngine: TextToSpeech by lazy {
-        TextToSpeech(application) {
-            if (it == TextToSpeech.SUCCESS) {
-                textToSpeechEngine.language = Locale(lang)
-
-            }
-        }
-    }
 
 
     lateinit var textToSpeechEngine1: TextToSpeech
@@ -51,6 +44,17 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
     val uploaded: LiveData<Boolean?>
         get()=_uploaded
 
+
+    val textToSpeechEngine: TextToSpeech by lazy {
+        TextToSpeech(application) {
+            if (it == TextToSpeech.SUCCESS) {
+                Log.d("Success",it.toString()+ lang)
+                textToSpeechEngine.language = Locale(lang)
+
+
+            }
+        }
+    }
 
 
 
@@ -107,6 +111,7 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
             }
         }
 
+     }
     }
 
     private suspend fun upload(comments:Comments){
@@ -114,6 +119,8 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
             authRepository.setCommentData(comments)
         }
     }
+        val allData: MutableLiveData<MutableList<Comments?>>
+        get()=authRepository.CommentDataMutableLiveDataList()
 
     fun uploaded(){
         _uploaded.value=false
@@ -135,8 +142,7 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
     fun speak(text: String) = viewModelScope.launch{
         textToSpeechEngine1.speak(text, TextToSpeech.QUEUE_FLUSH, null, "")
     }
-    val allData: MutableLiveData<MutableList<Comments?>>
-        get()=authRepository.CommentDataMutableLiveDataList()
+
 
 
 }

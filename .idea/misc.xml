@@ -3,32 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1255" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/drawable/ic_baseline_check_24.xml" value="0.127" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/drawable/ic_baseline_mic_24.xml" value="0.127" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/drawable/ic_home.xml" value="0.127" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1255" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/drawable/ic_outline_add_24.xml" value="0.127" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/drawable/rounded.xml" value="0.127" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/drawable/textbackground.xml" value="0.127" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/activity_add_problems.xml" value="0.1" />
         <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/activity_comments.xml" value="0.18" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/activity_editprofile.xml" value="0.1734375" />
         <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/activity_home.xml" value="0.1734375" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/activity_login.xml" value="0.1" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/activity_main.xml" value="0.1734375" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/activity_register.xml" value="0.1734375" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/activity_solutions.xml" value="0.1734375" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/activity_splash_screen.xml" value="0.16927083333333334" />
         <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/add_solutions.xml" value="0.1734375" />
         <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/fragment_home.xml" value="0.1734375" />
         <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/fragment_profile.xml" value="0.1734375" />
         <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/list_items.xml" value="0.1734375" />
         <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/list_items2.xml" value="0.1734375" />
         <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/layout/list_items3.xml" value="0.1734375" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/menu/menu.xml" value="0.1734375" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/menu/top_app_bar.xml" value="0.1734375" />
-        <entry key="..\:/Users/ELCOT/AndroidStudioProjects/U-Farm/app/src/main/res/menu/top_app_bar2.xml" value="0.1734375" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_account_circle_24.xml" value="0.228" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_arrow_circle_down_24.xml" value="0.1635" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/drawable/ic_baseline_arrow_circle_up_24.xml" value="0.1635" />
@@ -83,6 +65,7 @@
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/layout/activity_search_box.xml" value="0.2421875" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/layout/activity_solutionpage.xml" value="0.2421875" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/layout/activity_solutions.xml" value="0.1581196581196581" />
+        <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/layout/activity_splash_screen.xml" value="0.19880290722530997" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/layout/add_solutions.xml" value="0.2421875" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/layout/fragment_add_problems.xml" value="0.2421875" />
         <entry key="..\:/Users/dell/AndroidStudioProjects/UFarm/app/src/main/res/layout/fragment_add_solutions.xml" value="0.2421875" />

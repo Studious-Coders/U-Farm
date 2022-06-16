@@ -36,4 +36,7 @@
     <string name="post_solutions">समाधान अपलोड करें</string>
     <string name="post_problems">समस्याएं अपलोड करें</string>
     <string name="or">और</string>
+    <string name="comment1">दिया गया समाधान मेरे लिए बहुत मददगार है। अब मेरे पौधे अच्छे से बढ़ रहे हैं</string>
+    <string name="addcomments">टिप्पणी करें</string>
+    <string name="comments">टिप्पणियाँ</string>
 </resources>

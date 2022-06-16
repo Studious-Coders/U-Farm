@@ -36,4 +36,7 @@
     <string name="add_problems">"சிக்கல்களைச் சேர்க்கவும் "</string>
     <string name="post_solutions">தீர்வுகளைச் பதிவேற்றவும்</string>
     <string name="post_problems">சிக்கல்களைச் பதிவேற்றவும்</string>
+    <string name="addcomments">கருத்துகளைச் சேர்க்கவும்</string>
+    <string name="comment1">கொடுக்கப்பட்ட தீர்வு எனக்கு மிகவும் உதவியாக உள்ளது. இப்போது என் செடிகள் நன்றாக வளர்ந்து வருகின்றன</string>
+    <string name="comments">கருத்துகள்</string>
 </resources>

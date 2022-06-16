@@ -5,7 +5,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import com.bumptech.glide.Glide
-import com.chaquo.python.Python
 import de.hdodenhof.circleimageview.CircleImageView
 
 @SuppressLint("SetTextI18n")
@@ -13,11 +12,11 @@ import de.hdodenhof.circleimageview.CircleImageView
 fun TextView.setUserDetails(item: String?) {
     item?.let {
         text = item
-        val py = Python.getInstance()
-        val pyobj = py.getModule("translate")
+        initialzePython()
         text=pyobj.callAttr(lang,text).toString()
     }
 }
+
 
 @BindingAdapter("imageUrl")
 fun bindImage(imgView: ImageView, imgUrl:String?) {

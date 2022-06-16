@@ -1,25 +1,17 @@
 package com.example.u_farm.home.solutions.addsolutions
 
-import android.app.Activity
 import android.app.Application
-import android.media.MediaPlayer
-import android.media.MediaRecorder
-import android.net.Uri
-import android.os.Environment
-import android.util.Log
 import android.content.Intent
 import android.speech.RecognizerIntent
-import android.widget.Toast
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.u_farm.database.AuthRepository
-import com.example.u_farm.model.Problem
 import com.example.u_farm.model.Solution
 import com.example.u_farm.model.U_Farm
-import java.io.IOException
-import androidx.lifecycle.viewModelScope
 import com.example.u_farm.util.lang
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -65,6 +57,7 @@ class AddSolutionsViewModel(application: Application,problemUid:String): ViewMod
             _uploaded.value=true
         }
        }
+    }
     }
 
     private suspend fun upload(solution:Solution){

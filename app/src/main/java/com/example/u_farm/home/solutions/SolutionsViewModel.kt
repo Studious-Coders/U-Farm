@@ -43,12 +43,14 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
         Log.d("Priya",problemStatement+textToSpeechEngine)
         initial(textToSpeechEngine)
         var text = problemStatement.trim()
+
         val py = Python.getInstance()
         val pyobj = py.getModule("translate")
         text=pyobj.callAttr(lang,text).toString()
         Log.d("priya1",text)
         speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
     }
+
 
     fun increaseRating(inc:Int,suid:String){
         viewModelScope.launch{

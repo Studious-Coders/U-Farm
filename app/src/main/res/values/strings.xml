@@ -54,7 +54,7 @@
     <string name="notification">Notification</string>
     <string name="language">Language</string>
     <string name="logout">logout</string>
-    <string name="comment1" translatable="false">The given solution is very help for me. Now my plants are growing well</string>
-    <string name="addcomments" translatable="false">AddComments</string>
-    <string name="comments" translatable="false">Comments</string>
+    <string name="comment1">The given solution is very help for me. Now my plants are growing well</string>
+    <string name="addcomments">AddComments</string>
+    <string name="comments">Comments</string>
 </resources>

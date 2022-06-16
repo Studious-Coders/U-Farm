@@ -1,10 +1,10 @@
 package com.example.u_farm
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import androidx.core.os.HandlerCompat.postDelayed
+import androidx.appcompat.app.AppCompatActivity
+
 
 class Splash_screen : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -18,5 +18,6 @@ class Splash_screen : AppCompatActivity() {
             finish()
 
         },3000)
+
     }
 }

@@ -11,6 +11,9 @@
         <!-- Customize your theme here. -->
     </style>
 
+<style name="Splash_Screen">
+    <item name="android:background">@drawable/ufarm1</item>
+</style>
     <style name="Theme.UFarm.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
