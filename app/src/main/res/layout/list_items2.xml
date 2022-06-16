@@ -141,7 +141,6 @@
                         android:padding="8dp"
                         android:src="@drawable/ic_baseline_play_circle_filled_24"
                         app:elevation="25dp"
-                        android:onClick="@{()->clicklistener.onClick(data)}"
                         android:background="?attr/colorPrimary"
                         app:layout_constraintEnd_toStartOf="@id/right_well"
                         app:layout_constraintStart_toEndOf="@id/rating"

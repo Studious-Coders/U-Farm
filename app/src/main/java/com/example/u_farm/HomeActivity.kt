@@ -35,11 +35,13 @@ class HomeActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController,appBarConfiguration)
         bottomNavigationView.setupWithNavController(navController)
 
-        if (! Python.isStarted()) {
+
+        getUserData()
+
+        if (!Python.isStarted()) {
             Python.start(AndroidPlatform(this))
         }
 
-        getUserData()
 
 
     }

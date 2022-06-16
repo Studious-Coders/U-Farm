@@ -8,7 +8,6 @@ import com.bumptech.glide.Glide
 import com.chaquo.python.Python
 import de.hdodenhof.circleimageview.CircleImageView
 
-
 @SuppressLint("SetTextI18n")
 @BindingAdapter("userDetails")
 fun TextView.setUserDetails(item: String?) {

@@ -52,8 +52,7 @@ class HomeFragment : Fragment() {
         })
 
         homeViewModel.navigateToSolutionsPage.observe(viewLifecycleOwner, Observer {
-            if(it!=null){
-                adapter.submitList(null)
+            if(it!=""){
                 this.findNavController().navigate(HomeFragmentDirections.actionHomeToSolutionsActivity(it))
                 homeViewModel.navigateToSolutionsPageDone()
       }

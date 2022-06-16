@@ -88,6 +88,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
+            android:onClick="@{()->clicklistener.onClick(data)}"
             android:background="@android:color/transparent"
             android:contentDescription="@string/speech_to_text"
             android:src="@drawable/ic_baseline_play_circle_filled_24"

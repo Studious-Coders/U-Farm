@@ -101,7 +101,6 @@ class SolutionsActivity : AppCompatActivity() {
                 var text = it.trim()
                 val py = Python.getInstance()
                 val pyobj = py.getModule("translate")
-
                 text=pyobj.callAttr(lang,text).toString()
               solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
                 solutionsViewModel.textToSpeechDone()
