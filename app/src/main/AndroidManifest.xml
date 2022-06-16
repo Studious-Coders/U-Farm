@@ -16,6 +16,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.UFarm">
         <activity
+            android:name=".Splash_screen"
+            android:exported="true" >
+
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
+        <activity
             android:name=".register.RegisterActivity"
             android:exported="true" />
         <activity
@@ -48,11 +58,6 @@
             android:theme="@style/Theme.UFarm">
             <tools:validation testUrl="http://www.u-farm.com/profile" />
 
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 

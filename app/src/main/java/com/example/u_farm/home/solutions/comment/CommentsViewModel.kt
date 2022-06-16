@@ -73,7 +73,7 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
     }
 
     fun postComments(commentStatement:String){
-        if(commentStatement.length<50){
+        if(commentStatement.length<25){
               _expection.value=true
         }else {
             viewModelScope.launch {

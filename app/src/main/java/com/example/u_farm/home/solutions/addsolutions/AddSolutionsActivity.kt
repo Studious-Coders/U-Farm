@@ -50,16 +50,20 @@ import kotlinx.android.synthetic.main.fragment_profile.*
         binding.solution=solution
         binding.lifecycleOwner = this
 
+
         addSolutionsViewModel.setData.observe(this, Observer {
             if(it==true){
                 Toast.makeText(this,"Added Solution",Toast.LENGTH_LONG).show()
                 progressBar.dismiss()
+                val intent = Intent(this, SolutionsActivity::class.java)
+                startActivity(intent)
+                finish()
                }
         })
 
         addSolutionsViewModel.expection.observe(this,Observer{
             if(it==true){
-                Toast.makeText(this,"Solution must contains atleast 100 letters.",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"Solution must contains atleast 50 characters.",Toast.LENGTH_LONG).show()
             }
         })
 

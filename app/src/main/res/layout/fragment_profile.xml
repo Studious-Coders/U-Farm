@@ -79,25 +79,25 @@
             app:strokeColor="?attr/colorAccent" />
 
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/notify"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_weight="1"
-            android:padding="16dp"
-            android:text="@string/notification"
-            android:textColor="?attr/colorAccent"
-            app:cornerRadius="50dp"
-            app:icon="@drawable/ic_baseline_notifications_none_24"
-            app:iconTint="?attr/colorAccent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/editprofile"
-            app:strokeColor="?attr/colorAccent" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/notify"-->
+<!--            style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="16dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginRight="16dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:padding="16dp"-->
+<!--            android:text="@string/notification"-->
+<!--            android:textColor="?attr/colorAccent"-->
+<!--            app:cornerRadius="50dp"-->
+<!--            app:icon="@drawable/ic_baseline_notifications_none_24"-->
+<!--            app:iconTint="?attr/colorAccent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/editprofile"-->
+<!--            app:strokeColor="?attr/colorAccent" />-->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/language"
@@ -117,30 +117,30 @@
             app:iconTint="?attr/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/notify"
+            app:layout_constraintTop_toBottomOf="@id/editprofile"
             app:strokeColor="?attr/colorAccent" />
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/share"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginRight="16dp"
-            android:layout_weight="1"
-            android:onClick="@{()->profileViewModel.shareIntent()}"
-            android:padding="16dp"
-            android:text="@string/share"
-            android:textColor="?attr/colorAccent"
-            app:cornerRadius="50dp"
-            app:icon="@drawable/ic_baseline_share_24"
-            app:iconTint="?attr/colorAccent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/language"
-            app:strokeColor="?attr/colorAccent"
-            />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/share"-->
+<!--            style="@style/Widget.MaterialComponents.Button.OutlinedButton"-->
+<!--            android:layout_width="0dp"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="16dp"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:layout_marginRight="16dp"-->
+<!--            android:layout_weight="1"-->
+<!--            android:onClick="@{()->profileViewModel.shareIntent()}"-->
+<!--            android:padding="16dp"-->
+<!--            android:text="@string/share"-->
+<!--            android:textColor="?attr/colorAccent"-->
+<!--            app:cornerRadius="50dp"-->
+<!--            app:icon="@drawable/ic_baseline_share_24"-->
+<!--            app:iconTint="?attr/colorAccent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/language"-->
+<!--            app:strokeColor="?attr/colorAccent"-->
+<!--            />-->
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/logout"
@@ -160,7 +160,7 @@
             app:iconTint="?attr/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/share"
+            app:layout_constraintTop_toBottomOf="@id/language"
             app:strokeColor="?attr/colorAccent" />
 
         <ImageView

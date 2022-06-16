@@ -50,7 +50,7 @@ class AddSolutionsViewModel(application: Application,problemUid:String): ViewMod
 
 
     fun postSolutions(solutionStatement:String,rating:Int){
-        if(solutionStatement.length<100){
+        if(solutionStatement.length<50){
             _expection.value=true
         }else{
         viewModelScope.launch {

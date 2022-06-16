@@ -21,6 +21,7 @@ fun getUserData() {
             }else{
                 lang="en_US"
             }
+
         }
 
         override fun onCancelled(error: DatabaseError) {

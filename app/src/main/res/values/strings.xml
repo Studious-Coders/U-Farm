@@ -22,8 +22,8 @@
     <string name="title_activity_register" translatable="false">activity_register</string>
     <string name="next" translatable="false">Next</string>
     <string name="previous" translatable="false">Previous</string>
-   <string name="problem1">Verticillium wit is a fungal disease that affects hundreds of species of trees shrubs, edibles and ornamentals.</string>
-<string name="solution1">Give plants good drainage and ample air circulation. To Avoid overhead watering at night; mid-morning is preferred to allow foliage to dry before evening.</string>
+    <string name="problem1">Verticillium wit is a fungal disease that affects hundreds of species of trees shrubs, edibles and ornamentals.</string>
+    <string name="solution1">Give plants good drainage and ample air circulation. To Avoid overhead watering at night; mid-morning is preferred to allow foliage to dry before evening.</string>
 
     <string-array name="language">
         <item>English</item>
