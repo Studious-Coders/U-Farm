@@ -20,7 +20,7 @@
 <!--        android:layout_height="wrap_content"-->
 <!--        android:layout_margin="8dp">-->
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/comment"
+        android:id="@+id/commentx"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <androidx.constraintlayout.widget.Guideline
@@ -53,7 +53,7 @@
 
         <TextView
             android:id="@+id/username1"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@+id/selectphoto5"
             android:gravity="center"
@@ -64,10 +64,10 @@
             tools:text="@string/name"
             app:layout_constraintStart_toEndOf="@id/selectphoto5"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/solutionstatement"/>
+            app:layout_constraintBottom_toTopOf="@id/commentstatement"/>
 
-                    <TextView
-                        android:id="@+id/solutionstatement"
+             <TextView
+                        android:id="@+id/commentstatement"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
@@ -95,7 +95,7 @@
             app:layout_constraintTop_toBottomOf="@id/selectphoto5"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@id/right_well"
-            app:layout_constraintStart_toEndOf="@id/solutionstatement" />
+            app:layout_constraintStart_toEndOf="@id/commentstatement" />
 
         <View
             android:layout_width="match_parent"
@@ -104,16 +104,10 @@
             android:layout_marginTop="8dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/comment" />
+            app:layout_constraintTop_toBottomOf="@id/commentx" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:backgroundTint="?attr/colorAccent"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/comment" />
+
 
 </layout>

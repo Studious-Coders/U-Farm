@@ -17,114 +17,122 @@
             android:background="?attr/colorAccent"
             android:backgroundTint="?attr/colorSecondary"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
-            <!-- Note: A RecyclerView can also be used -->
 
+<!--            <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                android:id="@+id/problemStatement"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="parent">-->
 
-
-
-
-                <LinearLayout
-                    android:id="@+id/card1"
-                    android:layout_width="match_parent"
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/left_well"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
+                    app:layout_constraintGuide_begin="8dp" />
+
+
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/right_well"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_end="8dp" />
+
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/selectphoto1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ic_baseline_account_circle_24"
+                    app:civ_border_color="#000000"
+                    app:civ_border_width="0.5dp"
+                    app:imgUrl="@{solutionsViewModel.value.profilePicture}"
+                    app:layout_constraintStart_toStartOf="@id/left_well"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:src="@drawable/plantdiseases" />
+
+                <TextView
+                    android:id="@+id/username"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:layout_toEndOf="@id/selectphoto1"
+                    android:background="?attr/selectableItemBackground"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@+id/photo"
+                    app:layout_constraintStart_toEndOf="@+id/selectphoto1"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:userDetails="@{solutionsViewModel.value.username}"
+                    tools:text="Farmer" />
+
+
+                <ImageButton
+                    android:id="@+id/postmenus1"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/ic_baseline_more_horiz_24"
+                    android:backgroundTint="?attr/colorAccent"
+                    android:contentDescription="@string/already_have_a_account"
+                    app:layout_constraintBottom_toTopOf="@+id/photo"
+                    app:layout_constraintEnd_toEndOf="@id/right_well"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/photo"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="8dp"
+                    android:adjustViewBounds="false"
+                    android:contentDescription="@string/diseases_affected_plants_image"
+                    android:cropToPadding="false"
+                    android:scaleType="centerCrop"
+                    app:imageUrl="@{solutionsViewModel.value.diseaseAffectedPlantImage}"
+                    app:layout_constraintDimensionRatio="h,4:3"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                    <RelativeLayout
-                        android:id="@+id/relativelayout1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="8dp"
-                        android:orientation="horizontal">
-
-                        <de.hdodenhof.circleimageview.CircleImageView
-                            android:id="@+id/selectphoto1"
-                            android:layout_width="50dp"
-                            android:layout_height="50dp"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:background="@drawable/ic_baseline_account_circle_24"
-                            app:civ_border_color="#000000"
-                            app:civ_border_width="0.5dp"
-                            app:imgUrl="@{solutionsViewModel.value.profilePicture}"
-                            tools:src="@drawable/plantdiseases" />
-
-                        <TextView
-                            android:id="@+id/username"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginStart="12dp"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginEnd="12dp"
-                            android:layout_toEndOf="@id/selectphoto1"
-                            android:gravity="center"
-                            android:textSize="20sp"
-                            android:textStyle="bold"
-                            app:userDetails="@{solutionsViewModel.value.username}"
-                            tools:text="@string/name" />
-
-                        <ImageButton
-                            android:id="@+id/postmenus1"
-                            android:layout_width="24dp"
-                            android:layout_height="24dp"
-                            android:layout_alignParentTop="true"
-                            android:layout_alignParentEnd="true"
-                            android:layout_marginTop="12dp"
-                            android:layout_marginEnd="12dp"
-                            android:layout_marginBottom="12dp"
-                            android:background="@drawable/ic_baseline_more_horiz_24"
-                            android:backgroundTint="?attr/colorAccent"
-                            android:contentDescription="@string/already_have_a_account" />
-
-                    </RelativeLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="8dp"
-                        android:layout_marginRight="8dp"
-                        android:orientation="vertical">
-                        <!-- Media -->
-                        <ImageView
-                            android:id="@+id/photo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="224dp"
-                            android:contentDescription="@string/diseases_affected_plants_image"
-                            android:scaleType="centerCrop"
-                            app:imageUrl="@{solutionsViewModel.value.diseaseAffectedPlantImage}"
-                            tools:srcCompat="@drawable/plantdiseases" />
-
-                        <!-- Title, secondary and supporting text -->
-                        <TextView
-                            android:id="@+id/description"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="16sp"
-                            android:layout_margin="8dp"
-                            app:userDetails="@{solutionsViewModel.value.problemStatement}"
-                            tools:text="@string/problem1" />
-
-                        <ImageButton
-                            android:id="@+id/floating_action_button6"
-                            android:layout_width="wrap_content"
-                            android:layout_height="21dp"
-                            android:layout_gravity="end"
-                            android:layout_margin="8dp"
-                            android:background="@android:color/transparent"
-                            android:contentDescription="@string/speech_to_text"
-                            android:src="@drawable/ic_baseline_play_circle_filled_24"
-                            app:elevation="25dp"
-                            app:layout_constraintBottom_toBottomOf="parent"
-                            app:layout_constraintEnd_toEndOf="parent" />
+                    app:layout_constraintTop_toBottomOf="@+id/selectphoto1"
+                    tools:srcCompat="@drawable/plantdiseases" />
 
 
+                <TextView
+                    android:id="@+id/description"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:textAlignment="viewStart"
+                    android:textAllCaps="false"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/floating_action_button6"
+                    app:layout_constraintStart_toStartOf="@id/left_well"
+                    app:layout_constraintTop_toBottomOf="@id/photo"
+                    app:userDetails="@{solutionsViewModel.value.problemStatement}"
+                    tools:text="@string/problem1" />
 
-                    </LinearLayout>
+                <ImageButton
+                    android:id="@+id/floating_action_button6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="21dp"
+                    android:layout_gravity="end"
+                    android:layout_margin="8dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/speech_to_text"
+                    android:src="@drawable/ic_baseline_play_circle_filled_24"
+                    app:elevation="25dp"
+                    app:layout_constraintStart_toEndOf="@id/description"
+                    app:layout_constraintBottom_toTopOf="@id/recycler_view1"
+                    app:layout_constraintEnd_toEndOf="@id/right_well"
+                    app:layout_constraintTop_toBottomOf="@id/photo" />
 
-                </LinearLayout>
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -133,10 +141,10 @@
                 android:layout_height="0dp"
                 android:layout_marginTop="16dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintBottom_toTopOf="@+id/btn_asset_photo1"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/card1"
+                app:layout_constraintTop_toBottomOf="@id/description"
                 />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -144,17 +152,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="8dp"
-                android:contentDescription="@string/add_solutions"
-                app:borderWidth="0dp"
-                android:onClick="@{()-> solutionsViewModel.navigateToAddSolutions()}"
+                android:layout_margin="8dp"
                 android:backgroundTint="?attr/colorPrimary"
+                android:contentDescription="@string/add_solutions"
+                android:onClick="@{()-> solutionsViewModel.navigateToAddSolutions()}"
                 android:src="@drawable/ic_outline_add_24"
+                app:borderWidth="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/recycler_view1" />
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

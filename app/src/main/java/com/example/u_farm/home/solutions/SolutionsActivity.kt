@@ -94,13 +94,13 @@ class SolutionsActivity : AppCompatActivity() {
             }
         })
 
-        val py = Python.getInstance()
-        val pyobj = py.getModule("translate")
 
         solutionsViewModel.read.observe(this,Observer {
             if (it !=null) {
                 solutionsViewModel.initial(solutionsViewModel.textToSpeechEngine)
                 var text = it.trim()
+                val py = Python.getInstance()
+                val pyobj = py.getModule("translate")
 
                 text=pyobj.callAttr(lang,text).toString()
               solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")

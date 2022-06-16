@@ -70,7 +70,7 @@
 
                 <TextView
                     android:id="@+id/username1"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_toEndOf="@+id/selectphoto5"
@@ -104,6 +104,8 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="8dp"
                         tools:text="@string/_1"
+                        android:gravity="center"
+                        android:textStyle="bold"
                         android:text="@{String.valueOf(data.rating)}"
                         android:textSize="16sp"
                         app:layout_constraintBottom_toTopOf="@id/imageButton7"
@@ -127,30 +129,38 @@
                         android:contentDescription="@string/decreasing_button" />
                     <TextView
                         android:id="@+id/solutionstatement"
-                        android:layout_width="wrap_content"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         app:userDetails="@{data.solutionStatement}"
                         android:layout_marginStart="8dp"
                         android:layout_marginTop="8dp"
+                        android:textAlignment="viewStart"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"
                         tools:text="@string/solution1"
-                        app:layout_constraintEnd_toStartOf="@id/right_well"
-                        app:layout_constraintStart_toEndOf="@id/rating"
-                        app:layout_constraintTop_toBottomOf="@id/selectphoto5" />
-
-                    <ImageButton
-                        android:id="@+id/floating_action_button6"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:layout_marginBottom="8dp"
+                        android:padding="8dp"
                         android:src="@drawable/ic_baseline_play_circle_filled_24"
                         app:elevation="25dp"
                         android:onClick="@{()->clicklistener.onClick(data)}"
-                        android:background="@android:color/transparent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/solutionstatement"
+                        android:background="?attr/colorPrimary"
                         app:layout_constraintEnd_toStartOf="@id/right_well"
-                        android:contentDescription="@string/speech_to_text" />
+                        app:layout_constraintStart_toEndOf="@id/rating"
+                        app:layout_constraintTop_toBottomOf="@id/selectphoto5"
+                        />
+            <ImageButton
+                android:id="@+id/floating_action_button6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ic_baseline_play_circle_filled_24"
+                app:elevation="5dp"
+                android:layout_marginBottom="8dp"
+                android:onClick="@{()->clicklistener.onClick(data)}"
+                android:background="@android:color/transparent"
+                app:layout_constraintTop_toBottomOf="@id/solutionstatement"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/right_well"
+                android:contentDescription="@string/speech_to_text" />
 
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -56,12 +56,15 @@
 
         <TextView
             android:id="@+id/username"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_toEndOf="@id/selectphoto1"
             android:textSize="20sp"
             android:textStyle="bold"
+            android:background="?attr/selectableItemBackground"
+            android:textAlignment="viewStart"
+            android:textAllCaps="false"
             app:layout_constraintBottom_toTopOf="@+id/photo"
             app:layout_constraintStart_toEndOf="@+id/selectphoto1"
             app:layout_constraintTop_toTopOf="parent"
@@ -130,15 +133,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/description" />
-        <View
-            android:id="@+id/clickableOverlay"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:background="?attr/selectableItemBackground"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

@@ -64,14 +64,15 @@ class CommentsActivity : AppCompatActivity() {
             }
 
         })
-        val py = Python.getInstance();
-        val pyobj = py.getModule("translate")
+
 
 
         commentsViewModel.read.observe(this, Observer{
             if(it!=null) {
                 commentsViewModel.initial(commentsViewModel.textToSpeechEngine)
                 var text = it.trim()
+                val py = Python.getInstance();
+                val pyobj = py.getModule("translate")
                 text=pyobj.callAttr(lang,text).toString()
                 commentsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
                 commentsViewModel.textToSpeechDone()
