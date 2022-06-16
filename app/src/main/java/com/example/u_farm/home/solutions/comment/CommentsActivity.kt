@@ -83,12 +83,16 @@ class CommentsActivity : AppCompatActivity() {
         commentsViewModel.expection.observe(this, Observer{
             if(it==true) {
                 Toast.makeText(this,"Comment must contain atleast 10 words!",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"Comment must be more than 25 characters!",Toast.LENGTH_LONG).show()
               }
 
         })
 
 
 
+        commentsViewModel.set.observe(this,Observer{
+            Toast.makeText(this,"Comment is Added",Toast.LENGTH_LONG).show()
+            binding.convertText1.setText("")
         commentsViewModel.uploaded.observe(this,Observer{
             if(it==true) {
                 Toast.makeText(this, "Comment is Added", Toast.LENGTH_LONG).show()

@@ -24,6 +24,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivityAddProblemsBinding
+import com.example.u_farm.home.solutions.SolutionsActivity
 import com.example.u_farm.model.Problem
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_problems.*
@@ -97,6 +98,10 @@ class AddProblemsActivity : AppCompatActivity() {
             if (it != null) {
                 Toast.makeText(this, "Picture is uploaded", Toast.LENGTH_LONG).show()
                 progressBar.dismiss()
+                val intent = Intent(this, SolutionsActivity::class.java)
+                startActivity(intent)
+                finish()
+
             }
         })
 

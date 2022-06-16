@@ -56,6 +56,7 @@ class AddSolutionsViewModel(application: Application,problemUid:String): ViewMod
         Log.d("Words in a Sentence",words+numberOfInputWords)
 
         if(numberOfInputWords<10){
+        if(solutionStatement.length<50){
             _expection.value=true
         }else{
         viewModelScope.launch {
