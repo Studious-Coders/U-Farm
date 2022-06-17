@@ -39,10 +39,10 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     val expert: LiveData<Boolean?>
         get()=_expert
 
-    val value= MediatorLiveData<U_Farm>()
+
 
     val setData:LiveData<Boolean?>
-    get()=authRepository.setUserDataMutableLiveData()
+    get()=authRepository.singleRecordDataMutuableLiveData()
 
     val getData: LiveData<U_Farm?>
         get()=authRepository.getUserDataMutableLiveData()
@@ -50,6 +50,8 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     private val _snackbar= MutableLiveData<Boolean?>()
     val snackbar: LiveData<Boolean?>
         get()=_snackbar
+
+    val value= MediatorLiveData<U_Farm>()
 
     init {
         authRepository = AuthRepository(application)

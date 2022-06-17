@@ -85,6 +85,7 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
         viewModelScope.launch {
             if(setImage.value!=null) {
             setProifleImage(setImage.value.toString())
+                _upload.value=true
             }
         }
  }
