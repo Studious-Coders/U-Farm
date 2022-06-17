@@ -6,7 +6,6 @@ import android.app.AlertDialog
 import android.app.Application
 import android.net.Uri
 import android.os.Build
-import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -62,8 +61,7 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
         viewModelScope.launch{
             val ufarm= U_Farm(uid,username,email,password,phoneNumber,profilePicture,job,location,language,"")
             upload(ufarm)
-            upload1()
-         _spinner.value=true
+            _upload.value=true
 
         }
 
@@ -76,7 +74,6 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
 
     private suspend fun uploadImageToFirebase(uri: Uri){
         withContext(Dispatchers.IO){
-            Log.d("DefaultProfile",uri.toString())
             authRepository.uploadImageToFirebaseStorage(uri,"images")
         }
     }
@@ -85,7 +82,7 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
         viewModelScope.launch {
             if(setImage.value!=null) {
             setProifleImage(setImage.value.toString())
-                _upload.value=true
+
             }
         }
  }
