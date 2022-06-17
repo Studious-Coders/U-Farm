@@ -59,10 +59,10 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
 
     fun updateData(uid:String,username:String,email:String,password:String,phoneNumber:String,profilePicture:String,job:String,location:String,language:String){
         viewModelScope.launch{
+            _upload.value=true
+            _spinner.value=true
             val ufarm= U_Farm(uid,username,email,password,phoneNumber,profilePicture,job,location,language,"")
             upload(ufarm)
-            _upload.value=true
-
         }
 
     }

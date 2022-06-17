@@ -10,6 +10,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
@@ -58,14 +59,27 @@ class EditProfileActivity : AppCompatActivity() {
             }
         })
 
+
         editProfileViewModel.upload.observe(this,Observer{
             if(it==true) {
                 editProfileViewModel.upload1()
+
+            }
+
+        })
+
+        editProfileViewModel.setData.observe(this,Observer{
+            if(it==true){
+                loading_spinner.visibility=View.GONE
                 Toast.makeText(this, "Your profile is updated successfully", Toast.LENGTH_LONG)
                     .show()
                 editProfileViewModel.function()
             }
-
+        })
+        editProfileViewModel.spinner.observe(this,Observer{
+            if(it==true){
+               loading_spinner.visibility= View.VISIBLE
+            }
         })
 
 
