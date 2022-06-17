@@ -177,7 +177,7 @@ class AuthRepository(application: Application) {
             .addOnCompleteListener {
                 if (!it.isSuccessful) return@addOnCompleteListener
                 firebaseUserAuthRepository.postValue(auth.currentUser)
-                val ufarm = U_Farm(auth.currentUser!!.uid, username, email, password)
+                val ufarm = U_Farm(auth.currentUser!!.uid, username, email, password,"","https://firebasestorage.googleapis.com/v0/b/u-farm-27bab.appspot.com/o/images%2F1113f57b-6811-4602-b0fc-f3b555a42093?alt=media&token=0857364d-c912-4847-b499-b414ae56ee4c")
                 setUserData(ufarm)
                 Log.d("SignUp", "${it.result?.user?.uid}")
             }

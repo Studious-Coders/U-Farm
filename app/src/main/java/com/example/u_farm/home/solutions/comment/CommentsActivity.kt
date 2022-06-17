@@ -22,6 +22,7 @@ import com.example.u_farm.home.CommentsListener
 import com.example.u_farm.home.solutions.SolutionsActivity
 import com.example.u_farm.model.Comments
 import com.example.u_farm.util.lang
+import kotlinx.android.synthetic.main.list_items3.*
 
 class CommentsActivity : AppCompatActivity() {
     private lateinit var progressBar: ProgressDialog
@@ -95,7 +96,7 @@ class CommentsActivity : AppCompatActivity() {
             if(it==true) {
                 Toast.makeText(this, "Comment is Added", Toast.LENGTH_LONG).show()
                 commentsViewModel.uploaded()
-
+                commentstatement.text=""
             }
         })
         //Speech ToText

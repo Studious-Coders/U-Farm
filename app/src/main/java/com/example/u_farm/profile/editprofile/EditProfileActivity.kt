@@ -8,20 +8,19 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivityEditprofileBinding
 import com.example.u_farm.model.U_Farm
-import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_editprofile.*
 
@@ -60,14 +59,11 @@ class EditProfileActivity : AppCompatActivity() {
             }
         })
 
-        editProfileViewModel.setImage.observe(this, Observer {
-              editProfileViewModel.upload1()
-        })
-
-        editProfileViewModel.setData.observe(this,Observer{
+        editProfileViewModel.upload.observe(this,Observer{
             loading_spinner.visibility= View.GONE
             Toast.makeText(this,"Your profile is updated successfully",Toast.LENGTH_LONG).show()
             editProfileViewModel.function()
+
         })
 
         editProfileViewModel.spinner.observe(this, Observer {
@@ -86,6 +82,7 @@ class EditProfileActivity : AppCompatActivity() {
             Log.d("EditProfile", "Photo was selected")
             selectedPhotoUri = data.data
             editProfileViewModel.imageFormatingDone(selectedPhotoUri!!)
+            Glide.with(this).load(selectedPhotoUri).into(userdp1)
             Picasso.get().load(selectedPhotoUri).into(userdp1)
         }
     }

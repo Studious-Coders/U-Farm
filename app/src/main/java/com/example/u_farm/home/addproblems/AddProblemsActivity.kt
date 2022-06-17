@@ -22,11 +22,10 @@ import androidx.core.app.ActivityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.u_farm.R
 import com.example.u_farm.databinding.ActivityAddProblemsBinding
-import com.example.u_farm.home.solutions.SolutionsActivity
 import com.example.u_farm.model.Problem
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_add_problems.*
 
 private const val REQUEST_RECORD_AUDIO_PERMISSION = 200
@@ -98,9 +97,7 @@ class AddProblemsActivity : AppCompatActivity() {
             if (it != null) {
                 Toast.makeText(this, "Picture is uploaded", Toast.LENGTH_LONG).show()
                 progressBar.dismiss()
-                val intent = Intent(this, SolutionsActivity::class.java)
-                startActivity(intent)
-                finish()
+
 
             }
         })
@@ -139,8 +136,9 @@ class AddProblemsActivity : AppCompatActivity() {
 
             selectedPhotoUri = data.data
             addProblemsViewModel.imageFormatingDone(selectedPhotoUri!!)
-            Picasso.get().load(selectedPhotoUri).into(imageView)
-          }
+            Glide.with(this).load(selectedPhotoUri).into(imageView)
+
+    }
     }
 
 

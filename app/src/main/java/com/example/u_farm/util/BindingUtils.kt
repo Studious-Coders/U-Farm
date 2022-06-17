@@ -32,8 +32,6 @@ fun bindImage(circleImageView: CircleImageView, imgUrl:String?) {
     imgUrl?.let{
         if(it!=""){
             Glide.with(circleImageView.context).load(imgUrl).into(circleImageView)
-
-//            Picasso.get().load(imgUrl).into(circleImageView)
         }
     }
 }

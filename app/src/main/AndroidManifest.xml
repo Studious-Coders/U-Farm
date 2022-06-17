@@ -10,9 +10,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/ufarmlogo"
+        android:icon="@drawable/ufarm1"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/ufarmlogo"
+        android:roundIcon="@drawable/ufarm1"
         android:supportsRtl="true"
         android:theme="@style/Theme.UFarm">
         <activity
@@ -46,12 +46,8 @@
         <activity
             android:name=".profile.editprofile.EditProfileActivity"
             android:exported="true" />
-        <activity
-            android:name=".AppBar"
-            android:exported="true" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true" />
+
+
         <activity
             android:name=".HomeActivity"
             android:exported="true"

@@ -16,7 +16,7 @@
     <string name="copylink">Copylink</string>
     <string name="save">Save</string>
     <string name="solutions">solutions</string>
-    <string name="userprofile">UserProfile</string>
+    <string name="userprofile">Profile</string>
     <string name="search">Search</string>
     <string name="to_search_using_images" translatable="false">To search using images</string>
     <string name="title_activity_register" translatable="false">activity_register</string>

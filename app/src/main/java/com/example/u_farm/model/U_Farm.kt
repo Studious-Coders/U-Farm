@@ -2,12 +2,12 @@ package com.example.u_farm.model
 
 data class U_Farm(
     var uid:String="",
-    var username:String="#Username",
+    var username:String="Username",
     var email:String="",
     var password:String="",
     var phonenumber:String="",
     var profilePicture:String="",
-    var job:String="#Farmer",
+    var job:String="Farmer",
     var location:String="",
     var language:String="en_US",
     var verificationDocs:String="",
