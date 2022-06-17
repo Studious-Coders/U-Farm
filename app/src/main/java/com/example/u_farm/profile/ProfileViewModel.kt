@@ -65,6 +65,9 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
         _expert.value=false
     }
 
+   fun func(){
+       _snackbar.value=false
+   }
 
 
     fun function(){

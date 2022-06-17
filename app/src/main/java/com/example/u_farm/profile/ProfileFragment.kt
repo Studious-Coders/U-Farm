@@ -45,6 +45,13 @@ class ProfileFragment : Fragment() {
             if(it==true){
                 Snackbar.make(binding.root, "Login to access the settings", Snackbar.LENGTH_SHORT)
                     .show()
+                profileViewModel.func()
+            }
+        })
+
+        profileViewModel.getData.observe(viewLifecycleOwner,Observer{
+            if(it!=null){
+                profileViewModel.function()
             }
         })
 
