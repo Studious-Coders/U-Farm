@@ -49,13 +49,17 @@ class CommentsViewModel(application: Application, solutionUid:String): ViewModel
         TextToSpeech(application) {
             if (it == TextToSpeech.SUCCESS) {
                 Log.d("Success",it.toString()+ lang)
-                textToSpeechEngine.language = Locale(lang)
-
-
+                if(lang=="ta_IN"){
+                    textToSpeechEngine.language= Locale("ta-IN")
+                }else if(lang=="hi_IN"){
+                    textToSpeechEngine.language=Locale("hi-IN")
+                }else{
+                    textToSpeechEngine.language=Locale("en-US")
+                }
             }
+
         }
     }
-
 
 
     init{

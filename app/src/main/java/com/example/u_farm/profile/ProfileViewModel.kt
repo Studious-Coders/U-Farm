@@ -118,7 +118,7 @@ class ProfileViewModel(application: Application, activity: Activity): ViewModel(
     fun languageIntent() {
 if(authRepository.auth.currentUser!=null) {
     alert0.setTitle("Choose a language")
-    val  options = arrayOf("English","தமிழ்","हिन्दी")
+    val  options = arrayOf("தமிழ்","English","हिन्दी")
     alert0.setItems(options) { dialog, which ->
         dialog.dismiss()
 

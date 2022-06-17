@@ -69,14 +69,9 @@ class ProfileFragment : Fragment() {
 
 
 
-        profileViewModel.language.observe(viewLifecycleOwner, Observer {
-            if(it==true) {
-
-            }
-        })
 
         profileViewModel.setData.observe(viewLifecycleOwner, Observer {
-            if(it!=null){
+            if(it==true){
                 val intent=Intent(application,HomeActivity::class.java)
                 startActivity(intent)
                 profileViewModel.languageIntentDone()

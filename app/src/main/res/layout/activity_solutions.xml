@@ -128,7 +128,7 @@
                     android:onClick="@{()->solutionsViewModel.speakOutTheProblem(solutionsViewModel.value.problemStatement)}"
                     android:src="@drawable/ic_baseline_play_circle_filled_24"
                     app:elevation="25dp"
-                    app:layout_constraintBottom_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/right_well"
                     app:layout_constraintStart_toEndOf="@id/description"
                     app:layout_constraintTop_toBottomOf="@id/photo" />

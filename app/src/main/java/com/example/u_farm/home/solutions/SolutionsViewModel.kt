@@ -29,16 +29,15 @@ class SolutionsViewModel(application: Application,problemUid: String): ViewModel
         TextToSpeech(application) {
             if (it == TextToSpeech.SUCCESS) {
                 Log.d("Success",it.toString()+ lang)
-                if(lang=="ta_IN") {
-                    textToSpeechEngine.language = Locale("ta-IN")
-                }else if(lang=="hi_IN"){
-                            textToSpeechEngine.language=Locale("hi-IN")
-                }else {
-                    textToSpeechEngine.language = Locale("en-IN")
+                 if(lang=="ta_IN"){
+                     textToSpeechEngine.language= Locale("ta-IN")
+                 }else if(lang=="hi_IN"){
+                     textToSpeechEngine.language=Locale("hi-IN")
+                 }else{
+                     textToSpeechEngine.language=Locale("en-US")
+                 }
                 }
 
-
-            }
         }
     }
 
