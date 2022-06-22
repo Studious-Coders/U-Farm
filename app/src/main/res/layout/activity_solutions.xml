@@ -85,39 +85,41 @@
                     app:layout_constraintEnd_toEndOf="@id/right_well"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/photo"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="8dp"
-                    android:adjustViewBounds="false"
-                    android:contentDescription="@string/diseases_affected_plants_image"
-                    android:cropToPadding="false"
-                    android:scaleType="centerCrop"
-                    app:imageUrl="@{solutionsViewModel.value.diseaseAffectedPlantImage}"
-                    app:layout_constraintDimensionRatio="h,4:3"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/selectphoto1"
-                    tools:srcCompat="@drawable/plantdiseases" />
+                                <ImageView
+                                    android:id="@+id/photo"
+                                    android:layout_width="160dp"
+                                    android:layout_height="125dp"
+                                    android:layout_marginTop="8dp"
+                                    android:adjustViewBounds="false"
+                                    android:contentDescription="@string/diseases_affected_plants_image"
+                                    android:cropToPadding="false"
+                                    android:scaleType="centerCrop"
+                                    app:imageUrl="@{solutionsViewModel.value.diseaseAffectedPlantImage}"
+                                    app:layout_constraintDimensionRatio="h,4:3"
+                                    app:layout_constraintStart_toStartOf="parent"
+                                    app:layout_constraintTop_toBottomOf="@+id/selectphoto1"
+                                    tools:srcCompat="@drawable/plantdiseases" />
 
 
-                <TextView
-                    android:id="@+id/description"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:textAlignment="viewStart"
-                    android:textAllCaps="false"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toStartOf="@id/floating_action_button6"
-                    app:layout_constraintStart_toStartOf="@id/left_well"
-                    app:layout_constraintTop_toBottomOf="@id/photo"
-                    app:userDetails="@{solutionsViewModel.value.problemStatement}"
-                    tools:text="@string/problem1" />
+                                <TextView
+                                    android:id="@+id/description"
+                                    android:layout_width="176dp"
+                                    android:layout_height="100dp"
+                                    android:layout_marginStart="175dp"
+                                    android:background="?attr/selectableItemBackground"
+                                    android:textAlignment="viewStart"
+                                    android:textAllCaps="false"
+                                    android:textSize="16sp"
+                                    app:layout_constraintBottom_toBottomOf="parent"
+                                    app:layout_constraintEnd_toStartOf="@id/floating_action_button6"
+                                    app:layout_constraintStart_toEndOf="@+id/photo"
+                                    app:layout_constraintStart_toStartOf="@+id/photo"
+                                    app:layout_constraintTop_toTopOf="@+id/photo"
+                                    app:layout_constraintVertical_bias="0.454"
+                                    app:userDetails="@{solutionsViewModel.value.problemStatement}"
+                                    tools:text="@string/problem1" />
 
-                <ImageButton
+                                <ImageButton
                     android:id="@+id/floating_action_button6"
                     android:layout_width="wrap_content"
                     android:layout_height="21dp"
