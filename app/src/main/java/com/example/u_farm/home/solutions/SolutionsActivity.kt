@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -21,6 +22,7 @@ import com.example.u_farm.home.solutions.comment.CommentsActivity
 import com.example.u_farm.login.LoginActivity
 import com.example.u_farm.util.lang
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.activity_solutions.*
 
 class SolutionsActivity : AppCompatActivity() {
     companion object{
@@ -61,7 +63,7 @@ class SolutionsActivity : AppCompatActivity() {
             Log.d("Clicking","Clicked")
             solutionsViewModel.increaseRating(increase,suid)
         },DecreaseListener {  decrease,suid ->
-              solutionsViewModel.decreaseRating(decrease,suid)
+            solutionsViewModel.decreaseRating(decrease,suid)
 
         })
 
@@ -70,6 +72,7 @@ class SolutionsActivity : AppCompatActivity() {
 
         solutionsViewModel.allData.observe(this, Observer {
             it?.let {
+                loading_spinner3.visibility= View.GONE
                 adapter.submitList(it)
                 adapter.notifyDataSetChanged()
             }
@@ -103,12 +106,12 @@ class SolutionsActivity : AppCompatActivity() {
                 val py = Python.getInstance()
                 val pyobj = py.getModule("translate")
                 text=pyobj.callAttr(lang,text).toString()
-              solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
+                solutionsViewModel.speak(if (text.isNotEmpty()) text else "Text tidak boleh kosong")
                 solutionsViewModel.textToSpeechDone()
 
             }
 
-    })
+        })
 
 
 

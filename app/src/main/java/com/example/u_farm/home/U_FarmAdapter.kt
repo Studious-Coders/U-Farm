@@ -5,18 +5,25 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.u_farm.R
 import com.example.u_farm.databinding.ListItems2Binding
 import com.example.u_farm.databinding.ListItems3Binding
 import com.example.u_farm.databinding.ListItemsBinding
+import com.example.u_farm.localdatabase.Problems
 import com.example.u_farm.model.Comments
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.Solution
-import com.example.u_farm.model.U_Farm
-import java.util.Collections.addAll
 
-class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<Problem, ProblemsAdapter.ViewHolder>(ProblemsDiffCallback()) {
-
+class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<Problems, ProblemsAdapter.ViewHolder>(ProblemsDiffCallback()) {
+    //    private val adapterScope= CoroutineScope(Dispatchers.Default)
+//
+//    fun list(problem: MutableList<Problem?>){
+//            adapterScope.launch {
+//                val item = problem
+//                withContext(Dispatchers.Main) {
+//                    submitList(item)
+//                }
+//            }
+//        }
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = getItem(position)
         holder.bind(item,clickListener)
@@ -30,10 +37,10 @@ class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<Problem,
     class ViewHolder private constructor(val binding: ListItemsBinding)
         : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(item: Problem,clickListener: ProblemsListener) {
-              binding.data=item
+        fun bind(item: Problems,clickListener: ProblemsListener) {
+            binding.data=item
             binding.clicklistener=clickListener
-           binding.executePendingBindings()
+            binding.executePendingBindings()
         }
 
         companion object {
@@ -47,17 +54,17 @@ class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<Problem,
 }
 
 class ProblemsListener(val clickListener: (sleepId:String) -> Unit){
-    fun onClick(model: Problem)=clickListener(model.problemUid)
+    fun onClick(model: Problems)=clickListener(model.problemUid)
 }
-class ProblemsDiffCallback : DiffUtil.ItemCallback<Problem>() {
-            override fun areItemsTheSame(oldItem: Problem, newItem: Problem): Boolean {
-                return oldItem.username == newItem.username
-            }
+class ProblemsDiffCallback : DiffUtil.ItemCallback<Problems>() {
+    override fun areItemsTheSame(oldItem: Problems, newItem: Problems): Boolean {
+        return oldItem.problemUid == newItem.problemUid
+    }
 
-            override fun areContentsTheSame(oldItem: Problem, newItem: Problem): Boolean {
-                return oldItem== newItem
-            }
-        }
+    override fun areContentsTheSame(oldItem: Problems, newItem: Problems): Boolean {
+        return oldItem== newItem
+    }
+}
 
 class SolutionsAdapter(val solutionsListener1: SolutionsListener1,val clickListener: SolutionsListener,val increaseListener: IncreaseListener,val decreaseListener: DecreaseListener) : ListAdapter<Solution,SolutionsAdapter.ViewHolder>(SolutionsDiffCallback()) {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -105,9 +112,6 @@ class IncreaseListener(val clickListener: (sleepId:Int,sleepId2:String) -> Unit)
 class DecreaseListener(val clickListener: (sleepId:Int,sleepId2:String) -> Unit){
     fun onClick(model:Solution)=clickListener(model.rating,model.solutionUid)
 }
-
-
-
 
 class SolutionsDiffCallback : DiffUtil.ItemCallback<Solution>() {
     override fun areItemsTheSame(oldItem: Solution, newItem: Solution): Boolean {

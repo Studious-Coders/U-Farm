@@ -12,168 +12,166 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorOnPrimary">
-
-
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/selectphoto"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_margin="16dp"
-            android:background="@drawable/ic_baseline_account_circle_24"
-            app:imgUrl="@{addProblemsViewModel.getData.profilePicture}"
-            app:civ_border_color="#000000"
-            app:civ_border_width="1dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="24dp"
-            android:layout_toEndOf="@+id/selectphoto"
-            android:gravity="center"
-            android:text="@string/name"
-            app:userDetails="@{addProblemsViewModel.getData.username}"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toEndOf="@+id/selectphoto"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card1"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:background="?attr/colorSecondary"
-            app:cardElevation="25dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/selectphoto">
+            android:layout_height="match_parent"
+            android:background="?attr/colorOnPrimary">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/selectphoto"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_margin="16dp"
+                android:background="@drawable/ic_baseline_account_circle_24"
+                app:imgUrl="@{addProblemsViewModel.getData.profilePicture}"
+                app:civ_border_color="#000000"
+                app:civ_border_width="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:layout_toEndOf="@+id/selectphoto"
+                android:gravity="center"
+                android:text="@string/name"
+                app:userDetails="@{addProblemsViewModel.getData.username}"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/selectphoto"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card1"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="?attr/colorSecondary"
+                app:cardElevation="25dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/selectphoto">
 
-                <ImageView
-                    android:id="@+id/imageView"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="224dp"
-                    android:layout_margin="16dp"
-                    android:layout_marginTop="16dp"
-                    android:background="?attr/colorPrimary"
-                    android:onClick="@{()->addProblemsViewModel.imageFormating()}"
-                    android:contentDescription="@string/diseases_affected_plants_image"
-                    android:scaleType="centerCrop"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_height="match_parent">
 
-                <TextView
-                    android:id="@+id/textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="104dp"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginEnd="56dp"
-                    android:contentDescription="@string/diseases_affected_plants_image"
-                    android:gravity="center"
-                    android:scaleType="centerCrop"
-                    android:text="@string/upload_a_image"
-                    android:textSize="24sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.261"
-                    app:layout_constraintStart_toEndOf="@+id/imageView2"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <ImageView
-                    android:id="@+id/imageView2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="72dp"
-                    android:layout_marginTop="96dp"
-                    android:background="@drawable/ic_baseline_file_upload_24"
-                    app:layout_constraintStart_toStartOf="@+id/imageView"
-                    app:layout_constraintTop_toTopOf="@+id/imageView"
-                    android:contentDescription="@string/diseases_affected_plants_image" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/description"
-                    style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox.Dense"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/description"
-                    app:boxBackgroundMode="outline"
-                    app:boxStrokeColor="?attr/colorPrimary"
-                    app:boxStrokeWidthFocused="2dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/imageView">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/convertText1"
+                    <ImageView
+                        android:id="@+id/imageView"
                         android:layout_width="match_parent"
                         android:layout_height="224dp"
-                        android:text="@={problem.problemStatement}"
-                        android:gravity="top|start"
-                        />
+                        android:layout_margin="16dp"
+                        android:layout_marginTop="16dp"
+                        android:background="?attr/colorPrimary"
+                        android:onClick="@{()->addProblemsViewModel.imageFormating()}"
+                        android:contentDescription="@string/diseases_affected_plants_image"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="1.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                </com.google.android.material.textfield.TextInputLayout>
+                    <TextView
+                        android:id="@+id/textView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="104dp"
+                        android:layout_marginStart="2dp"
+                        android:layout_marginEnd="56dp"
+                        android:contentDescription="@string/diseases_affected_plants_image"
+                        android:gravity="center"
+                        android:scaleType="centerCrop"
+                        android:text="@string/upload_a_image"
+                        android:textSize="24sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.261"
+                        app:layout_constraintStart_toEndOf="@+id/imageView2"
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/floating_action_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:backgroundTint="?attr/colorPrimary"
-                    android:onClick="@{()-> addProblemsViewModel.startRecording()}"
-                    android:contentDescription="@string/voice_description"
-                    android:gravity="center_horizontal|center"
-                    android:src="@drawable/ic_baseline_mic_24"
-                    app:elevation="5dp"
-                    app:borderWidth="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/description" />
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="72dp"
+                        android:layout_marginTop="96dp"
+                        android:background="@drawable/ic_baseline_file_upload_24"
+                        app:layout_constraintStart_toStartOf="@+id/imageView"
+                        app:layout_constraintTop_toTopOf="@+id/imageView"
+                        android:contentDescription="@string/diseases_affected_plants_image" />
 
-             </androidx.constraintlayout.widget.ConstraintLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/description"
+                        style="@style/Widget.Material3.AutoCompleteTextView.OutlinedBox.Dense"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/description"
+                        app:boxBackgroundMode="outline"
+                        app:boxStrokeColor="?attr/colorPrimary"
+                        app:boxStrokeWidthFocused="2dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/imageView">
 
-        </com.google.android.material.card.MaterialCardView>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/convertText1"
+                            android:layout_width="match_parent"
+                            android:layout_height="224dp"
+                            android:text="@={problem.problemStatement}"
+                            android:gravity="top|start"
+                            />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.floatingactionbutton.FloatingActionButton
+                        android:id="@+id/floating_action_button"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:backgroundTint="?attr/colorPrimary"
+                        android:contentDescription="@string/voice_description"
+                        android:gravity="center_horizontal|center"
+                        android:minHeight="48dp"
+                        android:onClick="@{()-> addProblemsViewModel.startRecording()}"
+                        android:src="@drawable/ic_baseline_mic_24"
+                        app:borderWidth="0dp"
+                        app:elevation="5dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/description" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
 
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/post_problems"
-            android:onClick="@{()->addProblemsViewModel.postProblems(problem.problemStatement)}"
-            android:background="@drawable/rounded"
-            android:backgroundTint="?attr/colorPrimary"
-            android:textColor="?attr/colorAccent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.537"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card1"/>
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="16dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/post_problems"
+                android:onClick="@{()->addProblemsViewModel.postProblems(problem.problemStatement)}"
+                android:background="@drawable/rounded"
+                android:backgroundTint="?attr/colorPrimary"
+                android:textColor="?attr/colorAccent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.537"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card1"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
 </layout>
-
-
-

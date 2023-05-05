@@ -4,7 +4,11 @@ import android.app.Application
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Transformations
+import com.example.u_farm.localdatabase.Problems
+import com.example.u_farm.localdatabase.UFarmDatabase
 import com.example.u_farm.model.Comments
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.Solution
@@ -17,10 +21,17 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
-import com.google.firebase.database.*
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.Query
+import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
-import java.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
+import java.util.UUID
 
 class AuthRepository(application: Application) {
 
@@ -42,7 +53,7 @@ class AuthRepository(application: Application) {
 
     private var getProblemRepository = MutableLiveData<Problem?>()
     private var setProblemDataRepository = MutableLiveData<Boolean?>()
-    private var ProblemDataMutableLiveDataList = MutableLiveData<MutableList<Problem?>>()
+    private var ProblemDataMutableLiveDataList = MutableLiveData<List<Problems?>>()
     var problemList = mutableListOf<Problem?>()
 
     private var getSolutionRepository = MutableLiveData<Solution?>()
@@ -71,7 +82,7 @@ class AuthRepository(application: Application) {
         reference = firebaseDatabase.getReference("UFARMDB")
         reference1 = firebaseDatabase.getReference("PROBLEM").push()
         reference2 = firebaseDatabase.getReference("SOLUTION").push()
-        reference3=firebaseDatabase.getReference("COMMENT").push()
+        reference3 = firebaseDatabase.getReference("COMMENT").push()
         storage = FirebaseStorage.getInstance()
         auth = FirebaseAuth.getInstance()
         if (auth.currentUser != null) {
@@ -111,7 +122,15 @@ class AuthRepository(application: Application) {
         return getProblemRepository
     }
 
-    fun ProblemDataMutableLiveDataList(): MutableLiveData<MutableList<Problem?>> {
+    suspend fun ProblemDataMutableLiveDataList(): MutableLiveData<List<Problems?>> {
+              withContext(Dispatchers.IO) {
+                  ProblemDataMutableLiveDataList.value?.let {
+                      Log.d("ppp",it.toString())
+                      database.ufarmDatabaseDao.insertAllProblems(
+                          it
+                      )
+                  }
+              }
         return ProblemDataMutableLiveDataList
     }
 
@@ -148,6 +167,7 @@ class AuthRepository(application: Application) {
             if (it.isSuccessful) {
                 firebaseUserAuthRepository.postValue(auth.currentUser)
                 val user = auth.currentUser
+
                 val ufarm = U_Farm(
                     user!!.uid,
                     user.displayName.toString(),
@@ -159,6 +179,8 @@ class AuthRepository(application: Application) {
                 setUserData(ufarm)
             }
         }
+
+
     }
 
     //Register using Email Id
@@ -173,18 +195,29 @@ class AuthRepository(application: Application) {
             return
         }
 
+
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener {
                 if (!it.isSuccessful) return@addOnCompleteListener
                 firebaseUserAuthRepository.postValue(auth.currentUser)
-                val ufarm = U_Farm(auth.currentUser!!.uid, username, email, password,"","https://firebasestorage.googleapis.com/v0/b/u-farm-27bab.appspot.com/o/images%2F1113f57b-6811-4602-b0fc-f3b555a42093?alt=media&token=0857364d-c912-4847-b499-b414ae56ee4c")
+                val ufarm = U_Farm(
+                    auth.currentUser!!.uid,
+                    username,
+                    email,
+                    password,
+                    "",
+                    "https://firebasestorage.googleapis.com/v0/b/u-farm-27bab.appspot.com/o/images%2F1113f57b-6811-4602-b0fc-f3b555a42093?alt=media&token=0857364d-c912-4847-b499-b414ae56ee4c"
+                )
                 setUserData(ufarm)
                 Log.d("SignUp", "${it.result?.user?.uid}")
+
+
             }
 
             .addOnFailureListener {
                 Toast.makeText(application, "${it.message}", Toast.LENGTH_LONG).show()
             }
+
     }
 
     //Login with Email
@@ -233,6 +266,7 @@ class AuthRepository(application: Application) {
                 setUserDataRepository.postValue(false)
             }
         })
+
     }
 
     //Change a singleRecord in the U_Farm Model in Firebase
@@ -268,24 +302,37 @@ class AuthRepository(application: Application) {
         })
     }
 
-        fun ProblemDataList() {
-                    val ref = firebaseDatabase.getReference("PROBLEM")
-                 ref.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(snapshot: DataSnapshot) {
-                for  (postSnapshot in snapshot.children) {
-                    val problem = postSnapshot.getValue(Problem::class.java)
-                    if (problem != null) {
-                        problemList.add(problem)
-                    }
-                }
-                ProblemDataMutableLiveDataList.postValue(problemList)
-            }
 
-            override fun onCancelled(error: DatabaseError) {
-
-            }
-        })
+    val database = UFarmDatabase.getInstance(application)
+    val prob: LiveData<List<Problems>> =
+        Transformations.map(database.ufarmDatabaseDao.getProblem()){
+            it
         }
+
+    private val problem1: MutableList<Problems> = mutableListOf()
+
+     fun ProblemDataList() {
+             val ref = firebaseDatabase.getReference("PROBLEM")
+             ref.addValueEventListener(object : ValueEventListener {
+                 override fun onDataChange(snapshot: DataSnapshot) {
+
+                     for (postSnapshot in snapshot.children) {
+                         val problem = postSnapshot.getValue(Problem::class.java)
+                         if (problem != null) {
+                             problemList.add(problem)
+                             problem1.add(Problems(problem.problemUid, problem))
+                         }
+                     }
+
+                     ProblemDataMutableLiveDataList.postValue(problem1)
+                 }
+
+                 override fun onCancelled(error: DatabaseError) {
+
+                 }
+             })
+    }
+
 
     //Changes a single record in Problem Model in Firebase
     fun singleRecordProblem(data: String, parameter: String) {
@@ -377,7 +424,7 @@ class AuthRepository(application: Application) {
         })
     }
 
-        //Changes a single record in the Solution Model
+    //Changes a single record in the Solution Model
     fun singleRecordSolution(data: Int, parameter: String, suid: String) {
         val ref = firebaseDatabase.getReference("SOLUTION")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {

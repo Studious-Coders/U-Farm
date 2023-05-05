@@ -112,6 +112,10 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.6.2'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.2'
 
+    // Room and Lifecycle dependencies
+    implementation "androidx.room:room-runtime:2.4.3"
+    kapt "androidx.room:room-compiler:2.4.3"
+
     //Kodein Dependency Injection 5
 //    implementation 'org.kodein.di:kodein-di-generic-jvm:7.3.1'
 //    implementation 'org.kodein.di:kodein-di-framework-android-x:7.12.0'

@@ -35,13 +35,15 @@ class AddProblemsActivity : AppCompatActivity() {
     private lateinit var addProblemsViewModel:AddProblemsViewModel
     private lateinit var progressBar: ProgressDialog
     private var permissionToRecordAccepted = false
-    private var permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
+    private var permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO,Manifest.permission.READ_EXTERNAL_STORAGE)
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        permissionToRecordAccepted = if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
+        permissionToRecordAccepted = if(requestCode== REQUEST_RECORD_AUDIO_PERMISSION){
             grantResults[0] == PackageManager.PERMISSION_GRANTED
-        } else {
+            grantResults[1] == PackageManager.PERMISSION_GRANTED
+
+        }else{
             false
         }
         if (!permissionToRecordAccepted) finish()
@@ -60,7 +62,6 @@ class AddProblemsActivity : AppCompatActivity() {
         progressBar = ProgressDialog(this)
         supportActionBar?.setTitle(R.string.add_problems)
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
-
         val application: Application = requireNotNull(this).application
         val viewModelFactory = AddProblemsViewModelFactory(application)
         addProblemsViewModel =
@@ -102,7 +103,7 @@ class AddProblemsActivity : AppCompatActivity() {
             }
         })
 
-               addProblemsViewModel.expection.observe(this, Observer {
+        addProblemsViewModel.expection.observe(this, Observer {
             if (it == true) {
                 Toast.makeText(
                     this,
@@ -138,7 +139,7 @@ class AddProblemsActivity : AppCompatActivity() {
             addProblemsViewModel.imageFormatingDone(selectedPhotoUri!!)
             Glide.with(this).load(selectedPhotoUri).into(imageView)
 
-    }
+        }
     }
 
 

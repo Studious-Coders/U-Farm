@@ -2,10 +2,11 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
+
     <data>
         <variable
             name="data"
-            type="com.example.u_farm.model.Problem" />
+            type="com.example.u_farm.localdatabase.Problems" />
         <variable
             name="clicklistener"
             type="com.example.u_farm.home.ProblemsListener" />
@@ -49,7 +50,7 @@
             android:background="@drawable/ic_baseline_account_circle_24"
             app:civ_border_color="#000000"
             app:civ_border_width="0.5dp"
-            app:imgUrl="@{data.profilePicture}"
+            app:imgUrl="@{data.problem.profilePicture}"
             app:layout_constraintStart_toStartOf="@id/left_well"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/plantdiseases" />
@@ -68,7 +69,7 @@
             app:layout_constraintBottom_toTopOf="@+id/photo"
             app:layout_constraintStart_toEndOf="@+id/selectphoto1"
             app:layout_constraintTop_toTopOf="parent"
-            app:userDetails="@{data.username}"
+            app:userDetails="@{data.problem.username}"
             tools:text="Farmer" />
 
         <ImageButton
@@ -92,7 +93,7 @@
             android:contentDescription="@string/diseases_affected_plants_image"
             android:cropToPadding="false"
             android:scaleType="centerCrop"
-            app:imageUrl="@{data.diseaseAffectedPlantImage}"
+            app:imageUrl="@{data.problem.diseaseAffectedPlantImage}"
             app:layout_constraintDimensionRatio="h,4:3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -113,7 +114,7 @@
             app:layout_constraintEnd_toEndOf="@id/right_well"
             app:layout_constraintStart_toStartOf="@id/left_well"
             app:layout_constraintTop_toBottomOf="@id/photo"
-            app:userDetails="@{data.problemStatement}"
+            app:userDetails="@{data.problem.problemStatement}"
             tools:text="@string/problem1" />
 
         <com.google.android.material.button.MaterialButton

@@ -39,13 +39,13 @@ class CommentsActivity : AppCompatActivity() {
         )
         supportActionBar?.setBackgroundDrawable(ColorDrawable(Color.parseColor("#C4C4C4")))
         progressBar = ProgressDialog(this)
-       supportActionBar?.setTitle(R.string.comments)
+        supportActionBar?.setTitle(R.string.comments)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         problem=intent.getStringExtra(SolutionsActivity.USER_KEY).toString()
 
-       Log.d("IntentData",problem)
+        Log.d("IntentData",problem)
         val application: Application = requireNotNull(this).application
         val viewModelFactory = CommentsViewModelFactory(application, problem)
         commentsViewModel = ViewModelProvider(this, viewModelFactory).get(CommentsViewModel::class.java)
@@ -85,7 +85,7 @@ class CommentsActivity : AppCompatActivity() {
         commentsViewModel.expection.observe(this, Observer{
             if(it==true) {
                 Toast.makeText(this,"Comment must contain atleast 10 words!",Toast.LENGTH_LONG).show()
-              }
+            }
 
         })
 

@@ -4,7 +4,6 @@ import android.app.Application
 import android.content.Intent
 import android.net.Uri
 import android.speech.RecognizerIntent
-import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -17,7 +16,7 @@ import com.example.u_farm.util.lang
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
+import java.util.Locale
 
 class AddProblemsViewModel(application: Application): ViewModel() {
     private var authRepository: AuthRepository
@@ -57,7 +56,7 @@ class AddProblemsViewModel(application: Application): ViewModel() {
             uploadImageToStorage(dp)
             _image.value=false
         }
-        }
+    }
 
     private suspend fun uploadImageToStorage(uriLink:Uri){
         withContext(Dispatchers.IO) {
@@ -66,7 +65,7 @@ class AddProblemsViewModel(application: Application): ViewModel() {
     }
 
     fun postProblems(problemStatement:String){
-         val numberOfInputWords:Int
+        val numberOfInputWords:Int
         val words = problemStatement.trim()
         numberOfInputWords= words.split("\\s+".toRegex()).size
 
@@ -84,14 +83,16 @@ class AddProblemsViewModel(application: Application): ViewModel() {
                     setImage.value.toString()
                 )
                 upload(problem)
-               }
+            }
+
         }
+
     }
 
     private suspend fun upload(problem: Problem){
-     withContext(Dispatchers.IO){
-          authRepository.setProblemData(problem)
-          }
+        withContext(Dispatchers.IO){
+            authRepository.setProblemData(problem)
+        }
     }
 
     fun uploaded(){
@@ -100,19 +101,19 @@ class AddProblemsViewModel(application: Application): ViewModel() {
     }
 
     fun initial(
-         launcher: ActivityResultLauncher<Intent>
+        launcher: ActivityResultLauncher<Intent>
     ) = viewModelScope.launch {
         startForResult = launcher
     }
-    
+
     fun startRecording() {
         startForResult.launch(Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
             putExtra(
                 RecognizerIntent.EXTRA_LANGUAGE_MODEL,
                 RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
             )
-                   putExtra(RecognizerIntent.EXTRA_LANGUAGE, lang)
-                    putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
-                })
-            }
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, lang)
+            putExtra(RecognizerIntent.EXTRA_PROMPT, Locale("Bicara sekarang"))
+        })
+    }
 }

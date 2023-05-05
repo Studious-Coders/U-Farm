@@ -1,17 +1,13 @@
 package com.example.u_farm.login
 
-import android.app.Activity
 import android.app.Application
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.u_farm.database.AuthRepository
-import com.example.u_farm.model.U_Farm
-import com.google.android.gms.auth.api.signin.GoogleSignIn
-import com.google.android.gms.auth.api.signin.GoogleSignInClient
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.auth.GoogleAuthProvider
+import kotlinx.coroutines.launch
 
 class LoginViewModel(application: Application): ViewModel() {
 
@@ -37,12 +33,15 @@ class LoginViewModel(application: Application): ViewModel() {
     }
 
     fun login(email:String,password:String){
+        viewModelScope.launch {
+
+        }
         authRepository.login(email, password)
 
     }
 
     fun signInWithGoogle(idToken: String) {
-       authRepository.firebaseAuthWithGoogle(idToken)
-        }
+        authRepository.firebaseAuthWithGoogle(idToken)
+    }
 
 }
