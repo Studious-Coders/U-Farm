@@ -4,9 +4,7 @@ import android.app.Application
 import android.net.Uri
 import android.util.Log
 import android.widget.Toast
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Transformations
 import com.example.u_farm.localdatabase.Problems
 import com.example.u_farm.localdatabase.UFarmDatabase
 import com.example.u_farm.model.Comments
@@ -29,7 +27,10 @@ import com.google.firebase.database.Query
 import com.google.firebase.database.ValueEventListener
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.UploadTask
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.util.UUID
 
@@ -122,17 +123,7 @@ class AuthRepository(application: Application) {
         return getProblemRepository
     }
 
-    suspend fun ProblemDataMutableLiveDataList(): MutableLiveData<List<Problems?>> {
-              withContext(Dispatchers.IO) {
-                  ProblemDataMutableLiveDataList.value?.let {
-                      Log.d("ppp",it.toString())
-                      database.ufarmDatabaseDao.insertAllProblems(
-                          it
-                      )
-                  }
-              }
-        return ProblemDataMutableLiveDataList
-    }
+
 
     fun setSolutionDataMutableLiveData(): MutableLiveData<Boolean?> {
         return setSolutionDataRepository
@@ -304,33 +295,37 @@ class AuthRepository(application: Application) {
 
 
     val database = UFarmDatabase.getInstance(application)
-    val prob: LiveData<List<Problems>> =
-        Transformations.map(database.ufarmDatabaseDao.getProblem()){
-            it
-        }
 
-    private val problem1: MutableList<Problems> = mutableListOf()
+    var viewModelJob = Job()
+    val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
-     fun ProblemDataList() {
-             val ref = firebaseDatabase.getReference("PROBLEM")
-             ref.addValueEventListener(object : ValueEventListener {
-                 override fun onDataChange(snapshot: DataSnapshot) {
+//    val prob: LiveData<List<Problems>> =
+//        Transformations.map(database.ufarmDatabaseDao.getProblem()){
+//            it
+//        }
 
-                     for (postSnapshot in snapshot.children) {
-                         val problem = postSnapshot.getValue(Problem::class.java)
-                         if (problem != null) {
-                             problemList.add(problem)
-                             problem1.add(Problems(problem.problemUid, problem))
-                         }
-                     }
+    fun ProblemDataList(){
+        val ref = firebaseDatabase.getReference("PROBLEM")
+        ref.keepSynced(true)
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                val problem1: MutableList<Problems> = mutableListOf()
+                for (postSnapshot in snapshot.children) {
+                    val problem = postSnapshot.getValue(Problem::class.java)
+                    if (problem != null) {
+                        problem1.add(Problems(problem.problemUid, problem))
+                    }
+                }
+                coroutineScope.launch{
+                    database.ufarmDatabaseDao.insertAllProblems(problem1)
+                }
+            }
 
-                     ProblemDataMutableLiveDataList.postValue(problem1)
-                 }
+            override fun onCancelled(error: DatabaseError) {
 
-                 override fun onCancelled(error: DatabaseError) {
+            }
+        })
 
-                 }
-             })
     }
 
 

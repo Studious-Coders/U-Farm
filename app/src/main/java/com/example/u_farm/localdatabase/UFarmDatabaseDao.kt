@@ -13,5 +13,5 @@ interface UFarmDatabaseDao {
     fun getProblem(): LiveData<List<Problems>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertAllProblems(problems: List<Problems?>)
+    suspend fun insertAllProblems(problems: List<Problems?>)
 }

@@ -14,6 +14,7 @@ import com.example.u_farm.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.fragment_home.*
 
+
 class HomeFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
@@ -46,10 +47,9 @@ class HomeFragment : Fragment() {
         binding.recyclerView.adapter=adapter
 
         homeViewModel.allData.observe(viewLifecycleOwner, Observer {
-            Log.d("Size",it.size.toString())
             it?.let {
                 loading_spinner2.visibility=View.GONE
-                Log.d("ppp", it.toString())
+                Log.d("pp", it.toString())
                 adapter.submitList(it)
                 adapter.notifyDataSetChanged()
             }
@@ -81,6 +81,18 @@ class HomeFragment : Fragment() {
         inflater.inflate(R.menu.top_app_bar, menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.search -> {
+                return true
+            }
+            R.id.image -> {
+                return true
+            }
+
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
 
 }
 

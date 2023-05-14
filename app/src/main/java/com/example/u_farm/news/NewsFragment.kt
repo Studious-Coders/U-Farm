@@ -30,24 +30,19 @@ class NewsFragment : Fragment() {
         setHasOptionsMenu(true)
         val application= requireNotNull(this.activity).application
 
-
+//        https://newsdata.io/api/1/news?apikey=pub_213032277d5fc9a185d8fd3657596d0d7ff73&q=agri&q=india
 
         val viewModelFactory= NewsViewModelFactory(application)
+
         val newsViewModel= ViewModelProvider(this,viewModelFactory).get(NewsViewModel::class.java)
 
         binding.newsViewModel=newsViewModel
 
         binding.lifecycleOwner=this
 
-
-
-
-
         return binding.root
 
     }
-
-
 
 }
 
