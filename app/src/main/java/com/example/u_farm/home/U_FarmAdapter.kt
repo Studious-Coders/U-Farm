@@ -8,10 +8,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.u_farm.databinding.ListItems2Binding
 import com.example.u_farm.databinding.ListItems3Binding
 import com.example.u_farm.databinding.ListItemsBinding
+import com.example.u_farm.databinding.ListItemsNewsBinding
 import com.example.u_farm.localdatabase.Problems
 import com.example.u_farm.model.Comments
 import com.example.u_farm.model.Problem
 import com.example.u_farm.model.Solution
+import com.example.u_farm.network.News
 
 class ProblemsAdapter(val clickListener:ProblemsListener) : ListAdapter<Problems, ProblemsAdapter.ViewHolder>(ProblemsDiffCallback()) {
     //    private val adapterScope= CoroutineScope(Dispatchers.Default)
@@ -169,6 +171,56 @@ class CommentsDiffCallback : DiffUtil.ItemCallback<Comments>() {
     }
 
     override fun areContentsTheSame(oldItem: Comments, newItem: Comments): Boolean {
+        return oldItem== newItem
+    }
+}
+
+class NewsAdapter() : ListAdapter<News, NewsAdapter.ViewHolder>(NewsDiffCallback()) {
+    //    private val adapterScope= CoroutineScope(Dispatchers.Default)
+//
+//    fun list(problem: MutableList<Problem?>){
+//            adapterScope.launch {
+//                val item = problem
+//                withContext(Dispatchers.Main) {
+//                    submitList(item)
+//                }
+//            }
+//        }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.bind(item)
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        return ViewHolder.from(parent)
+    }
+
+
+    class ViewHolder private constructor(val binding: ListItemsNewsBinding)
+        : RecyclerView.ViewHolder(binding.root) {
+
+        fun bind(item: News) {
+            binding.data=item
+            binding.executePendingBindings()
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): ViewHolder {
+                val layoutInflater = LayoutInflater.from(parent.context)
+                val binding = ListItemsNewsBinding.inflate(layoutInflater, parent, false)
+                return ViewHolder(binding)
+            }
+        }
+    }
+}
+
+
+class NewsDiffCallback : DiffUtil.ItemCallback<News>() {
+    override fun areItemsTheSame(oldItem: News, newItem: News): Boolean {
+        return oldItem.title == newItem.title
+    }
+
+    override fun areContentsTheSame(oldItem: News, newItem: News): Boolean {
         return oldItem== newItem
     }
 }

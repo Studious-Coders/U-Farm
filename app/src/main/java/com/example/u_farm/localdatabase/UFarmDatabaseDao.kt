@@ -1,7 +1,6 @@
 package com.example.u_farm.localdatabase
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,5 +12,5 @@ interface UFarmDatabaseDao {
     fun getProblem(): LiveData<List<Problems>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllProblems(problems: List<Problems?>)
+    suspend fun insertAllProblems(problems: List<Problems>)
 }

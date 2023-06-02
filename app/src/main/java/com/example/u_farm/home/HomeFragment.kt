@@ -43,15 +43,18 @@ class HomeFragment : Fragment() {
 
         })
 
-        binding.recyclerView.setItemViewCacheSize(20)
+
         binding.recyclerView.adapter=adapter
 
         homeViewModel.allData.observe(viewLifecycleOwner, Observer {
-            it?.let {
+            if(it!=null){
                 loading_spinner2.visibility=View.GONE
                 Log.d("pp", it.toString())
-                adapter.submitList(it)
-                adapter.notifyDataSetChanged()
+
+
+                    adapter.submitList(it)
+                    adapter.notifyDataSetChanged()
+
             }
         })
 

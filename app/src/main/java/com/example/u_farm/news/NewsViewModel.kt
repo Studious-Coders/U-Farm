@@ -16,9 +16,9 @@ import retrofit2.await
 
 class NewsViewModel(application: Application): ViewModel() {
 
-    private val _homeFeed = MutableLiveData<List<News>>()
-    val homeFeed: LiveData<List<News>>
-        get() = _homeFeed
+    private val _newsFeed = MutableLiveData<List<News>>()
+    val newsFeed: LiveData<List<News>>
+        get() = _newsFeed
 
 
     private var viewModelJob = Job()
@@ -30,11 +30,14 @@ class NewsViewModel(application: Application): ViewModel() {
     fun getHomeFeed(){
         coroutineScope.launch {
             val getPropertiesDeferred = NewsApi.retrofitService.getNews( NewsConstants.api_key, NewsConstants.field)
+
             try {
                 val listResult = getPropertiesDeferred.await()
+                Log.d("Api Data",listResult.toString())
                 val trendList=getnews(listResult.results)
-                _homeFeed.value = trendList
-                Log.d("Api Data",trendList.toString())
+
+                _newsFeed.value = trendList
+
             }catch(e:Exception){
                 Log.d("Exception","${e}")
             }
@@ -43,8 +46,12 @@ class NewsViewModel(application: Application): ViewModel() {
 
     fun getnews(l:List<News>):List<News>{
         val localMovies:MutableList<News> = mutableListOf()
+        var i=0
         l.forEach {
-            localMovies.add(News(it.title,it.link,it.description,it.image_url))
+                if(i <= 2) {
+                    localMovies.add(News(it.title, it.link, it.desc, it.image_url))
+                    i++
+                }
         }
 
         return localMovies

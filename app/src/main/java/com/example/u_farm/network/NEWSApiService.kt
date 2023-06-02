@@ -22,27 +22,26 @@ private val retrofit= Retrofit.Builder()
     .addCallAdapterFactory(CoroutineCallAdapterFactory())
     .baseUrl(BASE_URL)
     .build()
-
 interface NewsApiService{
     @GET("/api/1/news")
-    fun getNews(@Query("api_key") api_key : String, @Query("q") q : String) : Call<NewsListProperty>
+    fun getNews(@Query("apikey") api_key : String, @Query("q") q : String) : Call<NewsListProperty>
 }
-
 object NewsApi{
     val retrofitService:NewsApiService by lazy{
         retrofit.create(NewsApiService::class.java)
     }
 }
-
 data class NewsListProperty(val results: List<News>)
-
 @Parcelize
 data class News(
     val title:String?,
     val link:String?,
     val description:String?,
     val image_url:String?,
-): Parcelable
+): Parcelable{
+    val desc :String
+        get() = description!!.substring(0, Math.min(description.length,10)) + "..."
+}
 
 class NewsConstants{
     companion object{

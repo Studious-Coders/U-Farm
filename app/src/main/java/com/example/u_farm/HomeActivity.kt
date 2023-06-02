@@ -18,10 +18,8 @@ import com.chaquo.python.Python
 import com.chaquo.python.android.AndroidPlatform
 import com.example.u_farm.databinding.ActivityHomeBinding
 import com.example.u_farm.util.getUserData
-import com.example.u_farm.util.initialzePython
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.snackbar.Snackbar
-
 
 class HomeActivity : AppCompatActivity() {
     lateinit var bottomNavigationView:BottomNavigationView
@@ -50,20 +48,12 @@ class HomeActivity : AppCompatActivity() {
 
         }
 
-
-
         if (!Python.isStarted()) {
             Python.start(AndroidPlatform(this))
         }
 
         getUserData()
 
-
-
-
-
     }
-
-
 
 }

@@ -9,7 +9,7 @@ import androidx.room.TypeConverters
 import com.example.u_farm.model.Problem
 import com.google.gson.Gson
 
-@Database(entities = [Problems::class], version = 1)
+@Database(entities = [Problems::class], version = 1,exportSchema = false)
 @TypeConverters(Convert::class)
 abstract class UFarmDatabase: RoomDatabase(){
     abstract val ufarmDatabaseDao:UFarmDatabaseDao
@@ -38,7 +38,7 @@ abstract class UFarmDatabase: RoomDatabase(){
 
 class Convert {
     @TypeConverter
-    fun fromList(value: Problem?): String = Gson().toJson(value)
+    fun fromList(value: Problem): String = Gson().toJson(value)
 
     @TypeConverter
     fun toList(value: String) = Gson().fromJson(value, Problem::class.java)

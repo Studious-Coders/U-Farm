@@ -3,7 +3,10 @@ package com.example.u_farm
 import android.app.Application
 import android.os.Build
 import androidx.work.*
+import com.chaquo.python.Python
+import com.chaquo.python.android.AndroidPlatform
 import com.example.u_farm.util.RefreshDataWorker
+import com.example.u_farm.util.getUserData
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -46,6 +49,10 @@ class UFarmApplication : Application() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
         delayInit()
+
+
+
+
 
     }
 

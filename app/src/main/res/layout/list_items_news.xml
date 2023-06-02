@@ -3,6 +3,9 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <variable
+            name="data"
+            type="com.example.u_farm.network.News" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -45,6 +48,7 @@
                 android:background="?attr/selectableItemBackground"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
+                android:text="@{data.title}"
                 app:layout_constraintBottom_toTopOf="@+id/photo"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -60,6 +64,7 @@
                 android:contentDescription="@string/diseases_affected_plants_image"
                 android:cropToPadding="false"
                 android:scaleType="centerCrop"
+                app:imageUrl="@{data.image_url}"
                 app:layout_constraintDimensionRatio="h,4:3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -73,6 +78,7 @@
                 android:layout_marginTop="8dp"
                 android:background="?attr/selectableItemBackground"
                 android:textAlignment="viewStart"
+                android:text="@{data.description}"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@id/right_well"
@@ -90,6 +96,7 @@
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 android:textColor="#1438FF"
+                android:text="@{data.link}"
                 app:layout_constraintEnd_toEndOf="@id/right_well"
                 app:layout_constraintStart_toStartOf="@id/left_well"
                 app:layout_constraintTop_toBottomOf="@id/description"
