@@ -12,6 +12,8 @@ import androidx.navigation.fragment.findNavController
 import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentHomeBinding
 import com.google.firebase.auth.FirebaseAuth
+import kotlinx.android.synthetic.main.fragment_home.*
+
 
 class HomeFragment : Fragment() {
 
@@ -23,11 +25,11 @@ class HomeFragment : Fragment() {
         // Inflate the layout for this fragment
         val binding:FragmentHomeBinding=DataBindingUtil.inflate(inflater,R.layout.fragment_home,container,false)
 
-     setHasOptionsMenu(true)
-
-
-
+        setHasOptionsMenu(true)
         val application= requireNotNull(this.activity).application
+
+
+
         val viewModelFactory=HomeViewModelFactory(application)
         val homeViewModel= ViewModelProvider(this,viewModelFactory).get(HomeViewModel::class.java)
 
@@ -35,27 +37,32 @@ class HomeFragment : Fragment() {
 
         binding.lifecycleOwner=this
 
-         //Initialize the adapter onClick event happen on each object (lamba function)
+        //Initialize the adapter onClick event happen on each object (lamba function)
         val adapter=ProblemsAdapter(ProblemsListener { uid ->
             homeViewModel.navigateToSolutionsPage(uid)
 
         })
 
+
         binding.recyclerView.adapter=adapter
 
         homeViewModel.allData.observe(viewLifecycleOwner, Observer {
-            Log.d("Size",it.size.toString())
-                                 it?.let{
-                                     adapter.submitList(it)
-                                    adapter.notifyDataSetChanged()
-                                   }
+            if(it!=null){
+                loading_spinner2.visibility=View.GONE
+                Log.d("pp", it.toString())
+
+
+                    adapter.submitList(it)
+                    adapter.notifyDataSetChanged()
+
+            }
         })
 
         homeViewModel.navigateToSolutionsPage.observe(viewLifecycleOwner, Observer {
             if(it!=""){
                 this.findNavController().navigate(HomeFragmentDirections.actionHomeToSolutionsActivity(it))
                 homeViewModel.navigateToSolutionsPageDone()
-      }
+            }
         })
 
         homeViewModel.navigateToAddProblemsPage.observe(viewLifecycleOwner, Observer {
@@ -65,19 +72,30 @@ class HomeFragment : Fragment() {
                     homeViewModel.navigateToAddProblemsPageDone()
                 }
             }else{
-               this.findNavController().navigate(HomeFragmentDirections.actionHomeToLoginActivity())
+                this.findNavController().navigate(HomeFragmentDirections.actionHomeToLoginActivity())
             }
 
         })
 
         return binding.root
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.top_app_bar, menu)
     }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId){
+            R.id.search -> {
+                return true
+            }
+            R.id.image -> {
+                return true
+            }
+
+            else -> return super.onOptionsItemSelected(item)
+        }
+    }
 
 }
 

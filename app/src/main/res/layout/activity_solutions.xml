@@ -6,166 +6,170 @@
         <variable
             name="solutionsViewModel"
             type="com.example.u_farm.home.solutions.SolutionsViewModel" />
-
     </data>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorAccent"
+        android:backgroundTint="?attr/colorSecondary"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/problemStatement"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?attr/colorAccent"
-            android:backgroundTint="?attr/colorSecondary"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/left_well"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="8dp" />
 
 
-                            <androidx.constraintlayout.widget.ConstraintLayout
-                                android:id="@+id/problemStatement"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                app:layout_constraintEnd_toEndOf="parent"
-                                app:layout_constraintStart_toStartOf="parent"
-                                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/left_well"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_begin="8dp" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/right_well"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="8dp" />
 
 
-                <androidx.constraintlayout.widget.Guideline
-                    android:id="@+id/right_well"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
-                    android:orientation="vertical"
-                    app:layout_constraintGuide_end="8dp" />
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/selectphoto1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/ic_baseline_account_circle_24"
+                app:civ_border_color="#000000"
+                app:civ_border_width="0.5dp"
+                app:imgUrl="@{solutionsViewModel.value.profilePicture}"
+                app:layout_constraintStart_toStartOf="@id/left_well"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@drawable/plantdiseases" />
 
+            <TextView
+                android:id="@+id/username"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_toEndOf="@id/selectphoto1"
+                android:background="?attr/selectableItemBackground"
+                android:textAlignment="viewStart"
+                android:textAllCaps="false"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/photo"
+                app:layout_constraintStart_toEndOf="@+id/selectphoto1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:userDetails="@{solutionsViewModel.value.username}"
+                tools:text="Farmer" />
 
-                <de.hdodenhof.circleimageview.CircleImageView
-                    android:id="@+id/selectphoto1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/ic_baseline_account_circle_24"
-                    app:civ_border_color="#000000"
-                    app:civ_border_width="0.5dp"
-                    app:imgUrl="@{solutionsViewModel.value.profilePicture}"
-                    app:layout_constraintStart_toStartOf="@id/left_well"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:src="@drawable/plantdiseases" />
+            <ImageView
+                android:id="@+id/photo"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="8dp"
+                android:contentDescription="@string/diseases_affected_plants_image"
+                app:imageUrl="@{solutionsViewModel.value.diseaseAffectedPlantImage}"
+                app:layout_constraintDimensionRatio="h,4:3"
+                app:layout_constraintStart_toStartOf="@id/left_well"
+                app:layout_constraintTop_toBottomOf="@+id/selectphoto1"
+                tools:srcCompat="@drawable/plantdiseases" />
+            <ScrollView
+                android:id="@+id/description"
+                android:layout_width="240dp"
+                android:layout_height="140dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/right_well"
+                app:layout_constraintStart_toEndOf="@+id/photo"
+                >
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="240dp"
+                    android:layout_height="140dp">
 
-                <TextView
-                    android:id="@+id/username"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="8dp"
-                    android:layout_toEndOf="@id/selectphoto1"
-                    android:background="?attr/selectableItemBackground"
-                    android:textAlignment="viewStart"
-                    android:textAllCaps="false"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toTopOf="@+id/photo"
-                    app:layout_constraintStart_toEndOf="@+id/selectphoto1"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:userDetails="@{solutionsViewModel.value.username}"
-                    tools:text="Farmer" />
+                    <TextView
+                        android:layout_width="240dp"
+                        android:layout_height="140dp"
+                        android:textAllCaps="false"
+                        android:textSize="16sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:userDetails="@{solutionsViewModel.value.problemStatement}"
+                        tools:text="@string/problem1" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </ScrollView>
 
-
-                <ImageButton
-                    android:id="@+id/postmenus1"
-                    android:layout_width="24dp"
-                    android:layout_height="24dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/ic_baseline_more_horiz_24"
-                    android:backgroundTint="?attr/colorAccent"
-                    android:contentDescription="@string/already_have_a_account"
-                    app:layout_constraintBottom_toTopOf="@+id/photo"
-                    app:layout_constraintEnd_toEndOf="@id/right_well"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                                <ImageView
-                                    android:id="@+id/photo"
-                                    android:layout_width="160dp"
-                                    android:layout_height="125dp"
-                                    android:layout_marginTop="8dp"
-                                    android:adjustViewBounds="false"
-                                    android:contentDescription="@string/diseases_affected_plants_image"
-                                    android:cropToPadding="false"
-                                    android:scaleType="centerCrop"
-                                    app:imageUrl="@{solutionsViewModel.value.diseaseAffectedPlantImage}"
-                                    app:layout_constraintDimensionRatio="h,4:3"
-                                    app:layout_constraintStart_toStartOf="parent"
-                                    app:layout_constraintTop_toBottomOf="@+id/selectphoto1"
-                                    tools:srcCompat="@drawable/plantdiseases" />
-
-
-                                <TextView
-                                    android:id="@+id/description"
-                                    android:layout_width="176dp"
-                                    android:layout_height="100dp"
-                                    android:layout_marginStart="175dp"
-                                    android:background="?attr/selectableItemBackground"
-                                    android:textAlignment="viewStart"
-                                    android:textAllCaps="false"
-                                    android:textSize="16sp"
-                                    app:layout_constraintBottom_toBottomOf="parent"
-                                    app:layout_constraintEnd_toStartOf="@id/floating_action_button6"
-                                    app:layout_constraintStart_toEndOf="@+id/photo"
-                                    app:layout_constraintStart_toStartOf="@+id/photo"
-                                    app:layout_constraintTop_toTopOf="@+id/photo"
-                                    app:layout_constraintVertical_bias="0.454"
-                                    app:userDetails="@{solutionsViewModel.value.problemStatement}"
-                                    tools:text="@string/problem1" />
-
-                                <ImageButton
-                    android:id="@+id/floating_action_button6"
-                    android:layout_width="wrap_content"
-                    android:layout_height="21dp"
-                    android:layout_gravity="end"
-                    android:layout_margin="8dp"
-                    android:background="@android:color/transparent"
-                    android:contentDescription="@string/speech_to_text"
-                    android:onClick="@{()->solutionsViewModel.speakOutTheProblem(solutionsViewModel.value.problemStatement)}"
-                    android:src="@drawable/ic_baseline_play_circle_filled_24"
-                    app:elevation="25dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="@id/right_well"
-                    app:layout_constraintStart_toEndOf="@id/description"
-                    app:layout_constraintTop_toBottomOf="@id/photo" />
-
-                            </androidx.constraintlayout.widget.ConstraintLayout>
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view1"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    android:layout_marginTop="16dp"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/problemStatement" />
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/btn_asset_photo1"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end|bottom"
-                    android:layout_margin="8dp"
-                    android:backgroundTint="?attr/colorPrimary"
-                    android:contentDescription="@string/add_solutions"
-                    android:onClick="@{()-> solutionsViewModel.navigateToAddSolutions()}"
-                    android:src="@drawable/ic_outline_add_24"
-                    app:borderWidth="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent" />
-
-
+            <ImageButton
+                android:id="@+id/floating_action_button6"
+                android:layout_width="wrap_content"
+                android:layout_height="21dp"
+                android:layout_gravity="end"
+                android:layout_margin="8dp"
+                android:background="@android:color/transparent"
+                android:contentDescription="@string/speech_to_text"
+                android:onClick="@{()->solutionsViewModel.speakOutTheProblem(solutionsViewModel.value.problemStatement)}"
+                android:src="@drawable/ic_baseline_play_circle_filled_24"
+                app:elevation="25dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/right_well"
+                app:layout_constraintTop_toBottomOf="@id/description" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/problemStatement" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/btn_asset_photo1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end|bottom"
+            android:layout_margin="8dp"
+            android:backgroundTint="?attr/colorPrimary"
+            android:contentDescription="@string/add_solutions"
+            android:onClick="@{()-> solutionsViewModel.navigateToAddSolutions()}"
+            android:src="@drawable/ic_outline_add_24"
+            app:borderWidth="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <ProgressBar
+            android:id="@+id/loading_spinner3"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:visibility="visible"
+            android:backgroundTint="?attr/colorAccent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </layout>
+

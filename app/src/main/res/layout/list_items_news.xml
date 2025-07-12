@@ -2,14 +2,10 @@
 <layout xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-
     <data>
         <variable
             name="data"
-            type="com.example.u_farm.localdatabase.Problems" />
-        <variable
-            name="clicklistener"
-            type="com.example.u_farm.home.ProblemsListener" />
+            type="com.example.u_farm.network.News" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -42,34 +38,20 @@
                 android:orientation="vertical"
                 app:layout_constraintGuide_end="8dp" />
 
-            <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/selectphoto1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/ic_baseline_account_circle_24"
-                app:civ_border_color="#000000"
-                app:civ_border_width="0.5dp"
-                app:imgUrl="@{data.problem.profilePicture}"
-                app:layout_constraintStart_toStartOf="@id/left_well"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:src="@drawable/plantdiseases" />
-
             <TextView
-                android:id="@+id/username"
+                android:id="@+id/title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
-                android:layout_toEndOf="@id/selectphoto1"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 android:background="?attr/selectableItemBackground"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false"
+                android:text="@{data.title}"
                 app:layout_constraintBottom_toTopOf="@+id/photo"
-                app:layout_constraintStart_toEndOf="@+id/selectphoto1"
                 app:layout_constraintTop_toTopOf="parent"
-                app:userDetails="@{data.problem.username}"
+                app:layout_constraintStart_toStartOf="parent"
                 tools:text="Farmer" />
 
 
@@ -82,14 +64,12 @@
                 android:contentDescription="@string/diseases_affected_plants_image"
                 android:cropToPadding="false"
                 android:scaleType="centerCrop"
-                app:imageUrl="@{data.problem.diseaseAffectedPlantImage}"
+                app:imageUrl="@{data.image_url}"
                 app:layout_constraintDimensionRatio="h,4:3"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/selectphoto1"
+                app:layout_constraintTop_toBottomOf="@id/title"
                 tools:srcCompat="@drawable/plantdiseases" />
-
-            <!-- Title, secondary and supporting text -->
 
             <TextView
                 android:id="@+id/description"
@@ -98,31 +78,29 @@
                 android:layout_marginTop="8dp"
                 android:background="?attr/selectableItemBackground"
                 android:textAlignment="viewStart"
+                android:text="@{data.description}"
                 android:textAllCaps="false"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="@id/right_well"
                 app:layout_constraintStart_toStartOf="@id/left_well"
                 app:layout_constraintTop_toBottomOf="@id/photo"
-                app:userDetails="@{data.problem.problemStatement}"
                 tools:text="@string/problem1" />
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/solution"
-                style="?attr/borderlessButtonStyle"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/link"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:drawableEnd="@drawable/ic_baseline_keyboard_arrow_right_24"
-                android:drawableTint="?attr/colorAccent"
-                android:onClick="@{()->clicklistener.onClick(data)}"
-                android:text="@string/solutions"
-                android:textColor="?attr/colorAccent"
+                android:background="?attr/selectableItemBackground"
+                android:textAlignment="center"
+                android:textAllCaps="false"
+                android:textSize="16sp"
+                android:textColor="#1438FF"
+                android:text="@{data.link}"
                 app:layout_constraintEnd_toEndOf="@id/right_well"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/description" />
+                app:layout_constraintStart_toStartOf="@id/left_well"
+                app:layout_constraintTop_toBottomOf="@id/description"
+                tools:text="www.google.com" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

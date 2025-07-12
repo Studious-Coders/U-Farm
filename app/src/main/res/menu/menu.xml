@@ -6,10 +6,10 @@
         android:id="@+id/home"
         android:icon="@drawable/ic_home"
         android:title="@string/home"/>
-<!--    <item-->
-<!--        android:id="@+id/news"-->
-<!--        android:icon="@drawable/ic_baseline_article_24"-->
-<!--        android:title="@string/news"/>-->
+    <item
+        android:id="@+id/news"
+        android:icon="@drawable/ic_baseline_article_24"
+        android:title="@string/news"/>
 
     <item
         android:id="@+id/profile"

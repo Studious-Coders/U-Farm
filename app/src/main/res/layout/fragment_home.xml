@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     app:theme="@style/Theme.UFarm.NoActionBar">
-<data>
-    <variable
-        name="homeViewModel"
-        type="com.example.u_farm.home.HomeViewModel" />
-</data>
+    <data>
+        <variable
+            name="homeViewModel"
+            type="com.example.u_farm.home.HomeViewModel" />
+    </data>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="?attr/colorAccent"
-        android:backgroundTint="?attr/colorSecondary"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <!-- Note: A RecyclerView can also be used -->
+        android:layout_height="match_parent">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="?attr/colorAccent"
+            android:backgroundTint="?attr/colorSecondary"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
+            <!-- Note: A RecyclerView can also be used -->
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -31,26 +31,38 @@ xmlns:android="http://schemas.android.com/apk/res/android"
                 app:layout_constraintTop_toTopOf="parent"
                 />
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_asset_photo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end|bottom"
-            android:layout_margin="8dp"
-            android:backgroundTint="?attr/colorPrimary"
-            android:contentDescription="@string/add_problems"
-            android:onClick="@{()-> homeViewModel.navigateToAddProblemsPage()}"
-            android:src="@drawable/ic_outline_add_24"
-            app:borderWidth="0dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="parent" />
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/btn_asset_photo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_margin="8dp"
+                android:backgroundTint="?attr/colorPrimary"
+                android:contentDescription="@string/add_problems"
+                android:onClick="@{()-> homeViewModel.navigateToAddProblemsPage()}"
+                android:src="@drawable/ic_outline_add_24"
+                app:borderWidth="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/loading_spinner2"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:visibility="visible"
+                android:backgroundTint="?attr/colorAccent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>
 

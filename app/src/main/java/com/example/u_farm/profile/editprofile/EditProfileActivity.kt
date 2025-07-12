@@ -68,7 +68,7 @@ class EditProfileActivity : AppCompatActivity() {
 
         })
 
-        editProfileViewModel.setData.observe(this,Observer{
+        editProfileViewModel.imageUploading.observe(this,Observer{
             if(it==true){
                 loading_spinner.visibility=View.GONE
                 Toast.makeText(this, "Your profile is updated successfully", Toast.LENGTH_LONG)
@@ -78,7 +78,7 @@ class EditProfileActivity : AppCompatActivity() {
         })
         editProfileViewModel.spinner.observe(this,Observer{
             if(it==true){
-               loading_spinner.visibility= View.VISIBLE
+                loading_spinner.visibility= View.VISIBLE
             }
         })
 

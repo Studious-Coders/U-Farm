@@ -31,7 +31,7 @@ data class Solution(
     var profilePicture: String="",
     var solutionStatement:String="",
     var rating: Int=0,
-    )
+)
 
 data class Comments(
     var commentUid:String="",
@@ -40,4 +40,6 @@ data class Comments(
     var username:String="",
     var profilePicture:String="",
     var commentStatement:String="",
-    )
+)
+
+

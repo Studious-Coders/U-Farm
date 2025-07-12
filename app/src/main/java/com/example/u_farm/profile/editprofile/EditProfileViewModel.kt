@@ -28,6 +28,11 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
     val spinner: LiveData<Boolean>
         get()=_spinner
 
+    private var _imageUploading= MutableLiveData<Boolean>()
+    val imageUploading: LiveData<Boolean>
+        get()=_imageUploading
+
+
     private var _upload= MutableLiveData<Boolean>()
     val upload: LiveData<Boolean>
         get()=_upload
@@ -81,11 +86,12 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
     fun upload1(){
         viewModelScope.launch {
             if(setImage.value!=null) {
-            setProifleImage(setImage.value.toString())
+                setProifleImage(setImage.value.toString())
+                _imageUploading.value=true
 
             }
         }
- }
+    }
 
     private suspend fun setProifleImage(string:String){
         withContext(Dispatchers.IO){
@@ -94,7 +100,8 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
     }
     fun function(){
         _upload.value=false
-         _spinner.value=false
+        _spinner.value=false
+        _imageUploading.value=false
     }
 
     fun imageFormatingDone(dp: Uri){
@@ -110,31 +117,31 @@ class EditProfileViewModel(application: Application, activity: Activity): ViewMo
         }
     }
 
-   private suspend fun updateJob1(job:String){
-       withContext(Dispatchers.IO){
-           authRepository.singleRecord(job,"job")
-       }
-   }
+    private suspend fun updateJob1(job:String){
+        withContext(Dispatchers.IO){
+            authRepository.singleRecord(job,"job")
+        }
+    }
 
 
     fun jobSelection(){
-       alert.setTitle("Choose a job title")
+        alert.setTitle("Choose a job title")
         val options= arrayOf("Farmer","Expert","Other")
 
-       alert.setItems(options) { dialog, which ->
-           dialog.dismiss()
-           when (which) {
-               0 ->  {
-                   updateJob(options[0])
-               }
-               1 ->  {
-                   updateJob(options[1])
-               }
-               2 ->{
-                   updateJob(options[2])
-               }
-           }
-       }
-       alert.show()
-   }
+        alert.setItems(options) { dialog, which ->
+            dialog.dismiss()
+            when (which) {
+                0 ->  {
+                    updateJob(options[0])
+                }
+                1 ->  {
+                    updateJob(options[1])
+                }
+                2 ->{
+                    updateJob(options[2])
+                }
+            }
+        }
+        alert.show()
+    }
 }

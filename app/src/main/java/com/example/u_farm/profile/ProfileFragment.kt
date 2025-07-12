@@ -1,6 +1,5 @@
 package com.example.u_farm.profile
 
-
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.Application
@@ -20,9 +19,12 @@ import com.example.u_farm.R
 import com.example.u_farm.databinding.FragmentProfileBinding
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_profile.*
+import java.util.*
 
+
+@Suppress("DEPRECATION")
 class ProfileFragment : Fragment() {
-  lateinit var choseAValue:String
+    lateinit var choseAValue:String
     @SuppressLint("ResourceType", "StringFormatInvalid")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,7 +43,7 @@ class ProfileFragment : Fragment() {
         binding.lifecycleOwner=this
 
 
-                profileViewModel.snackbar.observe(viewLifecycleOwner,Observer{
+        profileViewModel.snackbar.observe(viewLifecycleOwner,Observer{
             if(it==true){
                 Snackbar.make(binding.root, "Login to access the settings", Snackbar.LENGTH_SHORT)
                     .show()
@@ -51,6 +53,7 @@ class ProfileFragment : Fragment() {
 
         profileViewModel.getData.observe(viewLifecycleOwner,Observer{
             if(it!=null){
+                loading_spinner1.visibility=View.GONE
                 profileViewModel.function()
             }
         })
@@ -65,7 +68,7 @@ class ProfileFragment : Fragment() {
             if(it==true ) {
                 if(desgintion.text=="Expert") {
                     expertTick.visibility = View.VISIBLE
-                    }else{
+                }else{
                     expertTick.visibility = View.GONE
 
                 }
@@ -74,16 +77,31 @@ class ProfileFragment : Fragment() {
             }
         })
 
-
-
-
-        profileViewModel.setData.observe(viewLifecycleOwner, Observer {
-            if(it==true){
-                val intent=Intent(application,HomeActivity::class.java)
-                startActivity(intent)
-                profileViewModel.languageIntentDone()
+        profileViewModel.language.observe(viewLifecycleOwner,Observer{
+            if(it!=""){
+                loading_spinner1.visibility=View.VISIBLE
             }
         })
+
+        profileViewModel.setData.observe(viewLifecycleOwner,Observer{
+            if(it==true){
+                loading_spinner1.visibility=View.GONE
+            }
+        })
+        lateinit var locale: Locale
+
+
+
+//
+//
+//        profileViewModel.setData.observe(viewLifecycleOwner, Observer {
+//            if(it==true){
+//                val intent=Intent(application,HomeActivity::class.java)
+//                startActivity(intent)
+//                profileViewModel.languageIntentDone()
+//            }
+//        })
+
 
         profileViewModel.loggedUser.observe(viewLifecycleOwner, Observer{
             if(it == true){
@@ -98,7 +116,7 @@ class ProfileFragment : Fragment() {
 
 
 
-            return binding.root
+        return binding.root
     }
 
 }
